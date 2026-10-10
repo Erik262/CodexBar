@@ -2484,3 +2484,7 @@
 "Pace sign" = "使用節奏符號";
 "Ahead of pace is +" = "超出節奏為 +";
 "Reserve is +" = "餘量為 +";
+"menu_bar_status_badge_title" = "在圖示上顯示狀態標記";
+"menu_bar_status_badge_subtitle" = "當供應商狀態頁回報事故時，在圖示上繪製圓點或驚嘆號。";
+"menu_card_hover_highlight_title" = "滑過時醒目標示卡片";
+"menu_card_hover_highlight_subtitle" = "指標滑過時，在可點按卡片（圖表、費用）後繪製強調色。關閉後子選單仍可開啟。";

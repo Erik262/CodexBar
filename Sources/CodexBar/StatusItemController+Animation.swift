@@ -316,7 +316,7 @@ extension StatusItemController {
         let tilt: CGFloat =
             style == .combined ? 0 : self.tiltAmount(for: primaryProvider) * .pi / 28
 
-        let statusIndicator = self.store.statusIndicator(for: primaryProvider)
+        let statusIndicator = self.menuBarIconStatusIndicator(for: primaryProvider)
         if showBrandPercent,
            let brand = self.brandIcon(primaryProvider)
         {
@@ -574,7 +574,7 @@ extension StatusItemController {
         let blink = self.loadingBlinkAmount(for: provider, style: style, phase: isLoading ? phase : nil)
         let wiggle = self.wiggleAmount(for: provider)
         let tilt = self.tiltAmount(for: provider) * .pi / 28 // limit to ~6.4°
-        let statusIndicator = self.store.statusIndicator(for: provider)
+        let statusIndicator = self.menuBarIconStatusIndicator(for: provider)
         // Brand + percent returns above; remaining paths are image-only apart from the debug marker.
         let canSkipCachedRender = self.prepareButtonForImageOnlyCacheHit(button)
         if let morphProgress {
@@ -1470,6 +1470,11 @@ extension StatusItemController {
         } else {
             UsageProvider.allCases.forEach { self.applyIcon(for: $0, phase: self.animationPhase) }
         }
+    }
+
+    /// Status-page badges are opt-in on the meter icon; the menu still reports incidents either way.
+    func menuBarIconStatusIndicator(for provider: UsageProvider) -> ProviderStatusIndicator {
+        self.settings.menuBarStatusBadgeVisible ? self.store.statusIndicator(for: provider) : .none
     }
 
     nonisolated static func loadingAnimationHasExceededContinuousCap(

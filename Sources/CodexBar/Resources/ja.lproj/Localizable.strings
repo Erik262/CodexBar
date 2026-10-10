@@ -2506,3 +2506,7 @@
 "Pace sign" = "ペースの符号";
 "Ahead of pace is +" = "ペース超過を + で表示";
 "Reserve is +" = "余裕を + で表示";
+"menu_bar_status_badge_title" = "アイコンにステータスバッジを表示";
+"menu_bar_status_badge_subtitle" = "プロバイダのステータスページが障害を報告したとき、メーターアイコンに点または感嘆符を表示します。";
+"menu_card_hover_highlight_title" = "ホバー時にカードを強調表示";
+"menu_card_hover_highlight_subtitle" = "ポインタを重ねたとき、クリック可能なカード（グラフ、コスト）の背後にアクセントカラーを表示します。オフでもサブメニューは開きます。";

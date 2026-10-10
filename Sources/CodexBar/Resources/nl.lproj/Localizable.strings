@@ -2505,3 +2505,7 @@
 "Pace sign" = "Teken van gebruikstempo";
 "Ahead of pace is +" = "Boven het tempo is +";
 "Reserve is +" = "Reserve krijgt +";
+"menu_bar_status_badge_title" = "Statusbadge op pictogram tonen";
+"menu_bar_status_badge_subtitle" = "Tekent een stip of uitroepteken op het meterpictogram wanneer de statuspagina van een provider een storing meldt.";
+"menu_card_hover_highlight_title" = "Kaarten markeren bij aanwijzen";
+"menu_card_hover_highlight_subtitle" = "Kleurt klikbare kaarten (grafieken, kosten) met de accentkleur bij aanwijzen. Submenu’s openen ook als dit uit staat.";

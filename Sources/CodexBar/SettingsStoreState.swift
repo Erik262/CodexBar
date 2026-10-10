@@ -35,6 +35,8 @@ struct SettingsDefaultsState {
     var providerChangelogLinksEnabled: Bool
     var menuBarShowsBrandIconWithPercent: Bool
     var menuBarHidesCritters: Bool
+    var menuBarStatusBadgeVisible: Bool
+    var menuCardHoverHighlightEnabled: Bool
     var menuBarColorPace: Bool
     var menuBarPaceReservePositive: Bool
     var menuBarColorByProvider: Bool

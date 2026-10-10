@@ -66,7 +66,8 @@ extension StatusItemController {
             allowsMenuHighlight: allowsMenuHighlight,
             containsInteractiveControls: containsInteractiveControls,
             usesGPUSelection: usesGPUSelection,
-            onClick: onClick)
+            onClick: onClick,
+            drawsHoverHighlight: self.settings.menuCardHoverHighlightEnabled)
         let hosting: ErasedMenuCardHostingView
         if let recycled = self.takeRecyclableMenuCardView(
             for: id,

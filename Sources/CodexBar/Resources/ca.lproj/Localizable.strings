@@ -2510,3 +2510,7 @@
 "Pace sign" = "Signe del ritme";
 "Ahead of pace is +" = "Per sobre del ritme és +";
 "Reserve is +" = "La reserva és +";
+"menu_bar_status_badge_title" = "Mostra la insígnia d’estat a la icona";
+"menu_bar_status_badge_subtitle" = "Dibuixa un punt o un signe d’exclamació a la icona quan la pàgina d’estat d’un proveïdor informa d’una incidència.";
+"menu_card_hover_highlight_title" = "Ressalta les targetes en passar-hi el cursor";
+"menu_card_hover_highlight_subtitle" = "Pinta el color d’èmfasi darrere de les targetes clicables (gràfics, costos) en passar-hi el punter. Els submenús s’obren igualment si està desactivat.";

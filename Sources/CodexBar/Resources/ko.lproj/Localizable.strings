@@ -2474,3 +2474,7 @@
 "Pace sign" = "사용 속도 부호";
 "Ahead of pace is +" = "기준 속도 초과는 +";
 "Reserve is +" = "여유분은 +";
+"menu_bar_status_badge_title" = "아이콘에 상태 배지 표시";
+"menu_bar_status_badge_subtitle" = "제공자 상태 페이지에 장애가 보고되면 미터 아이콘에 점이나 느낌표를 표시합니다.";
+"menu_card_hover_highlight_title" = "마우스를 올리면 카드 강조";
+"menu_card_hover_highlight_subtitle" = "포인터를 올리면 클릭 가능한 카드(차트, 비용) 뒤에 강조 색상을 칠합니다. 꺼도 하위 메뉴는 열립니다.";

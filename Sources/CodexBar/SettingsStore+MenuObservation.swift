@@ -31,6 +31,8 @@ extension SettingsStore {
         _ = self.providerChangelogLinksEnabled
         _ = self.menuBarShowsBrandIconWithPercent
         _ = self.menuBarHidesCritters
+        _ = self.menuBarStatusBadgeVisible
+        _ = self.menuCardHoverHighlightEnabled
         _ = self.menuBarColorPace
         _ = self.menuBarPaceReservePositive
         _ = self.menuBarColorByProvider

@@ -67,6 +67,12 @@ struct MenuBarPane: View {
                 Toggle(isOn: self.$settings.menuBarColorByProvider) {
                     Text(L("Color by provider"))
                 }
+
+                Toggle(isOn: self.$settings.menuBarStatusBadgeVisible) {
+                    SettingsRowLabel(
+                        L("menu_bar_status_badge_title"),
+                        subtitle: L("menu_bar_status_badge_subtitle"))
+                }
             } header: {
                 Text(L("section_icon"))
             }

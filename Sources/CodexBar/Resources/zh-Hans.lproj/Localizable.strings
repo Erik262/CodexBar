@@ -2499,3 +2499,7 @@
 "Pace sign" = "使用节奏符号";
 "Ahead of pace is +" = "超出节奏为 +";
 "Reserve is +" = "余量为 +";
+"menu_bar_status_badge_title" = "在图标上显示状态标记";
+"menu_bar_status_badge_subtitle" = "当提供商状态页报告事故时，在图标上绘制圆点或感叹号。";
+"menu_card_hover_highlight_title" = "悬停时高亮卡片";
+"menu_card_hover_highlight_subtitle" = "指针悬停时，在可点击卡片（图表、费用）后绘制强调色。关闭后子菜单仍可打开。";

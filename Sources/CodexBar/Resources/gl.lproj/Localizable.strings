@@ -2505,3 +2505,7 @@
 "Pace sign" = "Signo do ritmo";
 "Ahead of pace is +" = "Por riba do ritmo é +";
 "Reserve is +" = "A reserva é +";
+"menu_bar_status_badge_title" = "Mostrar a insignia de estado na icona";
+"menu_bar_status_badge_subtitle" = "Debuxa un punto ou un signo de exclamación na icona cando a páxina de estado dun provedor informa dunha incidencia.";
+"menu_card_hover_highlight_title" = "Resaltar as tarxetas ao pasar o cursor";
+"menu_card_hover_highlight_subtitle" = "Pinta a cor de acento detrás das tarxetas clicables (gráficos, custos) ao pasar o punteiro. Os submenús ábrense igualmente se está desactivado.";

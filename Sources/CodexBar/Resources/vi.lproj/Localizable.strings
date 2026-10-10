@@ -2507,3 +2507,7 @@
 "Pace sign" = "Dấu nhịp sử dụng";
 "Ahead of pace is +" = "Vượt nhịp là +";
 "Reserve is +" = "Dự trữ là +";
+"menu_bar_status_badge_title" = "Hiển thị huy hiệu trạng thái trên biểu tượng";
+"menu_bar_status_badge_subtitle" = "Vẽ dấu chấm hoặc dấu chấm than trên biểu tượng khi trang trạng thái của nhà cung cấp báo cáo sự cố.";
+"menu_card_hover_highlight_title" = "Tô sáng thẻ khi di chuột";
+"menu_card_hover_highlight_subtitle" = "Tô màu nhấn phía sau các thẻ có thể nhấp (biểu đồ, chi phí) khi di chuột. Menu con vẫn mở khi tắt.";

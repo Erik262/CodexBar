@@ -2510,3 +2510,7 @@
 "Pace sign" = "Pace sign";
 "Ahead of pace is +" = "Ahead of pace is +";
 "Reserve is +" = "Reserve is +";
+"menu_bar_status_badge_title" = "Show status badge on icon";
+"menu_bar_status_badge_subtitle" = "Draws a dot or exclamation mark on the meter icon when a provider's status page reports an incident.";
+"menu_card_hover_highlight_title" = "Highlight cards on hover";
+"menu_card_hover_highlight_subtitle" = "Paints the accent color behind clickable cards (charts, costs) while the pointer is over them. Submenus still open when off.";

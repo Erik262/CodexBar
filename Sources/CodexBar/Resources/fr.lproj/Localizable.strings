@@ -2505,3 +2505,7 @@
 "Pace sign" = "Signe du rythme";
 "Ahead of pace is +" = "Au-dessus du rythme : +";
 "Reserve is +" = "Réserve : +";
+"menu_bar_status_badge_title" = "Afficher le badge d’état sur l’icône";
+"menu_bar_status_badge_subtitle" = "Affiche un point ou un point d’exclamation sur l’icône lorsque la page d’état d’un fournisseur signale un incident.";
+"menu_card_hover_highlight_title" = "Surligner les cartes au survol";
+"menu_card_hover_highlight_subtitle" = "Applique la couleur d’accent derrière les cartes cliquables (graphiques, coûts) au survol. Les sous-menus s’ouvrent toujours si désactivé.";

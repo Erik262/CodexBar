@@ -2505,3 +2505,7 @@
 "Pace sign" = "Tecken för förbrukningstakt";
 "Ahead of pace is +" = "Över förbrukningstakten är +";
 "Reserve is +" = "Reserv är +";
+"menu_bar_status_badge_title" = "Visa statusmärke på ikonen";
+"menu_bar_status_badge_subtitle" = "Ritar en punkt eller ett utropstecken på ikonen när en leverantörs statussida rapporterar en incident.";
+"menu_card_hover_highlight_title" = "Markera kort vid hovring";
+"menu_card_hover_highlight_subtitle" = "Färgar klickbara kort (diagram, kostnader) med accentfärgen vid hovring. Undermenyer öppnas även när detta är av.";

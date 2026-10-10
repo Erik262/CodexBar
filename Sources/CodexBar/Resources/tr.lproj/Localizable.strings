@@ -2509,3 +2509,7 @@
 "Pace sign" = "Kullanım hızı işareti";
 "Ahead of pace is +" = "Hızın üzerinde kullanım +";
 "Reserve is +" = "Rezerv +";
+"menu_bar_status_badge_title" = "Simgede durum rozetini göster";
+"menu_bar_status_badge_subtitle" = "Bir sağlayıcının durum sayfası bir olay bildirdiğinde simgeye nokta veya ünlem işareti çizer.";
+"menu_card_hover_highlight_title" = "Üzerine gelince kartları vurgula";
+"menu_card_hover_highlight_subtitle" = "İşaretçi üzerindeyken tıklanabilir kartların (grafikler, maliyetler) arkasını vurgu rengiyle boyar. Kapalıyken alt menüler yine açılır.";

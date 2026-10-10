@@ -2509,3 +2509,7 @@
 "Pace sign" = "Znak tempa zużycia";
 "Ahead of pace is +" = "Powyżej tempa to +";
 "Reserve is +" = "Rezerwa to +";
+"menu_bar_status_badge_title" = "Pokaż znacznik stanu na ikonie";
+"menu_bar_status_badge_subtitle" = "Rysuje kropkę lub wykrzyknik na ikonie, gdy strona stanu dostawcy zgłasza incydent.";
+"menu_card_hover_highlight_title" = "Podświetlaj karty po najechaniu";
+"menu_card_hover_highlight_subtitle" = "Maluje kolor akcentu za klikalnymi kartami (wykresy, koszty) po najechaniu. Podmenu otwierają się także po wyłączeniu.";

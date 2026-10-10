@@ -29,6 +29,12 @@ struct MenuPane: View {
                         subtitle: L("show_pace_subtitle"))
                 }
 
+                Toggle(isOn: self.$settings.menuCardHoverHighlightEnabled) {
+                    SettingsRowLabel(
+                        L("menu_card_hover_highlight_title"),
+                        subtitle: L("menu_card_hover_highlight_subtitle"))
+                }
+
                 SettingsMenuPicker(
                     selection: self.$settings.weeklyProgressWorkDays,
                     options: MenuSettingsMenuOptions.weeklyProgressWorkDays,

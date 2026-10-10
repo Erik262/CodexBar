@@ -2509,3 +2509,7 @@
 "Pace sign" = "Tanda laju penggunaan";
 "Ahead of pace is +" = "Di atas laju adalah +";
 "Reserve is +" = "Cadangan adalah +";
+"menu_bar_status_badge_title" = "Tampilkan lencana status pada ikon";
+"menu_bar_status_badge_subtitle" = "Menggambar titik atau tanda seru pada ikon saat halaman status penyedia melaporkan insiden.";
+"menu_card_hover_highlight_title" = "Sorot kartu saat diarahkan";
+"menu_card_hover_highlight_subtitle" = "Mewarnai latar kartu yang dapat diklik (grafik, biaya) dengan warna aksen saat penunjuk berada di atasnya. Submenu tetap terbuka saat nonaktif.";

@@ -308,6 +308,18 @@ extension SettingsStore {
         set { self.setDefault(\.menuBarHidesCritters, newValue, key: "menuBarHidesCritters") }
     }
 
+    /// Draws the provider status-page badge (dot or exclamation) onto the menu bar meter icon.
+    var menuBarStatusBadgeVisible: Bool {
+        get { self.defaultsState.menuBarStatusBadgeVisible }
+        set { self.setDefault(\.menuBarStatusBadgeVisible, newValue, key: "menuBarStatusBadgeVisible") }
+    }
+
+    /// Paints the selection (accent) background behind clickable menu cards while hovered.
+    var menuCardHoverHighlightEnabled: Bool {
+        get { self.defaultsState.menuCardHoverHighlightEnabled }
+        set { self.setDefault(\.menuCardHoverHighlightEnabled, newValue, key: "menuCardHoverHighlightEnabled") }
+    }
+
     var menuBarColorPace: Bool {
         get { self.defaultsState.menuBarColorPace }
         set { self.setDefault(\.menuBarColorPace, newValue, key: "menuBarColorPace") }
