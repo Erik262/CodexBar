@@ -464,7 +464,8 @@ extension UsageMenuCardView.Model {
         kpis.insert(
             .init(
                 title: L("api_credits_left_title"),
-                value: convertedString(max(0, status.remaining)),
+                // Negative when reported spend since the start day exceeds the entered balance.
+                value: convertedString(status.remaining),
                 emphasis: true),
             at: 0)
         if !status.coversStartDay {

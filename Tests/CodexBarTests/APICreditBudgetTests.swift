@@ -27,6 +27,24 @@ struct APICreditBudgetTests {
     }
 
     @Test
+    func `timestamped daily keys compare by their local day`() throws {
+        let calendar = try Self.utcCalendar()
+        let now = try #require(calendar.date(from: DateComponents(year: 2026, month: 7, day: 15, hour: 12)))
+        let budget = try #require(APICreditBudget(amount: 30, startDay: "2026-07-10"))
+        let status = budget.status(
+            daily: [
+                Self.entry("2026-07-01T08:00:00Z", cost: 500),
+                Self.entry("2026-07-12T08:00:00Z", cost: 5),
+            ],
+            historyDays: 30,
+            now: now,
+            calendar: calendar)
+
+        #expect(status.spent == 5)
+        #expect(status.remaining == 25)
+    }
+
+    @Test
     func `a start day before the loaded history is flagged as a lower bound`() throws {
         let calendar = try Self.utcCalendar()
         let now = try #require(calendar.date(from: DateComponents(year: 2026, month: 7, day: 15, hour: 12)))
