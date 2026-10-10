@@ -2525,3 +2525,10 @@
 "stacked_bars_window_weekly" = "Utilizzo settimanale";
 "stacked_bars_rows_title" = "Righe";
 "stacked_bars_rows_subtitle" = "Seleziona due o tre provider. Trascina per cambiare l’ordine dall’alto in basso.";
+"api_credits_left_title" = "Crediti rimanenti";
+"api_credits_left_value" = "%@ di %@";
+"api_credits_partial_note" = "La cronologia dei costi inizia dopo il %@, quindi i crediti rimanenti potrebbero essere sovrastimati.";
+"api_credits_settings_title" = "Crediti API prepagati";
+"api_credits_settings_subtitle" = "Inserisci il saldo e il giorno in cui l’hai controllato. Il menu mostra il saldo meno la spesa registrata da allora.";
+"api_credits_amount_placeholder" = "Saldo";
+"api_credits_since_title" = "Dal";

@@ -2519,3 +2519,10 @@
 "stacked_bars_window_weekly" = "Wöchentliche Nutzung";
 "stacked_bars_rows_title" = "Zeilen";
 "stacked_bars_rows_subtitle" = "Wähle zwei oder drei Anbieter. Ziehen ändert die Reihenfolge von oben nach unten.";
+"api_credits_left_title" = "Restguthaben";
+"api_credits_left_value" = "%@ von %@";
+"api_credits_partial_note" = "Der Kostenverlauf beginnt nach dem %@, daher kann das Restguthaben zu hoch sein.";
+"api_credits_settings_title" = "Vorausbezahltes API-Guthaben";
+"api_credits_settings_subtitle" = "Gib dein Guthaben und das Datum ein, an dem du es geprüft hast. Das Menü zeigt das Guthaben abzüglich der seitdem gemeldeten Ausgaben.";
+"api_credits_amount_placeholder" = "Guthaben";
+"api_credits_since_title" = "Seit";

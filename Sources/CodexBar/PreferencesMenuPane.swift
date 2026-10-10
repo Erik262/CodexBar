@@ -233,6 +233,13 @@ struct CostSummarySettingsSection: View {
                         L("cost_comparison_periods_title"),
                         subtitle: L("cost_comparison_periods_subtitle"))
                 }
+
+                if !self.budgetProviders.isEmpty {
+                    SettingsRowLabel(L("api_credits_settings_title"), subtitle: L("api_credits_settings_subtitle"))
+                    ForEach(self.budgetProviders, id: \.self) { provider in
+                        APICreditBudgetSettingsRow(settings: self.settings, provider: provider)
+                    }
+                }
             }
         } header: {
             Text(L("section_cost_summary"))
@@ -253,6 +260,11 @@ struct CostSummarySettingsSection: View {
 
     static func costDataExplanation() -> String {
         L("cost_data_explanation")
+    }
+
+    private var budgetProviders: [UsageProvider] {
+        let enabled = Set(self.store.enabledFirstPartyProvidersForDisplay())
+        return APICreditBudget.supportedProviders.filter { enabled.contains($0) }
     }
 
     static var costStatusProviders: [UsageProvider] {

@@ -2520,3 +2520,10 @@
 "stacked_bars_window_weekly" = "Weekgebruik";
 "stacked_bars_rows_title" = "Rijen";
 "stacked_bars_rows_subtitle" = "Vink twee of drie providers aan. Sleep om de volgorde van boven naar beneden te wijzigen.";
+"api_credits_left_title" = "Resterend tegoed";
+"api_credits_left_value" = "%@ van %@";
+"api_credits_partial_note" = "De kostengeschiedenis begint na %@, dus het resterende tegoed kan te hoog zijn.";
+"api_credits_settings_title" = "Vooraf betaald API-tegoed";
+"api_credits_settings_subtitle" = "Voer je saldo in en de dag waarop je het controleerde. Het menu toont het saldo min de sindsdien gemelde uitgaven.";
+"api_credits_amount_placeholder" = "Saldo";
+"api_credits_since_title" = "Sinds";

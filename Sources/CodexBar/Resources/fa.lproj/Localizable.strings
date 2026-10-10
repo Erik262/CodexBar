@@ -2525,3 +2525,10 @@
 "stacked_bars_window_weekly" = "مصرف هفتگی";
 "stacked_bars_rows_title" = "ردیف‌ها";
 "stacked_bars_rows_subtitle" = "دو یا سه ارائه‌دهنده را انتخاب کنید. برای تغییر ترتیب از بالا به پایین بکشید.";
+"api_credits_left_title" = "اعتبار باقی‌مانده";
+"api_credits_left_value" = "%@ از %@";
+"api_credits_partial_note" = "سابقهٔ هزینه پس از %@ شروع می‌شود، بنابراین اعتبار باقی‌مانده ممکن است بیش از واقع باشد.";
+"api_credits_settings_title" = "اعتبار پیش‌پرداخت API";
+"api_credits_settings_subtitle" = "موجودی و روزی را که آن را بررسی کردید وارد کنید. منو موجودی منهای هزینهٔ گزارش‌شده از آن روز را نشان می‌دهد.";
+"api_credits_amount_placeholder" = "موجودی";
+"api_credits_since_title" = "از";

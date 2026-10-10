@@ -586,6 +586,10 @@ extension SettingsStore {
             menuCardHoverHighlightEnabled: userDefaults.object(
                 forKey: "menuCardHoverHighlightEnabled") as? Bool ?? true,
             hiddenMenuSectionsRaw: userDefaults.stringArray(forKey: "hiddenMenuSections") ?? [],
+            apiCreditBudgetAmountsRaw: userDefaults.dictionary(forKey: "apiCreditBudgetAmounts") as? [String: Double]
+                ?? [:],
+            apiCreditBudgetStartDaysRaw: userDefaults.dictionary(
+                forKey: "apiCreditBudgetStartDays") as? [String: String] ?? [:],
             menuBarColorPace: userDefaults.bool(forKey: "menuBarColorPace"),
             menuBarPaceReservePositive: userDefaults.bool(forKey: "menuBarPaceReservePositive"),
             menuBarColorByProvider: userDefaults.bool(forKey: "menuBarColorByProvider"),

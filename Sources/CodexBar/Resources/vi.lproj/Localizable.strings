@@ -2522,3 +2522,10 @@
 "stacked_bars_window_weekly" = "Mức dùng hằng tuần";
 "stacked_bars_rows_title" = "Hàng";
 "stacked_bars_rows_subtitle" = "Chọn hai hoặc ba nhà cung cấp. Kéo để đổi thứ tự từ trên xuống dưới.";
+"api_credits_left_title" = "Tín dụng còn lại";
+"api_credits_left_value" = "%@ / %@";
+"api_credits_partial_note" = "Lịch sử chi phí bắt đầu sau %@, nên tín dụng còn lại có thể bị đánh giá cao hơn thực tế.";
+"api_credits_settings_title" = "Tín dụng API trả trước";
+"api_credits_settings_subtitle" = "Nhập số dư và ngày bạn kiểm tra. Menu hiển thị số dư trừ chi phí được báo cáo từ ngày đó.";
+"api_credits_amount_placeholder" = "Số dư";
+"api_credits_since_title" = "Từ";

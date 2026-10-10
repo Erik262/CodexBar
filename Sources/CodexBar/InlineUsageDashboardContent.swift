@@ -398,6 +398,25 @@ extension UsageMenuCardView.Model {
         if input.hiddenMenuSections.contains(.todayCost) {
             kpis.removeAll { $0 == todayKPI }
         }
+        if let budget = input.apiCreditBudget {
+            let status = budget.status(
+                daily: snapshot.daily,
+                historyDays: historyDays,
+                now: snapshot.updatedAt,
+                calendar: input.costUsageBucketCalendar)
+            kpis.insert(
+                .init(
+                    title: L("api_credits_left_title"),
+                    value: L(
+                        "api_credits_left_value",
+                        convertedString(max(0, status.remaining)),
+                        convertedString(budget.amount)),
+                    emphasis: true),
+                at: 0)
+            if !status.coversStartDay {
+                details.append(L("api_credits_partial_note", budget.startDay))
+            }
+        }
         var model = InlineUsageDashboardModel(
             accessibilityLabel: accessibilityLabel,
             valueStyle: Self.costValueStyle(currencyCode: displayCurrencyCode),

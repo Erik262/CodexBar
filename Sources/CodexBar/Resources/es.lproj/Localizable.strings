@@ -2519,3 +2519,10 @@
 "stacked_bars_window_weekly" = "Uso semanal";
 "stacked_bars_rows_title" = "Filas";
 "stacked_bars_rows_subtitle" = "Marca dos o tres proveedores. Arrastra para cambiar el orden de arriba abajo.";
+"api_credits_left_title" = "Créditos restantes";
+"api_credits_left_value" = "%@ de %@";
+"api_credits_partial_note" = "El historial de costes empieza después del %@, así que los créditos restantes pueden estar sobrestimados.";
+"api_credits_settings_title" = "Créditos de API prepagados";
+"api_credits_settings_subtitle" = "Introduce tu saldo y el día en que lo comprobaste. El menú muestra el saldo menos el gasto informado desde entonces.";
+"api_credits_amount_placeholder" = "Saldo";
+"api_credits_since_title" = "Desde";

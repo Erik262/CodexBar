@@ -2524,3 +2524,10 @@
 "stacked_bars_window_weekly" = "Penggunaan mingguan";
 "stacked_bars_rows_title" = "Baris";
 "stacked_bars_rows_subtitle" = "Centang dua atau tiga penyedia. Seret untuk mengubah urutan dari atas ke bawah.";
+"api_credits_left_title" = "Sisa kredit";
+"api_credits_left_value" = "%@ dari %@";
+"api_credits_partial_note" = "Riwayat biaya dimulai setelah %@, jadi sisa kredit mungkin terlalu tinggi.";
+"api_credits_settings_title" = "Kredit API prabayar";
+"api_credits_settings_subtitle" = "Masukkan saldo dan tanggal Anda memeriksanya. Menu menampilkan saldo dikurangi pengeluaran yang dilaporkan sejak itu.";
+"api_credits_amount_placeholder" = "Saldo";
+"api_credits_since_title" = "Sejak";

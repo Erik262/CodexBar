@@ -38,6 +38,8 @@ struct SettingsDefaultsState {
     var menuBarStatusBadgeVisible: Bool
     var menuCardHoverHighlightEnabled: Bool
     var hiddenMenuSectionsRaw: [String]
+    var apiCreditBudgetAmountsRaw: [String: Double]
+    var apiCreditBudgetStartDaysRaw: [String: String]
     var menuBarColorPace: Bool
     var menuBarPaceReservePositive: Bool
     var menuBarColorByProvider: Bool

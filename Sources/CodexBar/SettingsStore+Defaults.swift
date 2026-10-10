@@ -325,6 +325,16 @@ extension SettingsStore {
         set { self.setDefault(\.hiddenMenuSectionsRaw, newValue, key: "hiddenMenuSections") }
     }
 
+    var apiCreditBudgetAmountsRaw: [String: Double] {
+        get { self.defaultsState.apiCreditBudgetAmountsRaw }
+        set { self.setDefault(\.apiCreditBudgetAmountsRaw, newValue, key: "apiCreditBudgetAmounts") }
+    }
+
+    var apiCreditBudgetStartDaysRaw: [String: String] {
+        get { self.defaultsState.apiCreditBudgetStartDaysRaw }
+        set { self.setDefault(\.apiCreditBudgetStartDaysRaw, newValue, key: "apiCreditBudgetStartDays") }
+    }
+
     var menuBarColorPace: Bool {
         get { self.defaultsState.menuBarColorPace }
         set { self.setDefault(\.menuBarColorPace, newValue, key: "menuBarColorPace") }

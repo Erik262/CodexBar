@@ -2520,3 +2520,10 @@
 "stacked_bars_window_weekly" = "Utilisation hebdomadaire";
 "stacked_bars_rows_title" = "Lignes";
 "stacked_bars_rows_subtitle" = "Cochez deux ou trois fournisseurs. Faites glisser pour changer l’ordre de haut en bas.";
+"api_credits_left_title" = "Crédits restants";
+"api_credits_left_value" = "%@ sur %@";
+"api_credits_partial_note" = "L’historique des coûts commence après le %@ ; les crédits restants peuvent être surestimés.";
+"api_credits_settings_title" = "Crédits API prépayés";
+"api_credits_settings_subtitle" = "Saisissez votre solde et le jour où vous l’avez vérifié. Le menu affiche le solde moins les dépenses signalées depuis.";
+"api_credits_amount_placeholder" = "Solde";
+"api_credits_since_title" = "Depuis";

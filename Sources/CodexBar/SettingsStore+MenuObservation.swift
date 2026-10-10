@@ -34,6 +34,8 @@ extension SettingsStore {
         _ = self.menuBarStatusBadgeVisible
         _ = self.menuCardHoverHighlightEnabled
         _ = self.hiddenMenuSectionsRaw
+        _ = self.apiCreditBudgetAmountsRaw
+        _ = self.apiCreditBudgetStartDaysRaw
         _ = self.menuBarColorPace
         _ = self.menuBarPaceReservePositive
         _ = self.menuBarColorByProvider

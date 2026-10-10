@@ -2524,3 +2524,10 @@
 "stacked_bars_window_weekly" = "Użycie tygodniowe";
 "stacked_bars_rows_title" = "Wiersze";
 "stacked_bars_rows_subtitle" = "Zaznacz dwóch lub trzech dostawców. Przeciągnij, aby zmienić kolejność od góry do dołu.";
+"api_credits_left_title" = "Pozostałe kredyty";
+"api_credits_left_value" = "%@ z %@";
+"api_credits_partial_note" = "Historia kosztów zaczyna się po %@, więc pozostałe kredyty mogą być zawyżone.";
+"api_credits_settings_title" = "Przedpłacone kredyty API";
+"api_credits_settings_subtitle" = "Wpisz saldo i dzień, w którym je sprawdzono. Menu pokazuje saldo pomniejszone o wydatki zgłoszone od tego dnia.";
+"api_credits_amount_placeholder" = "Saldo";
+"api_credits_since_title" = "Od";
