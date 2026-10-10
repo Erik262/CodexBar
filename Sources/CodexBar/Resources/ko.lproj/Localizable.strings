@@ -2478,3 +2478,8 @@
 "menu_bar_status_badge_subtitle" = "제공자 상태 페이지에 장애가 보고되면 미터 아이콘에 점이나 느낌표를 표시합니다.";
 "menu_card_hover_highlight_title" = "마우스를 올리면 카드 강조";
 "menu_card_hover_highlight_subtitle" = "포인터를 올리면 클릭 가능한 카드(차트, 비용) 뒤에 강조 색상을 칠합니다. 꺼도 하위 메뉴는 열립니다.";
+"menu_section_today_cost" = "오늘 비용";
+"menu_section_cost_chart" = "일별 비용 차트";
+"menu_section_account_actions" = "계정 전환 / 추가";
+"section_menu_visibility" = "메뉴에 표시";
+"section_menu_visibility_footer" = "구독 요금제의 비용처럼 필요 없는 섹션을 끌 수 있습니다. 세션 및 주간 사용량은 항상 표시됩니다.";

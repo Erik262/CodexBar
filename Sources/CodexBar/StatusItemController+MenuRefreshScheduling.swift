@@ -112,6 +112,7 @@ extension StatusItemController {
             "costEnabled=\(self.settings.costUsageEnabled ? "1" : "0")",
             "codexLocalCost=\(self.settings.codexLocalSessionCostLedgerEnabled ? "1" : "0")",
             "costStyle=\(self.settings.costSummaryDisplayStyle.rawValue)",
+            "hiddenSections=\(self.settings.hiddenMenuSectionsRaw.joined(separator: ","))",
             "openAIAttached=\(self.store.openAIDashboardAttachmentAuthorized ? "1" : "0")",
             "openAILogin=\(self.store.openAIDashboardRequiresLogin ? "1" : "0")",
             "openAIUpdated=\(Self.millisecondsSinceEpoch(dashboard?.updatedAt))",

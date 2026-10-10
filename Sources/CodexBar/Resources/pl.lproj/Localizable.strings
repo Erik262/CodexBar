@@ -2513,3 +2513,8 @@
 "menu_bar_status_badge_subtitle" = "Rysuje kropkę lub wykrzyknik na ikonie, gdy strona stanu dostawcy zgłasza incydent.";
 "menu_card_hover_highlight_title" = "Podświetlaj karty po najechaniu";
 "menu_card_hover_highlight_subtitle" = "Maluje kolor akcentu za klikalnymi kartami (wykresy, koszty) po najechaniu. Podmenu otwierają się także po wyłączeniu.";
+"menu_section_today_cost" = "Dzisiejszy koszt";
+"menu_section_cost_chart" = "Wykres dziennych kosztów";
+"menu_section_account_actions" = "Przełącz / dodaj konto";
+"section_menu_visibility" = "Pokaż w menu";
+"section_menu_visibility_footer" = "Wyłącz niepotrzebne sekcje, np. koszty przy subskrypcji. Użycie sesji i tygodniowe pozostaje zawsze widoczne.";

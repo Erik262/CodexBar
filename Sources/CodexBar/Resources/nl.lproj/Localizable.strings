@@ -2509,3 +2509,8 @@
 "menu_bar_status_badge_subtitle" = "Tekent een stip of uitroepteken op het meterpictogram wanneer de statuspagina van een provider een storing meldt.";
 "menu_card_hover_highlight_title" = "Kaarten markeren bij aanwijzen";
 "menu_card_hover_highlight_subtitle" = "Kleurt klikbare kaarten (grafieken, kosten) met de accentkleur bij aanwijzen. Submenu’s openen ook als dit uit staat.";
+"menu_section_today_cost" = "Kosten van vandaag";
+"menu_section_cost_chart" = "Grafiek dagelijkse kosten";
+"menu_section_account_actions" = "Account wisselen / toevoegen";
+"section_menu_visibility" = "Tonen in menu";
+"section_menu_visibility_footer" = "Zet secties uit die je niet nodig hebt, zoals kosten bij een abonnement. Sessie- en weekgebruik blijven altijd zichtbaar.";

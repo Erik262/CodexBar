@@ -2514,3 +2514,8 @@
 "menu_bar_status_badge_subtitle" = "يرسم نقطة أو علامة تعجب على الأيقونة عندما تُبلغ صفحة حالة المزوّد عن حادث.";
 "menu_card_hover_highlight_title" = "تمييز البطاقات عند التمرير";
 "menu_card_hover_highlight_subtitle" = "يلوّن خلفية البطاقات القابلة للنقر (المخططات، التكاليف) بلون التمييز عند المرور فوقها. تظل القوائم الفرعية تفتح عند الإيقاف.";
+"menu_section_today_cost" = "تكلفة اليوم";
+"menu_section_cost_chart" = "مخطط التكلفة اليومية";
+"menu_section_account_actions" = "تبديل / إضافة حساب";
+"section_menu_visibility" = "إظهار في القائمة";
+"section_menu_visibility_footer" = "أوقف الأقسام التي لا تحتاجها، مثل التكاليف في خطة اشتراك. يبقى استخدام الجلسة والاستخدام الأسبوعي ظاهرين دائمًا.";

@@ -33,6 +33,7 @@ extension SettingsStore {
         _ = self.menuBarHidesCritters
         _ = self.menuBarStatusBadgeVisible
         _ = self.menuCardHoverHighlightEnabled
+        _ = self.hiddenMenuSectionsRaw
         _ = self.menuBarColorPace
         _ = self.menuBarPaceReservePositive
         _ = self.menuBarColorByProvider

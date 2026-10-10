@@ -2514,3 +2514,8 @@
 "menu_bar_status_badge_subtitle" = "Draws a dot or exclamation mark on the meter icon when a provider's status page reports an incident.";
 "menu_card_hover_highlight_title" = "Highlight cards on hover";
 "menu_card_hover_highlight_subtitle" = "Paints the accent color behind clickable cards (charts, costs) while the pointer is over them. Submenus still open when off.";
+"menu_section_today_cost" = "Today's cost";
+"menu_section_cost_chart" = "Daily cost chart";
+"menu_section_account_actions" = "Switch / Add Account";
+"section_menu_visibility" = "Show in menu";
+"section_menu_visibility_footer" = "Turn off sections you don't need, for example costs on a subscription plan. Session and weekly usage always stay visible.";

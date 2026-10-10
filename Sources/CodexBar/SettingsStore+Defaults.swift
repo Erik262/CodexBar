@@ -320,6 +320,11 @@ extension SettingsStore {
         set { self.setDefault(\.menuCardHoverHighlightEnabled, newValue, key: "menuCardHoverHighlightEnabled") }
     }
 
+    var hiddenMenuSectionsRaw: [String] {
+        get { self.defaultsState.hiddenMenuSectionsRaw }
+        set { self.setDefault(\.hiddenMenuSectionsRaw, newValue, key: "hiddenMenuSections") }
+    }
+
     var menuBarColorPace: Bool {
         get { self.defaultsState.menuBarColorPace }
         set { self.setDefault(\.menuBarColorPace, newValue, key: "menuBarColorPace") }

@@ -2508,3 +2508,8 @@
 "menu_bar_status_badge_subtitle" = "Zeichnet einen Punkt oder ein Ausrufezeichen auf das Balkensymbol, wenn die Statusseite eines Anbieters eine Störung meldet.";
 "menu_card_hover_highlight_title" = "Karten beim Überfahren hervorheben";
 "menu_card_hover_highlight_subtitle" = "Hinterlegt anklickbare Karten (Diagramme, Kosten) beim Überfahren mit der Akzentfarbe. Untermenüs öffnen sich auch, wenn dies aus ist.";
+"menu_section_today_cost" = "Heutige Kosten";
+"menu_section_cost_chart" = "Tägliches Kostendiagramm";
+"menu_section_account_actions" = "Konto wechseln / hinzufügen";
+"section_menu_visibility" = "Im Menü anzeigen";
+"section_menu_visibility_footer" = "Schalte Bereiche aus, die du nicht brauchst, z. B. Kosten bei einem Abo. Sitzungs- und Wochennutzung bleiben immer sichtbar.";

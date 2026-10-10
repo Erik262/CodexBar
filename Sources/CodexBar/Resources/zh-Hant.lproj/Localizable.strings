@@ -2488,3 +2488,8 @@
 "menu_bar_status_badge_subtitle" = "當供應商狀態頁回報事故時，在圖示上繪製圓點或驚嘆號。";
 "menu_card_hover_highlight_title" = "滑過時醒目標示卡片";
 "menu_card_hover_highlight_subtitle" = "指標滑過時，在可點按卡片（圖表、費用）後繪製強調色。關閉後子選單仍可開啟。";
+"menu_section_today_cost" = "今日費用";
+"menu_section_cost_chart" = "每日費用圖表";
+"menu_section_account_actions" = "切換／新增帳號";
+"section_menu_visibility" = "在選單中顯示";
+"section_menu_visibility_footer" = "關閉不需要的區塊，例如訂閱方案下的費用。工作階段與每週用量一律顯示。";

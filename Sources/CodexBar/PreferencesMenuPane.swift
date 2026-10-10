@@ -100,6 +100,18 @@ struct MenuPane: View {
                 Text(L("section_content"))
             }
 
+            Section {
+                ForEach(MenuSectionToggle.allCases) { section in
+                    Toggle(section.label, isOn: Binding(
+                        get: { self.settings.isMenuSectionVisible(section) },
+                        set: { self.settings.setMenuSection(section, visible: $0) }))
+                }
+            } header: {
+                Text(L("section_menu_visibility"))
+            } footer: {
+                SettingsSectionFooter(L("section_menu_visibility_footer"))
+            }
+
             Section(L("section_widgets")) {
                 Toggle(isOn: self.$settings.accountWidgetsEnabled) {
                     SettingsRowLabel(
@@ -294,6 +306,8 @@ struct CostSummarySettingsSection: View {
 
 @MainActor
 struct CostHistoryDaysEditor: View {
+    static let presetDays = [1, 3, 7, 14, 30, 90, 365]
+
     @Bindable var settings: SettingsStore
 
     static func title(days: Int) -> String {
@@ -304,10 +318,10 @@ struct CostHistoryDaysEditor: View {
         Picker(L("cost_history_window_title"), selection: self.$settings.costReportingPeriod) {
             Text(L("Month to date")).tag(CostReportingPeriod.monthToDate)
             Text(L("All")).tag(CostReportingPeriod.allTime)
-            ForEach([1, 7, 30, 90, 365], id: \.self) { days in
+            ForEach(Self.presetDays, id: \.self) { days in
                 Text(Self.title(days: days)).tag(CostReportingPeriod.rolling(days: days))
             }
-            if case let .rolling(days) = self.settings.costReportingPeriod, ![1, 7, 30, 90, 365].contains(days) {
+            if case let .rolling(days) = self.settings.costReportingPeriod, !Self.presetDays.contains(days) {
                 Text(Self.title(days: days)).tag(self.settings.costReportingPeriod)
             }
         }

@@ -2509,3 +2509,8 @@
 "menu_bar_status_badge_subtitle" = "Affiche un point ou un point d’exclamation sur l’icône lorsque la page d’état d’un fournisseur signale un incident.";
 "menu_card_hover_highlight_title" = "Surligner les cartes au survol";
 "menu_card_hover_highlight_subtitle" = "Applique la couleur d’accent derrière les cartes cliquables (graphiques, coûts) au survol. Les sous-menus s’ouvrent toujours si désactivé.";
+"menu_section_today_cost" = "Coût du jour";
+"menu_section_cost_chart" = "Graphique des coûts quotidiens";
+"menu_section_account_actions" = "Changer / ajouter un compte";
+"section_menu_visibility" = "Afficher dans le menu";
+"section_menu_visibility_footer" = "Désactivez les sections inutiles, par exemple les coûts avec un abonnement. L’utilisation de session et hebdomadaire reste toujours visible.";

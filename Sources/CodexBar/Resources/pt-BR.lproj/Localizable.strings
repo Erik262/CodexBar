@@ -2510,3 +2510,8 @@
 "menu_bar_status_badge_subtitle" = "Desenha um ponto ou ponto de exclamação no ícone quando a página de status de um provedor relata um incidente.";
 "menu_card_hover_highlight_title" = "Destacar cartões ao passar o cursor";
 "menu_card_hover_highlight_subtitle" = "Pinta a cor de destaque atrás de cartões clicáveis (gráficos, custos) ao passar o cursor. Submenus continuam abrindo quando desativado.";
+"menu_section_today_cost" = "Custo de hoje";
+"menu_section_cost_chart" = "Gráfico de custo diário";
+"menu_section_account_actions" = "Trocar / adicionar conta";
+"section_menu_visibility" = "Mostrar no menu";
+"section_menu_visibility_footer" = "Desative seções que você não precisa, como custos em um plano de assinatura. O uso da sessão e semanal sempre fica visível.";

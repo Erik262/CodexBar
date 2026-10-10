@@ -585,6 +585,7 @@ extension SettingsStore {
             menuBarStatusBadgeVisible: userDefaults.object(forKey: "menuBarStatusBadgeVisible") as? Bool ?? false,
             menuCardHoverHighlightEnabled: userDefaults.object(
                 forKey: "menuCardHoverHighlightEnabled") as? Bool ?? true,
+            hiddenMenuSectionsRaw: userDefaults.stringArray(forKey: "hiddenMenuSections") ?? [],
             menuBarColorPace: userDefaults.bool(forKey: "menuBarColorPace"),
             menuBarPaceReservePositive: userDefaults.bool(forKey: "menuBarPaceReservePositive"),
             menuBarColorByProvider: userDefaults.bool(forKey: "menuBarColorByProvider"),

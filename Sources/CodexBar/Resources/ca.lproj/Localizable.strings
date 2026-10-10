@@ -2514,3 +2514,8 @@
 "menu_bar_status_badge_subtitle" = "Dibuixa un punt o un signe d’exclamació a la icona quan la pàgina d’estat d’un proveïdor informa d’una incidència.";
 "menu_card_hover_highlight_title" = "Ressalta les targetes en passar-hi el cursor";
 "menu_card_hover_highlight_subtitle" = "Pinta el color d’èmfasi darrere de les targetes clicables (gràfics, costos) en passar-hi el punter. Els submenús s’obren igualment si està desactivat.";
+"menu_section_today_cost" = "Cost d’avui";
+"menu_section_cost_chart" = "Gràfic de cost diari";
+"menu_section_account_actions" = "Canvia / afegeix un compte";
+"section_menu_visibility" = "Mostra al menú";
+"section_menu_visibility_footer" = "Desactiva les seccions que no necessitis, per exemple els costos amb una subscripció. L’ús de sessió i setmanal sempre es mostra.";

@@ -34,6 +34,29 @@ struct SettingsPersistenceContractTests {
     }
 
     @Test
+    func `menu visibility toggles persist and default to visible`() {
+        let defaults = InMemoryUserDefaults()
+        let settings = testSettingsStore(suiteName: #function, userDefaults: defaults)
+        #expect(MenuSectionToggle.allCases.allSatisfy { settings.isMenuSectionVisible($0) })
+        #expect(settings.menuCardHoverHighlightEnabled)
+        #expect(!settings.menuBarStatusBadgeVisible)
+
+        settings.setMenuSection(.todayCost, visible: false)
+        settings.setMenuSection(.accountActions, visible: false)
+        settings.menuCardHoverHighlightEnabled = false
+        settings.menuBarStatusBadgeVisible = true
+
+        let reloaded = testSettingsStore(suiteName: #function, userDefaults: defaults)
+        #expect(reloaded.hiddenMenuSections == [.todayCost, .accountActions])
+        #expect(!reloaded.menuCardHoverHighlightEnabled)
+        #expect(reloaded.menuBarStatusBadgeVisible)
+        #expect(defaults.stringArray(forKey: "hiddenMenuSections") == ["accountActions", "todayCost"])
+
+        reloaded.setMenuSection(.todayCost, visible: true)
+        #expect(reloaded.hiddenMenuSections == [.accountActions])
+    }
+
+    @Test
     func `normalized cost assignments preserve revision and persistence semantics`() {
         let defaults = InMemoryUserDefaults()
         let settings = testSettingsStore(suiteName: #function, userDefaults: defaults)

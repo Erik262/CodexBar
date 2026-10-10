@@ -2513,3 +2513,8 @@
 "menu_bar_status_badge_subtitle" = "Menggambar titik atau tanda seru pada ikon saat halaman status penyedia melaporkan insiden.";
 "menu_card_hover_highlight_title" = "Sorot kartu saat diarahkan";
 "menu_card_hover_highlight_subtitle" = "Mewarnai latar kartu yang dapat diklik (grafik, biaya) dengan warna aksen saat penunjuk berada di atasnya. Submenu tetap terbuka saat nonaktif.";
+"menu_section_today_cost" = "Biaya hari ini";
+"menu_section_cost_chart" = "Grafik biaya harian";
+"menu_section_account_actions" = "Ganti / tambah akun";
+"section_menu_visibility" = "Tampilkan di menu";
+"section_menu_visibility_footer" = "Matikan bagian yang tidak diperlukan, misalnya biaya pada paket langganan. Penggunaan sesi dan mingguan selalu terlihat.";

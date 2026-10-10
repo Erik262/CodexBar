@@ -37,6 +37,7 @@ struct SettingsDefaultsState {
     var menuBarHidesCritters: Bool
     var menuBarStatusBadgeVisible: Bool
     var menuCardHoverHighlightEnabled: Bool
+    var hiddenMenuSectionsRaw: [String]
     var menuBarColorPace: Bool
     var menuBarPaceReservePositive: Bool
     var menuBarColorByProvider: Bool

@@ -155,7 +155,8 @@ extension UsageStore {
                     snapshot: snapshot,
                     historySelection: account?.historySelection,
                     usesLiveAccount: isLive)
-                : [])
+                : [],
+            hiddenMenuSections: isSettings ? [] : self.settings.hiddenMenuSections)
     }
 
     private func menuCardSessionEquivalentForecast(

@@ -54,7 +54,7 @@ struct InlineUsageDashboardModel: Equatable {
     let accessibilityLabel: String
     let valueStyle: ValueStyle
     let kpis: [KPI]
-    let points: [Point]
+    var points: [Point]
     let detailLines: [String]
     /// Codex/Claude weekly quota windows, newest first. Empty for other cost dashboards.
     var quotaWindows: [QuotaWindow] = []
@@ -112,6 +112,9 @@ extension UsageMenuCardView.Model {
     static func inlineUsageDashboard(input: Input) -> InlineUsageDashboardModel? {
         guard var model = self.resolveInlineUsageDashboard(input: input) else { return nil }
         model.barColor = Self.inlineDashboardBarColor(for: input.provider)
+        if input.hiddenMenuSections.contains(.costChart) {
+            model.points = []
+        }
         return model
     }
 
@@ -338,7 +341,8 @@ extension UsageMenuCardView.Model {
             snapshot: snapshot,
             requestHistoryTitle: requestHistoryTitle,
             displayCurrencyCode: displayCurrencyCode)
-        if !quota.rows.isEmpty, let note = menuCardPresentation(for: input.provider).quotaWindowNote {
+        let quotaRows = input.hiddenMenuSections.contains(.recentWindows) ? [] : quota.rows
+        if !quotaRows.isEmpty, let note = menuCardPresentation(for: input.provider).quotaWindowNote {
             details.append(L(note))
         }
         let providerName = ProviderDefaults.metadata[input.provider]?.displayName ?? input.provider.rawValue
@@ -391,13 +395,16 @@ extension UsageMenuCardView.Model {
                     emphasis: true),
                 at: 0)
         }
+        if input.hiddenMenuSections.contains(.todayCost) {
+            kpis.removeAll { $0 == todayKPI }
+        }
         var model = InlineUsageDashboardModel(
             accessibilityLabel: accessibilityLabel,
             valueStyle: Self.costValueStyle(currencyCode: displayCurrencyCode),
             kpis: kpis,
             points: points,
             detailLines: details)
-        model.quotaWindows = quota.rows
+        model.quotaWindows = quotaRows
         model.currencyCode = displayCurrencyCode
         return model
     }

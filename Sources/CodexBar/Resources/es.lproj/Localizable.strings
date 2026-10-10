@@ -2508,3 +2508,8 @@
 "menu_bar_status_badge_subtitle" = "Dibuja un punto o un signo de exclamación en el icono cuando la página de estado de un proveedor informa de una incidencia.";
 "menu_card_hover_highlight_title" = "Resaltar tarjetas al pasar el cursor";
 "menu_card_hover_highlight_subtitle" = "Pinta el color de acento detrás de las tarjetas clicables (gráficos, costes) al pasar el puntero. Los submenús se siguen abriendo si está desactivado.";
+"menu_section_today_cost" = "Coste de hoy";
+"menu_section_cost_chart" = "Gráfico de coste diario";
+"menu_section_account_actions" = "Cambiar / añadir cuenta";
+"section_menu_visibility" = "Mostrar en el menú";
+"section_menu_visibility_footer" = "Desactiva las secciones que no necesites, por ejemplo los costes con una suscripción. El uso de sesión y semanal siempre se muestra.";
