@@ -2493,3 +2493,9 @@
 "menu_section_account_actions" = "切換／新增帳號";
 "section_menu_visibility" = "在選單中顯示";
 "section_menu_visibility_footer" = "關閉不需要的區塊，例如訂閱方案下的費用。工作階段與每週用量一律顯示。";
+"merged_icon_style_bars" = "堆疊進度列";
+"stacked_bars_window_title" = "進度列顯示";
+"stacked_bars_window_session" = "工作階段用量";
+"stacked_bars_window_weekly" = "每週用量";
+"stacked_bars_rows_title" = "列";
+"stacked_bars_rows_subtitle" = "勾選兩到三個供應商。拖曳可變更由上到下的順序。";

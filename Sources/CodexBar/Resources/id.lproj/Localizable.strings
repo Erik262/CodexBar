@@ -2518,3 +2518,9 @@
 "menu_section_account_actions" = "Ganti / tambah akun";
 "section_menu_visibility" = "Tampilkan di menu";
 "section_menu_visibility_footer" = "Matikan bagian yang tidak diperlukan, misalnya biaya pada paket langganan. Penggunaan sesi dan mingguan selalu terlihat.";
+"merged_icon_style_bars" = "Bilah bertumpuk";
+"stacked_bars_window_title" = "Bilah menampilkan";
+"stacked_bars_window_session" = "Penggunaan sesi";
+"stacked_bars_window_weekly" = "Penggunaan mingguan";
+"stacked_bars_rows_title" = "Baris";
+"stacked_bars_rows_subtitle" = "Centang dua atau tiga penyedia. Seret untuk mengubah urutan dari atas ke bawah.";

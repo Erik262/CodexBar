@@ -113,6 +113,9 @@ extension SettingsStore {
         _ = self.mergeIconsStacked
         _ = self.mergeIconStackedTopProviderRaw
         _ = self.mergeIconStackedBottomProviderRaw
+        _ = self.mergeIconsStackedBars
+        _ = self.stackedBarsProvidersRaw
+        _ = self.stackedBarsWindow
         _ = self.mergedOverviewSelectedProviders
         _ = self.zaiAPIToken
         _ = self[providerConfig: .synthetic, field: .apiKey]

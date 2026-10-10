@@ -2513,3 +2513,9 @@
 "menu_section_account_actions" = "Cambiar / añadir cuenta";
 "section_menu_visibility" = "Mostrar en el menú";
 "section_menu_visibility_footer" = "Desactiva las secciones que no necesites, por ejemplo los costes con una suscripción. El uso de sesión y semanal siempre se muestra.";
+"merged_icon_style_bars" = "Barras apiladas";
+"stacked_bars_window_title" = "Las barras muestran";
+"stacked_bars_window_session" = "Uso de la sesión";
+"stacked_bars_window_weekly" = "Uso semanal";
+"stacked_bars_rows_title" = "Filas";
+"stacked_bars_rows_subtitle" = "Marca dos o tres proveedores. Arrastra para cambiar el orden de arriba abajo.";

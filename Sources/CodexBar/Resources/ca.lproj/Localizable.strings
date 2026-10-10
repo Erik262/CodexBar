@@ -2519,3 +2519,9 @@
 "menu_section_account_actions" = "Canvia / afegeix un compte";
 "section_menu_visibility" = "Mostra al menú";
 "section_menu_visibility_footer" = "Desactiva les seccions que no necessitis, per exemple els costos amb una subscripció. L’ús de sessió i setmanal sempre es mostra.";
+"merged_icon_style_bars" = "Barres apilades";
+"stacked_bars_window_title" = "Les barres mostren";
+"stacked_bars_window_session" = "Ús de la sessió";
+"stacked_bars_window_weekly" = "Ús setmanal";
+"stacked_bars_rows_title" = "Files";
+"stacked_bars_rows_subtitle" = "Marca dos o tres proveïdors. Arrossega per canviar l’ordre de dalt a baix.";

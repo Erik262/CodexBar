@@ -2518,3 +2518,9 @@
 "menu_section_account_actions" = "Przełącz / dodaj konto";
 "section_menu_visibility" = "Pokaż w menu";
 "section_menu_visibility_footer" = "Wyłącz niepotrzebne sekcje, np. koszty przy subskrypcji. Użycie sesji i tygodniowe pozostaje zawsze widoczne.";
+"merged_icon_style_bars" = "Paski ułożone w stos";
+"stacked_bars_window_title" = "Paski pokazują";
+"stacked_bars_window_session" = "Użycie sesji";
+"stacked_bars_window_weekly" = "Użycie tygodniowe";
+"stacked_bars_rows_title" = "Wiersze";
+"stacked_bars_rows_subtitle" = "Zaznacz dwóch lub trzech dostawców. Przeciągnij, aby zmienić kolejność od góry do dołu.";

@@ -2516,3 +2516,9 @@
 "menu_section_account_actions" = "Сменить / добавить аккаунт";
 "section_menu_visibility" = "Показывать в меню";
 "section_menu_visibility_footer" = "Отключите ненужные разделы, например расходы при подписке. Использование за сессию и неделю всегда видно.";
+"merged_icon_style_bars" = "Полосы стопкой";
+"stacked_bars_window_title" = "Полосы показывают";
+"stacked_bars_window_session" = "Использование за сессию";
+"stacked_bars_window_weekly" = "Использование за неделю";
+"stacked_bars_rows_title" = "Строки";
+"stacked_bars_rows_subtitle" = "Отметьте двух или трёх провайдеров. Перетаскивайте, чтобы изменить порядок сверху вниз.";

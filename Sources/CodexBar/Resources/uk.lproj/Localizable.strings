@@ -2515,3 +2515,9 @@
 "menu_section_account_actions" = "Змінити / додати обліковий запис";
 "section_menu_visibility" = "Показувати в меню";
 "section_menu_visibility_footer" = "Вимкніть непотрібні розділи, наприклад витрати за підписки. Використання за сесію й тиждень завжди видно.";
+"merged_icon_style_bars" = "Смуги стовпчиком";
+"stacked_bars_window_title" = "Смуги показують";
+"stacked_bars_window_session" = "Використання за сесію";
+"stacked_bars_window_weekly" = "Використання за тиждень";
+"stacked_bars_rows_title" = "Рядки";
+"stacked_bars_rows_subtitle" = "Позначте двох або трьох постачальників. Перетягуйте, щоб змінити порядок згори донизу.";

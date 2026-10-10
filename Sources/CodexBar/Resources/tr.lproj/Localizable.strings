@@ -2518,3 +2518,9 @@
 "menu_section_account_actions" = "Hesap değiştir / ekle";
 "section_menu_visibility" = "Menüde göster";
 "section_menu_visibility_footer" = "Abonelikteki maliyetler gibi ihtiyacınız olmayan bölümleri kapatın. Oturum ve haftalık kullanım her zaman görünür kalır.";
+"merged_icon_style_bars" = "Yığılmış çubuklar";
+"stacked_bars_window_title" = "Çubuklar gösterir";
+"stacked_bars_window_session" = "Oturum kullanımı";
+"stacked_bars_window_weekly" = "Haftalık kullanım";
+"stacked_bars_rows_title" = "Satırlar";
+"stacked_bars_rows_subtitle" = "İki veya üç sağlayıcı seçin. Yukarıdan aşağıya sırayı değiştirmek için sürükleyin.";

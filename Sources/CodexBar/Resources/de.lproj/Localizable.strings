@@ -2513,3 +2513,9 @@
 "menu_section_account_actions" = "Konto wechseln / hinzufügen";
 "section_menu_visibility" = "Im Menü anzeigen";
 "section_menu_visibility_footer" = "Schalte Bereiche aus, die du nicht brauchst, z. B. Kosten bei einem Abo. Sitzungs- und Wochennutzung bleiben immer sichtbar.";
+"merged_icon_style_bars" = "Gestapelte Balken";
+"stacked_bars_window_title" = "Balken zeigen";
+"stacked_bars_window_session" = "Sitzungsnutzung";
+"stacked_bars_window_weekly" = "Wöchentliche Nutzung";
+"stacked_bars_rows_title" = "Zeilen";
+"stacked_bars_rows_subtitle" = "Wähle zwei oder drei Anbieter. Ziehen ändert die Reihenfolge von oben nach unten.";

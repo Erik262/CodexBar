@@ -885,6 +885,21 @@ extension SettingsStore {
         set { self.setDefault(\.mergeIconsStacked, newValue, key: "mergeIconsStacked") }
     }
 
+    var mergeIconsStackedBars: Bool {
+        get { self.defaultsState.mergeIconsStackedBars }
+        set { self.setDefault(\.mergeIconsStackedBars, newValue, key: "mergeIconsStackedBars") }
+    }
+
+    var stackedBarsProvidersRaw: [String] {
+        get { self.defaultsState.stackedBarsProvidersRaw }
+        set { self.setDefault(\.stackedBarsProvidersRaw, newValue, key: "stackedBarsProviders") }
+    }
+
+    var stackedBarsWindow: StackedBarsWindow {
+        get { StackedBarsWindow(rawValue: self.defaultsState.stackedBarsWindowRaw) ?? .session }
+        set { self.setDefault(\.stackedBarsWindowRaw, newValue.rawValue, key: "stackedBarsWindow") }
+    }
+
     var mergeIconStackedTopProviderRaw: String? {
         get { self.defaultsState.mergeIconStackedTopProviderRaw }
         set { self.setOptionalDefault(\.mergeIconStackedTopProviderRaw, newValue, key: "mergeIconStackedTopProvider") }

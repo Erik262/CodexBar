@@ -2514,3 +2514,9 @@
 "menu_section_account_actions" = "Changer / ajouter un compte";
 "section_menu_visibility" = "Afficher dans le menu";
 "section_menu_visibility_footer" = "Désactivez les sections inutiles, par exemple les coûts avec un abonnement. L’utilisation de session et hebdomadaire reste toujours visible.";
+"merged_icon_style_bars" = "Barres empilées";
+"stacked_bars_window_title" = "Les barres affichent";
+"stacked_bars_window_session" = "Utilisation de la session";
+"stacked_bars_window_weekly" = "Utilisation hebdomadaire";
+"stacked_bars_rows_title" = "Lignes";
+"stacked_bars_rows_subtitle" = "Cochez deux ou trois fournisseurs. Faites glisser pour changer l’ordre de haut en bas.";

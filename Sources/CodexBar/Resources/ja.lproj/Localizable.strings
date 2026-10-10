@@ -2515,3 +2515,9 @@
 "menu_section_account_actions" = "アカウントの切り替え／追加";
 "section_menu_visibility" = "メニューに表示";
 "section_menu_visibility_footer" = "不要なセクション（サブスクリプション利用時のコストなど）をオフにできます。セッションと週間の使用量は常に表示されます。";
+"merged_icon_style_bars" = "積み重ねバー";
+"stacked_bars_window_title" = "バーの表示内容";
+"stacked_bars_window_session" = "セッション使用量";
+"stacked_bars_window_weekly" = "週間使用量";
+"stacked_bars_rows_title" = "行";
+"stacked_bars_rows_subtitle" = "2〜3個のプロバイダを選択します。ドラッグで上から下への順序を変更できます。";

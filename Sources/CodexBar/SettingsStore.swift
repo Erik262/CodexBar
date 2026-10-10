@@ -669,6 +669,10 @@ extension SettingsStore {
             mergeIconsStacked: userDefaults.object(forKey: "mergeIconsStacked") as? Bool ?? false,
             mergeIconStackedTopProviderRaw: userDefaults.string(forKey: "mergeIconStackedTopProvider"),
             mergeIconStackedBottomProviderRaw: userDefaults.string(forKey: "mergeIconStackedBottomProvider"),
+            mergeIconsStackedBars: userDefaults.object(forKey: "mergeIconsStackedBars") as? Bool ?? false,
+            stackedBarsProvidersRaw: userDefaults.stringArray(forKey: "stackedBarsProviders") ?? [],
+            stackedBarsWindowRaw: userDefaults.string(forKey: "stackedBarsWindow")
+                ?? StackedBarsWindow.session.rawValue,
             mergedMenuLastSelectedWasOverview: userDefaults.object(
                 forKey: "mergedMenuLastSelectedWasOverview") as? Bool ?? false,
             mergedOverviewSelectedProvidersRaw: userDefaults.array(

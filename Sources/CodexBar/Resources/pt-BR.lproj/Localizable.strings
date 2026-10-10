@@ -2515,3 +2515,9 @@
 "menu_section_account_actions" = "Trocar / adicionar conta";
 "section_menu_visibility" = "Mostrar no menu";
 "section_menu_visibility_footer" = "Desative seções que você não precisa, como custos em um plano de assinatura. O uso da sessão e semanal sempre fica visível.";
+"merged_icon_style_bars" = "Barras empilhadas";
+"stacked_bars_window_title" = "As barras mostram";
+"stacked_bars_window_session" = "Uso da sessão";
+"stacked_bars_window_weekly" = "Uso semanal";
+"stacked_bars_rows_title" = "Linhas";
+"stacked_bars_rows_subtitle" = "Marque dois ou três provedores. Arraste para mudar a ordem de cima para baixo.";

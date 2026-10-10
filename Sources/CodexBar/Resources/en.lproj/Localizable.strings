@@ -2519,3 +2519,9 @@
 "menu_section_account_actions" = "Switch / Add Account";
 "section_menu_visibility" = "Show in menu";
 "section_menu_visibility_footer" = "Turn off sections you don't need, for example costs on a subscription plan. Session and weekly usage always stay visible.";
+"merged_icon_style_bars" = "Stacked bars";
+"stacked_bars_window_title" = "Bars show";
+"stacked_bars_window_session" = "Session usage";
+"stacked_bars_window_weekly" = "Weekly usage";
+"stacked_bars_rows_title" = "Rows";
+"stacked_bars_rows_subtitle" = "Check two or three providers. Drag to change the order from top to bottom.";

@@ -2516,3 +2516,9 @@
 "menu_section_account_actions" = "Chuyển / thêm tài khoản";
 "section_menu_visibility" = "Hiển thị trong menu";
 "section_menu_visibility_footer" = "Tắt các mục không cần, ví dụ chi phí khi dùng gói đăng ký. Mức dùng phiên và hằng tuần luôn hiển thị.";
+"merged_icon_style_bars" = "Thanh xếp chồng";
+"stacked_bars_window_title" = "Thanh hiển thị";
+"stacked_bars_window_session" = "Mức dùng phiên";
+"stacked_bars_window_weekly" = "Mức dùng hằng tuần";
+"stacked_bars_rows_title" = "Hàng";
+"stacked_bars_rows_subtitle" = "Chọn hai hoặc ba nhà cung cấp. Kéo để đổi thứ tự từ trên xuống dưới.";
