@@ -1439,7 +1439,7 @@ extension StatusItemController {
                 now: now)
             : nil
         let stale = self.store.isStale(provider: provider)
-        let indicator = self.store.statusIndicator(for: provider)
+        let indicator = self.menuBarIconStatusIndicator(for: provider)
         let image = IconRenderer.makeIcon(
             primaryRemaining: primary,
             weeklyRemaining: weekly,

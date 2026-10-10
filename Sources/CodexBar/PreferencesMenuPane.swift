@@ -29,6 +29,12 @@ struct MenuPane: View {
                         subtitle: L("show_pace_subtitle"))
                 }
 
+                Toggle(isOn: self.$settings.menuCardHoverHighlightEnabled) {
+                    SettingsRowLabel(
+                        L("menu_card_hover_highlight_title"),
+                        subtitle: L("menu_card_hover_highlight_subtitle"))
+                }
+
                 SettingsMenuPicker(
                     selection: self.$settings.weeklyProgressWorkDays,
                     options: MenuSettingsMenuOptions.weeklyProgressWorkDays,
@@ -92,6 +98,18 @@ struct MenuPane: View {
                     })
             } header: {
                 Text(L("section_content"))
+            }
+
+            Section {
+                ForEach(MenuSectionToggle.allCases) { section in
+                    Toggle(section.label, isOn: Binding(
+                        get: { self.settings.isMenuSectionVisible(section) },
+                        set: { self.settings.setMenuSection(section, visible: $0) }))
+                }
+            } header: {
+                Text(L("section_menu_visibility"))
+            } footer: {
+                SettingsSectionFooter(L("section_menu_visibility_footer"))
             }
 
             Section(L("section_widgets")) {
@@ -215,6 +233,13 @@ struct CostSummarySettingsSection: View {
                         L("cost_comparison_periods_title"),
                         subtitle: L("cost_comparison_periods_subtitle"))
                 }
+
+                if !self.budgetProviders.isEmpty {
+                    SettingsRowLabel(L("api_credits_settings_title"), subtitle: L("api_credits_settings_subtitle"))
+                    ForEach(self.budgetProviders, id: \.self) { provider in
+                        APICreditBudgetSettingsRow(settings: self.settings, provider: provider)
+                    }
+                }
             }
         } header: {
             Text(L("section_cost_summary"))
@@ -235,6 +260,11 @@ struct CostSummarySettingsSection: View {
 
     static func costDataExplanation() -> String {
         L("cost_data_explanation")
+    }
+
+    private var budgetProviders: [UsageProvider] {
+        let enabled = Set(self.store.enabledFirstPartyProvidersForDisplay())
+        return APICreditBudget.supportedProviders.filter { enabled.contains($0) }
     }
 
     static var costStatusProviders: [UsageProvider] {
@@ -288,6 +318,8 @@ struct CostSummarySettingsSection: View {
 
 @MainActor
 struct CostHistoryDaysEditor: View {
+    static let presetDays = [1, 3, 7, 14, 30, 90, 365]
+
     @Bindable var settings: SettingsStore
 
     static func title(days: Int) -> String {
@@ -298,10 +330,10 @@ struct CostHistoryDaysEditor: View {
         Picker(L("cost_history_window_title"), selection: self.$settings.costReportingPeriod) {
             Text(L("Month to date")).tag(CostReportingPeriod.monthToDate)
             Text(L("All")).tag(CostReportingPeriod.allTime)
-            ForEach([1, 7, 30, 90, 365], id: \.self) { days in
+            ForEach(Self.presetDays, id: \.self) { days in
                 Text(Self.title(days: days)).tag(CostReportingPeriod.rolling(days: days))
             }
-            if case let .rolling(days) = self.settings.costReportingPeriod, ![1, 7, 30, 90, 365].contains(days) {
+            if case let .rolling(days) = self.settings.costReportingPeriod, !Self.presetDays.contains(days) {
                 Text(Self.title(days: days)).tag(self.settings.costReportingPeriod)
             }
         }

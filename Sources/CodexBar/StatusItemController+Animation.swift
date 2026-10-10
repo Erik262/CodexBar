@@ -14,7 +14,7 @@ extension StatusItemController {
         // Stacked rows always render through the layout-token path (`applyStoredStackedMenuBarLayoutIfNeeded`
         // requires `menuBarShowsBrandIconWithPercent`), which has no phase-driven blink/wiggle/tilt/morph
         // rendering — scheduling the 30 FPS driver here would only burn CPU for frames that never change.
-        if self.stackedMergeIconProvidersIfActive() != nil {
+        if self.stackedMergeIconProvidersIfActive() != nil || self.stackedBarProvidersIfActive() != nil {
             return false
         }
         if self.shouldMergeIcons {
@@ -56,7 +56,9 @@ extension StatusItemController {
     }
 
     private func blinkingProviders() -> [UsageProvider] {
-        guard self.stackedMergeIconProvidersIfActive() == nil else { return [] }
+        guard self.stackedMergeIconProvidersIfActive() == nil, self.stackedBarProvidersIfActive() == nil else {
+            return []
+        }
         let merged = self.shouldMergeIcons
         let providers = merged ? [self.primaryProviderForUnifiedIcon()] : UsageProvider.allCases.filter(self.isVisible)
         return providers.filter { provider in
@@ -260,6 +262,10 @@ extension StatusItemController {
         let snapshot = self.store.menuBarSnapshot(for: primaryProvider.instanceID)
         let warningFlash = self.quotaWarningFlashActive(provider: primaryProvider)
 
+        if let barProviders = self.stackedBarProvidersIfActive() {
+            return self.applyStackedBarsIcon(providers: barProviders, button: button)
+        }
+
         if let rows = self.stackedMergeIconProvidersIfActive(),
            let stackedResult = self.applyStoredStackedMenuBarLayoutIfNeeded(top: rows.top, bottom: rows.bottom)
         {
@@ -316,7 +322,7 @@ extension StatusItemController {
         let tilt: CGFloat =
             style == .combined ? 0 : self.tiltAmount(for: primaryProvider) * .pi / 28
 
-        let statusIndicator = self.store.statusIndicator(for: primaryProvider)
+        let statusIndicator = self.menuBarIconStatusIndicator(for: primaryProvider)
         if showBrandPercent,
            let brand = self.brandIcon(primaryProvider)
         {
@@ -419,6 +425,44 @@ extension StatusItemController {
                 tint: providerTint,
                 for: button)
         }
+        self.noteIconPerfRender(skipped: false)
+        return false
+    }
+
+    /// One image with a brand icon and a meter per provider row; returns whether the render was skipped.
+    private func applyStackedBarsIcon(providers: [UsageProvider], button: NSStatusBarButton) -> Bool {
+        self.statusItem.length = NSStatusItem.variableLength
+        let window = self.settings.stackedBarsWindow
+        let rows = providers.map { provider in
+            let snapshot = self.store.menuBarSnapshot(for: provider.instanceID)
+            let percents = self.resolvedMenuBarIconPercents(
+                provider: provider,
+                snapshot: snapshot,
+                style: self.store.style(for: provider),
+                showUsed: self.settings.usageBarsShowUsed)
+            // Single-lane providers fall back to their only lane instead of drawing a misleading empty track.
+            let percent = window == .session
+                ? percents?.primary ?? percents?.secondary
+                : percents?.secondary ?? percents?.primary
+            return StackedBarsIconRenderer.Row(
+                percent: percent,
+                stale: percent == nil || self.store.isStale(provider: provider))
+        }
+        let rowSignatures = zip(providers, rows).map { provider, row in
+            "\(provider.rawValue)=\(Self.iconSignatureValue(row.percent)):\(row.stale ? "1" : "0")"
+        }
+        let signature = ([
+            "mode=stackedBars",
+            "window=\(window.rawValue)",
+            "highContrast=\(self.shouldUseHighContrastStatusItemContent ? "1" : "0")",
+        ] + rowSignatures).joined(separator: "|")
+        let canSkipCachedRender = self.prepareButtonForImageOnlyCacheHit(button)
+        if self.shouldSkipMergedIconRender(signature), canSkipCachedRender {
+            self.noteIconPerfRender(skipped: true)
+            return true
+        }
+        let image = StackedBarsIconRenderer.makeImage(rows: rows, icons: providers.map { self.brandIcon($0) })
+        self.setButtonContent(image: image, title: nil, tint: nil, for: button)
         self.noteIconPerfRender(skipped: false)
         return false
     }
@@ -574,7 +618,7 @@ extension StatusItemController {
         let blink = self.loadingBlinkAmount(for: provider, style: style, phase: isLoading ? phase : nil)
         let wiggle = self.wiggleAmount(for: provider)
         let tilt = self.tiltAmount(for: provider) * .pi / 28 // limit to ~6.4°
-        let statusIndicator = self.store.statusIndicator(for: provider)
+        let statusIndicator = self.menuBarIconStatusIndicator(for: provider)
         // Brand + percent returns above; remaining paths are image-only apart from the debug marker.
         let canSkipCachedRender = self.prepareButtonForImageOnlyCacheHit(button)
         if let morphProgress {
@@ -1291,7 +1335,7 @@ extension StatusItemController {
             source: self.settings.unifiedIconSource,
             focusedProvider: self.frontmostProviderMonitor?.currentProvider,
             isMergedMenuOpen: self.isMergedMenuOpen,
-            isStacked: self.stackedMergeIconProvidersIfActive() != nil)
+            isStacked: self.stackedMergeIconProvidersIfActive() != nil || self.stackedBarProvidersIfActive() != nil)
             .resolve(
                 fallback: fallback,
                 mergeIcons: self.shouldMergeIcons,
@@ -1470,6 +1514,11 @@ extension StatusItemController {
         } else {
             UsageProvider.allCases.forEach { self.applyIcon(for: $0, phase: self.animationPhase) }
         }
+    }
+
+    /// Status-page badges are opt-in on the meter icon; the menu still reports incidents either way.
+    func menuBarIconStatusIndicator(for provider: UsageProvider) -> ProviderStatusIndicator {
+        self.settings.menuBarStatusBadgeVisible ? self.store.statusIndicator(for: provider) : .none
     }
 
     nonisolated static func loadingAnimationHasExceededContinuousCap(

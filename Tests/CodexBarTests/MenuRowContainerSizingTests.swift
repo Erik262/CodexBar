@@ -60,6 +60,21 @@ struct MenuRowContainerSizingTests {
         #expect(row.intrinsicContentSize == NSSize(width: 400, height: 47))
     }
 
+    @Test
+    func `hover highlight opt out keeps tracking without painting the selection`() {
+        var payload = Self.payload(height: 40)
+        payload.drawsHoverHighlight = false
+        let row = MenuRowContainerView(payload: payload, refreshMonitor: nil)
+
+        row.setHighlighted(true)
+
+        #expect(row.isHighlightedForTesting)
+        #expect(!row.swiftUIHighlightStateIsHighlightedForTesting)
+
+        row.replant(Self.payload(height: 40), refreshMonitor: nil)
+        #expect(row.swiftUIHighlightStateIsHighlightedForTesting)
+    }
+
     private static func makeRow(height: CGFloat) -> MenuRowContainerView {
         MenuRowContainerView(payload: self.payload(height: height), refreshMonitor: nil)
     }

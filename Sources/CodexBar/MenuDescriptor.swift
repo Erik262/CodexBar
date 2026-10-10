@@ -570,7 +570,8 @@ struct MenuDescriptor {
         }
 
         // Show "Add Account" if no account, "Switch Account" if logged in
-        if let targetProvider,
+        if store.settings.isMenuSectionVisible(.accountActions),
+           let targetProvider,
            let implementation = ProviderCatalog.implementation(for: targetProvider),
            implementation.supportsLoginFlow
         {
@@ -598,10 +599,12 @@ struct MenuDescriptor {
                 .appendActionMenuEntries(context: actionContext, entries: &entries)
         }
 
-        if metadata?.dashboardURL != nil {
+        if store.settings.isMenuSectionVisible(.dashboardLink), metadata?.dashboardURL != nil {
             entries.append(.action(L("Usage Dashboard"), .dashboard))
         }
-        if metadata?.statusPageURL != nil || metadata?.statusLinkURL != nil {
+        if store.settings.isMenuSectionVisible(.statusPageLink),
+           metadata?.statusPageURL != nil || metadata?.statusLinkURL != nil
+        {
             entries.append(.action(L("Status Page"), .statusPage))
         }
         if store.settings.providerChangelogLinksEnabled, metadata?.changelogURL != nil {

@@ -210,6 +210,7 @@ extension UsageMenuCardView.Model {
         snapshot: CostUsageTokenSnapshot?,
         error: String?,
         preferredCurrencyCode: String = "auto",
+        includesToday: Bool = true,
         calendar: Calendar = .current) -> TokenUsageSection?
     {
         guard ProviderDescriptorRegistry.descriptor(for: provider).tokenCost.supportsTokenCost else {
@@ -293,7 +294,9 @@ extension UsageMenuCardView.Model {
             .compactMap(\.self)
         return TokenUsageSection(
             isRefreshing: isRefreshing,
-            sessionLine: sessionLine + UsageFormatter.incompleteUsageSuffix(todayIncompleteCount),
+            sessionLine: includesToday
+                ? sessionLine + UsageFormatter.incompleteUsageSuffix(todayIncompleteCount)
+                : "",
             monthLine: monthLine + UsageFormatter.incompleteUsageSuffix(incompleteCount),
             meteredLine: meteredLine,
             comparisonLines: comparisonPeriodsEnabled

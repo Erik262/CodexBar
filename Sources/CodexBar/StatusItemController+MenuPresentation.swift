@@ -160,6 +160,8 @@ struct MenuCardRowPayload {
     let containsInteractiveControls: Bool
     let usesGPUSelection: Bool
     let onClick: (() -> Void)?
+    /// False keeps hover tracking (submenus, clicks) but skips the accent selection paint.
+    var drawsHoverHighlight = true
 }
 
 /// One stable AppKit class for every menu-card row. Keeping the outer view attached while payloads
@@ -256,7 +258,7 @@ final class MenuRowContainerView: NSView, MenuCardHighlighting, MenuCardMeasurin
         self.onClick = payload.onClick
         self.isPressed = false
         self.isForwardingHostedControlPress = false
-        self.highlightState.isHighlighted = !payload.usesGPUSelection && self.isRowHighlighted
+        self.highlightState.isHighlighted = !payload.usesGPUSelection && self.showsRowHighlight
         self.hosting.rootView = Self.makeRootView(
             payload: payload,
             highlightState: self.highlightState,
@@ -446,19 +448,23 @@ final class MenuRowContainerView: NSView, MenuCardHighlighting, MenuCardMeasurin
         self.needsLayout = true
     }
 
+    private var showsRowHighlight: Bool {
+        self.isRowHighlighted && self.rowPayload.drawsHoverHighlight
+    }
+
     private func applyHighlight(animated: Bool) {
         guard self.rowPayload.usesGPUSelection else {
-            self.highlightState.isHighlighted = self.isRowHighlighted
+            self.highlightState.isHighlighted = self.showsRowHighlight
             return
         }
 
         self.highlightState.isHighlighted = false
-        self.hosting.layer?.filters = self.isRowHighlighted ? self.tintFilter.map { [$0] } ?? [] : []
+        self.hosting.layer?.filters = self.showsRowHighlight ? self.tintFilter.map { [$0] } ?? [] : []
         let layer = self.ensureSelectionView().layer
-        let targetOpacity: Float = self.isRowHighlighted ? 1 : 0
+        let targetOpacity: Float = self.showsRowHighlight ? 1 : 0
         if animated {
             let fade = CABasicAnimation(keyPath: "opacity")
-            fade.fromValue = layer?.presentation()?.opacity ?? (self.isRowHighlighted ? 0 : 1)
+            fade.fromValue = layer?.presentation()?.opacity ?? (self.showsRowHighlight ? 0 : 1)
             fade.toValue = targetOpacity
             fade.duration = Self.selectionFadeDuration
             fade.timingFunction = CAMediaTimingFunction(name: .easeOut)
@@ -488,7 +494,7 @@ final class MenuRowContainerView: NSView, MenuCardHighlighting, MenuCardMeasurin
     private func refreshTintFilter() {
         guard self.rowPayload.usesGPUSelection else { return }
         self.tintFilter = Self.makeSelectedTextTintFilter(appearance: self.effectiveAppearance)
-        if self.isRowHighlighted {
+        if self.showsRowHighlight {
             self.hosting.layer?.filters = self.tintFilter.map { [$0] } ?? []
         }
     }

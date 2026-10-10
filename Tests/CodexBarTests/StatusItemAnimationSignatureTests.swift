@@ -589,6 +589,7 @@ struct StatusItemAnimationSignatureTests {
         settings.mergeIcons = true
         settings.selectedMenuProvider = .codex
         settings.menuBarShowsBrandIconWithPercent = false
+        settings.menuBarStatusBadgeVisible = true
 
         let registry = ProviderRegistry.shared
         let codexMeta = try #require(registry.metadata[.codex])
@@ -630,6 +631,11 @@ struct StatusItemAnimationSignatureTests {
         #expect(controller.primaryProviderForUnifiedIcon() == .claude)
         #expect(controller.lastAppliedMergedIconRenderSignature?.contains("provider=claude") == true)
         #expect(controller.lastAppliedMergedIconRenderSignature?.contains("status=major") == true)
+
+        settings.menuBarStatusBadgeVisible = false
+        controller.applyIcon(phase: nil)
+
+        #expect(controller.lastAppliedMergedIconRenderSignature?.contains("status=none") == true)
     }
 
     @Test

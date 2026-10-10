@@ -30,11 +30,26 @@ enum SwitcherRowsOption: String, CaseIterable {
 enum MergedIconDisplayStyle: String, CaseIterable {
     case switcher
     case stacked
+    case bars
 
     var label: String {
         switch self {
         case .switcher: L("merged_icon_style_switcher")
         case .stacked: L("merged_icon_style_stacked")
+        case .bars: L("merged_icon_style_bars")
+        }
+    }
+}
+
+/// Which quota lane the stacked-bars icon shows for every row.
+enum StackedBarsWindow: String, CaseIterable {
+    case session
+    case weekly
+
+    var label: String {
+        switch self {
+        case .session: L("stacked_bars_window_session")
+        case .weekly: L("stacked_bars_window_weekly")
         }
     }
 }
@@ -174,8 +189,26 @@ extension SettingsStore {
     }
 
     var mergedIconDisplayStyle: MergedIconDisplayStyle {
-        get { self.mergeIconsStacked ? .stacked : .switcher }
-        set { self.mergeIconsStacked = newValue == .stacked }
+        get {
+            if self.mergeIconsStackedBars { return .bars }
+            return self.mergeIconsStacked ? .stacked : .switcher
+        }
+        set {
+            self.mergeIconsStackedBars = newValue == .bars
+            self.mergeIconsStacked = newValue == .stacked
+        }
+    }
+
+    /// Ordered rows chosen for the stacked-bars icon; unknown or disabled providers are filtered later.
+    var stackedBarsProviders: [UsageProvider] {
+        get { self.stackedBarsProvidersRaw.compactMap(UsageProvider.init(rawValue:)) }
+        set {
+            var seen: Set<UsageProvider> = []
+            self.stackedBarsProvidersRaw = newValue
+                .filter { seen.insert($0).inserted }
+                .prefix(StackedBarsIconRenderer.maxRows)
+                .map(\.rawValue)
+        }
     }
 
     var mergeIconStackedTopProvider: UsageProvider? {
@@ -198,7 +231,8 @@ extension SettingsStore {
             requestedStyle: self.mergedIconDisplayStyle,
             eligibleProviders: activeProviders,
             preferredTop: self.mergeIconStackedTopProvider,
-            preferredBottom: self.mergeIconStackedBottomProvider)
+            preferredBottom: self.mergeIconStackedBottomProvider,
+            preferredBars: self.stackedBarsProviders)
     }
 
     var usageBarsFillOption: UsageBarsFillOption {

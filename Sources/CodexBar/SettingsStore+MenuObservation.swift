@@ -31,6 +31,11 @@ extension SettingsStore {
         _ = self.providerChangelogLinksEnabled
         _ = self.menuBarShowsBrandIconWithPercent
         _ = self.menuBarHidesCritters
+        _ = self.menuBarStatusBadgeVisible
+        _ = self.menuCardHoverHighlightEnabled
+        _ = self.hiddenMenuSectionsRaw
+        _ = self.apiCreditBudgetAmountsRaw
+        _ = self.apiCreditBudgetStartDaysRaw
         _ = self.menuBarColorPace
         _ = self.menuBarPaceReservePositive
         _ = self.menuBarColorByProvider
@@ -110,6 +115,9 @@ extension SettingsStore {
         _ = self.mergeIconsStacked
         _ = self.mergeIconStackedTopProviderRaw
         _ = self.mergeIconStackedBottomProviderRaw
+        _ = self.mergeIconsStackedBars
+        _ = self.stackedBarsProvidersRaw
+        _ = self.stackedBarsWindow
         _ = self.mergedOverviewSelectedProviders
         _ = self.zaiAPIToken
         _ = self[providerConfig: .synthetic, field: .apiKey]

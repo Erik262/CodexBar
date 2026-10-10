@@ -153,6 +153,9 @@ extension StatusItemController {
     }
 
     private func menuBarRefreshProviders() -> [UsageProvider] {
+        if let barProviders = self.stackedBarProvidersIfActive() {
+            return barProviders
+        }
         if let stackedProviders = self.stackedMergeIconProvidersIfActive() {
             return [stackedProviders.top, stackedProviders.bottom]
         }
@@ -166,7 +169,7 @@ extension StatusItemController {
         if providers.contains(.codex) {
             return true
         }
-        guard self.stackedMergeIconProvidersIfActive() == nil,
+        guard self.stackedMergeIconProvidersIfActive() == nil, self.stackedBarProvidersIfActive() == nil,
               self.shouldMergeIcons, self.settings.unifiedIconSource == .highestUsage
         else {
             return false

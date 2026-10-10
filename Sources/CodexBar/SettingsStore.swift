@@ -582,6 +582,14 @@ extension SettingsStore {
             menuBarShowsBrandIconWithPercent: userDefaults.object(
                 forKey: "menuBarShowsBrandIconWithPercent") as? Bool ?? false,
             menuBarHidesCritters: userDefaults.object(forKey: "menuBarHidesCritters") as? Bool ?? false,
+            menuBarStatusBadgeVisible: userDefaults.object(forKey: "menuBarStatusBadgeVisible") as? Bool ?? false,
+            menuCardHoverHighlightEnabled: userDefaults.object(
+                forKey: "menuCardHoverHighlightEnabled") as? Bool ?? true,
+            hiddenMenuSectionsRaw: userDefaults.stringArray(forKey: "hiddenMenuSections") ?? [],
+            apiCreditBudgetAmountsRaw: userDefaults.dictionary(forKey: "apiCreditBudgetAmounts") as? [String: Double]
+                ?? [:],
+            apiCreditBudgetStartDaysRaw: userDefaults.dictionary(
+                forKey: "apiCreditBudgetStartDays") as? [String: String] ?? [:],
             menuBarColorPace: userDefaults.bool(forKey: "menuBarColorPace"),
             menuBarPaceReservePositive: userDefaults.bool(forKey: "menuBarPaceReservePositive"),
             menuBarColorByProvider: userDefaults.bool(forKey: "menuBarColorByProvider"),
@@ -665,6 +673,10 @@ extension SettingsStore {
             mergeIconsStacked: userDefaults.object(forKey: "mergeIconsStacked") as? Bool ?? false,
             mergeIconStackedTopProviderRaw: userDefaults.string(forKey: "mergeIconStackedTopProvider"),
             mergeIconStackedBottomProviderRaw: userDefaults.string(forKey: "mergeIconStackedBottomProvider"),
+            mergeIconsStackedBars: userDefaults.object(forKey: "mergeIconsStackedBars") as? Bool ?? false,
+            stackedBarsProvidersRaw: userDefaults.stringArray(forKey: "stackedBarsProviders") ?? [],
+            stackedBarsWindowRaw: userDefaults.string(forKey: "stackedBarsWindow")
+                ?? StackedBarsWindow.session.rawValue,
             mergedMenuLastSelectedWasOverview: userDefaults.object(
                 forKey: "mergedMenuLastSelectedWasOverview") as? Bool ?? false,
             mergedOverviewSelectedProvidersRaw: userDefaults.array(

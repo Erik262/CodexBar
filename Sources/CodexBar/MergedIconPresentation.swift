@@ -15,9 +15,12 @@ struct MergedIconPresentation: Equatable {
     let bottomSelection: UsageProvider?
     let canStack: Bool
     let stackedProviders: Pair?
+    /// Rows of the stacked-bars icon, top to bottom (2...3), or nil when that style is not active.
+    let barProviders: [UsageProvider]?
 
     var effectiveStyle: MergedIconDisplayStyle {
-        self.stackedProviders == nil ? .switcher : .stacked
+        if self.barProviders != nil { return .bars }
+        return self.stackedProviders == nil ? .switcher : .stacked
     }
 
     init(
@@ -26,7 +29,8 @@ struct MergedIconPresentation: Equatable {
         requestedStyle: MergedIconDisplayStyle,
         eligibleProviders: [UsageProvider],
         preferredTop: UsageProvider?,
-        preferredBottom: UsageProvider?)
+        preferredBottom: UsageProvider?,
+        preferredBars: [UsageProvider] = [])
     {
         var seen: Set<UsageProvider> = []
         let providers = eligibleProviders.filter { seen.insert($0).inserted }
@@ -46,6 +50,27 @@ struct MergedIconPresentation: Equatable {
         } else {
             self.stackedProviders = nil
         }
+
+        // Bars render as one image, so they work with every menu bar style.
+        self.barProviders = mergeIcons && requestedStyle == .bars && providers.count >= 2
+            ? Self.resolvedBarProviders(preferred: preferredBars, eligible: providers)
+            : nil
+    }
+
+    /// Keeps the user's order for providers that are still enabled, then fills up to two rows
+    /// from the enabled order so a stale or partial selection never collapses the icon.
+    static func resolvedBarProviders(
+        preferred: [UsageProvider],
+        eligible: [UsageProvider],
+        limit: Int = StackedBarsIconRenderer.maxRows) -> [UsageProvider]
+    {
+        var seen: Set<UsageProvider> = []
+        var rows = preferred.filter { eligible.contains($0) && seen.insert($0).inserted }
+        rows = Array(rows.prefix(limit))
+        for provider in eligible where rows.count < min(2, limit) && !rows.contains(provider) {
+            rows.append(provider)
+        }
+        return rows
     }
 
     func renderedResolution(

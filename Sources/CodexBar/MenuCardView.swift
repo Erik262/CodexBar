@@ -496,9 +496,11 @@ private struct TokenUsageSectionContent: View {
                         .accessibilityLabel(L("Refreshing"))
                 }
             }
-            Text(self.tokenUsage.sessionLine)
-                .font(self.lineFont)
-                .lineLimit(1)
+            if !self.tokenUsage.sessionLine.isEmpty {
+                Text(self.tokenUsage.sessionLine)
+                    .font(self.lineFont)
+                    .lineLimit(1)
+            }
             Text(self.tokenUsage.monthLine)
                 .font(self.lineFont)
                 .lineLimit(1)
@@ -903,6 +905,7 @@ extension UsageMenuCardView.Model {
             snapshot: tokenUsageSnapshot,
             error: input.tokenError,
             preferredCurrencyCode: input.preferredCurrencyCode,
+            includesToday: !input.hiddenMenuSections.contains(.todayCost),
             calendar: input.costUsageBucketCalendar)
         let subtitle = input.subtitleOverride.map { (text: $0, style: SubtitleStyle.info) }
             ?? Self.subtitle(

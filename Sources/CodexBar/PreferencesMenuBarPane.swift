@@ -67,6 +67,12 @@ struct MenuBarPane: View {
                 Toggle(isOn: self.$settings.menuBarColorByProvider) {
                     Text(L("Color by provider"))
                 }
+
+                Toggle(isOn: self.$settings.menuBarStatusBadgeVisible) {
+                    SettingsRowLabel(
+                        L("menu_bar_status_badge_title"),
+                        subtitle: L("menu_bar_status_badge_subtitle"))
+                }
             } header: {
                 Text(L("section_icon"))
             }
@@ -96,7 +102,21 @@ struct MenuBarPane: View {
                     optionLabel: { style in
                         Text(style.label)
                     })
-                    .disabled(!self.mergedIconPresentation.canStack)
+                    .disabled(!self.settings.mergeIcons || self.mergedIconPresentation.eligibleProviders.count < 2)
+
+                if let barRows = self.mergedIconPresentation.barProviders {
+                    SettingsMenuPicker(
+                        selection: self.$settings.stackedBarsWindow,
+                        options: StackedBarsWindow.allCases,
+                        label: { Text(L("stacked_bars_window_title")) },
+                        optionLabel: { window in
+                            Text(window.label)
+                        })
+                    StackedBarsProviderList(
+                        settings: self.settings,
+                        eligibleProviders: self.mergedIconPresentation.eligibleProviders,
+                        activeRows: barRows)
+                }
 
                 if let pair = self.mergedIconPresentation.stackedProviders {
                     self.stackedRowProviderPicker(
@@ -125,7 +145,7 @@ struct MenuBarPane: View {
                     .disabled(!self.settings.mergeIcons)
 
                 UnifiedIconSourcePicker(selection: self.$settings.unifiedIconSource)
-                    .disabled(!self.settings.mergeIcons || self.mergedIconPresentation.effectiveStyle == .stacked)
+                    .disabled(!self.settings.mergeIcons || self.mergedIconPresentation.effectiveStyle != .switcher)
 
                 self.overviewProviderRow
                     .disabled(!self.settings.mergeIcons)
