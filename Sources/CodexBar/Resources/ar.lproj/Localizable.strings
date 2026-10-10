@@ -2526,7 +2526,6 @@
 "stacked_bars_rows_title" = "الصفوف";
 "stacked_bars_rows_subtitle" = "حدّد مزوّدَين أو ثلاثة. اسحب لتغيير الترتيب من الأعلى إلى الأسفل.";
 "api_credits_left_title" = "الرصيد المتبقي";
-"api_credits_left_value" = "%@ من %@";
 "api_credits_partial_note" = "يبدأ سجل التكاليف بعد %@، لذا قد يكون الرصيد المتبقي أعلى من الحقيقي.";
 "api_credits_settings_title" = "أرصدة API المدفوعة مسبقًا";
 "api_credits_settings_subtitle" = "أدخل رصيدك واليوم الذي تحققت منه فيه. تعرض القائمة الرصيد مطروحًا منه الإنفاق المُبلغ عنه منذ ذلك الحين.";

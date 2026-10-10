@@ -16,19 +16,19 @@ enum StackedBarsIconRenderer {
         let barX: CGFloat
         let size: NSSize
 
-        /// Two rows use 10 pt each (20 pt tall), three rows 7 pt each (21 pt), filling the menu bar height.
+        /// Two rows use 9 pt each (18 pt tall), three rows 6 pt each (18 pt), matching the standard icon height.
         init(rowCount: Int, barWidth: CGFloat = StackedBarsIconRenderer.barWidth) {
             let rows = max(1, rowCount)
-            self.rowHeight = rows >= 3 ? 7 : 10
+            self.rowHeight = rows >= 3 ? 6 : 9
             self.iconSize = self.rowHeight - 1
-            self.barHeight = rows >= 3 ? 5 : 7
+            self.barHeight = rows >= 3 ? 4 : 6
             self.barX = self.iconSize + 4
             self.size = NSSize(width: self.barX + barWidth, height: self.rowHeight * CGFloat(rows))
         }
     }
 
     static let maxRows = 3
-    static let barWidth: CGFloat = 32
+    static let barWidth: CGFloat = 28
     static let trackAlpha: CGFloat = 0.38
 
     static func fillWidth(percent: Double?, barWidth: CGFloat) -> CGFloat {

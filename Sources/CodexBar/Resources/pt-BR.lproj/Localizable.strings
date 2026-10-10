@@ -2522,7 +2522,6 @@
 "stacked_bars_rows_title" = "Linhas";
 "stacked_bars_rows_subtitle" = "Marque dois ou três provedores. Arraste para mudar a ordem de cima para baixo.";
 "api_credits_left_title" = "Créditos restantes";
-"api_credits_left_value" = "%@ de %@";
 "api_credits_partial_note" = "O histórico de custos começa depois de %@, então os créditos restantes podem estar superestimados.";
 "api_credits_settings_title" = "Créditos de API pré-pagos";
 "api_credits_settings_subtitle" = "Informe seu saldo e o dia em que o verificou. O menu mostra o saldo menos os gastos informados desde então.";

@@ -145,6 +145,7 @@ struct CompactStatusComponentsView: View {
                         .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
                         .lineLimit(1)
                 }
+                .padding(.leading, 18)
                 .accessibilityElement(children: .combine)
             }
         }

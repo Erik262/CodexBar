@@ -2515,7 +2515,6 @@
 "stacked_bars_rows_title" = "行";
 "stacked_bars_rows_subtitle" = "勾选两到三个提供商。拖动可更改从上到下的顺序。";
 "api_credits_left_title" = "剩余额度";
-"api_credits_left_value" = "%@ / %@";
 "api_credits_partial_note" = "费用记录从 %@ 之后开始，剩余额度可能偏高。";
 "api_credits_settings_title" = "预付 API 额度";
 "api_credits_settings_subtitle" = "输入余额和查看余额的日期。菜单会显示余额减去此后报告的支出。";

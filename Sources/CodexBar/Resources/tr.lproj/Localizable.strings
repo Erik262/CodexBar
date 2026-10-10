@@ -2525,7 +2525,6 @@
 "stacked_bars_rows_title" = "Satırlar";
 "stacked_bars_rows_subtitle" = "İki veya üç sağlayıcı seçin. Yukarıdan aşağıya sırayı değiştirmek için sürükleyin.";
 "api_credits_left_title" = "Kalan kredi";
-"api_credits_left_value" = "%@ / %@";
 "api_credits_partial_note" = "Maliyet geçmişi %@ sonrasında başlıyor; kalan kredi olduğundan yüksek görünebilir.";
 "api_credits_settings_title" = "Ön ödemeli API kredisi";
 "api_credits_settings_subtitle" = "Bakiyenizi ve kontrol ettiğiniz günü girin. Menü, bakiyeden o günden beri bildirilen harcamayı düşerek gösterir.";

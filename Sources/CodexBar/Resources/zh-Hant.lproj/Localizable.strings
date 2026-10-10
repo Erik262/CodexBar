@@ -2500,7 +2500,6 @@
 "stacked_bars_rows_title" = "列";
 "stacked_bars_rows_subtitle" = "勾選兩到三個供應商。拖曳可變更由上到下的順序。";
 "api_credits_left_title" = "剩餘額度";
-"api_credits_left_value" = "%@ / %@";
 "api_credits_partial_note" = "費用紀錄從 %@ 之後開始，剩餘額度可能偏高。";
 "api_credits_settings_title" = "預付 API 額度";
 "api_credits_settings_subtitle" = "輸入餘額與查看餘額的日期。選單會顯示餘額減去之後回報的支出。";

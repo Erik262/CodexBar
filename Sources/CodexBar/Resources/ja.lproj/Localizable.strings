@@ -2522,7 +2522,6 @@
 "stacked_bars_rows_title" = "行";
 "stacked_bars_rows_subtitle" = "2〜3個のプロバイダを選択します。ドラッグで上から下への順序を変更できます。";
 "api_credits_left_title" = "残りクレジット";
-"api_credits_left_value" = "%@ / %@";
 "api_credits_partial_note" = "コスト履歴は %@ 以降から始まるため、残りクレジットが多めに表示される場合があります。";
 "api_credits_settings_title" = "前払い API クレジット";
 "api_credits_settings_subtitle" = "残高と確認した日を入力してください。メニューには、残高からその日以降に報告された支出を引いた値が表示されます。";

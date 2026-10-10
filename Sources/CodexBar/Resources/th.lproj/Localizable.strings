@@ -2526,7 +2526,6 @@
 "stacked_bars_rows_title" = "แถว";
 "stacked_bars_rows_subtitle" = "เลือกผู้ให้บริการสองหรือสามราย ลากเพื่อเปลี่ยนลำดับจากบนลงล่าง";
 "api_credits_left_title" = "เครดิตคงเหลือ";
-"api_credits_left_value" = "%@ จาก %@";
 "api_credits_partial_note" = "ประวัติค่าใช้จ่ายเริ่มหลัง %@ เครดิตคงเหลืออาจสูงกว่าความจริง";
 "api_credits_settings_title" = "เครดิต API แบบเติมเงินล่วงหน้า";
 "api_credits_settings_subtitle" = "ป้อนยอดคงเหลือและวันที่ตรวจสอบ เมนูจะแสดงยอดคงเหลือหักค่าใช้จ่ายที่รายงานตั้งแต่วันนั้น";

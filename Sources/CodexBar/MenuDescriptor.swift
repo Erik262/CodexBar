@@ -617,7 +617,10 @@ struct MenuDescriptor {
             entries.append(.action(L("Changelog"), .changelog))
         }
 
-        if let statusLine = self.statusLine(for: provider, store: store) {
+        // The inline status card already lists every component, so the summary line would repeat it.
+        let showsInlineStatus = store.settings.statusComponentsInline
+            && targetProvider.map { StatusItemController.statusComponentsSubmenuProviders.contains($0) } == true
+        if !showsInlineStatus, let statusLine = self.statusLine(for: provider, store: store) {
             entries.append(.text(statusLine, .secondary))
         }
 

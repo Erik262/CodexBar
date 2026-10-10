@@ -418,10 +418,7 @@ extension UsageMenuCardView.Model {
             kpis.insert(
                 .init(
                     title: L("api_credits_left_title"),
-                    value: L(
-                        "api_credits_left_value",
-                        convertedString(max(0, status.remaining)),
-                        convertedString(budget.amount)),
+                    value: convertedString(max(0, status.remaining)),
                     emphasis: true),
                 at: 0)
             if !status.coversStartDay {

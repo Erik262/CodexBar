@@ -2521,7 +2521,6 @@
 "stacked_bars_rows_title" = "Rader";
 "stacked_bars_rows_subtitle" = "Markera två eller tre leverantörer. Dra för att ändra ordningen uppifrån och ned.";
 "api_credits_left_title" = "Kvarvarande krediter";
-"api_credits_left_value" = "%@ av %@";
 "api_credits_partial_note" = "Kostnadshistoriken börjar efter %@, så kvarvarande krediter kan vara för höga.";
 "api_credits_settings_title" = "Förbetalda API-krediter";
 "api_credits_settings_subtitle" = "Ange ditt saldo och dagen du kontrollerade det. Menyn visar saldot minus rapporterade utgifter sedan dess.";
