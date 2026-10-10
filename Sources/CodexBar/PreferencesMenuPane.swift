@@ -11,12 +11,12 @@ struct MenuPane: View {
         self.store.enabledFirstPartyProvidersForDisplay()
     }
 
-    private var selectedVisibilityProvider: UsageProvider {
+    private var selectedVisibilityProvider: UsageProvider? {
         let providers = self.visibilityProviders
         if let chosen = self.visibilityProvider, providers.contains(chosen) {
             return chosen
         }
-        return providers.first ?? .codex
+        return providers.first
     }
 
     var body: some View {
@@ -114,11 +114,10 @@ struct MenuPane: View {
             }
 
             Section {
-                if !self.visibilityProviders.isEmpty {
-                    let provider = self.selectedVisibilityProvider
+                if let provider = self.selectedVisibilityProvider {
                     SettingsMenuPicker(
                         selection: Binding(
-                            get: { self.selectedVisibilityProvider },
+                            get: { provider },
                             set: { self.visibilityProvider = $0 }),
                         options: self.visibilityProviders,
                         label: { Text(L("menu_visibility_provider_title")) },
