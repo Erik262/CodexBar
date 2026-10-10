@@ -2534,7 +2534,7 @@
 "menu_section_latest_tokens" = "Ultimi token / richieste";
 "menu_section_current_window" = "Costo e token della finestra attuale";
 "menu_section_cost_details" = "Dettagli dei costi (modello principale, note)";
-"menu_visibility_provider_title" = "Provider";
+"menu_visibility_provider_title" = "Fornitore";
 "status_components_inline_title" = "Mostra lo stato in linea";
 "status_components_inline_subtitle" = "Sostituisce il sottomenu della pagina di stato con un elenco compatto dei componenti. Fai clic per aprire la pagina di stato.";
 "app_actions_overview_only_title" = "Azioni dell’app solo in Panoramica";

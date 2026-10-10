@@ -2529,7 +2529,7 @@
 "menu_section_latest_tokens" = "Laatste tokens / verzoeken";
 "menu_section_current_window" = "Kosten & tokens huidig venster";
 "menu_section_cost_details" = "Kostendetails (topmodel, notities)";
-"menu_visibility_provider_title" = "Provider";
+"menu_visibility_provider_title" = "Aanbieder";
 "status_components_inline_title" = "Status direct tonen";
 "status_components_inline_subtitle" = "Vervangt het submenu Statuspagina door een compacte lijst met onderdelen. Klik om de statuspagina te openen.";
 "app_actions_overview_only_title" = "App-acties alleen in Overzicht";
