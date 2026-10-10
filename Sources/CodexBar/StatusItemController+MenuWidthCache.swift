@@ -40,7 +40,7 @@ extension StatusItemController {
 
     /// App actions (Refresh, Settings, About, Quit) stay on every tab unless the user pinned them to
     /// Overview and that tab exists, so they can never disappear from the menu entirely.
-    func showsAppActions(isOverviewSelected: Bool, includesOverview: Bool) -> Bool {
+    func appActionsVisible(overview isOverviewSelected: Bool, hasOverview includesOverview: Bool) -> Bool {
         !self.settings.appActionsOnOverviewOnly || isOverviewSelected || !includesOverview || !self.shouldMergeIcons
     }
 

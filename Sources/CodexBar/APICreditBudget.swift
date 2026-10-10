@@ -4,7 +4,7 @@ import Foundation
 /// A prepaid API balance the user entered. Neither the Anthropic nor the OpenAI Admin API reports a
 /// remaining balance, so "credits left" is this amount minus the reported spend since `startDay`.
 struct APICreditBudget: Equatable, Sendable {
-    // Provider-specific by design: these three report spend we can subtract from a prepaid balance.
+    /// Provider-specific by design: these three report spend we can subtract from a prepaid balance.
     static let supportedProviders: [UsageProvider] = [.claude, .codex, .openai]
 
     struct Status: Equatable, Sendable {

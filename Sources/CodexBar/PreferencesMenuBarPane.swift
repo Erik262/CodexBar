@@ -105,18 +105,7 @@ struct MenuBarPane: View {
                     .disabled(!self.settings.mergeIcons || self.mergedIconPresentation.eligibleProviders.count < 2)
 
                 if let barRows = self.mergedIconPresentation.barProviders {
-                    SettingsMenuPicker(
-                        selection: self.$settings.stackedBarsWindow,
-                        options: StackedBarsWindow.allCases,
-                        label: { Text(L("stacked_bars_window_title")) },
-                        optionLabel: { window in
-                            Text(window.label)
-                        })
-                    Toggle(L("stacked_bars_show_icons_title"), isOn: self.$settings.stackedBarsShowIcons)
-                    StackedBarsProviderList(
-                        settings: self.settings,
-                        eligibleProviders: self.mergedIconPresentation.eligibleProviders,
-                        activeRows: barRows)
+                    self.stackedBarsSettings(rows: barRows)
                 }
 
                 if let pair = self.mergedIconPresentation.stackedProviders {
@@ -241,6 +230,22 @@ struct MenuBarPane: View {
         }
         .padding(12)
         .frame(width: 280)
+    }
+
+    @ViewBuilder
+    private func stackedBarsSettings(rows: [UsageProvider]) -> some View {
+        SettingsMenuPicker(
+            selection: self.$settings.stackedBarsWindow,
+            options: StackedBarsWindow.allCases,
+            label: { Text(L("stacked_bars_window_title")) },
+            optionLabel: { window in
+                Text(window.label)
+            })
+        Toggle(L("stacked_bars_show_icons_title"), isOn: self.$settings.stackedBarsShowIcons)
+        StackedBarsProviderList(
+            settings: self.settings,
+            eligibleProviders: self.mergedIconPresentation.eligibleProviders,
+            activeRows: rows)
     }
 
     private var activeProvidersInOrder: [UsageProvider] {

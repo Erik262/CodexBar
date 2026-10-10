@@ -395,36 +395,20 @@ extension UsageMenuCardView.Model {
                     emphasis: true),
                 at: 0)
         }
-        let hidden = input.hiddenMenuSections
-        if hidden.contains(.todayCost) {
-            kpis.removeAll { $0 == todayKPI }
-        }
-        if hidden.contains(.latestTokens) {
-            kpis.removeAll { trailingKPIs.contains($0) }
-        }
-        if hidden.contains(.currentWindow) {
-            let windowTitles: Set = [weekCostTitle, weekTokenTitle]
-            kpis.removeAll { windowTitles.contains($0.title) }
-        }
-        if hidden.contains(.costDetails) {
-            details = []
-        }
-        if let budget = input.apiCreditBudget {
-            let status = budget.status(
-                daily: snapshot.daily,
-                historyDays: historyDays,
-                now: snapshot.updatedAt,
-                calendar: input.costUsageBucketCalendar)
-            kpis.insert(
-                .init(
-                    title: L("api_credits_left_title"),
-                    value: convertedString(max(0, status.remaining)),
-                    emphasis: true),
-                at: 0)
-            if !status.coversStartDay {
-                details.append(L("api_credits_partial_note", budget.startDay))
-            }
-        }
+        Self.removeHiddenSections(
+            input.hiddenMenuSections,
+            from: &kpis,
+            details: &details,
+            todayKPI: todayKPI,
+            trailingKPIs: trailingKPIs,
+            windowTitles: [weekCostTitle, weekTokenTitle])
+        Self.insertCreditBudget(
+            input: input,
+            snapshot: snapshot,
+            historyDays: historyDays,
+            convertedString: convertedString,
+            into: &kpis,
+            details: &details)
         var model = InlineUsageDashboardModel(
             accessibilityLabel: accessibilityLabel,
             valueStyle: Self.costValueStyle(currencyCode: displayCurrencyCode),
@@ -434,6 +418,54 @@ extension UsageMenuCardView.Model {
         model.quotaWindows = quotaRows
         model.currencyCode = displayCurrencyCode
         return model
+    }
+
+    private static func removeHiddenSections(
+        _ hidden: Set<MenuSectionToggle>,
+        from kpis: inout [InlineUsageDashboardModel.KPI],
+        details: inout [String],
+        todayKPI: InlineUsageDashboardModel.KPI,
+        trailingKPIs: [InlineUsageDashboardModel.KPI],
+        windowTitles: Set<String>)
+    {
+        if hidden.contains(.todayCost) {
+            kpis.removeAll { $0 == todayKPI }
+        }
+        if hidden.contains(.latestTokens) {
+            kpis.removeAll { trailingKPIs.contains($0) }
+        }
+        if hidden.contains(.currentWindow) {
+            kpis.removeAll { windowTitles.contains($0.title) }
+        }
+        if hidden.contains(.costDetails) {
+            details = []
+        }
+    }
+
+    /// Leads with the user's prepaid balance minus spend reported since its start day.
+    private static func insertCreditBudget(
+        input: Input,
+        snapshot: CostUsageTokenSnapshot,
+        historyDays: Int,
+        convertedString: (Double) -> String,
+        into kpis: inout [InlineUsageDashboardModel.KPI],
+        details: inout [String])
+    {
+        guard let budget = input.apiCreditBudget else { return }
+        let status = budget.status(
+            daily: snapshot.daily,
+            historyDays: historyDays,
+            now: snapshot.updatedAt,
+            calendar: input.costUsageBucketCalendar)
+        kpis.insert(
+            .init(
+                title: L("api_credits_left_title"),
+                value: convertedString(max(0, status.remaining)),
+                emphasis: true),
+            at: 0)
+        if !status.coversStartDay {
+            details.append(L("api_credits_partial_note", budget.startDay))
+        }
     }
 
     private static func redeemedWeeklyResetInstants(from snapshot: UsageSnapshot?) -> [Date] {
