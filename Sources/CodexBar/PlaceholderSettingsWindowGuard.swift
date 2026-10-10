@@ -1,5 +1,6 @@
 import AppKit
 import CodexBarCore
+import SwiftUI
 
 /// CodexBar's preferences live in ``SettingsWindowController``. The SwiftUI `Settings` scene is an empty
 /// placeholder that only carries the app-menu command group, and because it is the app's only scene macOS
@@ -99,5 +100,31 @@ final class PlaceholderSettingsWindowGuard {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+}
+
+/// Content of the SwiftUI `Settings` placeholder scene. It hides and closes whatever window hosts it,
+/// so the empty "CodexBar Settings" window disappears even on macOS releases that name it differently
+/// than ``PlaceholderSettingsWindowDecision`` expects.
+struct PlaceholderSettingsWindowCloser: NSViewRepresentable {
+    func makeNSView(context _: Context) -> CloserView {
+        CloserView()
+    }
+
+    func updateNSView(_: CloserView, context _: Context) {}
+
+    final class CloserView: NSView {
+        override func viewDidMoveToWindow() {
+            super.viewDidMoveToWindow()
+            guard let window = self.window else { return }
+            // Never the AppKit Settings window: that one hosts the real preferences, not this view.
+            guard window.identifier?.rawValue != SettingsWindowIdentity.identifier else { return }
+            window.isRestorable = false
+            window.alphaValue = 0
+            window.orderOut(nil)
+            Task { @MainActor [weak window] in
+                window?.close()
+            }
+        }
     }
 }

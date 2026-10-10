@@ -38,6 +38,9 @@ struct SettingsDefaultsState {
     var menuBarStatusBadgeVisible: Bool
     var menuCardHoverHighlightEnabled: Bool
     var hiddenMenuSectionsRaw: [String]
+    var hiddenMenuSectionsByProviderRaw: [String: [String]]
+    var appActionsOnOverviewOnly: Bool
+    var statusComponentsInline: Bool
     var apiCreditBudgetAmountsRaw: [String: Double]
     var apiCreditBudgetStartDaysRaw: [String: String]
     var menuBarColorPace: Bool
@@ -98,6 +101,7 @@ struct SettingsDefaultsState {
     var mergeIconsStackedBars: Bool
     var stackedBarsProvidersRaw: [String]
     var stackedBarsWindowRaw: String
+    var stackedBarsShowIcons: Bool
     var mergedMenuLastSelectedWasOverview: Bool
     var mergedOverviewSelectedProvidersRaw: [String]
     var selectedMenuProviderRaw: String?

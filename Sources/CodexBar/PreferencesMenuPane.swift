@@ -5,6 +5,19 @@ import SwiftUI
 struct MenuPane: View {
     @Bindable var settings: SettingsStore
     @Bindable var store: UsageStore
+    @State private var visibilityProvider: UsageProvider?
+
+    private var visibilityProviders: [UsageProvider] {
+        self.store.enabledFirstPartyProvidersForDisplay()
+    }
+
+    private var selectedVisibilityProvider: UsageProvider? {
+        let providers = self.visibilityProviders
+        if let chosen = self.visibilityProvider, providers.contains(chosen) {
+            return chosen
+        }
+        return providers.first
+    }
 
     var body: some View {
         Form {
@@ -101,11 +114,35 @@ struct MenuPane: View {
             }
 
             Section {
-                ForEach(MenuSectionToggle.allCases) { section in
-                    Toggle(section.label, isOn: Binding(
-                        get: { self.settings.isMenuSectionVisible(section) },
-                        set: { self.settings.setMenuSection(section, visible: $0) }))
+                if let provider = self.selectedVisibilityProvider {
+                    SettingsMenuPicker(
+                        selection: Binding(
+                            get: { provider },
+                            set: { self.visibilityProvider = $0 }),
+                        options: self.visibilityProviders,
+                        label: { Text(L("menu_visibility_provider_title")) },
+                        optionLabel: { provider in
+                            Text(ProviderDescriptorRegistry.descriptor(for: provider).metadata.displayName)
+                        })
+                    ForEach(MenuSectionToggle.allCases) { section in
+                        Toggle(section.label, isOn: Binding(
+                            get: { self.settings.isMenuSectionVisible(section, for: provider) },
+                            set: { self.settings.setMenuSection(section, visible: $0, for: provider) }))
+                    }
                 }
+
+                Toggle(isOn: self.$settings.statusComponentsInline) {
+                    SettingsRowLabel(
+                        L("status_components_inline_title"),
+                        subtitle: L("status_components_inline_subtitle"))
+                }
+
+                Toggle(isOn: self.$settings.appActionsOnOverviewOnly) {
+                    SettingsRowLabel(
+                        L("app_actions_overview_only_title"),
+                        subtitle: L("app_actions_overview_only_subtitle"))
+                }
+                .disabled(!self.settings.mergeIcons)
             } header: {
                 Text(L("section_menu_visibility"))
             } footer: {

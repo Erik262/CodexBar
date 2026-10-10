@@ -325,6 +325,23 @@ extension SettingsStore {
         set { self.setDefault(\.hiddenMenuSectionsRaw, newValue, key: "hiddenMenuSections") }
     }
 
+    var hiddenMenuSectionsByProviderRaw: [String: [String]] {
+        get { self.defaultsState.hiddenMenuSectionsByProviderRaw }
+        set { self.setDefault(\.hiddenMenuSectionsByProviderRaw, newValue, key: "hiddenMenuSectionsByProvider") }
+    }
+
+    /// Keeps Refresh, Settings, About, and Quit on the Overview tab only when that tab exists.
+    var appActionsOnOverviewOnly: Bool {
+        get { self.defaultsState.appActionsOnOverviewOnly }
+        set { self.setDefault(\.appActionsOnOverviewOnly, newValue, key: "appActionsOnOverviewOnly") }
+    }
+
+    /// Shows live status components as a compact card instead of the Status Page submenu.
+    var statusComponentsInline: Bool {
+        get { self.defaultsState.statusComponentsInline }
+        set { self.setDefault(\.statusComponentsInline, newValue, key: "statusComponentsInline") }
+    }
+
     var apiCreditBudgetAmountsRaw: [String: Double] {
         get { self.defaultsState.apiCreditBudgetAmountsRaw }
         set { self.setDefault(\.apiCreditBudgetAmountsRaw, newValue, key: "apiCreditBudgetAmounts") }
@@ -903,6 +920,11 @@ extension SettingsStore {
     var stackedBarsProvidersRaw: [String] {
         get { self.defaultsState.stackedBarsProvidersRaw }
         set { self.setDefault(\.stackedBarsProvidersRaw, newValue, key: "stackedBarsProviders") }
+    }
+
+    var stackedBarsShowIcons: Bool {
+        get { self.defaultsState.stackedBarsShowIcons }
+        set { self.setDefault(\.stackedBarsShowIcons, newValue, key: "stackedBarsShowIcons") }
     }
 
     var stackedBarsWindow: StackedBarsWindow {

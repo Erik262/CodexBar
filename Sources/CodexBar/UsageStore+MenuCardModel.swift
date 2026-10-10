@@ -156,7 +156,7 @@ extension UsageStore {
                     historySelection: account?.historySelection,
                     usesLiveAccount: isLive)
                 : [],
-            hiddenMenuSections: isSettings ? [] : self.settings.hiddenMenuSections,
+            hiddenMenuSections: isSettings ? [] : self.settings.hiddenMenuSections(for: provider),
             apiCreditBudget: self.settings.apiCreditBudget(for: provider))
     }
 

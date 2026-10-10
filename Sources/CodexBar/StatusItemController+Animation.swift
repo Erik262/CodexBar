@@ -454,6 +454,7 @@ extension StatusItemController {
         let signature = ([
             "mode=stackedBars",
             "window=\(window.rawValue)",
+            "icons=\(self.settings.stackedBarsShowIcons ? "1" : "0")",
             "highContrast=\(self.shouldUseHighContrastStatusItemContent ? "1" : "0")",
         ] + rowSignatures).joined(separator: "|")
         let canSkipCachedRender = self.prepareButtonForImageOnlyCacheHit(button)
@@ -461,7 +462,8 @@ extension StatusItemController {
             self.noteIconPerfRender(skipped: true)
             return true
         }
-        let image = StackedBarsIconRenderer.makeImage(rows: rows, icons: providers.map { self.brandIcon($0) })
+        let icons = self.settings.stackedBarsShowIcons ? providers.map { self.brandIcon($0) } : []
+        let image = StackedBarsIconRenderer.makeImage(rows: rows, icons: icons)
         self.setButtonContent(image: image, title: nil, tint: nil, for: button)
         self.noteIconPerfRender(skipped: false)
         return false

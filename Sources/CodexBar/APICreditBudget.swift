@@ -2,8 +2,9 @@ import CodexBarCore
 import Foundation
 
 /// A prepaid API balance the user entered. Neither the Anthropic nor the OpenAI Admin API reports a
-/// remaining balance, so "credits left" is this amount minus the reported spend since `startDay`.
+/// remaining balance, so "credits left" is this amount minus vendor-reported spend after `startDay`.
 struct APICreditBudget: Equatable, Sendable {
+    /// Provider-specific by design: these three report spend we can subtract from a prepaid balance.
     static let supportedProviders: [UsageProvider] = [.claude, .codex, .openai]
 
     struct Status: Equatable, Sendable {
@@ -14,7 +15,7 @@ struct APICreditBudget: Equatable, Sendable {
     }
 
     let amount: Double
-    /// Local calendar day (`yyyy-MM-dd`) the balance was last topped up or checked.
+    /// Local calendar day (`yyyy-MM-dd`) the balance was checked; that day's spend is already in it.
     let startDay: String
 
     init?(amount: Double, startDay: String) {
@@ -29,9 +30,13 @@ struct APICreditBudget: Equatable, Sendable {
         now: Date,
         calendar: Calendar) -> Status
     {
-        // Day keys are zero-padded ISO dates, so string order is chronological order.
+        // Sources report days in different formats; normalize to zero-padded ISO keys, whose string
+        // order is chronological. Entries whose date cannot be read are left out rather than guessed.
         let spent = daily
-            .filter { $0.date >= self.startDay }
+            .filter { entry in
+                CostUsageTokenSnapshot.localDayKey(for: entry.date, calendar: calendar)
+                    .map { $0 > self.startDay } ?? false
+            }
             .compactMap(\.costUSD)
             .reduce(0, +)
         let historyStart = calendar.date(

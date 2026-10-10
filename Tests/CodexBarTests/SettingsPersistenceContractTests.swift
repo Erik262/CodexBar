@@ -37,23 +37,42 @@ struct SettingsPersistenceContractTests {
     func `menu visibility toggles persist and default to visible`() {
         let defaults = InMemoryUserDefaults()
         let settings = testSettingsStore(suiteName: #function, userDefaults: defaults)
-        #expect(MenuSectionToggle.allCases.allSatisfy { settings.isMenuSectionVisible($0) })
+        #expect(MenuSectionToggle.allCases.allSatisfy { settings.isMenuSectionVisible($0, for: .claude) })
         #expect(settings.menuCardHoverHighlightEnabled)
         #expect(!settings.menuBarStatusBadgeVisible)
+        #expect(!settings.appActionsOnOverviewOnly)
+        #expect(!settings.statusComponentsInline)
 
-        settings.setMenuSection(.todayCost, visible: false)
-        settings.setMenuSection(.accountActions, visible: false)
+        settings.setMenuSection(.todayCost, visible: false, for: .claude)
+        settings.setMenuSection(.planUsage, visible: false, for: .claude)
+        settings.setMenuSection(.accountActions, visible: false, for: .openai)
         settings.menuCardHoverHighlightEnabled = false
         settings.menuBarStatusBadgeVisible = true
+        settings.appActionsOnOverviewOnly = true
+        settings.statusComponentsInline = true
 
         let reloaded = testSettingsStore(suiteName: #function, userDefaults: defaults)
-        #expect(reloaded.hiddenMenuSections == [.todayCost, .accountActions])
+        #expect(reloaded.hiddenMenuSections(for: .claude) == [.todayCost, .planUsage])
+        #expect(reloaded.hiddenMenuSections(for: .openai) == [.accountActions])
+        #expect(reloaded.hiddenMenuSections(for: .codex).isEmpty)
         #expect(!reloaded.menuCardHoverHighlightEnabled)
         #expect(reloaded.menuBarStatusBadgeVisible)
-        #expect(defaults.stringArray(forKey: "hiddenMenuSections") == ["accountActions", "todayCost"])
+        #expect(reloaded.appActionsOnOverviewOnly)
+        #expect(reloaded.statusComponentsInline)
 
-        reloaded.setMenuSection(.todayCost, visible: true)
-        #expect(reloaded.hiddenMenuSections == [.accountActions])
+        reloaded.setMenuSection(.todayCost, visible: true, for: .claude)
+        #expect(reloaded.hiddenMenuSections(for: .claude) == [.planUsage])
+    }
+
+    @Test
+    func `providers without their own visibility choice inherit the earlier app-wide set`() {
+        let defaults = InMemoryUserDefaults(values: ["hiddenMenuSections": ["costChart", "todayCost"]])
+        let settings = testSettingsStore(suiteName: #function, userDefaults: defaults)
+        #expect(settings.hiddenMenuSections(for: .codex) == [.costChart, .todayCost])
+
+        settings.setMenuSection(.costChart, visible: true, for: .codex)
+        #expect(settings.hiddenMenuSections(for: .codex) == [.todayCost])
+        #expect(settings.hiddenMenuSections(for: .claude) == [.costChart, .todayCost])
     }
 
     @Test

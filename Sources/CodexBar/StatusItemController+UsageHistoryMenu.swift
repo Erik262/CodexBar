@@ -23,6 +23,7 @@ extension StatusItemController {
     func makeUsageHistorySubmenu(provider: UsageProvider, width: CGFloat? = nil) -> NSMenu? {
         guard self.store.supportsPlanUtilizationHistory(for: provider) else { return nil }
         guard !self.store.shouldHidePlanUtilizationMenuItem(for: provider) else { return nil }
+        guard self.settings.isMenuSectionVisible(.planUsage, for: provider) else { return nil }
         if let width {
             return self.makeHostedSubviewPlaceholderMenu(
                 chartID: Self.usageHistoryChartID,

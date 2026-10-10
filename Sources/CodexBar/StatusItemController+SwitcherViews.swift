@@ -42,7 +42,7 @@ final class ProviderSwitcherView: NSView {
     private var pressedButtonTag: Int?
     private var selectedSegmentIndex: Int?
     private static let quotaIndicatorHeight: CGFloat = 2
-    private static let quotaIndicatorBottomInset: CGFloat = 2
+    private static let quotaIndicatorBottomInset: CGFloat = 0
     private static let quotaIndicatorHorizontalInset: CGFloat = 8
 
     init(

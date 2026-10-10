@@ -34,6 +34,9 @@ extension SettingsStore {
         _ = self.menuBarStatusBadgeVisible
         _ = self.menuCardHoverHighlightEnabled
         _ = self.hiddenMenuSectionsRaw
+        _ = self.hiddenMenuSectionsByProviderRaw
+        _ = self.appActionsOnOverviewOnly
+        _ = self.statusComponentsInline
         _ = self.apiCreditBudgetAmountsRaw
         _ = self.apiCreditBudgetStartDaysRaw
         _ = self.menuBarColorPace
@@ -118,6 +121,7 @@ extension SettingsStore {
         _ = self.mergeIconsStackedBars
         _ = self.stackedBarsProvidersRaw
         _ = self.stackedBarsWindow
+        _ = self.stackedBarsShowIcons
         _ = self.mergedOverviewSelectedProviders
         _ = self.zaiAPIToken
         _ = self[providerConfig: .synthetic, field: .apiKey]

@@ -586,6 +586,10 @@ extension SettingsStore {
             menuCardHoverHighlightEnabled: userDefaults.object(
                 forKey: "menuCardHoverHighlightEnabled") as? Bool ?? true,
             hiddenMenuSectionsRaw: userDefaults.stringArray(forKey: "hiddenMenuSections") ?? [],
+            hiddenMenuSectionsByProviderRaw: userDefaults.dictionary(
+                forKey: "hiddenMenuSectionsByProvider") as? [String: [String]] ?? [:],
+            appActionsOnOverviewOnly: userDefaults.object(forKey: "appActionsOnOverviewOnly") as? Bool ?? false,
+            statusComponentsInline: userDefaults.object(forKey: "statusComponentsInline") as? Bool ?? false,
             apiCreditBudgetAmountsRaw: userDefaults.dictionary(forKey: "apiCreditBudgetAmounts") as? [String: Double]
                 ?? [:],
             apiCreditBudgetStartDaysRaw: userDefaults.dictionary(
@@ -677,6 +681,7 @@ extension SettingsStore {
             stackedBarsProvidersRaw: userDefaults.stringArray(forKey: "stackedBarsProviders") ?? [],
             stackedBarsWindowRaw: userDefaults.string(forKey: "stackedBarsWindow")
                 ?? StackedBarsWindow.session.rawValue,
+            stackedBarsShowIcons: userDefaults.object(forKey: "stackedBarsShowIcons") as? Bool ?? true,
             mergedMenuLastSelectedWasOverview: userDefaults.object(
                 forKey: "mergedMenuLastSelectedWasOverview") as? Bool ?? false,
             mergedOverviewSelectedProvidersRaw: userDefaults.array(
