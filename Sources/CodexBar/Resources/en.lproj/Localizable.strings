@@ -2540,3 +2540,4 @@
 "app_actions_overview_only_title" = "App actions on Overview only";
 "app_actions_overview_only_subtitle" = "Refresh, Settings, About, and Quit appear only on the Overview tab. Needs merged icons with the Overview tab enabled.";
 "stacked_bars_show_icons_title" = "Show provider icons";
+"api_credits_unmetered_note" = "Shows your entered balance: costs here are local estimates, not API billing.";

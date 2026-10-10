@@ -2539,3 +2539,4 @@
 "app_actions_overview_only_title" = "Tindakan aplikasi hanya di Ikhtisar";
 "app_actions_overview_only_subtitle" = "Segarkan, Pengaturan, Tentang, dan Keluar hanya muncul di tab Ikhtisar. Memerlukan ikon gabungan dengan tab Ikhtisar aktif.";
 "stacked_bars_show_icons_title" = "Tampilkan ikon penyedia";
+"api_credits_unmetered_note" = "Menampilkan saldo yang Anda masukkan: biaya di sini adalah perkiraan lokal, bukan tagihan API.";

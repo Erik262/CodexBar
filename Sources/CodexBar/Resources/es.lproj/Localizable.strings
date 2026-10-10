@@ -2534,3 +2534,4 @@
 "app_actions_overview_only_title" = "Acciones de la app solo en Resumen";
 "app_actions_overview_only_subtitle" = "Actualizar, Ajustes, Acerca de y Salir aparecen solo en la pestaña Resumen. Requiere iconos combinados con la pestaña Resumen activada.";
 "stacked_bars_show_icons_title" = "Mostrar iconos de proveedores";
+"api_credits_unmetered_note" = "Muestra el saldo introducido: los costes aquí son estimaciones locales, no facturación de la API.";

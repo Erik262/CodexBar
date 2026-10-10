@@ -2535,3 +2535,4 @@
 "app_actions_overview_only_title" = "Appåtgärder endast i Översikt";
 "app_actions_overview_only_subtitle" = "Uppdatera, Inställningar, Om och Avsluta visas bara på fliken Översikt. Kräver sammanslagna symboler med fliken Översikt aktiverad.";
 "stacked_bars_show_icons_title" = "Visa leverantörsikoner";
+"api_credits_unmetered_note" = "Visar ditt angivna saldo: kostnaderna här är lokala uppskattningar, inte API-debitering.";

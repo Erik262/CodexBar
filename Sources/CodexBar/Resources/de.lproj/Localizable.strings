@@ -2534,3 +2534,4 @@
 "app_actions_overview_only_title" = "App-Aktionen nur in der Übersicht";
 "app_actions_overview_only_subtitle" = "Aktualisieren, Einstellungen, Über und Beenden erscheinen nur im Übersicht-Tab. Erfordert zusammengeführte Symbole mit aktivem Übersicht-Tab.";
 "stacked_bars_show_icons_title" = "Anbietersymbole anzeigen";
+"api_credits_unmetered_note" = "Zeigt dein eingegebenes Guthaben: Die Kosten hier sind lokale Schätzungen, keine API-Abrechnung.";

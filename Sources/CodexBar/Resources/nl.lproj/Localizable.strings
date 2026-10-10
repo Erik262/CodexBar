@@ -2535,3 +2535,4 @@
 "app_actions_overview_only_title" = "App-acties alleen in Overzicht";
 "app_actions_overview_only_subtitle" = "Vernieuwen, Instellingen, Over en Stop verschijnen alleen op het tabblad Overzicht. Vereist samengevoegde pictogrammen met het tabblad Overzicht aan.";
 "stacked_bars_show_icons_title" = "Providerpictogrammen tonen";
+"api_credits_unmetered_note" = "Toont je ingevoerde saldo: de kosten hier zijn lokale schattingen, geen API-facturering.";

@@ -6,7 +6,7 @@ import Testing
 @MainActor
 struct APICreditBudgetTests {
     @Test
-    func `credits left subtract spend on and after the start day`() throws {
+    func `credits left subtract spend after the start day`() throws {
         let calendar = try Self.utcCalendar()
         let now = try #require(calendar.date(from: DateComponents(year: 2026, month: 7, day: 15, hour: 12)))
         let budget = try #require(APICreditBudget(amount: 50, startDay: "2026-07-10"))
@@ -21,8 +21,8 @@ struct APICreditBudgetTests {
             now: now,
             calendar: calendar)
 
-        #expect(status.spent == 10.5)
-        #expect(status.remaining == 39.5)
+        #expect(status.spent == 6.5)
+        #expect(status.remaining == 43.5)
         #expect(status.coversStartDay)
     }
 

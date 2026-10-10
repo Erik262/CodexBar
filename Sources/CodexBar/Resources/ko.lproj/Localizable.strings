@@ -2504,3 +2504,4 @@
 "app_actions_overview_only_title" = "앱 작업은 개요에만 표시";
 "app_actions_overview_only_subtitle" = "새로 고침, 설정, 정보, 종료가 개요 탭에만 표시됩니다. 개요 탭이 켜진 아이콘 병합이 필요합니다.";
 "stacked_bars_show_icons_title" = "제공자 아이콘 표시";
+"api_credits_unmetered_note" = "입력한 잔액을 표시합니다. 여기의 비용은 API 청구액이 아닌 로컬 추정치입니다.";

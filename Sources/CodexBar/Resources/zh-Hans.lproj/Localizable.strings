@@ -2529,3 +2529,4 @@
 "app_actions_overview_only_title" = "应用操作仅显示在概览";
 "app_actions_overview_only_subtitle" = "刷新、设置、关于和退出仅显示在概览标签页。需要合并图标并启用概览标签页。";
 "stacked_bars_show_icons_title" = "显示提供商图标";
+"api_credits_unmetered_note" = "显示你输入的余额：此处费用为本地估算，并非 API 账单。";

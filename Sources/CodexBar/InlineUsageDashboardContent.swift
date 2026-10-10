@@ -456,8 +456,11 @@ extension UsageMenuCardView.Model {
         details: inout [String])
     {
         guard let budget = input.apiCreditBudget else { return }
+        // Local-log costs are list-price estimates (largely subscription usage), not API billing,
+        // so only vendor-reported spend may draw the balance down.
+        let reportsSpend = snapshot.costProvenance == .vendorMetered
         let status = budget.status(
-            daily: snapshot.daily,
+            daily: reportsSpend ? snapshot.daily : [],
             historyDays: snapshot.displayHistoryDays(calendar: input.costUsageBucketCalendar),
             now: snapshot.updatedAt,
             calendar: input.costUsageBucketCalendar)
@@ -468,7 +471,9 @@ extension UsageMenuCardView.Model {
                 value: convertedString(status.remaining),
                 emphasis: true),
             at: 0)
-        if !status.coversStartDay {
+        if !reportsSpend {
+            details.append(L("api_credits_unmetered_note"))
+        } else if !status.coversStartDay {
             details.append(L("api_credits_partial_note", budget.startDay))
         }
     }
