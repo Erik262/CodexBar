@@ -2539,3 +2539,4 @@
 "status_components_inline_subtitle" = "Replaces the Status Page submenu with a compact list of components. Click it to open the status page.";
 "app_actions_overview_only_title" = "App actions on Overview only";
 "app_actions_overview_only_subtitle" = "Refresh, Settings, About, and Quit appear only on the Overview tab. Needs merged icons with the Overview tab enabled.";
+"stacked_bars_show_icons_title" = "Show provider icons";

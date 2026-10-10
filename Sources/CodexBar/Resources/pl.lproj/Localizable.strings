@@ -2538,3 +2538,4 @@
 "status_components_inline_subtitle" = "Zastępuje podmenu strony stanu zwięzłą listą komponentów. Kliknij, aby otworzyć stronę stanu.";
 "app_actions_overview_only_title" = "Akcje aplikacji tylko w Przeglądzie";
 "app_actions_overview_only_subtitle" = "Odśwież, Ustawienia, O programie i Zakończ pojawiają się tylko na karcie Przegląd. Wymaga scalonych ikon z włączoną kartą Przegląd.";
+"stacked_bars_show_icons_title" = "Pokaż ikony dostawców";

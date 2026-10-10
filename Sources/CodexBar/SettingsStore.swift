@@ -681,6 +681,7 @@ extension SettingsStore {
             stackedBarsProvidersRaw: userDefaults.stringArray(forKey: "stackedBarsProviders") ?? [],
             stackedBarsWindowRaw: userDefaults.string(forKey: "stackedBarsWindow")
                 ?? StackedBarsWindow.session.rawValue,
+            stackedBarsShowIcons: userDefaults.object(forKey: "stackedBarsShowIcons") as? Bool ?? true,
             mergedMenuLastSelectedWasOverview: userDefaults.object(
                 forKey: "mergedMenuLastSelectedWasOverview") as? Bool ?? false,
             mergedOverviewSelectedProvidersRaw: userDefaults.array(

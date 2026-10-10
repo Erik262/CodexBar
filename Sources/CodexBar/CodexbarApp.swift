@@ -110,7 +110,7 @@ struct CodexBarApp: App {
     @SceneBuilder
     var body: some Scene {
         Settings {
-            EmptyView()
+            PlaceholderSettingsWindowCloser()
         }
         .commands {
             CommandGroup(replacing: .appInfo) {

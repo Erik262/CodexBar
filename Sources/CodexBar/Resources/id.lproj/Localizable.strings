@@ -2538,3 +2538,4 @@
 "status_components_inline_subtitle" = "Mengganti submenu Halaman Status dengan daftar komponen yang ringkas. Klik untuk membuka halaman status.";
 "app_actions_overview_only_title" = "Tindakan aplikasi hanya di Ikhtisar";
 "app_actions_overview_only_subtitle" = "Segarkan, Pengaturan, Tentang, dan Keluar hanya muncul di tab Ikhtisar. Memerlukan ikon gabungan dengan tab Ikhtisar aktif.";
+"stacked_bars_show_icons_title" = "Tampilkan ikon penyedia";

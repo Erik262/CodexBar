@@ -2536,3 +2536,4 @@
 "status_components_inline_subtitle" = "Thay menu con Trang trạng thái bằng danh sách thành phần gọn. Nhấp để mở trang trạng thái.";
 "app_actions_overview_only_title" = "Thao tác ứng dụng chỉ ở Tổng quan";
 "app_actions_overview_only_subtitle" = "Làm mới, Cài đặt, Giới thiệu và Thoát chỉ hiện ở tab Tổng quan. Cần gộp biểu tượng và bật tab Tổng quan.";
+"stacked_bars_show_icons_title" = "Hiển thị biểu tượng nhà cung cấp";

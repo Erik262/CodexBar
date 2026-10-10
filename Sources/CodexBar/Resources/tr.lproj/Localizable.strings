@@ -2538,3 +2538,4 @@
 "status_components_inline_subtitle" = "Durum sayfası alt menüsünü kompakt bir bileşen listesiyle değiştirir. Durum sayfasını açmak için tıklayın.";
 "app_actions_overview_only_title" = "Uygulama eylemleri yalnızca Genel Bakış’ta";
 "app_actions_overview_only_subtitle" = "Yenile, Ayarlar, Hakkında ve Çık yalnızca Genel Bakış sekmesinde görünür. Genel Bakış sekmesi açık birleşik simgeler gerekir.";
+"stacked_bars_show_icons_title" = "Sağlayıcı simgelerini göster";

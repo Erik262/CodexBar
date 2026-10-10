@@ -2534,3 +2534,4 @@
 "status_components_inline_subtitle" = "Vervangt het submenu Statuspagina door een compacte lijst met onderdelen. Klik om de statuspagina te openen.";
 "app_actions_overview_only_title" = "App-acties alleen in Overzicht";
 "app_actions_overview_only_subtitle" = "Vernieuwen, Instellingen, Over en Stop verschijnen alleen op het tabblad Overzicht. Vereist samengevoegde pictogrammen met het tabblad Overzicht aan.";
+"stacked_bars_show_icons_title" = "Providerpictogrammen tonen";

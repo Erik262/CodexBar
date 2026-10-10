@@ -2535,3 +2535,4 @@
 "status_components_inline_subtitle" = "ステータスページのサブメニューをコンポーネントのコンパクトな一覧に置き換えます。クリックするとステータスページを開きます。";
 "app_actions_overview_only_title" = "アプリ操作は概要タブのみ";
 "app_actions_overview_only_subtitle" = "更新、設定、情報、終了は概要タブにのみ表示されます。概要タブを有効にしたアイコン統合が必要です。";
+"stacked_bars_show_icons_title" = "プロバイダのアイコンを表示";

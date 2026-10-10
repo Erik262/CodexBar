@@ -112,6 +112,7 @@ struct MenuBarPane: View {
                         optionLabel: { window in
                             Text(window.label)
                         })
+                    Toggle(L("stacked_bars_show_icons_title"), isOn: self.$settings.stackedBarsShowIcons)
                     StackedBarsProviderList(
                         settings: self.settings,
                         eligibleProviders: self.mergedIconPresentation.eligibleProviders,

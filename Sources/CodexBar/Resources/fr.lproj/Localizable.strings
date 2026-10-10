@@ -2534,3 +2534,4 @@
 "status_components_inline_subtitle" = "Remplace le sous-menu Page d’état par une liste compacte des composants. Cliquez pour ouvrir la page d’état.";
 "app_actions_overview_only_title" = "Actions de l’app uniquement dans Aperçu";
 "app_actions_overview_only_subtitle" = "Actualiser, Réglages, À propos et Quitter n’apparaissent que dans l’onglet Aperçu. Nécessite les icônes fusionnées avec l’onglet Aperçu activé.";
+"stacked_bars_show_icons_title" = "Afficher les icônes des fournisseurs";

@@ -922,6 +922,11 @@ extension SettingsStore {
         set { self.setDefault(\.stackedBarsProvidersRaw, newValue, key: "stackedBarsProviders") }
     }
 
+    var stackedBarsShowIcons: Bool {
+        get { self.defaultsState.stackedBarsShowIcons }
+        set { self.setDefault(\.stackedBarsShowIcons, newValue, key: "stackedBarsShowIcons") }
+    }
+
     var stackedBarsWindow: StackedBarsWindow {
         get { StackedBarsWindow(rawValue: self.defaultsState.stackedBarsWindowRaw) ?? .session }
         set { self.setDefault(\.stackedBarsWindowRaw, newValue.rawValue, key: "stackedBarsWindow") }

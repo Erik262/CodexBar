@@ -2528,3 +2528,4 @@
 "status_components_inline_subtitle" = "用紧凑的组件列表替换状态页子菜单。点击可打开状态页。";
 "app_actions_overview_only_title" = "应用操作仅显示在概览";
 "app_actions_overview_only_subtitle" = "刷新、设置、关于和退出仅显示在概览标签页。需要合并图标并启用概览标签页。";
+"stacked_bars_show_icons_title" = "显示提供商图标";

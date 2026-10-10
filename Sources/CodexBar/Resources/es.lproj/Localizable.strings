@@ -2533,3 +2533,4 @@
 "status_components_inline_subtitle" = "Sustituye el submenú de la página de estado por una lista compacta de componentes. Haz clic para abrir la página de estado.";
 "app_actions_overview_only_title" = "Acciones de la app solo en Resumen";
 "app_actions_overview_only_subtitle" = "Actualizar, Ajustes, Acerca de y Salir aparecen solo en la pestaña Resumen. Requiere iconos combinados con la pestaña Resumen activada.";
+"stacked_bars_show_icons_title" = "Mostrar iconos de proveedores";

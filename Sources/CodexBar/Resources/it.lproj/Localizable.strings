@@ -2539,3 +2539,4 @@
 "status_components_inline_subtitle" = "Sostituisce il sottomenu della pagina di stato con un elenco compatto dei componenti. Fai clic per aprire la pagina di stato.";
 "app_actions_overview_only_title" = "Azioni dell’app solo in Panoramica";
 "app_actions_overview_only_subtitle" = "Aggiorna, Impostazioni, Info e Esci compaiono solo nella scheda Panoramica. Richiede le icone unite con la scheda Panoramica attiva.";
+"stacked_bars_show_icons_title" = "Mostra le icone dei provider";

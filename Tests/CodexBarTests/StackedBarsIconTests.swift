@@ -71,6 +71,9 @@ struct StackedBarsIconTests {
         #expect(StackedBarsIconRenderer.Metrics(rowCount: 2).size.height == 18)
         #expect(StackedBarsIconRenderer.Metrics(rowCount: 3).size.height == 18)
         #expect(StackedBarsIconRenderer.Metrics(rowCount: 2).barHeight == 6)
+        #expect(StackedBarsIconRenderer.Metrics(rowCount: 2, showsIcons: false).barX == 0)
+        #expect(StackedBarsIconRenderer.makeImage(rows: [.init(percent: 50, stale: false)], icons: []).size.width
+            == StackedBarsIconRenderer.barWidth)
         #expect(StackedBarsIconRenderer.fillWidth(percent: 50, barWidth: 28) == 14)
         #expect(StackedBarsIconRenderer.fillWidth(percent: nil, barWidth: 28) == 0)
         #expect(StackedBarsIconRenderer.fillWidth(percent: 140, barWidth: 28) == 28)

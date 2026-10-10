@@ -2534,3 +2534,4 @@
 "status_components_inline_subtitle" = "Ersätter undermenyn Statussida med en kompakt lista över komponenter. Klicka för att öppna statussidan.";
 "app_actions_overview_only_title" = "Appåtgärder endast i Översikt";
 "app_actions_overview_only_subtitle" = "Uppdatera, Inställningar, Om och Avsluta visas bara på fliken Översikt. Kräver sammanslagna symboler med fliken Översikt aktiverad.";
+"stacked_bars_show_icons_title" = "Visa leverantörsikoner";

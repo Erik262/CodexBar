@@ -2539,3 +2539,4 @@
 "status_components_inline_subtitle" = "Substitueix el submenú de la pàgina d’estat per una llista compacta de components. Fes-hi clic per obrir la pàgina d’estat.";
 "app_actions_overview_only_title" = "Accions de l’app només a Resum";
 "app_actions_overview_only_subtitle" = "Actualitza, Configuració, Quant a i Surt només apareixen a la pestanya Resum. Cal combinar les icones amb la pestanya Resum activada.";
+"stacked_bars_show_icons_title" = "Mostra les icones dels proveïdors";

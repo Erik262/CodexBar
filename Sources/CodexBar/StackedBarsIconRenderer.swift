@@ -17,12 +17,12 @@ enum StackedBarsIconRenderer {
         let size: NSSize
 
         /// Two rows use 9 pt each (18 pt tall), three rows 6 pt each (18 pt), matching the standard icon height.
-        init(rowCount: Int, barWidth: CGFloat = StackedBarsIconRenderer.barWidth) {
+        init(rowCount: Int, showsIcons: Bool = true, barWidth: CGFloat = StackedBarsIconRenderer.barWidth) {
             let rows = max(1, rowCount)
             self.rowHeight = rows >= 3 ? 6 : 9
             self.iconSize = self.rowHeight - 1
             self.barHeight = rows >= 3 ? 4 : 6
-            self.barX = self.iconSize + 4
+            self.barX = showsIcons ? self.iconSize + 4 : 0
             self.size = NSSize(width: self.barX + barWidth, height: self.rowHeight * CGFloat(rows))
         }
     }
@@ -37,9 +37,10 @@ enum StackedBarsIconRenderer {
         return (barWidth * CGFloat(clamped) * 2).rounded() / 2
     }
 
+    /// Pass an empty `icons` array to draw bars only, without reserving the icon column.
     static func makeImage(rows: [Row], icons: [NSImage?], scale: CGFloat = 2) -> NSImage {
         let rows = Array(rows.prefix(self.maxRows))
-        let metrics = Metrics(rowCount: rows.count)
+        let metrics = Metrics(rowCount: rows.count, showsIcons: !icons.isEmpty)
         let image = NSImage(size: metrics.size)
         guard let rep = NSBitmapImageRep(
             bitmapDataPlanes: nil,

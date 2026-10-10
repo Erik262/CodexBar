@@ -2533,3 +2533,4 @@
 "status_components_inline_subtitle" = "Ersetzt das Statusseiten-Untermenü durch eine kompakte Komponentenliste. Ein Klick öffnet die Statusseite.";
 "app_actions_overview_only_title" = "App-Aktionen nur in der Übersicht";
 "app_actions_overview_only_subtitle" = "Aktualisieren, Einstellungen, Über und Beenden erscheinen nur im Übersicht-Tab. Erfordert zusammengeführte Symbole mit aktivem Übersicht-Tab.";
+"stacked_bars_show_icons_title" = "Anbietersymbole anzeigen";
