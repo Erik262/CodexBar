@@ -111,13 +111,14 @@ struct InlineCostHistoryDashboardLabelTests {
             hidePersonalInfo: false,
             costUsageBucketCalendar: calendar,
             now: now,
-            hiddenMenuSections: [.todayCost, .recentWindows, .costChart]))
+            hiddenMenuSections: [.todayCost, .recentWindows, .costChart, .currentWindow, .costDetails]))
 
         let dashboard = try #require(model.inlineUsageDashboard)
         #expect(!dashboard.kpis.map(\.title).contains("Today"))
+        #expect(!dashboard.kpis.map(\.title).contains { $0.contains("Current window") })
         #expect(dashboard.quotaWindows.isEmpty)
         #expect(dashboard.points.isEmpty)
-        #expect(!dashboard.detailLines.contains(L("antigravity_quota_window_note")))
+        #expect(dashboard.detailLines.isEmpty)
     }
 
     @Test

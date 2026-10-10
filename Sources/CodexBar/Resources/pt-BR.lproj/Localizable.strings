@@ -2528,3 +2528,11 @@
 "api_credits_settings_subtitle" = "Informe seu saldo e o dia em que o verificou. O menu mostra o saldo menos os gastos informados desde então.";
 "api_credits_amount_placeholder" = "Saldo";
 "api_credits_since_title" = "Desde";
+"menu_section_latest_tokens" = "Tokens / solicitações recentes";
+"menu_section_current_window" = "Custo e tokens da janela atual";
+"menu_section_cost_details" = "Detalhes de custo (modelo principal, notas)";
+"menu_visibility_provider_title" = "Provedor";
+"status_components_inline_title" = "Mostrar status integrado";
+"status_components_inline_subtitle" = "Substitui o submenu da página de status por uma lista compacta de componentes. Clique para abrir a página de status.";
+"app_actions_overview_only_title" = "Ações do app apenas na Visão geral";
+"app_actions_overview_only_subtitle" = "Atualizar, Ajustes, Sobre e Encerrar aparecem só na aba Visão geral. Requer ícones mesclados com a aba Visão geral ativada.";

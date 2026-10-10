@@ -281,7 +281,10 @@ extension StatusItemController {
             showAllAccounts: showAllAccounts)
         let descriptor = self.makeMenuDescriptor(
             provider: selectedProvider,
-            includeContextualActions: !isOverviewSelected && !isPluginSelected)
+            includeContextualActions: !isOverviewSelected && !isPluginSelected,
+            includeAppActions: self.showsAppActions(
+                isOverviewSelected: isOverviewSelected,
+                includesOverview: includesOverview))
         let menuWidth = self.menuCardWidth(
             for: enabledProviders,
             selectedProvider: selectedProvider,
@@ -895,6 +898,13 @@ extension StatusItemController {
                         continue
                     }
                     let localizedTitle = L(title)
+                    if action == .statusPage,
+                       let provider,
+                       let inlineItem = self.makeInlineStatusComponentsItem(provider: provider, width: width)
+                    {
+                        menu.addItem(inlineItem)
+                        continue
+                    }
                     if case let .focusAgentSession(session, remoteHost) = action {
                         menu.addItem(self.makeAgentSessionMenuItem(
                             title: localizedTitle,
@@ -1645,6 +1655,29 @@ extension StatusItemController {
         else { return }
         item.action = nil
         item.submenu = submenu
+    }
+
+    /// The compact status card that replaces the Status Page submenu when the user opted in and
+    /// components have loaded; nil keeps the regular row.
+    func makeInlineStatusComponentsItem(provider: UsageProvider, width: CGFloat) -> NSMenuItem? {
+        guard self.settings.statusComponentsInline,
+              self.store.statusChecksEnabled,
+              Self.statusComponentsSubmenuProviders.contains(provider)
+        else { return nil }
+        let components = Self.filterStatusComponents(self.store.statusComponents(for: provider), for: provider)
+        guard !components.isEmpty else { return nil }
+        let metadata = self.store.metadata(for: provider)
+        let url = (metadata.statusPageURL ?? metadata.statusLinkURL).flatMap(URL.init(string:))
+        let onClick: (() -> Void)? = url.map { url in { _ = NSWorkspace.shared.open(url) } }
+        let item = self.makeMenuCardItem(
+            CompactStatusComponentsView(components: components),
+            id: Self.statusComponentsID + "Inline",
+            width: width,
+            heightCacheScope: provider.rawValue,
+            heightCacheFingerprint: "statusInline:\(components.count)",
+            onClick: onClick)
+        item.title = L("Status Page")
+        return item
     }
 
     func makeStatusComponentsSubmenu(provider: UsageProvider, width: CGFloat? = nil) -> NSMenu? {

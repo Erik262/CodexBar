@@ -99,6 +99,7 @@ struct MenuDescriptor {
         canCheckForUpdates: Bool = false,
         versionText: String = AppVersion.shortVersion,
         includeContextualActions: Bool = true,
+        includeAppActions: Bool = true,
         codexWorkspacesMenuEnabled: Bool = false,
         isKeepingAwake: Bool = false,
         agentSessionsEnabled: Bool = false,
@@ -169,12 +170,14 @@ struct MenuDescriptor {
                 hideUnreachableHosts: agentSessionsHideUnreachableHosts,
                 now: now))
         }
-        sections.append(Self.metaSection(
-            updateReady: updateReady,
-            availableUpdateVersion: availableUpdateVersion,
-            isInstallingUpdate: isInstallingUpdate,
-            canCheckForUpdates: canCheckForUpdates,
-            versionText: versionText))
+        if includeAppActions {
+            sections.append(Self.metaSection(
+                updateReady: updateReady,
+                availableUpdateVersion: availableUpdateVersion,
+                isInstallingUpdate: isInstallingUpdate,
+                canCheckForUpdates: canCheckForUpdates,
+                versionText: versionText))
+        }
 
         return MenuDescriptor(sections: sections)
     }
@@ -570,8 +573,8 @@ struct MenuDescriptor {
         }
 
         // Show "Add Account" if no account, "Switch Account" if logged in
-        if store.settings.isMenuSectionVisible(.accountActions),
-           let targetProvider,
+        if let targetProvider,
+           store.settings.isMenuSectionVisible(.accountActions, for: targetProvider),
            let implementation = ProviderCatalog.implementation(for: targetProvider),
            implementation.supportsLoginFlow
         {
@@ -599,15 +602,18 @@ struct MenuDescriptor {
                 .appendActionMenuEntries(context: actionContext, entries: &entries)
         }
 
-        if store.settings.isMenuSectionVisible(.dashboardLink), metadata?.dashboardURL != nil {
+        let showsLink = { (section: MenuSectionToggle) -> Bool in
+            targetProvider.map { store.settings.isMenuSectionVisible(section, for: $0) } ?? true
+        }
+        if showsLink(.dashboardLink), metadata?.dashboardURL != nil {
             entries.append(.action(L("Usage Dashboard"), .dashboard))
         }
-        if store.settings.isMenuSectionVisible(.statusPageLink),
+        if showsLink(.statusPageLink),
            metadata?.statusPageURL != nil || metadata?.statusLinkURL != nil
         {
             entries.append(.action(L("Status Page"), .statusPage))
         }
-        if store.settings.providerChangelogLinksEnabled, metadata?.changelogURL != nil {
+        if store.settings.providerChangelogLinksEnabled, showsLink(.changelogLink), metadata?.changelogURL != nil {
             entries.append(.action(L("Changelog"), .changelog))
         }
 

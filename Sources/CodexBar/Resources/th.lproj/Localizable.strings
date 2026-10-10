@@ -2532,3 +2532,11 @@
 "api_credits_settings_subtitle" = "ป้อนยอดคงเหลือและวันที่ตรวจสอบ เมนูจะแสดงยอดคงเหลือหักค่าใช้จ่ายที่รายงานตั้งแต่วันนั้น";
 "api_credits_amount_placeholder" = "ยอดคงเหลือ";
 "api_credits_since_title" = "ตั้งแต่";
+"menu_section_latest_tokens" = "โทเค็น / คำขอล่าสุด";
+"menu_section_current_window" = "ค่าใช้จ่ายและโทเค็นของช่วงปัจจุบัน";
+"menu_section_cost_details" = "รายละเอียดค่าใช้จ่าย (โมเดลหลัก หมายเหตุ)";
+"menu_visibility_provider_title" = "ผู้ให้บริการ";
+"status_components_inline_title" = "แสดงสถานะในเมนู";
+"status_components_inline_subtitle" = "แทนที่เมนูย่อยหน้าสถานะด้วยรายการส่วนประกอบแบบกะทัดรัด คลิกเพื่อเปิดหน้าสถานะ";
+"app_actions_overview_only_title" = "การทำงานของแอปเฉพาะในภาพรวม";
+"app_actions_overview_only_subtitle" = "รีเฟรช การตั้งค่า เกี่ยวกับ และออก จะแสดงเฉพาะในแท็บภาพรวม ต้องรวมไอคอนและเปิดแท็บภาพรวม";

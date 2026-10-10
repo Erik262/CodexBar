@@ -2528,3 +2528,11 @@
 "api_credits_settings_subtitle" = "Введіть баланс і день перевірки. Меню показує баланс мінус витрати, зафіксовані відтоді.";
 "api_credits_amount_placeholder" = "Баланс";
 "api_credits_since_title" = "З";
+"menu_section_latest_tokens" = "Останні токени / запити";
+"menu_section_current_window" = "Витрати й токени поточного вікна";
+"menu_section_cost_details" = "Деталі витрат (основна модель, примітки)";
+"menu_visibility_provider_title" = "Постачальник";
+"status_components_inline_title" = "Показувати стан прямо в меню";
+"status_components_inline_subtitle" = "Замінює підменю сторінки стану компактним списком компонентів. Натисніть, щоб відкрити сторінку стану.";
+"app_actions_overview_only_title" = "Дії застосунку лише в «Огляді»";
+"app_actions_overview_only_subtitle" = "«Оновити», «Налаштування», «Про програму» і «Вийти» показуються лише на вкладці «Огляд». Потрібні об’єднані значки з увімкненою вкладкою «Огляд».";

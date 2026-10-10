@@ -2528,3 +2528,11 @@
 "api_credits_settings_subtitle" = "残高と確認した日を入力してください。メニューには、残高からその日以降に報告された支出を引いた値が表示されます。";
 "api_credits_amount_placeholder" = "残高";
 "api_credits_since_title" = "開始日";
+"menu_section_latest_tokens" = "最新のトークン／リクエスト";
+"menu_section_current_window" = "現在のウィンドウのコストとトークン";
+"menu_section_cost_details" = "コストの詳細（主要モデル、注記）";
+"menu_visibility_provider_title" = "プロバイダ";
+"status_components_inline_title" = "ステータスをインライン表示";
+"status_components_inline_subtitle" = "ステータスページのサブメニューをコンポーネントのコンパクトな一覧に置き換えます。クリックするとステータスページを開きます。";
+"app_actions_overview_only_title" = "アプリ操作は概要タブのみ";
+"app_actions_overview_only_subtitle" = "更新、設定、情報、終了は概要タブにのみ表示されます。概要タブを有効にしたアイコン統合が必要です。";

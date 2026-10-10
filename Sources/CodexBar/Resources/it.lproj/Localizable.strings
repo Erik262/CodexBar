@@ -2532,3 +2532,11 @@
 "api_credits_settings_subtitle" = "Inserisci il saldo e il giorno in cui l’hai controllato. Il menu mostra il saldo meno la spesa registrata da allora.";
 "api_credits_amount_placeholder" = "Saldo";
 "api_credits_since_title" = "Dal";
+"menu_section_latest_tokens" = "Ultimi token / richieste";
+"menu_section_current_window" = "Costo e token della finestra attuale";
+"menu_section_cost_details" = "Dettagli dei costi (modello principale, note)";
+"menu_visibility_provider_title" = "Provider";
+"status_components_inline_title" = "Mostra lo stato in linea";
+"status_components_inline_subtitle" = "Sostituisce il sottomenu della pagina di stato con un elenco compatto dei componenti. Fai clic per aprire la pagina di stato.";
+"app_actions_overview_only_title" = "Azioni dell’app solo in Panoramica";
+"app_actions_overview_only_subtitle" = "Aggiorna, Impostazioni, Info e Esci compaiono solo nella scheda Panoramica. Richiede le icone unite con la scheda Panoramica attiva.";

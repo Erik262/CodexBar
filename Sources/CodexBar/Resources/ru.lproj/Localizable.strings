@@ -2529,3 +2529,11 @@
 "api_credits_settings_subtitle" = "Введите баланс и дату проверки. В меню показывается баланс за вычетом расходов, учтённых с этой даты.";
 "api_credits_amount_placeholder" = "Баланс";
 "api_credits_since_title" = "С";
+"menu_section_latest_tokens" = "Последние токены / запросы";
+"menu_section_current_window" = "Расходы и токены текущего окна";
+"menu_section_cost_details" = "Детали расходов (основная модель, заметки)";
+"menu_visibility_provider_title" = "Провайдер";
+"status_components_inline_title" = "Показывать статус прямо в меню";
+"status_components_inline_subtitle" = "Заменяет подменю страницы статуса компактным списком компонентов. Нажмите, чтобы открыть страницу статуса.";
+"app_actions_overview_only_title" = "Действия приложения только в «Обзоре»";
+"app_actions_overview_only_subtitle" = "«Обновить», «Настройки», «О программе» и «Выйти» отображаются только на вкладке «Обзор». Требуются объединённые значки с включённой вкладкой «Обзор».";

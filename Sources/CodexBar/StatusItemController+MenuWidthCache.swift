@@ -38,9 +38,16 @@ extension StatusItemController {
         }
     }
 
+    /// App actions (Refresh, Settings, About, Quit) stay on every tab unless the user pinned them to
+    /// Overview and that tab exists, so they can never disappear from the menu entirely.
+    func showsAppActions(isOverviewSelected: Bool, includesOverview: Bool) -> Bool {
+        !self.settings.appActionsOnOverviewOnly || isOverviewSelected || !includesOverview || !self.shouldMergeIcons
+    }
+
     func makeMenuDescriptor(
         provider: UsageProvider?,
         includeContextualActions: Bool,
+        includeAppActions: Bool = true,
         codexWorkspacesMenuEnabled: Bool = CodexWorkspacesMenuAvailability.isEnabledForCurrentProcess) -> MenuDescriptor
     {
         MenuDescriptor.build(
@@ -55,6 +62,7 @@ extension StatusItemController {
             isInstallingUpdate: self.updater.updateStatus.isInstalling,
             canCheckForUpdates: self.updater.isAvailable,
             includeContextualActions: includeContextualActions,
+            includeAppActions: includeAppActions,
             codexWorkspacesMenuEnabled: codexWorkspacesMenuEnabled,
             isKeepingAwake: self.agentSessions.isKeepingAwake,
             agentSessionsEnabled: self.settings.agentSessionsEnabled,

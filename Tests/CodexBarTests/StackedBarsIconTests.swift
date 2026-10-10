@@ -68,11 +68,12 @@ struct StackedBarsIconTests {
 
     @Test
     func `renderer sizes the canvas per row count and fills from the left`() throws {
-        #expect(StackedBarsIconRenderer.Metrics(rowCount: 2).rowHeight == 9)
-        #expect(StackedBarsIconRenderer.Metrics(rowCount: 3).rowHeight == 6)
-        #expect(StackedBarsIconRenderer.fillWidth(percent: 50, barWidth: 24) == 12)
-        #expect(StackedBarsIconRenderer.fillWidth(percent: nil, barWidth: 24) == 0)
-        #expect(StackedBarsIconRenderer.fillWidth(percent: 140, barWidth: 24) == 24)
+        #expect(StackedBarsIconRenderer.Metrics(rowCount: 2).size.height == 20)
+        #expect(StackedBarsIconRenderer.Metrics(rowCount: 3).size.height == 21)
+        #expect(StackedBarsIconRenderer.Metrics(rowCount: 2).barHeight == 7)
+        #expect(StackedBarsIconRenderer.fillWidth(percent: 50, barWidth: 32) == 16)
+        #expect(StackedBarsIconRenderer.fillWidth(percent: nil, barWidth: 32) == 0)
+        #expect(StackedBarsIconRenderer.fillWidth(percent: 140, barWidth: 32) == 32)
 
         let image = StackedBarsIconRenderer.makeImage(
             rows: [.init(percent: 100, stale: false), .init(percent: 0, stale: false)],

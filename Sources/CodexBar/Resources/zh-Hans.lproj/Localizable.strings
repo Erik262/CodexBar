@@ -2521,3 +2521,11 @@
 "api_credits_settings_subtitle" = "输入余额和查看余额的日期。菜单会显示余额减去此后报告的支出。";
 "api_credits_amount_placeholder" = "余额";
 "api_credits_since_title" = "起始日";
+"menu_section_latest_tokens" = "最近令牌／请求";
+"menu_section_current_window" = "当前窗口费用和令牌";
+"menu_section_cost_details" = "费用详情（主要模型、说明）";
+"menu_visibility_provider_title" = "提供商";
+"status_components_inline_title" = "内联显示状态";
+"status_components_inline_subtitle" = "用紧凑的组件列表替换状态页子菜单。点击可打开状态页。";
+"app_actions_overview_only_title" = "应用操作仅显示在概览";
+"app_actions_overview_only_subtitle" = "刷新、设置、关于和退出仅显示在概览标签页。需要合并图标并启用概览标签页。";

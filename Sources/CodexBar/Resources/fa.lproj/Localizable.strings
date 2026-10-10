@@ -2532,3 +2532,11 @@
 "api_credits_settings_subtitle" = "موجودی و روزی را که آن را بررسی کردید وارد کنید. منو موجودی منهای هزینهٔ گزارش‌شده از آن روز را نشان می‌دهد.";
 "api_credits_amount_placeholder" = "موجودی";
 "api_credits_since_title" = "از";
+"menu_section_latest_tokens" = "آخرین توکن‌ها / درخواست‌ها";
+"menu_section_current_window" = "هزینه و توکن‌های بازهٔ فعلی";
+"menu_section_cost_details" = "جزئیات هزینه (مدل اصلی، یادداشت‌ها)";
+"menu_visibility_provider_title" = "ارائه‌دهنده";
+"status_components_inline_title" = "نمایش وضعیت درون منو";
+"status_components_inline_subtitle" = "زیرمنوی صفحهٔ وضعیت را با فهرست فشرده‌ای از اجزا جایگزین می‌کند. برای باز کردن صفحهٔ وضعیت کلیک کنید.";
+"app_actions_overview_only_title" = "اقدامات برنامه فقط در نمای کلی";
+"app_actions_overview_only_subtitle" = "تازه‌سازی، تنظیمات، درباره و خروج فقط در زبانهٔ نمای کلی نمایش داده می‌شوند. نیاز به ادغام نمادها با زبانهٔ نمای کلی فعال دارد.";

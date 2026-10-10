@@ -16,19 +16,20 @@ enum StackedBarsIconRenderer {
         let barX: CGFloat
         let size: NSSize
 
+        /// Two rows use 10 pt each (20 pt tall), three rows 7 pt each (21 pt), filling the menu bar height.
         init(rowCount: Int, barWidth: CGFloat = StackedBarsIconRenderer.barWidth) {
-            let rows = CGFloat(max(1, rowCount))
-            self.rowHeight = StackedBarsIconRenderer.canvasHeight / rows
-            self.iconSize = (self.rowHeight - 1).rounded(.down)
-            self.barHeight = rowCount >= 3 ? 3 : 4
-            self.barX = self.iconSize + 3
-            self.size = NSSize(width: self.barX + barWidth, height: StackedBarsIconRenderer.canvasHeight)
+            let rows = max(1, rowCount)
+            self.rowHeight = rows >= 3 ? 7 : 10
+            self.iconSize = self.rowHeight - 1
+            self.barHeight = rows >= 3 ? 5 : 7
+            self.barX = self.iconSize + 4
+            self.size = NSSize(width: self.barX + barWidth, height: self.rowHeight * CGFloat(rows))
         }
     }
 
     static let maxRows = 3
-    static let canvasHeight: CGFloat = 18
-    static let barWidth: CGFloat = 24
+    static let barWidth: CGFloat = 32
+    static let trackAlpha: CGFloat = 0.38
 
     static func fillWidth(percent: Double?, barWidth: CGFloat) -> CGFloat {
         guard let percent, percent.isFinite else { return 0 }
@@ -94,7 +95,7 @@ enum StackedBarsIconRenderer {
     private static func drawBar(in rect: NSRect, percent: Double?, alpha: CGFloat) {
         let radius = rect.height / 2
         let track = NSBezierPath(roundedRect: rect, xRadius: radius, yRadius: radius)
-        NSColor.black.withAlphaComponent(0.3 * alpha).setFill()
+        NSColor.black.withAlphaComponent(self.trackAlpha * alpha).setFill()
         track.fill()
 
         let fill = self.fillWidth(percent: percent, barWidth: rect.width)

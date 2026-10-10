@@ -2532,3 +2532,11 @@
 "api_credits_settings_subtitle" = "Introdueix el saldo i el dia que el vas consultar. El menú mostra el saldo menys la despesa informada des de llavors.";
 "api_credits_amount_placeholder" = "Saldo";
 "api_credits_since_title" = "Des de";
+"menu_section_latest_tokens" = "Últims tokens / sol·licituds";
+"menu_section_current_window" = "Cost i tokens de la finestra actual";
+"menu_section_cost_details" = "Detalls de cost (model principal, notes)";
+"menu_visibility_provider_title" = "Proveïdor";
+"status_components_inline_title" = "Mostra l’estat integrat";
+"status_components_inline_subtitle" = "Substitueix el submenú de la pàgina d’estat per una llista compacta de components. Fes-hi clic per obrir la pàgina d’estat.";
+"app_actions_overview_only_title" = "Accions de l’app només a Resum";
+"app_actions_overview_only_subtitle" = "Actualitza, Configuració, Quant a i Surt només apareixen a la pestanya Resum. Cal combinar les icones amb la pestanya Resum activada.";

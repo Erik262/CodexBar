@@ -395,8 +395,19 @@ extension UsageMenuCardView.Model {
                     emphasis: true),
                 at: 0)
         }
-        if input.hiddenMenuSections.contains(.todayCost) {
+        let hidden = input.hiddenMenuSections
+        if hidden.contains(.todayCost) {
             kpis.removeAll { $0 == todayKPI }
+        }
+        if hidden.contains(.latestTokens) {
+            kpis.removeAll { trailingKPIs.contains($0) }
+        }
+        if hidden.contains(.currentWindow) {
+            let windowTitles: Set = [weekCostTitle, weekTokenTitle]
+            kpis.removeAll { windowTitles.contains($0.title) }
+        }
+        if hidden.contains(.costDetails) {
+            details = []
         }
         if let budget = input.apiCreditBudget {
             let status = budget.status(

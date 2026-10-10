@@ -2532,3 +2532,11 @@
 "api_credits_settings_subtitle" = "أدخل رصيدك واليوم الذي تحققت منه فيه. تعرض القائمة الرصيد مطروحًا منه الإنفاق المُبلغ عنه منذ ذلك الحين.";
 "api_credits_amount_placeholder" = "الرصيد";
 "api_credits_since_title" = "منذ";
+"menu_section_latest_tokens" = "أحدث الرموز / الطلبات";
+"menu_section_current_window" = "تكلفة ورموز النافذة الحالية";
+"menu_section_cost_details" = "تفاصيل التكلفة (النموذج الأعلى، ملاحظات)";
+"menu_visibility_provider_title" = "المزوّد";
+"status_components_inline_title" = "إظهار الحالة مباشرة";
+"status_components_inline_subtitle" = "يستبدل القائمة الفرعية لصفحة الحالة بقائمة مكونات مختصرة. انقر لفتح صفحة الحالة.";
+"app_actions_overview_only_title" = "إجراءات التطبيق في النظرة العامة فقط";
+"app_actions_overview_only_subtitle" = "تظهر التحديث والإعدادات وحول والإنهاء في علامة تبويب النظرة العامة فقط. يتطلب دمج الأيقونات مع تفعيل علامة النظرة العامة.";

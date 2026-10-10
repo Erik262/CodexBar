@@ -2527,3 +2527,11 @@
 "api_credits_settings_subtitle" = "Introduce o saldo e o día en que o comprobaches. O menú amosa o saldo menos o gasto informado desde entón.";
 "api_credits_amount_placeholder" = "Saldo";
 "api_credits_since_title" = "Desde";
+"menu_section_latest_tokens" = "Últimos tokens / solicitudes";
+"menu_section_current_window" = "Custo e tokens da xanela actual";
+"menu_section_cost_details" = "Detalles de custo (modelo principal, notas)";
+"menu_visibility_provider_title" = "Provedor";
+"status_components_inline_title" = "Mostrar o estado integrado";
+"status_components_inline_subtitle" = "Substitúe o submenú da páxina de estado por unha lista compacta de compoñentes. Fai clic para abrir a páxina de estado.";
+"app_actions_overview_only_title" = "Accións da app só en Resumo";
+"app_actions_overview_only_subtitle" = "Actualizar, Axustes, Acerca de e Saír só aparecen na lapela Resumo. Require iconas combinadas coa lapela Resumo activada.";

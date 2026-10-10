@@ -2527,3 +2527,11 @@
 "api_credits_settings_subtitle" = "Saisissez votre solde et le jour où vous l’avez vérifié. Le menu affiche le solde moins les dépenses signalées depuis.";
 "api_credits_amount_placeholder" = "Solde";
 "api_credits_since_title" = "Depuis";
+"menu_section_latest_tokens" = "Derniers jetons / requêtes";
+"menu_section_current_window" = "Coût et jetons de la fenêtre actuelle";
+"menu_section_cost_details" = "Détails des coûts (modèle principal, notes)";
+"menu_visibility_provider_title" = "Fournisseur";
+"status_components_inline_title" = "Afficher l’état directement";
+"status_components_inline_subtitle" = "Remplace le sous-menu Page d’état par une liste compacte des composants. Cliquez pour ouvrir la page d’état.";
+"app_actions_overview_only_title" = "Actions de l’app uniquement dans Aperçu";
+"app_actions_overview_only_subtitle" = "Actualiser, Réglages, À propos et Quitter n’apparaissent que dans l’onglet Aperçu. Nécessite les icônes fusionnées avec l’onglet Aperçu activé.";
