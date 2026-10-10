@@ -399,13 +399,13 @@ extension UsageMenuCardView.Model {
             input.hiddenMenuSections,
             from: &kpis,
             details: &details,
-            todayKPI: todayKPI,
-            trailingKPIs: trailingKPIs,
-            windowTitles: [weekCostTitle, weekTokenTitle])
+            hideable: HideableKPIs(
+                today: todayKPI,
+                trailing: trailingKPIs,
+                windowTitles: [weekCostTitle, weekTokenTitle]))
         Self.insertCreditBudget(
             input: input,
             snapshot: snapshot,
-            historyDays: historyDays,
             convertedString: convertedString,
             into: &kpis,
             details: &details)
@@ -420,22 +420,27 @@ extension UsageMenuCardView.Model {
         return model
     }
 
+    /// The KPIs a user can switch off, identified by value (today, trailing) or title (current window).
+    private struct HideableKPIs {
+        let today: InlineUsageDashboardModel.KPI
+        let trailing: [InlineUsageDashboardModel.KPI]
+        let windowTitles: Set<String>
+    }
+
     private static func removeHiddenSections(
         _ hidden: Set<MenuSectionToggle>,
         from kpis: inout [InlineUsageDashboardModel.KPI],
         details: inout [String],
-        todayKPI: InlineUsageDashboardModel.KPI,
-        trailingKPIs: [InlineUsageDashboardModel.KPI],
-        windowTitles: Set<String>)
+        hideable: HideableKPIs)
     {
         if hidden.contains(.todayCost) {
-            kpis.removeAll { $0 == todayKPI }
+            kpis.removeAll { $0 == hideable.today }
         }
         if hidden.contains(.latestTokens) {
-            kpis.removeAll { trailingKPIs.contains($0) }
+            kpis.removeAll { hideable.trailing.contains($0) }
         }
         if hidden.contains(.currentWindow) {
-            kpis.removeAll { windowTitles.contains($0.title) }
+            kpis.removeAll { hideable.windowTitles.contains($0.title) }
         }
         if hidden.contains(.costDetails) {
             details = []
@@ -446,7 +451,6 @@ extension UsageMenuCardView.Model {
     private static func insertCreditBudget(
         input: Input,
         snapshot: CostUsageTokenSnapshot,
-        historyDays: Int,
         convertedString: (Double) -> String,
         into kpis: inout [InlineUsageDashboardModel.KPI],
         details: inout [String])
@@ -454,7 +458,7 @@ extension UsageMenuCardView.Model {
         guard let budget = input.apiCreditBudget else { return }
         let status = budget.status(
             daily: snapshot.daily,
-            historyDays: historyDays,
+            historyDays: snapshot.displayHistoryDays(calendar: input.costUsageBucketCalendar),
             now: snapshot.updatedAt,
             calendar: input.costUsageBucketCalendar)
         kpis.insert(
