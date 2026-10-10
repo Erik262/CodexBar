@@ -11,6 +11,7 @@ enum MenuSectionToggle: String, CaseIterable, Identifiable, Sendable {
     case recentWindows
     case planUsage
     case accountActions
+    case buyCredits
     case dashboardLink
     case statusPageLink
     case changelogLink
@@ -29,6 +30,7 @@ enum MenuSectionToggle: String, CaseIterable, Identifiable, Sendable {
         case .recentWindows: L("Recent windows")
         case .planUsage: L("Plan Usage")
         case .accountActions: L("menu_section_account_actions")
+        case .buyCredits: L("Buy Credits")
         case .dashboardLink: L("Usage Dashboard")
         case .statusPageLink: L("Status Page")
         case .changelogLink: L("Changelog")

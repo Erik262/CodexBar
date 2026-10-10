@@ -788,7 +788,9 @@ extension StatusItemController {
         if self.addStorageMenuCardSection(to: menu, provider: context.currentProvider, width: context.menuWidth) {
             menu.addItem(.separator())
         }
-        if context.openAIContext.canShowBuyCredits {
+        if context.openAIContext.canShowBuyCredits,
+           self.settings.isMenuSectionVisible(.buyCredits, for: context.currentProvider)
+        {
             menu.addItem(self.makeBuyCreditsItem())
         }
         menu.addItem(.separator())
@@ -1380,7 +1382,7 @@ extension StatusItemController {
                 heightCacheScope: provider.rawValue,
                 heightCacheFingerprint: layoutModel.heightFingerprint(section: "credits"),
                 submenu: creditsSubmenu))
-            if webItems.canShowBuyCredits {
+            if webItems.canShowBuyCredits, self.settings.isMenuSectionVisible(.buyCredits, for: provider) {
                 menu.addItem(self.makeBuyCreditsItem())
             }
         }
@@ -1413,7 +1415,7 @@ extension StatusItemController {
             addSectionSeparator()
             _ = self.addCreditsHistorySubmenu(to: menu)
         }
-        if !hasCredits, webItems.canShowBuyCredits {
+        if !hasCredits, webItems.canShowBuyCredits, self.settings.isMenuSectionVisible(.buyCredits, for: provider) {
             menu.addItem(self.makeBuyCreditsItem())
         }
     }
