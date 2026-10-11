@@ -276,8 +276,13 @@ if [[ -f "$ICON_SOURCE" ]]; then
 fi
 
 BUNDLE_ID="com.steipete.codexbar"
-FEED_URL="https://raw.githubusercontent.com/steipete/CodexBar/main/appcast.xml"
+# This fork ships its own customizations, so it must not auto-update to upstream releases (that would
+# replace the build with stock CodexBar). Set CODEXBAR_FEED_URL to an appcast you publish to opt back in.
+FEED_URL="${CODEXBAR_FEED_URL:-}"
 AUTO_CHECKS=true
+if [[ -z "$FEED_URL" ]]; then
+  AUTO_CHECKS=false
+fi
 # CODEXBAR_DEBUG_KEEPS_BUNDLE_ID=1 (compile_and_run.sh --fast) keeps the release bundle ID so a debug
 # build reads the same settings and shows no debug "D" marker in the menu bar.
 if [[ "$LOWER_CONF" == "debug" && "${CODEXBAR_DEBUG_KEEPS_BUNDLE_ID:-0}" != "1" ]]; then

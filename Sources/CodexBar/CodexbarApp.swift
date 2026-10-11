@@ -331,6 +331,11 @@ private func makeUpdaterController() -> UpdaterProviding {
         return DisabledUpdaterController(unavailableReason: "Updates unavailable in this build.")
     }
 
+    // Fork builds ship without an appcast; never let Sparkle swap them for an upstream release.
+    guard let feed = Bundle.main.object(forInfoDictionaryKey: "SUFeedURL") as? String, !feed.isEmpty else {
+        return DisabledUpdaterController(unavailableReason: "Updates unavailable in this build.")
+    }
+
     // Default to true for first launch; fall back to saved preference thereafter.
     return SparkleUpdaterController(
         savedAutoUpdate: (UserDefaults.standard.object(forKey: "autoUpdateEnabled") as? Bool) ?? true)
