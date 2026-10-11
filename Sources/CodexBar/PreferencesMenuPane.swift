@@ -240,7 +240,6 @@ struct CostSummarySettingsSection: View {
                         L("cost_comparison_periods_title"),
                         subtitle: L("cost_comparison_periods_subtitle"))
                 }
-
             }
         } header: {
             Text(L("section_cost_summary"))
