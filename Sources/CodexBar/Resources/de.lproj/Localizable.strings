@@ -2546,3 +2546,4 @@
 "status_page_inline" = "Eingebettet";
 "status_page_inline_subtitle" = "Listet die Dienstkomponenten im Menü auf. Ein Klick auf die Liste öffnet die Statusseite.";
 "status_page_inline_requires_checks" = "Eingebettet braucht „Anbieterstatus prüfen“ unter Allgemein; bis dahin zeigt das Menü den Link.";
+"menu_bar_layout_token_stacked_bars" = "Sitzungs- und Wochenbalken";

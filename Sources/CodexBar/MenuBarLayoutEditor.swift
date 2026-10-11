@@ -55,6 +55,7 @@ enum MenuBarLayoutPaletteTokens {
                 .usageBar,
                 .windowBar(window: .session),
                 .windowBar(window: .weekly),
+                .stackedBars,
                 .pace(window: .session),
                 .pace(window: .weekly),
                 .pace(window: .automatic),
@@ -83,6 +84,7 @@ enum MenuBarLayoutPaletteTokens {
         .usageBar,
         .windowBar(window: .session),
         .windowBar(window: .weekly),
+        .stackedBars,
         .pace(window: .session),
         .pace(window: .weekly),
         .pace(window: .automatic),
@@ -1253,6 +1255,7 @@ extension MenuBarLayoutToken {
         case .pace(window: .automatic): L("menu_bar_layout_token_auto_pace")
         case .usageBar: L("menu_bar_layout_token_bar")
         case let .windowBar(window): L("%@: %@", Self.resetWindowLabel(window), L("menu_bar_layout_token_bar"))
+        case .stackedBars: L("menu_bar_layout_token_stacked_bars")
         case .resetCountdown: L("menu_bar_layout_token_resets_in")
         case .resetAbsolute: L("menu_bar_layout_token_reset_at")
         case let .windowResetCountdown(window):
@@ -1306,6 +1309,7 @@ extension MenuBarLayoutToken {
         case .percent, .lanePercent, .extraPercent: "percent"
         case .pace: "speedometer"
         case .usageBar, .windowBar: "chart.bar.fill"
+        case .stackedBars: "rectangle.split.1x2"
         case .resetCountdown, .windowResetCountdown: "timer"
         case .resetAbsolute, .windowResetAbsolute: "clock"
         case .runsOut, .runsOutCompact: "hourglass.bottomhalf.filled"

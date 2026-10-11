@@ -496,6 +496,8 @@ enum MenuBarLayoutToken: Codable, Hashable, Sendable {
     case usageBar
     /// A drawn meter for one specific window (session or weekly), unlike `usageBar` which follows Automatic.
     case windowBar(window: PercentWindow)
+    /// Session and weekly meters stacked in one element, drawn like the merged stacked-bars icon.
+    case stackedBars
     case resetCountdown
     case resetAbsolute
     /// Explicit reset windows keep separate discriminators so persisted automatic tokens stay unchanged.
@@ -541,21 +543,22 @@ enum MenuBarLayoutToken: Codable, Hashable, Sendable {
     /// failing the whole blob and losing the user's arrangement.
     var hasReleasedRepresentation: Bool {
         switch self {
-        case .extraPercent, .windowResetCountdown, .windowResetAbsolute, .windowBar: false
+        case .extraPercent, .windowResetCountdown, .windowResetAbsolute, .windowBar, .stackedBars: false
         default: true
         }
     }
 
     var hasV3Representation: Bool {
         switch self {
-        case .extraPercent, .windowBar: false
+        case .extraPercent, .windowBar, .stackedBars: false
         default: true
         }
     }
 
     var hasLegacyRepresentation: Bool {
         switch self {
-        case .conditional, .extraPercent, .hidden, .windowResetCountdown, .windowResetAbsolute, .windowBar: false
+        case .conditional, .extraPercent, .hidden, .windowResetCountdown, .windowResetAbsolute, .windowBar,
+             .stackedBars: false
         default: true
         }
     }

@@ -2547,3 +2547,4 @@
 "status_page_inline" = "Integrado";
 "status_page_inline_subtitle" = "Mostra os compoñentes do servizo no menú. Fai clic na lista para abrir a páxina de estado.";
 "status_page_inline_requires_checks" = "O modo integrado precisa «Comprobar o estado do provedor» en Xeral; ata entón o menú mostra a ligazón.";
+"menu_bar_layout_token_stacked_bars" = "Barras de sesión e semanal";

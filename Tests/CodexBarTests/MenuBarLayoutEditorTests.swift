@@ -114,6 +114,7 @@ struct MenuBarLayoutEditorTests {
             .usageBar,
             .windowBar(window: .session),
             .windowBar(window: .weekly),
+            .stackedBars,
             .pace(window: .session),
             .pace(window: .weekly),
             .pace(window: .automatic),

@@ -2547,3 +2547,4 @@
 "status_page_inline" = "Inline";
 "status_page_inline_subtitle" = "Toont de servicecomponenten in het menu. Klik op de lijst om de statuspagina te openen.";
 "status_page_inline_requires_checks" = "Inline vereist ‘Controleer de status van de provider’ onder Algemeen; tot die tijd toont het menu de link.";
+"menu_bar_layout_token_stacked_bars" = "Sessie- en weekbalken";

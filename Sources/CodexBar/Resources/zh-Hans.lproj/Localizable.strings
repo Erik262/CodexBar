@@ -2541,3 +2541,4 @@
 "status_page_inline" = "内嵌";
 "status_page_inline_subtitle" = "在菜单中列出服务组件。点击列表可打开状态页。";
 "status_page_inline_requires_checks" = "内嵌显示需要在“通用”中开启“检查提供商状态”；在此之前菜单显示链接。";
+"menu_bar_layout_token_stacked_bars" = "会话 + 每周条";

@@ -2552,3 +2552,4 @@
 "status_page_inline" = "In linea";
 "status_page_inline_subtitle" = "Elenca i componenti del servizio nel menu. Fai clic sull'elenco per aprire la pagina di stato.";
 "status_page_inline_requires_checks" = "La modalità in linea richiede «Controlla stato provider» in Generale; fino ad allora il menu mostra il collegamento.";
+"menu_bar_layout_token_stacked_bars" = "Barre sessione e settimana";

@@ -2551,3 +2551,4 @@
 "status_page_inline" = "W menu";
 "status_page_inline_subtitle" = "Pokazuje komponenty usługi w menu. Kliknij listę, aby otworzyć stronę stanu.";
 "status_page_inline_requires_checks" = "Tryb w menu wymaga opcji „Sprawdzaj status dostawców” w Ogólnych; do tego czasu menu pokazuje link.";
+"menu_bar_layout_token_stacked_bars" = "Paski sesji i tygodnia";

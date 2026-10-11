@@ -2552,3 +2552,4 @@
 "status_page_inline" = "Integrat";
 "status_page_inline_subtitle" = "Mostra els components del servei al menú. Fes clic a la llista per obrir la pàgina d'estat.";
 "status_page_inline_requires_checks" = "El mode integrat necessita «Comproveu l'estat del proveïdor» a General; fins aleshores el menú mostra l'enllaç.";
+"menu_bar_layout_token_stacked_bars" = "Barres de sessió i setmanal";

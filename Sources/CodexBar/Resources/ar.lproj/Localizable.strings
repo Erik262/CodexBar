@@ -2552,3 +2552,4 @@
 "status_page_inline" = "مضمّن";
 "status_page_inline_subtitle" = "يعرض مكونات الخدمة في القائمة. انقر على القائمة لفتح صفحة الحالة.";
 "status_page_inline_requires_checks" = "يتطلب العرض المضمّن تفعيل «تحقق من حالة المزود» في «عام»؛ وحتى ذلك الحين تعرض القائمة الرابط.";
+"menu_bar_layout_token_stacked_bars" = "أشرطة الجلسة والأسبوع";

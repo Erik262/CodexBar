@@ -711,6 +711,12 @@ final class MenuBarLayoutRenderer {
                 style: style,
                 showUsed: options.showUsed,
                 isMonochrome: providerTintColor == nil)
+        case .stackedBars:
+            return self.stackedBarsToken(
+                data: data,
+                style: style,
+                showUsed: options.showUsed,
+                providerTintColor: providerTintColor)
         case .resetCountdown, .resetAbsolute:
             let text = MenuBarLayoutResetText(window: data.automatic, provider: data.provider, now: options.now)
             return self.resetToken(
@@ -802,6 +808,47 @@ final class MenuBarLayoutRenderer {
         let value = NSMutableAttributedString(attachment: attachment)
         value.addAttributes(style.attributes, range: NSRange(location: 0, length: value.length))
         return (value, L("Usage bar, %d%%", Int(percent.rounded())))
+    }
+
+    /// Session over weekly, scaled to the line's icon height so it sits like the provider icon.
+    private static func stackedBarsToken(
+        data: MenuBarLayoutRenderData,
+        style: TokenStyle,
+        showUsed: Bool,
+        providerTintColor: NSColor?)
+        -> (value: NSAttributedString, accessibilityText: String?)
+    {
+        let windows = [(L("Session"), data.session ?? data.automatic), (L("Weekly"), data.weekly)]
+        guard windows.contains(where: { $0.1 != nil }) else {
+            return self.textToken(
+                self.missingValue,
+                accessibilityText: L("Usage bar unavailable"),
+                attributes: style.attributes)
+        }
+        let percents = windows.map { _, window in
+            window.map { (showUsed ? $0.usedPercent : $0.remainingPercent).clamped(to: 0...100) }
+        }
+        let base = StackedBarsIconRenderer.makeImage(
+            rows: percents.map { StackedBarsIconRenderer.Row(percent: $0, stale: false) },
+            icons: [])
+        let attachment = NSTextAttachment()
+        attachment.image = Self.attachmentImage(
+            base,
+            tint: providerTintColor ?? style.foregroundColor,
+            isMonochrome: providerTintColor == nil)
+        let height = style.iconHeight
+        let width = base.size.height > 0 ? base.size.width * height / base.size.height : height
+        attachment.bounds = NSRect(
+            x: 0,
+            y: ((style.font.capHeight - height) / 2).rounded(),
+            width: width,
+            height: height)
+        let value = NSMutableAttributedString(attachment: attachment)
+        value.addAttributes(style.attributes, range: NSRange(location: 0, length: value.length))
+        let accessibility = zip(windows, percents).compactMap { window, percent in
+            percent.map { "\(window.0) \(Int($0.rounded()))%" }
+        }.joined(separator: ", ")
+        return (value, accessibility)
     }
 
     private static func renderPercent(

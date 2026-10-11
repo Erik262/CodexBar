@@ -46,6 +46,7 @@ struct MenuBarLayoutRendererTests {
             (.usageBar, "\u{FFFC}"),
             (.windowBar(window: .session), "\u{FFFC}"),
             (.windowBar(window: .weekly), "\u{FFFC}"),
+            (.stackedBars, "\u{FFFC}"),
             (.resetCountdown, "in 2h"),
             (.runsOut, "Runs out in 1d 16h"),
             (.runsOutCompact, "1d 16h"),

@@ -2549,3 +2549,4 @@
 "status_page_inline" = "Nội tuyến";
 "status_page_inline_subtitle" = "Liệt kê các thành phần dịch vụ trong menu. Nhấp vào danh sách để mở trang trạng thái.";
 "status_page_inline_requires_checks" = "Chế độ nội tuyến cần bật “Kiểm tra Nhà cung cấp trạng thái” trong Chung; trước đó menu hiển thị liên kết.";
+"menu_bar_layout_token_stacked_bars" = "Thanh phiên + tuần";

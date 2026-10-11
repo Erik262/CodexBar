@@ -2552,3 +2552,4 @@
 "status_page_inline" = "Inline";
 "status_page_inline_subtitle" = "Lists service components in the menu. Click the list to open the status page.";
 "status_page_inline_requires_checks" = "Inline needs “Check provider status” in General; until then the menu shows the link.";
+"menu_bar_layout_token_stacked_bars" = "Session + weekly bars";

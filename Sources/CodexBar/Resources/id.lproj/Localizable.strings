@@ -2551,3 +2551,4 @@
 "status_page_inline" = "Sebaris";
 "status_page_inline_subtitle" = "Menampilkan komponen layanan di menu. Klik daftar untuk membuka halaman status.";
 "status_page_inline_requires_checks" = "Mode sebaris memerlukan “Periksa status penyedia” di Umum; sampai saat itu menu menampilkan tautan.";
+"menu_bar_layout_token_stacked_bars" = "Bilah sesi + mingguan";

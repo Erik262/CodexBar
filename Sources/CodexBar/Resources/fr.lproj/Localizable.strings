@@ -2547,3 +2547,4 @@
 "status_page_inline" = "Intégré";
 "status_page_inline_subtitle" = "Liste les composants du service dans le menu. Cliquez sur la liste pour ouvrir la page d'état.";
 "status_page_inline_requires_checks" = "Le mode intégré nécessite « Vérifier l'état des fournisseurs » dans Général ; d'ici là, le menu affiche le lien.";
+"menu_bar_layout_token_stacked_bars" = "Barres session et hebdo";

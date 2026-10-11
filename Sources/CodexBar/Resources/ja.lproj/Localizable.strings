@@ -2548,3 +2548,4 @@
 "status_page_inline" = "インライン";
 "status_page_inline_subtitle" = "サービスのコンポーネントをメニューに一覧表示します。一覧をクリックするとステータスページを開きます。";
 "status_page_inline_requires_checks" = "インライン表示には「一般」の「プロバイダのステータスを確認」が必要です。それまではリンクが表示されます。";
+"menu_bar_layout_token_stacked_bars" = "セッション＋週間バー";

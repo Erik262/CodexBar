@@ -2516,3 +2516,4 @@
 "status_page_inline" = "인라인";
 "status_page_inline_subtitle" = "메뉴에 서비스 구성 요소를 나열합니다. 목록을 클릭하면 상태 페이지가 열립니다.";
 "status_page_inline_requires_checks" = "인라인 표시는 일반의 “공급자 상태 확인”이 필요합니다. 그 전까지는 메뉴에 링크가 표시됩니다.";
+"menu_bar_layout_token_stacked_bars" = "세션 + 주간 막대";

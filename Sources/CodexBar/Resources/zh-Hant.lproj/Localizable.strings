@@ -2526,3 +2526,4 @@
 "status_page_inline" = "內嵌";
 "status_page_inline_subtitle" = "在選單中列出服務元件。點按列表可開啟狀態頁面。";
 "status_page_inline_requires_checks" = "內嵌顯示需要在「一般」中開啟「檢查提供者狀態」；在此之前選單會顯示連結。";
+"menu_bar_layout_token_stacked_bars" = "工作階段 + 每週列";
