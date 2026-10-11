@@ -2561,3 +2561,4 @@
 "menu_tab_order_overview_subtitle" = "Marca fins a %@ proveïdors per a la pestanya Resum. Arrossega per canviar l'ordre de les pestanyes.";
 "menu_preview_title" = "Previsualització del menú";
 "menu_preview_footer" = "S'actualitza mentre canvies les opcions de sota. El menú real es tanca quan Configuració té el focus, així que no pot quedar obert aquí.";
+"menu_section_usage_summary" = "Resum d'ús (avui, 7 dies, sol·licituds, model principal)";

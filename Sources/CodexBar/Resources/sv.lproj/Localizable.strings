@@ -2556,3 +2556,4 @@
 "menu_tab_order_overview_subtitle" = "Markera upp till %@ leverantörer för fliken Översikt. Dra för att ändra flikordningen.";
 "menu_preview_title" = "Förhandsvisning av menyn";
 "menu_preview_footer" = "Uppdateras när du ändrar alternativen nedan. Den riktiga menyn stängs när Inställningar är aktivt, så den kan inte vara öppen här.";
+"menu_section_usage_summary" = "Användningssammanfattning (i dag, 7 dagar, förfrågningar, toppmodell)";

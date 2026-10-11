@@ -76,7 +76,7 @@ extension UsageMenuCardView.Model {
             showOptionalUsage: input.showOptionalCreditsAndExtraUsage))
         {
         case let .openAIAPI(usage):
-            return self.openAIAPIUsageNotes(usage)
+            return input.hiddenMenuSections.contains(.usageSummary) ? [] : self.openAIAPIUsageNotes(usage)
         case let .localized(keys):
             return keys.map { L($0) }
         case .unhandled:

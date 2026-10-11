@@ -2556,3 +2556,4 @@
 "menu_tab_order_overview_subtitle" = "Marca ata %@ provedores para a lapela Resumo. Arrastra para cambiar a orde das lapelas.";
 "menu_preview_title" = "Vista previa do menú";
 "menu_preview_footer" = "Actualízase ao cambiar as opcións de abaixo. O menú real péchase cando Axustes ten o foco, polo que non pode quedar aberto aquí.";
+"menu_section_usage_summary" = "Resumo de uso (hoxe, 7 días, solicitudes, modelo principal)";

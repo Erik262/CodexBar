@@ -2560,3 +2560,4 @@
 "menu_tab_order_overview_subtitle" = "Genel Bakış sekmesi için en fazla %@ sağlayıcı işaretleyin. Sekme sırasını değiştirmek için sürükleyin.";
 "menu_preview_title" = "Menü önizlemesi";
 "menu_preview_footer" = "Aşağıdaki seçenekleri değiştirdikçe güncellenir. Ayarlar etkinken gerçek menü kapanır, bu yüzden burada açık kalamaz.";
+"menu_section_usage_summary" = "Kullanım özeti (bugün, 7 gün, istekler, en çok kullanılan model)";

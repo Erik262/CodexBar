@@ -2555,3 +2555,4 @@
 "menu_tab_order_overview_subtitle" = "Marca hasta %@ proveedores para la pestaña Resumen. Arrastra para cambiar el orden de las pestañas.";
 "menu_preview_title" = "Vista previa del menú";
 "menu_preview_footer" = "Se actualiza al cambiar las opciones de abajo. El menú real se cierra cuando Ajustes tiene el foco, por lo que no puede quedarse abierto aquí.";
+"menu_section_usage_summary" = "Resumen de uso (hoy, 7 días, solicitudes, modelo principal)";

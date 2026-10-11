@@ -2555,3 +2555,4 @@
 "menu_tab_order_overview_subtitle" = "Wähle bis zu %@ Anbieter für den Übersicht-Tab. Ziehen ändert die Tab-Reihenfolge.";
 "menu_preview_title" = "Menüvorschau";
 "menu_preview_footer" = "Aktualisiert sich, während du die Optionen unten änderst. Das echte Menü schließt sich, sobald die Einstellungen aktiv sind, und kann hier nicht offen bleiben.";
+"menu_section_usage_summary" = "Nutzungsübersicht (heute, 7 Tage, Anfragen, Top-Modell)";

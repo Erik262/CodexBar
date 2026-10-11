@@ -25,8 +25,8 @@ struct MetricRow: View {
                 MetricRowHeader(
                     title: presentation.titleText,
                     layoutTitle: layoutPresentation.titleText,
-                    resetText: self.compact ? nil : presentation.resetText,
-                    layoutResetText: self.compact ? nil : layoutPresentation.resetText,
+                    resetText: self.hidesResetText ? nil : presentation.resetText,
+                    layoutResetText: self.hidesResetText ? nil : layoutPresentation.resetText,
                     isHighlighted: self.isHighlighted)
                 UsageProgressBar(
                     percent: self.metric.percent,
@@ -55,6 +55,10 @@ struct MetricRow: View {
         .padding(self.metric.cardStyle ? 10 : 0)
         .background(self.metric.cardStyle ? Color.secondary.opacity(self.isHighlighted ? 0.2 : 0.08) : Color.clear)
         .clipShape(RoundedRectangle(cornerRadius: self.metric.cardStyle ? 10 : 0))
+    }
+
+    private var hidesResetText: Bool {
+        self.compact && !self.metric.showsResetTextWhenCompact
     }
 
     private func layoutPreservingText(

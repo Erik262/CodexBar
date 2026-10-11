@@ -348,6 +348,7 @@ struct MenuDescriptor {
                 provider: provider,
                 snapshot: snap,
                 showOptionalUsage: settings.showOptionalCreditsAndExtraUsage,
+                showsUsageSummary: settings.isMenuSectionVisible(.usageSummary, for: provider),
                 preferredCurrencyCode: settings.preferredCurrencyCode)
             if snap.rateLimitsUnavailable(for: provider) {
                 entries.append(.text(L("Limits not available"), .secondary))
@@ -377,6 +378,7 @@ struct MenuDescriptor {
         provider: UsageProvider,
         snapshot: UsageSnapshot,
         showOptionalUsage: Bool,
+        showsUsageSummary: Bool = true,
         preferredCurrencyCode: String = "auto")
     {
         if let cost = snapshot.providerCost {
@@ -386,13 +388,13 @@ struct MenuDescriptor {
                 entries.append(.text("\(L("Quota")): \(used) / \(limit)", .primary))
             }
         }
-        if let openAIAPIUsage = snapshot.openAIAPIUsage {
+        if showsUsageSummary, let openAIAPIUsage = snapshot.openAIAPIUsage {
             Self.appendOpenAIAPIUsageSummary(
                 entries: &entries,
                 usage: openAIAPIUsage,
                 preferredCurrencyCode: preferredCurrencyCode)
         }
-        if let mistralUsage = snapshot.mistralUsage, !mistralUsage.daily.isEmpty {
+        if showsUsageSummary, let mistralUsage = snapshot.mistralUsage, !mistralUsage.daily.isEmpty {
             Self.appendMistralUsageSummary(
                 entries: &entries,
                 usage: mistralUsage,

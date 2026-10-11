@@ -2560,3 +2560,4 @@
 "menu_tab_order_overview_subtitle" = "Centang hingga %@ penyedia untuk tab Ringkasan. Seret untuk mengubah urutan tab.";
 "menu_preview_title" = "Pratinjau menu";
 "menu_preview_footer" = "Diperbarui saat Anda mengubah opsi di bawah. Menu asli tertutup saat Pengaturan aktif, jadi tidak bisa tetap terbuka di sini.";
+"menu_section_usage_summary" = "Ringkasan penggunaan (hari ini, 7 hari, permintaan, model teratas)";

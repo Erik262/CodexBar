@@ -113,7 +113,7 @@ extension UsageMenuCardView.Model {
         } else {
             nil
         }
-        return Metric(
+        var metric = Metric(
             id: "api-credit-budget",
             title: L("Credits"),
             percent: style == .used ? 100 - remainingPercent : remainingPercent,
@@ -124,5 +124,7 @@ extension UsageMenuCardView.Model {
             detailRightText: nil,
             pacePercent: nil,
             paceOnTop: false)
+        metric.showsResetTextWhenCompact = true
+        return metric
     }
 }

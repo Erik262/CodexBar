@@ -2561,3 +2561,4 @@
 "menu_tab_order_overview_subtitle" = "Check up to %@ providers for the Overview tab. Drag to change the tab order.";
 "menu_preview_title" = "Menu preview";
 "menu_preview_footer" = "Updates as you change the options below. The real menu closes while Settings has focus, so it can't stay open here.";
+"menu_section_usage_summary" = "Usage summary (today, 7 days, requests, top model)";

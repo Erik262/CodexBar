@@ -2560,3 +2560,4 @@
 "menu_tab_order_overview_subtitle" = "Zaznacz do %@ dostawców na karcie Przegląd. Przeciągnij, aby zmienić kolejność kart.";
 "menu_preview_title" = "Podgląd menu";
 "menu_preview_footer" = "Aktualizuje się podczas zmiany opcji poniżej. Prawdziwe menu zamyka się, gdy aktywne są Ustawienia, więc nie może tu pozostać otwarte.";
+"menu_section_usage_summary" = "Podsumowanie użycia (dziś, 7 dni, żądania, główny model)";

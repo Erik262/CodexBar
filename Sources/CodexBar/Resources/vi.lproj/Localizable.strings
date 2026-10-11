@@ -2558,3 +2558,4 @@
 "menu_tab_order_overview_subtitle" = "Chọn tối đa %@ nhà cung cấp cho tab Tổng quan. Kéo để thay đổi thứ tự tab.";
 "menu_preview_title" = "Xem trước menu";
 "menu_preview_footer" = "Cập nhật khi bạn thay đổi các tùy chọn bên dưới. Menu thật sẽ đóng khi Cài đặt được chọn, nên không thể mở sẵn ở đây.";
+"menu_section_usage_summary" = "Tóm tắt sử dụng (hôm nay, 7 ngày, yêu cầu, mô hình hàng đầu)";

@@ -49,6 +49,8 @@ struct UsageMenuCardView: View {
             let workdayTickAppearance: WorkdayTickAppearance
             let cardStyle: Bool
             var sessionEquivalentDetail: UsagePaceText.SessionEquivalentDetail?
+            /// Keeps the right-hand amount (e.g. "$5.70 of $10.00") in compact Overview rows.
+            var showsResetTextWhenCompact = false
 
             init(
                 id: String,

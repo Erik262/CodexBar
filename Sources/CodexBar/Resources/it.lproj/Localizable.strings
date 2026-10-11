@@ -2561,3 +2561,4 @@
 "menu_tab_order_overview_subtitle" = "Seleziona fino a %@ provider per la scheda Panoramica. Trascina per cambiare l'ordine delle schede.";
 "menu_preview_title" = "Anteprima del menu";
 "menu_preview_footer" = "Si aggiorna mentre modifichi le opzioni qui sotto. Il menu reale si chiude quando Impostazioni è in primo piano, quindi non può restare aperto qui.";
+"menu_section_usage_summary" = "Riepilogo utilizzo (oggi, 7 giorni, richieste, modello principale)";

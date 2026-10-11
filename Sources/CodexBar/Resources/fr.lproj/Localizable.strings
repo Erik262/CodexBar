@@ -2556,3 +2556,4 @@
 "menu_tab_order_overview_subtitle" = "Cochez jusqu'à %@ fournisseurs pour l'onglet Vue d'ensemble. Faites glisser pour changer l'ordre des onglets.";
 "menu_preview_title" = "Aperçu du menu";
 "menu_preview_footer" = "Se met à jour quand vous modifiez les options ci-dessous. Le vrai menu se ferme quand les Réglages sont au premier plan ; il ne peut donc pas rester ouvert ici.";
+"menu_section_usage_summary" = "Résumé d'utilisation (aujourd'hui, 7 jours, requêtes, modèle principal)";

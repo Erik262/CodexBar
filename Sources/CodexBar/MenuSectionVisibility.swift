@@ -8,6 +8,7 @@ enum MenuSectionToggle: String, CaseIterable, Identifiable, Sendable {
     case currentWindow
     case costChart
     case costDetails
+    case usageSummary
     case recentWindows
     case planUsage
     case accountActions
@@ -27,6 +28,7 @@ enum MenuSectionToggle: String, CaseIterable, Identifiable, Sendable {
         case .currentWindow: L("menu_section_current_window")
         case .costChart: L("menu_section_cost_chart")
         case .costDetails: L("menu_section_cost_details")
+        case .usageSummary: L("menu_section_usage_summary")
         case .recentWindows: L("Recent windows")
         case .planUsage: L("Plan Usage")
         case .accountActions: L("menu_section_account_actions")
@@ -44,7 +46,7 @@ enum MenuSectionToggle: String, CaseIterable, Identifiable, Sendable {
     func applies(to provider: UsageProvider) -> Bool {
         let descriptor = ProviderDescriptorRegistry.descriptor(for: provider)
         switch self {
-        case .todayCost, .latestTokens, .currentWindow, .costChart, .costDetails, .recentWindows:
+        case .todayCost, .latestTokens, .currentWindow, .costChart, .costDetails, .usageSummary, .recentWindows:
             return descriptor.tokenCost.supportsTokenCost
         case .planUsage, .accountActions:
             return true

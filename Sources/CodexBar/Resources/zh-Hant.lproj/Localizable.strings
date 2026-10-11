@@ -2535,3 +2535,4 @@
 "menu_tab_order_overview_subtitle" = "為「概覽」標籤最多勾選 %@ 個提供者。拖移可變更標籤順序。";
 "menu_preview_title" = "選單預覽";
 "menu_preview_footer" = "變更下方選項時會即時更新。設定視窗處於作用中時真實選單會關閉，因此無法在此保持開啟。";
+"menu_section_usage_summary" = "用量摘要（今天、7 天、請求、主要模型）";

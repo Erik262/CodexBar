@@ -2525,3 +2525,4 @@
 "menu_tab_order_overview_subtitle" = "개요 탭에 표시할 공급자를 최대 %@개까지 선택하세요. 드래그하여 탭 순서를 바꿉니다.";
 "menu_preview_title" = "메뉴 미리보기";
 "menu_preview_footer" = "아래 옵션을 변경하면 업데이트됩니다. 설정이 활성화되면 실제 메뉴가 닫히므로 여기서 열어 둘 수 없습니다.";
+"menu_section_usage_summary" = "사용량 요약(오늘, 7일, 요청, 주요 모델)";

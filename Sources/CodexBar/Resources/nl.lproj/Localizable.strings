@@ -2556,3 +2556,4 @@
 "menu_tab_order_overview_subtitle" = "Vink maximaal %@ aanbieders aan voor het tabblad Overzicht. Sleep om de tabvolgorde te wijzigen.";
 "menu_preview_title" = "Menuvoorbeeld";
 "menu_preview_footer" = "Werkt bij terwijl je de opties hieronder wijzigt. Het echte menu sluit zodra Instellingen actief is en kan hier dus niet open blijven.";
+"menu_section_usage_summary" = "Gebruiksoverzicht (vandaag, 7 dagen, verzoeken, topmodel)";
