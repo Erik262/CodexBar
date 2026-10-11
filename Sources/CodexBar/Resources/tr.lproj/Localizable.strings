@@ -2524,7 +2524,6 @@
 "stacked_bars_window_weekly" = "Haftalık kullanım";
 "stacked_bars_rows_title" = "Satırlar";
 "stacked_bars_rows_subtitle" = "İki veya üç sağlayıcı seçin. Yukarıdan aşağıya sırayı değiştirmek için sürükleyin.";
-"api_credits_left_title" = "Kalan kredi";
 "api_credits_partial_note" = "Maliyet geçmişi %@ sonrasında başlıyor; kalan kredi olduğundan yüksek görünebilir.";
 "api_credits_settings_title" = "Ön ödemeli API kredisi";
 "api_credits_settings_subtitle" = "Bakiyenizi ve kontrol ettiğiniz günü girin. Menü, bakiyeden o günden beri bildirilen harcamayı düşerek gösterir.";
@@ -2557,4 +2556,7 @@
 "merged_icon_style_subtitle_all" = "Değiştirici her seferinde bir sağlayıcı gösterir. Yığın, iki sağlayıcıyı metin satırları olarak gösterir. Yığılmış çubuklar iki veya üç sağlayıcıyı gösterge olarak çizer.";
 "stacked_bars_section_footer" = "Çubuklar Menü altında ayarlanan doldurma yönünü izler (kalan veya kullanılan).";
 "menu_tab_order_title" = "Sekme sırası";
-"menu_tab_order_subtitle" = "Menünün üstündeki sağlayıcı sekmelerini yeniden sıralamak için sürükleyin.";
+"api_credits_of_amount" = "%2$@ içinden %1$@";
+"menu_tab_order_overview_subtitle" = "Genel Bakış sekmesi için en fazla %@ sağlayıcı işaretleyin. Sekme sırasını değiştirmek için sürükleyin.";
+"menu_preview_title" = "Menü önizlemesi";
+"menu_preview_footer" = "Aşağıdaki seçenekleri değiştirdikçe güncellenir. Ayarlar etkinken gerçek menü kapanır, bu yüzden burada açık kalamaz.";

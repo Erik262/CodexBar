@@ -2524,7 +2524,6 @@
 "stacked_bars_window_weekly" = "Użycie tygodniowe";
 "stacked_bars_rows_title" = "Wiersze";
 "stacked_bars_rows_subtitle" = "Zaznacz dwóch lub trzech dostawców. Przeciągnij, aby zmienić kolejność od góry do dołu.";
-"api_credits_left_title" = "Pozostałe kredyty";
 "api_credits_partial_note" = "Historia kosztów zaczyna się po %@, więc pozostałe kredyty mogą być zawyżone.";
 "api_credits_settings_title" = "Przedpłacone kredyty API";
 "api_credits_settings_subtitle" = "Wpisz saldo i dzień, w którym je sprawdzono. Menu pokazuje saldo pomniejszone o wydatki zgłoszone od tego dnia.";
@@ -2557,4 +2556,7 @@
 "merged_icon_style_subtitle_all" = "Przełącznik pokazuje jednego dostawcę naraz. Stos pokazuje dwóch dostawców jako wiersze tekstu. Paski w stosie rysują dwóch lub trzech dostawców jako wskaźniki.";
 "stacked_bars_section_footer" = "Paski są wypełniane zgodnie z kierunkiem ustawionym w sekcji Menu (pozostało lub zużyto).";
 "menu_tab_order_title" = "Kolejność kart";
-"menu_tab_order_subtitle" = "Przeciągnij, aby zmienić kolejność kart dostawców u góry menu.";
+"api_credits_of_amount" = "%1$@ z %2$@";
+"menu_tab_order_overview_subtitle" = "Zaznacz do %@ dostawców na karcie Przegląd. Przeciągnij, aby zmienić kolejność kart.";
+"menu_preview_title" = "Podgląd menu";
+"menu_preview_footer" = "Aktualizuje się podczas zmiany opcji poniżej. Prawdziwe menu zamyka się, gdy aktywne są Ustawienia, więc nie może tu pozostać otwarte.";

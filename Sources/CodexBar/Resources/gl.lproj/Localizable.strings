@@ -2520,7 +2520,6 @@
 "stacked_bars_window_weekly" = "Uso semanal";
 "stacked_bars_rows_title" = "Filas";
 "stacked_bars_rows_subtitle" = "Marca dous ou tres provedores. Arrastra para cambiar a orde de arriba abaixo.";
-"api_credits_left_title" = "Créditos restantes";
 "api_credits_partial_note" = "O historial de custos comeza despois do %@, así que os créditos restantes poden estar sobreestimados.";
 "api_credits_settings_title" = "Créditos de API prepagados";
 "api_credits_settings_subtitle" = "Introduce o saldo e o día en que o comprobaches. O menú amosa o saldo menos o gasto informado desde entón.";
@@ -2553,4 +2552,7 @@
 "merged_icon_style_subtitle_all" = "O selector mostra un provedor de cada vez. Apilado mostra dous provedores como filas de texto. As barras apiladas debuxan dous ou tres provedores como indicadores.";
 "stacked_bars_section_footer" = "As barras seguen a dirección de enchido definida en Menú (restante ou usado).";
 "menu_tab_order_title" = "Orde das lapelas";
-"menu_tab_order_subtitle" = "Arrastra para reordenar as lapelas dos provedores na parte superior do menú.";
+"api_credits_of_amount" = "%1$@ de %2$@";
+"menu_tab_order_overview_subtitle" = "Marca ata %@ provedores para a lapela Resumo. Arrastra para cambiar a orde das lapelas.";
+"menu_preview_title" = "Vista previa do menú";
+"menu_preview_footer" = "Actualízase ao cambiar as opcións de abaixo. O menú real péchase cando Axustes ten o foco, polo que non pode quedar aberto aquí.";

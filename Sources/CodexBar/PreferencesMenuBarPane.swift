@@ -5,7 +5,6 @@ import SwiftUI
 struct MenuBarPane: View {
     private static let maxOverviewProviders = SettingsStore.mergedOverviewProviderLimit
 
-    @State private var isOverviewProviderPopoverPresented = false
     @Bindable var settings: SettingsStore
     @Bindable var store: UsageStore
 
@@ -63,16 +62,10 @@ struct MenuBarPane: View {
             self.reconcileOverviewSelection()
         }
         .onChange(of: self.settings.mergeIcons) { _, isEnabled in
-            guard isEnabled else {
-                self.isOverviewProviderPopoverPresented = false
-                return
-            }
+            guard isEnabled else { return }
             self.reconcileOverviewSelection()
         }
         .onChange(of: self.activeProvidersInOrder) { _, _ in
-            if self.activeProvidersInOrder.isEmpty {
-                self.isOverviewProviderPopoverPresented = false
-            }
             self.reconcileOverviewSelection()
         }
     }
@@ -234,75 +227,20 @@ struct MenuBarPane: View {
                     UnifiedIconSourcePicker(selection: self.$settings.unifiedIconSource)
                 }
 
-                if self.activeProvidersInOrder.count > 1 {
-                    MenuTabOrderList(settings: self.settings, providers: self.activeProvidersInOrder)
+                if !self.activeProvidersInOrder.isEmpty {
+                    MenuTabOrderList(
+                        settings: self.settings,
+                        providers: self.activeProvidersInOrder,
+                        overviewLimit: Self.maxOverviewProviders,
+                        isOnOverview: { self.overviewSelectedProviders.contains($0) },
+                        setOnOverview: { self.setOverviewProviderSelection(provider: $0, isSelected: $1) })
                 }
-
-                self.overviewProviderRow
             } header: {
                 Text(L("section_menu_tabs"))
             } footer: {
                 SettingsSectionFooter(L("section_menu_tabs_footer"))
             }
         }
-    }
-
-    private var overviewProviderRow: some View {
-        LabeledContent {
-            if self.showsOverviewConfigureButton {
-                Button(L("configure")) {
-                    self.isOverviewProviderPopoverPresented = true
-                }
-                .popover(isPresented: self.$isOverviewProviderPopoverPresented, arrowEdge: .bottom) {
-                    self.overviewProviderPopover
-                }
-            }
-        } label: {
-            SettingsRowLabel(L("overview_tab_providers_title"), subtitle: self.overviewProviderSubtitle)
-        }
-    }
-
-    private var overviewProviderSubtitle: String {
-        if !self.settings.mergeIcons {
-            L("overview_enable_merge_icons_hint")
-        } else if self.activeProvidersInOrder.isEmpty {
-            L("overview_no_providers_hint")
-        } else {
-            self.overviewProviderSelectionSummary
-        }
-    }
-
-    private var overviewProviderPopover: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text(Self.overviewProviderLimitText())
-                .font(.headline)
-            Text(L("overview_rows_follow_order"))
-                .font(.footnote)
-                .foregroundStyle(.tertiary)
-
-            ScrollView(.vertical, showsIndicators: true) {
-                VStack(alignment: .leading, spacing: 6) {
-                    ForEach(self.activeProvidersInOrder, id: \.self) { provider in
-                        Toggle(
-                            isOn: Binding(
-                                get: { self.overviewSelectedProviders.contains(provider) },
-                                set: { shouldSelect in
-                                    self.setOverviewProviderSelection(provider: provider, isSelected: shouldSelect)
-                                })) {
-                            Text(self.providerDisplayName(provider))
-                                .font(.body)
-                        }
-                        .toggleStyle(.checkbox)
-                        .disabled(
-                            !self.overviewSelectedProviders.contains(provider) &&
-                                self.overviewSelectedProviders.count >= Self.maxOverviewProviders)
-                    }
-                }
-            }
-            .frame(maxHeight: 220)
-        }
-        .padding(12)
-        .frame(width: 280)
     }
 
     @ViewBuilder
@@ -349,16 +287,6 @@ struct MenuBarPane: View {
         self.settings.resolvedMergedOverviewProviders(
             activeProviders: self.activeProvidersInOrder,
             maxVisibleProviders: Self.maxOverviewProviders)
-    }
-
-    private var showsOverviewConfigureButton: Bool {
-        self.settings.mergeIcons && !self.activeProvidersInOrder.isEmpty
-    }
-
-    private var overviewProviderSelectionSummary: String {
-        let selectedNames = self.overviewSelectedProviders.map(self.providerDisplayName)
-        guard !selectedNames.isEmpty else { return L("overview_no_providers_selected") }
-        return selectedNames.joined(separator: ", ")
     }
 
     private func providerDisplayName(_ provider: UsageProvider) -> String {

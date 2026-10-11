@@ -2499,7 +2499,6 @@
 "stacked_bars_window_weekly" = "每週用量";
 "stacked_bars_rows_title" = "列";
 "stacked_bars_rows_subtitle" = "勾選兩到三個供應商。拖曳可變更由上到下的順序。";
-"api_credits_left_title" = "剩餘額度";
 "api_credits_partial_note" = "費用紀錄從 %@ 之後開始，剩餘額度可能偏高。";
 "api_credits_settings_title" = "預付 API 額度";
 "api_credits_settings_subtitle" = "輸入餘額與查看餘額的日期。選單會顯示餘額減去之後回報的支出。";
@@ -2532,4 +2531,7 @@
 "merged_icon_style_subtitle_all" = "切換器一次顯示一個提供者。堆疊以兩行文字顯示兩個提供者。堆疊列以量表形式繪製兩到三個提供者。";
 "stacked_bars_section_footer" = "列條遵循「選單」中設定的填滿方向（剩餘或已用）。";
 "menu_tab_order_title" = "標籤順序";
-"menu_tab_order_subtitle" = "拖移以重新排列選單頂端的提供者標籤。";
+"api_credits_of_amount" = "%1$@ / %2$@";
+"menu_tab_order_overview_subtitle" = "為「概覽」標籤最多勾選 %@ 個提供者。拖移可變更標籤順序。";
+"menu_preview_title" = "選單預覽";
+"menu_preview_footer" = "變更下方選項時會即時更新。設定視窗處於作用中時真實選單會關閉，因此無法在此保持開啟。";

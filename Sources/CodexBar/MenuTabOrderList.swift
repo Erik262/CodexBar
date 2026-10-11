@@ -2,26 +2,42 @@ import CodexBarCore
 import SwiftUI
 import UniformTypeIdentifiers
 
-/// Drag-to-reorder list of the provider tabs in the merged menu. Tabs follow the global provider order,
-/// so reordering here also reorders the Settings sidebar's custom order.
+/// The provider tabs of the merged menu in one list: the checkbox puts a provider on the Overview tab
+/// (up to `overviewLimit`), dragging sets the tab order. Tabs follow the global provider order, so
+/// reordering here also reorders the Settings sidebar's custom order.
 @MainActor
 struct MenuTabOrderList: View {
     @Bindable var settings: SettingsStore
     let providers: [UsageProvider]
+    let overviewLimit: Int
+    let isOnOverview: (UsageProvider) -> Bool
+    let setOnOverview: (UsageProvider, Bool) -> Void
     @State private var draggedProvider: UsageProvider?
 
     var body: some View {
-        SettingsRowLabel(L("menu_tab_order_title"), subtitle: L("menu_tab_order_subtitle"))
+        SettingsRowLabel(
+            L("menu_tab_order_title"),
+            subtitle: L("menu_tab_order_overview_subtitle", String(self.overviewLimit)))
         ForEach(self.providers, id: \.self) { provider in
             HStack(spacing: 8) {
-                if let icon = ProviderBrandIcon.image(for: provider) {
-                    Image(nsImage: icon)
-                        .resizable()
-                        .renderingMode(.template)
-                        .frame(width: 14, height: 14)
-                        .accessibilityHidden(true)
+                let selectedCount = self.providers.count(where: self.isOnOverview)
+                Toggle(isOn: Binding(
+                    get: { self.isOnOverview(provider) },
+                    set: { self.setOnOverview(provider, $0) }))
+                {
+                    HStack(spacing: 6) {
+                        if let icon = ProviderBrandIcon.image(for: provider) {
+                            Image(nsImage: icon)
+                                .resizable()
+                                .renderingMode(.template)
+                                .frame(width: 14, height: 14)
+                                .accessibilityHidden(true)
+                        }
+                        Text(ProviderDescriptorRegistry.descriptor(for: provider).metadata.displayName)
+                    }
                 }
-                Text(ProviderDescriptorRegistry.descriptor(for: provider).metadata.displayName)
+                .toggleStyle(.checkbox)
+                .disabled(!self.isOnOverview(provider) && selectedCount >= self.overviewLimit)
                 Spacer(minLength: 0)
                 Image(systemName: "line.3.horizontal")
                     .foregroundStyle(.tertiary)

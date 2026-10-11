@@ -2525,7 +2525,6 @@
 "stacked_bars_window_weekly" = "Weekly usage";
 "stacked_bars_rows_title" = "Rows";
 "stacked_bars_rows_subtitle" = "Check two or three providers. Drag to change the order from top to bottom.";
-"api_credits_left_title" = "Credits left";
 "api_credits_partial_note" = "Cost history starts after %@, so credits left may be overstated.";
 "api_credits_settings_title" = "Prepaid API credits";
 "api_credits_settings_subtitle" = "Enter your balance and the day you checked it. The menu shows the balance minus the spend reported since then.";
@@ -2558,4 +2557,7 @@
 "merged_icon_style_subtitle_all" = "Switcher shows one provider at a time. Stacked shows two providers as text rows. Stacked bars draw two or three providers as meters.";
 "stacked_bars_section_footer" = "Bars follow the fill direction set under Menu (remaining or used).";
 "menu_tab_order_title" = "Tab order";
-"menu_tab_order_subtitle" = "Drag to reorder the provider tabs at the top of the menu.";
+"api_credits_of_amount" = "%1$@ of %2$@";
+"menu_tab_order_overview_subtitle" = "Check up to %@ providers for the Overview tab. Drag to change the tab order.";
+"menu_preview_title" = "Menu preview";
+"menu_preview_footer" = "Updates as you change the options below. The real menu closes while Settings has focus, so it can't stay open here.";

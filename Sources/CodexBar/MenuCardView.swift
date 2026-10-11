@@ -851,7 +851,8 @@ extension UsageMenuCardView.Model {
             metadata: input.metadata)
         let paceVisible = input.paceVisible && ProviderDescriptorRegistry.descriptor(for: input.provider).pace
             .allowsPace(dataConfidence: input.snapshot?.dataConfidence ?? .unknown)
-        let metrics = Self.redactedMetrics(
+        let budgetMetrics = Self.creditBudgetMetric(input: input).map { [$0] } ?? []
+        let metrics = budgetMetrics + Self.redactedMetrics(
             Self.paceGatedMetrics(Self.metrics(input: input), paceVisible: paceVisible),
             provider: input.provider,
             hidePersonalInfo: input.hidePersonalInfo)

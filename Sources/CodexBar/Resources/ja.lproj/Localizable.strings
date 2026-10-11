@@ -2521,7 +2521,6 @@
 "stacked_bars_window_weekly" = "週間使用量";
 "stacked_bars_rows_title" = "行";
 "stacked_bars_rows_subtitle" = "2〜3個のプロバイダを選択します。ドラッグで上から下への順序を変更できます。";
-"api_credits_left_title" = "残りクレジット";
 "api_credits_partial_note" = "コスト履歴は %@ 以降から始まるため、残りクレジットが多めに表示される場合があります。";
 "api_credits_settings_title" = "前払い API クレジット";
 "api_credits_settings_subtitle" = "残高と確認した日を入力してください。メニューには、残高からその日以降に報告された支出を引いた値が表示されます。";
@@ -2554,4 +2553,7 @@
 "merged_icon_style_subtitle_all" = "スイッチャーは一度に1つのプロバイダを表示します。スタックは2つのプロバイダをテキスト行で表示します。スタックバーは2〜3個のプロバイダをメーターで表示します。";
 "stacked_bars_section_footer" = "バーは「メニュー」で設定した塗りの向き（残り／使用済み）に従います。";
 "menu_tab_order_title" = "タブの順序";
-"menu_tab_order_subtitle" = "ドラッグしてメニュー上部のプロバイダタブを並べ替えます。";
+"api_credits_of_amount" = "%2$@ 中 %1$@";
+"menu_tab_order_overview_subtitle" = "概要タブに表示するプロバイダを最大%@個まで選択します。ドラッグでタブの順序を変更できます。";
+"menu_preview_title" = "メニューのプレビュー";
+"menu_preview_footer" = "下のオプションを変更すると更新されます。設定が前面にあると実際のメニューは閉じるため、ここでは開いたままにできません。";

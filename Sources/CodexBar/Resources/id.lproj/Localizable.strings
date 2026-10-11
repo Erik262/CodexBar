@@ -2524,7 +2524,6 @@
 "stacked_bars_window_weekly" = "Penggunaan mingguan";
 "stacked_bars_rows_title" = "Baris";
 "stacked_bars_rows_subtitle" = "Centang dua atau tiga penyedia. Seret untuk mengubah urutan dari atas ke bawah.";
-"api_credits_left_title" = "Sisa kredit";
 "api_credits_partial_note" = "Riwayat biaya dimulai setelah %@, jadi sisa kredit mungkin terlalu tinggi.";
 "api_credits_settings_title" = "Kredit API prabayar";
 "api_credits_settings_subtitle" = "Masukkan saldo dan tanggal Anda memeriksanya. Menu menampilkan saldo dikurangi pengeluaran yang dilaporkan sejak itu.";
@@ -2557,4 +2556,7 @@
 "merged_icon_style_subtitle_all" = "Pengalih menampilkan satu penyedia sekaligus. Bertumpuk menampilkan dua penyedia sebagai baris teks. Bilah bertumpuk menggambar dua atau tiga penyedia sebagai meter.";
 "stacked_bars_section_footer" = "Bilah mengikuti arah isian yang diatur di Menu (sisa atau terpakai).";
 "menu_tab_order_title" = "Urutan tab";
-"menu_tab_order_subtitle" = "Seret untuk mengurutkan ulang tab penyedia di bagian atas menu.";
+"api_credits_of_amount" = "%1$@ dari %2$@";
+"menu_tab_order_overview_subtitle" = "Centang hingga %@ penyedia untuk tab Ringkasan. Seret untuk mengubah urutan tab.";
+"menu_preview_title" = "Pratinjau menu";
+"menu_preview_footer" = "Diperbarui saat Anda mengubah opsi di bawah. Menu asli tertutup saat Pengaturan aktif, jadi tidak bisa tetap terbuka di sini.";

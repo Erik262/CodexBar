@@ -2520,7 +2520,6 @@
 "stacked_bars_window_weekly" = "Veckoanvändning";
 "stacked_bars_rows_title" = "Rader";
 "stacked_bars_rows_subtitle" = "Markera två eller tre leverantörer. Dra för att ändra ordningen uppifrån och ned.";
-"api_credits_left_title" = "Kvarvarande krediter";
 "api_credits_partial_note" = "Kostnadshistoriken börjar efter %@, så kvarvarande krediter kan vara för höga.";
 "api_credits_settings_title" = "Förbetalda API-krediter";
 "api_credits_settings_subtitle" = "Ange ditt saldo och dagen du kontrollerade det. Menyn visar saldot minus rapporterade utgifter sedan dess.";
@@ -2553,4 +2552,7 @@
 "merged_icon_style_subtitle_all" = "Växlaren visar en leverantör i taget. Staplad visar två leverantörer som textrader. Staplade staplar ritar två eller tre leverantörer som mätare.";
 "stacked_bars_section_footer" = "Staplarna följer fyllningsriktningen under Meny (kvar eller använt).";
 "menu_tab_order_title" = "Flikordning";
-"menu_tab_order_subtitle" = "Dra för att ändra ordningen på leverantörsflikarna högst upp i menyn.";
+"api_credits_of_amount" = "%1$@ av %2$@";
+"menu_tab_order_overview_subtitle" = "Markera upp till %@ leverantörer för fliken Översikt. Dra för att ändra flikordningen.";
+"menu_preview_title" = "Förhandsvisning av menyn";
+"menu_preview_footer" = "Uppdateras när du ändrar alternativen nedan. Den riktiga menyn stängs när Inställningar är aktivt, så den kan inte vara öppen här.";

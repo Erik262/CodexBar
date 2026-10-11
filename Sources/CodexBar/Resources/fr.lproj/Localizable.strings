@@ -2520,7 +2520,6 @@
 "stacked_bars_window_weekly" = "Utilisation hebdomadaire";
 "stacked_bars_rows_title" = "Lignes";
 "stacked_bars_rows_subtitle" = "Cochez deux ou trois fournisseurs. Faites glisser pour changer l’ordre de haut en bas.";
-"api_credits_left_title" = "Crédits restants";
 "api_credits_partial_note" = "L’historique des coûts commence après le %@ ; les crédits restants peuvent être surestimés.";
 "api_credits_settings_title" = "Crédits API prépayés";
 "api_credits_settings_subtitle" = "Saisissez votre solde et le jour où vous l’avez vérifié. Le menu affiche le solde moins les dépenses signalées depuis.";
@@ -2553,4 +2552,7 @@
 "merged_icon_style_subtitle_all" = "Le sélecteur affiche un fournisseur à la fois. Empilé affiche deux fournisseurs en lignes de texte. Les barres empilées dessinent deux ou trois fournisseurs sous forme de jauges.";
 "stacked_bars_section_footer" = "Les barres suivent le sens de remplissage défini dans Menu (restant ou utilisé).";
 "menu_tab_order_title" = "Ordre des onglets";
-"menu_tab_order_subtitle" = "Faites glisser pour réordonner les onglets des fournisseurs en haut du menu.";
+"api_credits_of_amount" = "%1$@ sur %2$@";
+"menu_tab_order_overview_subtitle" = "Cochez jusqu'à %@ fournisseurs pour l'onglet Vue d'ensemble. Faites glisser pour changer l'ordre des onglets.";
+"menu_preview_title" = "Aperçu du menu";
+"menu_preview_footer" = "Se met à jour quand vous modifiez les options ci-dessous. Le vrai menu se ferme quand les Réglages sont au premier plan ; il ne peut donc pas rester ouvert ici.";

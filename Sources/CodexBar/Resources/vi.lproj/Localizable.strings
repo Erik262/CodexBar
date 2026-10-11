@@ -2522,7 +2522,6 @@
 "stacked_bars_window_weekly" = "Mức dùng hằng tuần";
 "stacked_bars_rows_title" = "Hàng";
 "stacked_bars_rows_subtitle" = "Chọn hai hoặc ba nhà cung cấp. Kéo để đổi thứ tự từ trên xuống dưới.";
-"api_credits_left_title" = "Tín dụng còn lại";
 "api_credits_partial_note" = "Lịch sử chi phí bắt đầu sau %@, nên tín dụng còn lại có thể bị đánh giá cao hơn thực tế.";
 "api_credits_settings_title" = "Tín dụng API trả trước";
 "api_credits_settings_subtitle" = "Nhập số dư và ngày bạn kiểm tra. Menu hiển thị số dư trừ chi phí được báo cáo từ ngày đó.";
@@ -2555,4 +2554,7 @@
 "merged_icon_style_subtitle_all" = "Bộ chuyển hiển thị từng nhà cung cấp một. Xếp chồng hiển thị hai nhà cung cấp dưới dạng dòng chữ. Thanh xếp chồng vẽ hai hoặc ba nhà cung cấp dưới dạng thước đo.";
 "stacked_bars_section_footer" = "Các thanh theo hướng tô đã đặt trong Menu (còn lại hoặc đã dùng).";
 "menu_tab_order_title" = "Thứ tự tab";
-"menu_tab_order_subtitle" = "Kéo để sắp xếp lại các tab nhà cung cấp ở đầu menu.";
+"api_credits_of_amount" = "%1$@ / %2$@";
+"menu_tab_order_overview_subtitle" = "Chọn tối đa %@ nhà cung cấp cho tab Tổng quan. Kéo để thay đổi thứ tự tab.";
+"menu_preview_title" = "Xem trước menu";
+"menu_preview_footer" = "Cập nhật khi bạn thay đổi các tùy chọn bên dưới. Menu thật sẽ đóng khi Cài đặt được chọn, nên không thể mở sẵn ở đây.";
