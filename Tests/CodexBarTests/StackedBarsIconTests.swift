@@ -30,21 +30,29 @@ struct StackedBarsIconTests {
     }
 
     @Test
-    func `dragging moves rows past or before the drop target`() {
-        let rows: [UsageProvider] = [.codex, .claude, .cursor]
-        #expect(StackedBarsProviderList.reordered(rows: rows, moving: .codex, onto: .cursor)
-            == [.claude, .cursor, .codex])
-        #expect(StackedBarsProviderList.reordered(rows: rows, moving: .cursor, onto: .codex)
-            == [.cursor, .codex, .claude])
-        #expect(StackedBarsProviderList.reordered(rows: rows, moving: .claude, onto: .claude) == rows)
+    func `pinned zone keeps saved order and fills from enabled providers`() {
+        let enabled: [UsageProvider] = [.codex, .claude, .openai, .cursor]
+        let saved = ProviderZones.resolve(pinned: [.openai, .codex], enabled: enabled, limit: 3)
+        #expect(saved.pinned == [.openai, .codex])
+        #expect(saved.others == [.claude, .cursor])
+        #expect(saved.tabOrder == [.openai, .codex, .claude, .cursor])
+        #expect(ProviderZones.resolve(pinned: [], enabled: enabled, limit: 3).pinned == [.codex, .claude, .openai])
     }
 
     @Test
-    func `dropping an unchecked provider selects it without exceeding three rows`() {
-        #expect(StackedBarsProviderList.reordered(rows: [.codex, .claude], moving: .cursor, onto: .claude)
-            == [.codex, .cursor, .claude])
-        #expect(StackedBarsProviderList.reordered(rows: [.codex, .claude, .cursor], moving: .gemini, onto: .codex)
-            == [.gemini, .codex, .claude])
+    func `dragging between zones respects the pinned limit`() throws {
+        let zones = ProviderZones(pinned: [.codex, .claude], others: [.openai, .cursor, .gemini])
+        let added = try #require(zones.moving(.openai, to: .pinned, onto: .codex, limit: 3))
+        #expect(added.pinned == [.openai, .codex, .claude])
+        #expect(added.others == [.cursor, .gemini])
+        #expect(added.moving(.cursor, to: .pinned, onto: .claude, limit: 3) == nil)
+
+        let reordered = try #require(added.moving(.openai, to: .pinned, onto: .claude, limit: 3))
+        #expect(reordered.pinned == [.codex, .claude, .openai])
+
+        let unpinned = try #require(added.moving(.codex, to: .others, onto: nil, limit: 3))
+        #expect(unpinned.pinned == [.openai, .claude])
+        #expect(unpinned.others == [.cursor, .gemini, .codex])
     }
 
     @Test

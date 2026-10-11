@@ -80,6 +80,7 @@ struct OverviewMenuCardRowView: View {
             }
         }
         .frame(width: self.width, alignment: .leading)
+        .environment(\.menuCardOverviewStyle, true)
     }
 
     var usesFullCard: Bool {

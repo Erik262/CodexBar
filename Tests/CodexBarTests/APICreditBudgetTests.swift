@@ -6,6 +6,15 @@ import Testing
 @MainActor
 struct APICreditBudgetTests {
     @Test
+    func `budgets follow each provider's cost support`() {
+        #expect(APICreditBudget.supports(.claude))
+        #expect(APICreditBudget.supports(.codex))
+        #expect(APICreditBudget.supports(.openai))
+        #expect(APICreditBudget.supports(.openrouter))
+        #expect(!APICreditBudget.supports(.gemini))
+    }
+
+    @Test
     func `credits left subtract spend after the start day`() throws {
         let calendar = try Self.utcCalendar()
         let now = try #require(calendar.date(from: DateComponents(year: 2026, month: 7, day: 15, hour: 12)))

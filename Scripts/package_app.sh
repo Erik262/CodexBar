@@ -94,8 +94,16 @@ esac
 
 # Load version info
 source "$ROOT/version.env"
+# Release workflows may stamp their own build number (Sparkle compares CFBundleVersion).
+BUILD_NUMBER="${CODEXBAR_BUILD_NUMBER:-$BUILD_NUMBER}"
 source "$ROOT/Scripts/package_product_paths.sh"
 source "$ROOT/Scripts/sparkle_signing_paths.sh"
+
+# SwiftBuild can record the deployment target as the SDK, enabling legacy native UI.
+CODEXBAR_MACOS_SDK_PATH=$(xcrun --sdk macosx --show-sdk-path)
+SDK_VERSION=$(xcrun --sdk macosx --show-sdk-version)
+BUILD_ARGS=(--sdk "$CODEXBAR_MACOS_SDK_PATH"
+  -Xlinker -platform_version -Xlinker macos -Xlinker 14.0 -Xlinker "$SDK_VERSION")
 
 # Clean build only when explicitly requested (slower).
 if [[ "${CODEXBAR_FORCE_CLEAN:-0}" == "1" ]]; then
@@ -188,7 +196,7 @@ PY
 
 KEYBOARD_SHORTCUTS_UTIL="$ROOT/.build/checkouts/KeyboardShortcuts/Sources/KeyboardShortcuts/Utilities.swift"
 if [[ ! -f "$KEYBOARD_SHORTCUTS_UTIL" ]]; then
-  swift build -c "$CONF" --arch "${ARCH_LIST[0]}"
+  swift build "${BUILD_ARGS[@]}" -c "$CONF" --arch "${ARCH_LIST[0]}"
 fi
 patch_keyboard_shortcuts
 
@@ -235,6 +243,14 @@ stage_build_products() {
       echo "ERROR: ${product} does not contain required architecture: ${arch}" >&2
       return 1
     fi
+    if ! otool -arch "$arch" -l "$product" | awk -v sdk="$SDK_VERSION" '
+      $1 == "cmd" { build = ($2 == "LC_BUILD_VERSION") }
+      build && $1 == "minos" { minimum = ($2 == "14.0") }
+      build && $1 == "sdk" { valid = (minimum && $2 == sdk) }
+      END { exit !valid }'; then
+      echo "ERROR: Expected macOS 14.0 / SDK ${SDK_VERSION} for ${product} (${arch})." >&2
+      return 1
+    fi
     cp "$product" "$stage_dir/$name"
   done
   if [[ -d "$bin_dir/CodexBar.dSYM" ]]; then
@@ -243,7 +259,7 @@ stage_build_products() {
 }
 
 for ARCH in "${ARCH_LIST[@]}"; do
-  swift build -c "$CONF" --arch "$ARCH"
+  swift build "${BUILD_ARGS[@]}" -c "$CONF" --arch "$ARCH"
   stage_build_products "$ARCH"
 done
 
@@ -262,14 +278,21 @@ if [[ -f "$ICON_SOURCE" ]]; then
 fi
 
 BUNDLE_ID="com.steipete.codexbar"
-FEED_URL="https://raw.githubusercontent.com/steipete/CodexBar/main/appcast.xml"
+# CODEXBAR_FEED_URL and CODEXBAR_SPARKLE_PUBLIC_KEY point a build at another appcast and EdDSA key
+# (for example a fork's own releases); CODEXBAR_ALLOW_ADHOC_UPDATES=1 lets an ad-hoc signed build use it.
+FEED_URL="${CODEXBAR_FEED_URL:-https://raw.githubusercontent.com/steipete/CodexBar/main/appcast.xml}"
 AUTO_CHECKS=true
-if [[ "$LOWER_CONF" == "debug" ]]; then
+# CODEXBAR_DEBUG_KEEPS_BUNDLE_ID=1 (compile_and_run.sh --fast) keeps the release bundle ID so a debug
+# build reads the same settings and shows no debug "D" marker in the menu bar.
+if [[ "$LOWER_CONF" == "debug" && "${CODEXBAR_DEBUG_KEEPS_BUNDLE_ID:-0}" != "1" ]]; then
   BUNDLE_ID="com.steipete.codexbar.debug"
   FEED_URL=""
   AUTO_CHECKS=false
+elif [[ "$LOWER_CONF" == "debug" ]]; then
+  FEED_URL=""
+  AUTO_CHECKS=false
 fi
-if [[ "$SIGNING_MODE" == "adhoc" ]]; then
+if [[ "$SIGNING_MODE" == "adhoc" && "${CODEXBAR_ALLOW_ADHOC_UPDATES:-0}" != "1" ]]; then
   FEED_URL=""
   AUTO_CHECKS=false
 fi
@@ -362,7 +385,8 @@ cat > "$APP/Contents/Info.plist" <<PLIST
     <key>CFBundleIconFile</key><string>Icon</string>
     <key>NSHumanReadableCopyright</key><string>© 2026 Peter Steinberger. MIT License.</string>
     <key>SUFeedURL</key><string>${FEED_URL}</string>
-    <key>SUPublicEDKey</key><string>AGCY8w5vHirVfGGDGc8Szc5iuOqupZSh9pMj/Qs67XI=</string>
+    <key>SUPublicEDKey</key><string>${CODEXBAR_SPARKLE_PUBLIC_KEY:-AGCY8w5vHirVfGGDGc8Szc5iuOqupZSh9pMj/Qs67XI=}</string>
+    $(if [[ "${CODEXBAR_ALLOW_ADHOC_UPDATES:-0}" == "1" && -n "$FEED_URL" ]]; then echo "<key>CodexBarAllowsAdHocUpdates</key><true/>"; fi)
     <key>SUEnableAutomaticChecks</key><${AUTO_CHECKS}/>
     <key>CodexBuildTimestamp</key><string>${BUILD_TIMESTAMP}</string>
     <key>CodexGitCommit</key><string>${GIT_COMMIT}</string>
@@ -551,7 +575,13 @@ strip_release_binary "$APP/Contents/Helpers/CodexBarCLI"
 # Watchdog helper: ensures `claude` probes die when CodexBar crashes/gets killed.
 install_binary "CodexBarClaudeWatchdog" "$APP/Contents/Helpers/CodexBarClaudeWatchdog"
 strip_release_binary "$APP/Contents/Helpers/CodexBarClaudeWatchdog"
-install_widget_extension
+# Fast local loops can skip the Xcode-built widget extension, the slowest packaging step.
+if [[ "${CODEXBAR_SKIP_WIDGET_EXTENSION:-0}" == "1" ]]; then
+  echo "==> Skipping widget extension (CODEXBAR_SKIP_WIDGET_EXTENSION=1)"
+  rm -rf "$APP/Contents/PlugIns/CodexBarWidget.appex"
+else
+  install_widget_extension
+fi
 strip_release_binary "$APP/Contents/PlugIns/CodexBarWidget.appex/Contents/MacOS/CodexBarWidget"
 
 swiftpm_bin_path "${ARCH_LIST[0]}" PREFERRED_BUILD_DIR

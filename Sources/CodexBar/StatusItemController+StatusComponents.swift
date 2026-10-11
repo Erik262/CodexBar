@@ -60,14 +60,17 @@ extension StatusItemController {
         item.submenu = submenu
     }
 
+    /// Components for the inline status card: any provider whose status page published a component list,
+    /// once the user opted in. Empty keeps the regular Status Page row and its summary line.
+    static func inlineStatusComponents(store: UsageStore, provider: UsageProvider) -> [ProviderStatusComponent] {
+        guard store.settings.statusPagePresentation(for: provider) == .inline else { return [] }
+        return self.filterStatusComponents(store.statusComponents(for: provider), for: provider)
+    }
+
     /// The compact status card that replaces the Status Page submenu when the user opted in and
     /// components have loaded; nil keeps the regular row.
     func makeInlineStatusComponentsItem(provider: UsageProvider, width: CGFloat) -> NSMenuItem? {
-        guard self.settings.statusComponentsInline,
-              self.store.statusChecksEnabled,
-              Self.statusComponentsSubmenuProviders.contains(provider)
-        else { return nil }
-        let components = Self.filterStatusComponents(self.store.statusComponents(for: provider), for: provider)
+        let components = Self.inlineStatusComponents(store: self.store, provider: provider)
         guard !components.isEmpty else { return nil }
         let metadata = self.store.metadata(for: provider)
         let url = (metadata.statusPageURL ?? metadata.statusLinkURL).flatMap(URL.init(string:))

@@ -1,0 +1,86 @@
+name: Fork release
+
+# Builds the macOS app for a release published on this fork, signs it for Sparkle with the fork's own
+# Ed25519 key, and attaches the zip plus a one-item appcast.xml to the release. Installed fork builds
+# read releases/latest/download/appcast.xml, so publishing a release is all it takes to ship an update.
+# Setup: docs/FORK_UPDATES.md. Upstream (steipete/CodexBar) skips this workflow.
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing release tag to (re)build and attach"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fork-release-${{ github.event.release.tag_name || inputs.tag }}
+  cancel-in-progress: false
+
+jobs:
+  macos-app:
+    if: ${{ github.repository != 'steipete/CodexBar' }}
+    runs-on: macos-26
+    timeout-minutes: 90
+    env:
+      TAG: ${{ github.event.release.tag_name || inputs.tag }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.release.tag_name || inputs.tag }}
+
+      - name: Select Xcode 26.6
+        run: |
+          set -euo pipefail
+          sudo xcode-select -s /Applications/Xcode_26.6.app/Contents/Developer
+          echo "DEVELOPER_DIR=/Applications/Xcode_26.6.app/Contents/Developer" >> "$GITHUB_ENV"
+          /usr/bin/xcodebuild -version
+
+      - name: Load Sparkle signing key
+        env:
+          SPARKLE_ED25519_PEM: ${{ secrets.SPARKLE_ED25519_PEM }}
+        run: |
+          set -euo pipefail
+          if [[ -z "$SPARKLE_ED25519_PEM" ]]; then
+            echo "::error::Add the SPARKLE_ED25519_PEM repository secret (see docs/FORK_UPDATES.md)."
+            exit 1
+          fi
+          brew list openssl@3 >/dev/null 2>&1 || brew install openssl@3
+          openssl_bin="$(brew --prefix openssl@3)/bin/openssl"
+          key="$RUNNER_TEMP/sparkle_ed25519.pem"
+          printf '%s\n' "$SPARKLE_ED25519_PEM" > "$key"
+          chmod 600 "$key"
+          public_key=$("$openssl_bin" pkey -in "$key" -pubout -outform DER | tail -c 32 | base64)
+          echo "SPARKLE_KEY_FILE=$key" >> "$GITHUB_ENV"
+          echo "SPARKLE_PUBLIC_KEY=$public_key" >> "$GITHUB_ENV"
+
+      - name: Package app
+        run: |
+          set -euo pipefail
+          source version.env
+          # Sparkle compares CFBundleVersion; the run number keeps every fork release newer than the last
+          # and newer than a local build of the same upstream version.
+          CODEXBAR_BUILD_NUMBER="${BUILD_NUMBER}.${GITHUB_RUN_NUMBER}" \
+            CODEXBAR_SIGNING=adhoc \
+            CODEXBAR_ALLOW_ADHOC_UPDATES=1 \
+            CODEXBAR_FEED_URL="https://github.com/${GITHUB_REPOSITORY}/releases/latest/download/appcast.xml" \
+            CODEXBAR_SPARKLE_PUBLIC_KEY="$SPARKLE_PUBLIC_KEY" \
+            ARCHES="arm64" \
+            ./Scripts/package_app.sh release
+
+      - name: Archive, sign and write appcast
+        run: ./Scripts/fork_release_appcast.sh CodexBar.app "$TAG" "$SPARKLE_KEY_FILE" dist
+
+      - name: Attach to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$TAG" dist/*.zip dist/appcast.xml --clobber --repo "$GITHUB_REPOSITORY"
+
+      - name: Remove signing key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/sparkle_ed25519.pem"

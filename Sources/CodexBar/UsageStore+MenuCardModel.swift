@@ -156,7 +156,8 @@ extension UsageStore {
                     historySelection: account?.historySelection,
                     usesLiveAccount: isLive)
                 : [],
-            hiddenMenuSections: isSettings ? [] : self.settings.hiddenMenuSections(for: provider),
+            // Settings previews follow the same choices as the menu so toggles visibly take effect there too.
+            hiddenMenuSections: self.settings.hiddenMenuSections(for: provider),
             apiCreditBudget: self.settings.apiCreditBudget(for: provider))
     }
 

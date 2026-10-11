@@ -5,19 +5,6 @@ import SwiftUI
 struct MenuPane: View {
     @Bindable var settings: SettingsStore
     @Bindable var store: UsageStore
-    @State private var visibilityProvider: UsageProvider?
-
-    private var visibilityProviders: [UsageProvider] {
-        self.store.enabledFirstPartyProvidersForDisplay()
-    }
-
-    private var selectedVisibilityProvider: UsageProvider? {
-        let providers = self.visibilityProviders
-        if let chosen = self.visibilityProvider, providers.contains(chosen) {
-            return chosen
-        }
-        return providers.first
-    }
 
     var body: some View {
         Form {
@@ -25,7 +12,7 @@ struct MenuPane: View {
                 SettingsMenuPicker(
                     selection: self.$settings.usageBarsFillOption,
                     options: MenuSettingsMenuOptions.usageBarsFill,
-                    label: { Text(L("usage_bars_fill_title")) },
+                    label: { Text(L("usage_bars_fill_title")).settingsSearchAnchor(L("usage_bars_fill_title")) },
                     optionLabel: { option in
                         Text(option.label)
                     })
@@ -42,39 +29,35 @@ struct MenuPane: View {
                         subtitle: L("show_pace_subtitle"))
                 }
 
-                Toggle(isOn: self.$settings.menuCardHoverHighlightEnabled) {
-                    SettingsRowLabel(
-                        L("menu_card_hover_highlight_title"),
-                        subtitle: L("menu_card_hover_highlight_subtitle"))
-                }
-
                 SettingsMenuPicker(
                     selection: self.$settings.weeklyProgressWorkDays,
                     options: MenuSettingsMenuOptions.weeklyProgressWorkDays,
                     label: {
                         Text(L("weekly_progress_work_days_title"))
+                            .settingsSearchAnchor(L("weekly_progress_work_days_title"))
                     },
                     optionLabel: { workDays in
                         Text(MenuSettingsMenuOptions.weeklyProgressWorkDaysLabel(workDays))
                     })
 
-                SettingsMenuPicker(
-                    selection: self.$settings.workdayTickAppearance,
-                    options: MenuSettingsMenuOptions.workdayTickAppearances,
-                    label: {
-                        SettingsRowLabel(
-                            L("workday_tick_appearance_title"),
-                            subtitle: L("workday_tick_appearance_subtitle"))
-                    },
-                    optionLabel: { appearance in
-                        Text(appearance.label)
-                    })
-                    .disabled(self.settings.weeklyProgressWorkDays == nil)
+                if self.settings.weeklyProgressWorkDays != nil {
+                    SettingsMenuPicker(
+                        selection: self.$settings.workdayTickAppearance,
+                        options: MenuSettingsMenuOptions.workdayTickAppearances,
+                        label: {
+                            SettingsRowLabel(
+                                L("workday_tick_appearance_title"),
+                                subtitle: L("workday_tick_appearance_subtitle"))
+                        },
+                        optionLabel: { appearance in
+                            Text(appearance.label)
+                        })
+                }
 
                 SettingsMenuPicker(
                     selection: self.$settings.resetTimesOption,
                     options: MenuSettingsMenuOptions.resetTimes,
-                    label: { Text(L("reset_times_title")) },
+                    label: { Text(L("reset_times_title")).settingsSearchAnchor(L("reset_times_title")) },
                     optionLabel: { option in
                         Text(option.label)
                     })
@@ -84,15 +67,25 @@ struct MenuPane: View {
 
             Section {
                 Toggle(L("show_provider_changelog_links_title"), isOn: self.$settings.providerChangelogLinksEnabled)
+                    .settingsSearchAnchor(L("show_provider_changelog_links_title"))
+                Toggle(L("highlight_menu_cards_on_hover_title"), isOn: self.$settings.highlightMenuCardsOnHover)
+                    .settingsSearchAnchor(L("highlight_menu_cards_on_hover_title"))
 
-                SettingsMenuPicker(
-                    selection: self.$settings.mergedOverviewLayout,
-                    options: MenuSettingsMenuOptions.mergedOverviewLayouts,
-                    label: {
-                        SettingsRowLabel(L("overview_layout_title"), subtitle: L("overview_layout_subtitle"))
-                    },
-                    optionLabel: { Text($0.label) })
-                    .disabled(!self.settings.mergeIcons)
+                if self.settings.mergeIcons {
+                    SettingsMenuPicker(
+                        selection: self.$settings.mergedOverviewLayout,
+                        options: MenuSettingsMenuOptions.mergedOverviewLayouts,
+                        label: {
+                            SettingsRowLabel(L("overview_layout_title"), subtitle: L("overview_layout_subtitle"))
+                        },
+                        optionLabel: { Text($0.label) })
+
+                    Toggle(isOn: self.$settings.appActionsOnOverviewOnly) {
+                        SettingsRowLabel(
+                            L("app_actions_overview_only_title"),
+                            subtitle: L("app_actions_overview_only_subtitle"))
+                    }
+                }
 
                 Toggle(isOn: self.$settings.showOptionalCreditsAndExtraUsage) {
                     SettingsRowLabel(
@@ -104,49 +97,15 @@ struct MenuPane: View {
                     selection: self.$settings.multiAccountMenuLayout,
                     options: MenuSettingsMenuOptions.multiAccountLayouts,
                     label: {
-                        Text(L("multi_account_layout_title"))
+                        Text(L("multi_account_layout_title")).settingsSearchAnchor(L("multi_account_layout_title"))
                     },
                     optionLabel: { layout in
                         Text(layout.label)
                     })
             } header: {
                 Text(L("section_content"))
-            }
-
-            Section {
-                if let provider = self.selectedVisibilityProvider {
-                    SettingsMenuPicker(
-                        selection: Binding(
-                            get: { provider },
-                            set: { self.visibilityProvider = $0 }),
-                        options: self.visibilityProviders,
-                        label: { Text(L("menu_visibility_provider_title")) },
-                        optionLabel: { provider in
-                            Text(ProviderDescriptorRegistry.descriptor(for: provider).metadata.displayName)
-                        })
-                    ForEach(MenuSectionToggle.allCases) { section in
-                        Toggle(section.label, isOn: Binding(
-                            get: { self.settings.isMenuSectionVisible(section, for: provider) },
-                            set: { self.settings.setMenuSection(section, visible: $0, for: provider) }))
-                    }
-                }
-
-                Toggle(isOn: self.$settings.statusComponentsInline) {
-                    SettingsRowLabel(
-                        L("status_components_inline_title"),
-                        subtitle: L("status_components_inline_subtitle"))
-                }
-
-                Toggle(isOn: self.$settings.appActionsOnOverviewOnly) {
-                    SettingsRowLabel(
-                        L("app_actions_overview_only_title"),
-                        subtitle: L("app_actions_overview_only_subtitle"))
-                }
-                .disabled(!self.settings.mergeIcons)
-            } header: {
-                Text(L("section_menu_visibility"))
             } footer: {
-                SettingsSectionFooter(L("section_menu_visibility_footer"))
+                SettingsSectionFooter(L("section_menu_layout_footer"))
             }
 
             Section(L("section_widgets")) {
@@ -168,6 +127,7 @@ struct MenuPane: View {
             AgentSessionsSettingsSection(settings: self.settings)
         }
         .formStyle(.grouped)
+        .settingsSearchScrollTarget()
         .toggleStyle(.switch)
         .scrollContentBackground(.hidden)
         .background(FocusResigningBackground())
@@ -270,13 +230,6 @@ struct CostSummarySettingsSection: View {
                         L("cost_comparison_periods_title"),
                         subtitle: L("cost_comparison_periods_subtitle"))
                 }
-
-                if !self.budgetProviders.isEmpty {
-                    SettingsRowLabel(L("api_credits_settings_title"), subtitle: L("api_credits_settings_subtitle"))
-                    ForEach(self.budgetProviders, id: \.self) { provider in
-                        APICreditBudgetSettingsRow(settings: self.settings, provider: provider)
-                    }
-                }
             }
         } header: {
             Text(L("section_cost_summary"))
@@ -297,11 +250,6 @@ struct CostSummarySettingsSection: View {
 
     static func costDataExplanation() -> String {
         L("cost_data_explanation")
-    }
-
-    private var budgetProviders: [UsageProvider] {
-        let enabled = Set(self.store.enabledFirstPartyProvidersForDisplay())
-        return APICreditBudget.supportedProviders.filter { enabled.contains($0) }
     }
 
     static var costStatusProviders: [UsageProvider] {

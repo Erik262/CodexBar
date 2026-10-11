@@ -14,6 +14,7 @@ LOCK_PID_FILE="${LOCK_DIR}/pid"
 WAIT_FOR_LOCK=0
 RUN_TESTS=0
 DEBUG_LLDB=0
+FAST_BUILD=0
 RELEASE_ARCHES=""
 SIGNING_MODE="${CODEXBAR_SIGNING:-}"
 CLEAR_ADHOC_KEYCHAIN=0
@@ -202,11 +203,12 @@ for arg in "$@"; do
     --wait|-w) WAIT_FOR_LOCK=1 ;;
     --test|-t) RUN_TESTS=1 ;;
     --debug-lldb) DEBUG_LLDB=1 ;;
+    --fast|-f) FAST_BUILD=1 ;;
     --clear-adhoc-keychain) CLEAR_ADHOC_KEYCHAIN=1 ;;
     --release-universal) RELEASE_ARCHES="arm64 x86_64" ;;
     --release-arches=*) RELEASE_ARCHES="${arg#*=}" ;;
     --help|-h)
-      log "Usage: $(basename "$0") [--wait] [--test] [--debug-lldb] [--clear-adhoc-keychain] [--release-universal] [--release-arches=\"arm64 x86_64\"]"
+      log "Usage: $(basename "$0") [--wait] [--test] [--fast] [--debug-lldb] [--clear-adhoc-keychain] [--release-universal] [--release-arches=\"arm64 x86_64\"]"
       exit 0
       ;;
     *)
@@ -259,7 +261,18 @@ fi
 PACKAGE_ENV=(
   ARCHES="${ARCHES_VALUE}"
 )
-if [[ "${DEBUG_LLDB}" == "1" ]]; then
+if [[ "${FAST_BUILD}" == "1" && -n "${RELEASE_ARCHES}" ]]; then
+  fail "--fast cannot be combined with --release-arches"
+fi
+if [[ "${FAST_BUILD}" == "1" ]]; then
+  # Debug builds compile incrementally (release re-optimizes the whole module on every change), and the
+  # widget extension is an extra Xcode build that day-to-day UI work rarely needs.
+  PACKAGE_ENV+=(CODEXBAR_SKIP_WIDGET_EXTENSION=1 CODEXBAR_DEBUG_KEEPS_BUNDLE_ID=1)
+  if [[ -n "${SIGNING_MODE}" ]]; then
+    PACKAGE_ENV+=(CODEXBAR_SIGNING="${SIGNING_MODE}")
+  fi
+  run_step "package app (fast debug)" env "${PACKAGE_ENV[@]}" "${ROOT_DIR}/Scripts/package_app.sh" debug
+elif [[ "${DEBUG_LLDB}" == "1" ]]; then
   run_step "package app" env CODEXBAR_ALLOW_LLDB=1 "${PACKAGE_ENV[@]}" "${ROOT_DIR}/Scripts/package_app.sh" debug
 else
   if [[ -n "${SIGNING_MODE}" ]]; then

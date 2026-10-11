@@ -6,6 +6,8 @@ enum StackedBarsIconRenderer {
     struct Row: Equatable {
         /// Fill percent (0...100) in the user's remaining/used direction; nil draws an empty track.
         let percent: Double?
+        /// Kept for render signatures only; every row draws in the same colour so mixed refresh states never
+        /// make one bar look darker than the others.
         let stale: Bool
     }
 
@@ -66,7 +68,6 @@ enum StackedBarsIconRenderer {
             for (index, row) in rows.enumerated() {
                 // AppKit's origin is bottom-left; row 0 is the top row.
                 let rowBottom = metrics.size.height - CGFloat(index + 1) * metrics.rowHeight
-                let alpha: CGFloat = row.stale ? 0.55 : 1
                 if let icon = icons.indices.contains(index) ? icons[index] : nil {
                     icon.draw(
                         in: NSRect(
@@ -76,7 +77,7 @@ enum StackedBarsIconRenderer {
                             height: metrics.iconSize),
                         from: .zero,
                         operation: .sourceOver,
-                        fraction: alpha)
+                        fraction: 1)
                 }
                 self.drawBar(
                     in: NSRect(
@@ -84,8 +85,7 @@ enum StackedBarsIconRenderer {
                         y: rowBottom + (metrics.rowHeight - metrics.barHeight) / 2,
                         width: self.barWidth,
                         height: metrics.barHeight),
-                    percent: row.percent,
-                    alpha: alpha)
+                    percent: row.percent)
             }
         }
         NSGraphicsContext.restoreGraphicsState()
@@ -93,17 +93,18 @@ enum StackedBarsIconRenderer {
         return image
     }
 
-    private static func drawBar(in rect: NSRect, percent: Double?, alpha: CGFloat) {
+    /// Shared with the menu bar layout's bar tokens so both meters look identical.
+    static func drawBar(in rect: NSRect, percent: Double?, color: NSColor = .black) {
         let radius = rect.height / 2
         let track = NSBezierPath(roundedRect: rect, xRadius: radius, yRadius: radius)
-        NSColor.black.withAlphaComponent(self.trackAlpha * alpha).setFill()
+        color.withAlphaComponent(self.trackAlpha).setFill()
         track.fill()
 
         let fill = self.fillWidth(percent: percent, barWidth: rect.width)
         guard fill > 0 else { return }
         NSGraphicsContext.saveGraphicsState()
         track.addClip()
-        NSColor.black.withAlphaComponent(alpha).setFill()
+        color.setFill()
         NSBezierPath(rect: NSRect(x: rect.minX, y: rect.minY, width: fill, height: rect.height)).fill()
         NSGraphicsContext.restoreGraphicsState()
     }

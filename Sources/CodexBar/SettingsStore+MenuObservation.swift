@@ -29,14 +29,15 @@ extension SettingsStore {
         _ = self.usageBarsShowUsed
         _ = self.resetTimesShowAbsolute
         _ = self.providerChangelogLinksEnabled
+        _ = self.highlightMenuCardsOnHover
         _ = self.menuBarShowsBrandIconWithPercent
         _ = self.menuBarHidesCritters
         _ = self.menuBarStatusBadgeVisible
-        _ = self.menuCardHoverHighlightEnabled
         _ = self.hiddenMenuSectionsRaw
         _ = self.hiddenMenuSectionsByProviderRaw
         _ = self.appActionsOnOverviewOnly
         _ = self.statusComponentsInline
+        _ = self.statusInlineByProviderRaw
         _ = self.apiCreditBudgetAmountsRaw
         _ = self.apiCreditBudgetStartDaysRaw
         _ = self.menuBarColorPace

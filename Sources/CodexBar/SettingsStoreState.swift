@@ -33,14 +33,15 @@ struct SettingsDefaultsState {
     var usageBarsShowUsed: Bool
     var resetTimesShowAbsolute: Bool
     var providerChangelogLinksEnabled: Bool
+    var highlightMenuCardsOnHover: Bool
     var menuBarShowsBrandIconWithPercent: Bool
     var menuBarHidesCritters: Bool
     var menuBarStatusBadgeVisible: Bool
-    var menuCardHoverHighlightEnabled: Bool
     var hiddenMenuSectionsRaw: [String]
     var hiddenMenuSectionsByProviderRaw: [String: [String]]
     var appActionsOnOverviewOnly: Bool
     var statusComponentsInline: Bool
+    var statusInlineByProviderRaw: [String: Bool]
     var apiCreditBudgetAmountsRaw: [String: Double]
     var apiCreditBudgetStartDaysRaw: [String: String]
     var menuBarColorPace: Bool

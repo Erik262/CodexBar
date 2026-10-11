@@ -49,6 +49,8 @@ struct UsageMenuCardView: View {
             let workdayTickAppearance: WorkdayTickAppearance
             let cardStyle: Bool
             var sessionEquivalentDetail: UsagePaceText.SessionEquivalentDetail?
+            /// Keeps the right-hand amount (e.g. "$5.70 of $10.00") in compact Overview rows.
+            var showsResetTextWhenCompact = false
 
             init(
                 id: String,
@@ -325,10 +327,19 @@ private struct UsageMenuCardHeaderView: View {
     var planAction: (() -> Void)?
     @Environment(\.menuItemHighlighted) private var isHighlighted
     @Environment(\.menuCardRefreshMonitor) private var refreshMonitor
+    @Environment(\.menuCardOverviewStyle) private var isOverviewStyle
 
     var body: some View {
         VStack(alignment: .leading, spacing: UsageMenuCardLayout.headerLineSpacing) {
             HStack(alignment: .firstTextBaseline, spacing: UsageMenuCardLayout.headerColumnSpacing) {
+                if self.isOverviewStyle, let icon = ProviderBrandIcon.image(for: self.model.provider) {
+                    Image(nsImage: icon)
+                        .resizable()
+                        .renderingMode(.template)
+                        .frame(width: 14, height: 14)
+                        .alignmentGuide(.firstTextBaseline) { $0[.bottom] - 2 }
+                        .accessibilityHidden(true)
+                }
                 Text(self.model.providerName).font(.headline)
                     .fontWeight(.semibold)
                     .lineLimit(1).truncationMode(.tail).layoutPriority(1)
@@ -842,7 +853,8 @@ extension UsageMenuCardView.Model {
             metadata: input.metadata)
         let paceVisible = input.paceVisible && ProviderDescriptorRegistry.descriptor(for: input.provider).pace
             .allowsPace(dataConfidence: input.snapshot?.dataConfidence ?? .unknown)
-        let metrics = Self.redactedMetrics(
+        let budgetMetrics = Self.creditBudgetMetric(input: input).map { [$0] } ?? []
+        let metrics = budgetMetrics + Self.redactedMetrics(
             Self.paceGatedMetrics(Self.metrics(input: input), paceVisible: paceVisible),
             provider: input.provider,
             hidePersonalInfo: input.hidePersonalInfo)

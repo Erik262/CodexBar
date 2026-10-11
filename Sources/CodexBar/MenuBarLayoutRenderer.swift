@@ -55,6 +55,7 @@ struct MenuBarLayoutRenderMetrics: Hashable {
 
 struct MenuBarLayoutRenderData: Hashable {
     let provider: UsageProvider
+    var quotaIsEstimated = false
     let iconKey: String
     let providerName: String?
     let accountLabel: String?
@@ -700,19 +701,23 @@ final class MenuBarLayoutRenderer {
                 accessibilityPrefix: accessibilityPrefix,
                 attributes: attributes)
         case .usageBar:
-            guard let window = data.automatic else {
-                return self.textToken(
-                    self.missingValue,
-                    accessibilityText: L("Usage bar unavailable"),
-                    attributes: style.attributes)
-            }
-            let displayedPercent = options.showUsed ? window.usedPercent : window.remainingPercent
-            let filled = Int((displayedPercent.clamped(to: 0...100) / 100 * 3).rounded())
-            let value = String(repeating: "▮", count: filled) + String(repeating: "▯", count: 3 - filled)
-            return self.textToken(
-                value,
-                accessibilityText: L("Usage bar, %d of 3 filled", filled),
-                attributes: style.attributes)
+            return self.barToken(
+                window: data.automatic,
+                style: style,
+                showUsed: options.showUsed,
+                isMonochrome: providerTintColor == nil)
+        case let .windowBar(window):
+            return self.barToken(
+                window: Self.window(window, data: data),
+                style: style,
+                showUsed: options.showUsed,
+                isMonochrome: providerTintColor == nil)
+        case .stackedBars:
+            return self.stackedBarsToken(
+                data: data,
+                style: style,
+                showUsed: options.showUsed,
+                providerTintColor: providerTintColor)
         case .resetCountdown, .resetAbsolute:
             let text = MenuBarLayoutResetText(window: data.automatic, provider: data.provider, now: options.now)
             return self.resetToken(
@@ -782,6 +787,7 @@ final class MenuBarLayoutRenderer {
             window: window,
             rateWindow: rateWindow,
             automaticText: data.automaticText,
+            estimated: data.quotaIsEstimated,
             showUsed: options.showUsed)
         let prefix: String
         let accessibilityPrefix = Self.windowAccessibilityLabel(window, data: data)
@@ -860,6 +866,7 @@ final class MenuBarLayoutRenderer {
             window: .automatic,
             rateWindow: rateWindow,
             automaticText: nil,
+            estimated: data.quotaIsEstimated,
             showUsed: showUsed)
         let label = data.laneLabels.label(for: lane)
         let accessibility = resolvedValue.isAvailable
@@ -880,6 +887,7 @@ final class MenuBarLayoutRenderer {
             window: .automatic,
             rateWindow: data.extraWindow(id)?.window,
             automaticText: nil,
+            estimated: data.quotaIsEstimated,
             showUsed: showUsed)
         let accessibility = resolvedValue.isAvailable
             ? L("%@ %@", title, resolvedValue.text)
@@ -892,6 +900,7 @@ final class MenuBarLayoutRenderer {
         window: PercentWindow,
         rateWindow: MenuBarLayoutRenderWindow?,
         automaticText: String?,
+        estimated: Bool,
         showUsed: Bool)
         -> (text: String, isAvailable: Bool)
     {
@@ -901,7 +910,7 @@ final class MenuBarLayoutRenderer {
         }
         if let rateWindow {
             let percent = showUsed ? rateWindow.usedPercent : rateWindow.remainingPercent
-            return (UsageFormatter.percentString(percent), true)
+            return ("\(estimated ? "~" : "")\(UsageFormatter.percentString(percent))", true)
         }
         return (Self.missingValue, false)
     }
@@ -1118,6 +1127,86 @@ final class MenuBarLayoutRenderer {
             return size == .small ? 8 : 9
         }
         return size == .small ? 14 : 18
+    }
+}
+
+/// Drawn meter tokens live in an extension to keep the renderer body within the type length limit.
+extension MenuBarLayoutRenderer {
+    /// A rounded meter drawn like the stacked-bars icon, sized to the line: wide and 6 pt tall on one line,
+    /// narrower and 4 pt tall when two lines share the menu bar.
+    private static func barToken(
+        window: MenuBarLayoutRenderWindow?,
+        style: TokenStyle,
+        showUsed: Bool,
+        isMonochrome: Bool)
+        -> (value: NSAttributedString, accessibilityText: String?)
+    {
+        guard let window else {
+            return self.textToken(
+                self.missingValue,
+                accessibilityText: L("Usage bar unavailable"),
+                attributes: style.attributes)
+        }
+        let percent = (showUsed ? window.usedPercent : window.remainingPercent).clamped(to: 0...100)
+        let isStacked = style.iconHeight < 10
+        let size = NSSize(width: isStacked ? 18 : 26, height: isStacked ? 4 : 6)
+        let color = style.foregroundColor
+        let image = NSImage(size: size, flipped: false) { rect in
+            StackedBarsIconRenderer.drawBar(in: rect, percent: percent, color: color)
+            return true
+        }
+        image.isTemplate = isMonochrome
+        let attachment = NSTextAttachment()
+        attachment.image = image
+        attachment.bounds = NSRect(
+            x: 0,
+            y: ((style.font.capHeight - size.height) / 2).rounded(),
+            width: size.width,
+            height: size.height)
+        let value = NSMutableAttributedString(attachment: attachment)
+        value.addAttributes(style.attributes, range: NSRange(location: 0, length: value.length))
+        return (value, L("Usage bar, %d%%", Int(percent.rounded())))
+    }
+
+    /// Session over weekly, scaled to the line's icon height so it sits like the provider icon.
+    private static func stackedBarsToken(
+        data: MenuBarLayoutRenderData,
+        style: TokenStyle,
+        showUsed: Bool,
+        providerTintColor: NSColor?)
+        -> (value: NSAttributedString, accessibilityText: String?)
+    {
+        let windows = [(L("Session"), data.session ?? data.automatic), (L("Weekly"), data.weekly)]
+        guard windows.contains(where: { $0.1 != nil }) else {
+            return self.textToken(
+                self.missingValue,
+                accessibilityText: L("Usage bar unavailable"),
+                attributes: style.attributes)
+        }
+        let percents = windows.map { _, window in
+            window.map { (showUsed ? $0.usedPercent : $0.remainingPercent).clamped(to: 0...100) }
+        }
+        let base = StackedBarsIconRenderer.makeImage(
+            rows: percents.map { StackedBarsIconRenderer.Row(percent: $0, stale: false) },
+            icons: [])
+        let attachment = NSTextAttachment()
+        attachment.image = Self.attachmentImage(
+            base,
+            tint: providerTintColor ?? style.foregroundColor,
+            isMonochrome: providerTintColor == nil)
+        let height = style.iconHeight
+        let width = base.size.height > 0 ? base.size.width * height / base.size.height : height
+        attachment.bounds = NSRect(
+            x: 0,
+            y: ((style.font.capHeight - height) / 2).rounded(),
+            width: width,
+            height: height)
+        let value = NSMutableAttributedString(attachment: attachment)
+        value.addAttributes(style.attributes, range: NSRange(location: 0, length: value.length))
+        let accessibility = zip(windows, percents).compactMap { window, percent in
+            percent.map { "\(window.0) \(Int($0.rounded()))%" }
+        }.joined(separator: ", ")
+        return (value, accessibility)
     }
 }
 

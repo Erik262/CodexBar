@@ -43,6 +43,7 @@ struct HooksPane: View {
             }
         }
         .formStyle(.grouped)
+        .settingsSearchScrollTarget()
     }
 
     private var enabledBinding: Binding<Bool> {

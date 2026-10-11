@@ -4,8 +4,10 @@ import Foundation
 /// A prepaid API balance the user entered. Neither the Anthropic nor the OpenAI Admin API reports a
 /// remaining balance, so "credits left" is this amount minus vendor-reported spend after `startDay`.
 struct APICreditBudget: Equatable, Sendable {
-    /// Provider-specific by design: these three report spend we can subtract from a prepaid balance.
-    static let supportedProviders: [UsageProvider] = [.claude, .codex, .openai]
+    /// Any provider with cost history can carry a prepaid balance; only vendor-reported spend draws it down.
+    static func supports(_ provider: UsageProvider) -> Bool {
+        ProviderDescriptorRegistry.descriptor(for: provider).tokenCost.supportsTokenCost
+    }
 
     struct Status: Equatable, Sendable {
         let spent: Double
@@ -79,5 +81,50 @@ extension SettingsStore {
         startDays[provider.rawValue] = budget?.startDay
         self.apiCreditBudgetAmountsRaw = amounts
         self.apiCreditBudgetStartDaysRaw = startDays
+    }
+}
+
+extension UsageMenuCardView.Model {
+    /// "Credits" meter for the user's prepaid balance. It sits with the usage bars, so it shows whether or not
+    /// the cost summary is on; only vendor-reported spend after the start day draws it down.
+    static func creditBudgetMetric(input: Input) -> Metric? {
+        guard let budget = input.apiCreditBudget, budget.amount > 0 else { return nil }
+        let snapshot = Self.tokenUsageSnapshot(input: input)
+        let reportsSpend = snapshot?.costProvenance == .vendorMetered
+        let status = budget.status(
+            daily: reportsSpend ? snapshot?.daily ?? [] : [],
+            historyDays: snapshot?.displayHistoryDays(calendar: input.costUsageBucketCalendar) ?? 0,
+            now: snapshot?.updatedAt ?? input.now,
+            calendar: input.costUsageBucketCalendar)
+        let remainingPercent = (status.remaining / budget.amount * 100).clamped(to: 0...100)
+        let style: PercentStyle = input.usageBarsShowUsed ? .used : .left
+        func money(_ value: Double) -> String {
+            UsageFormatter.convertedCostString(
+                value,
+                preferredCurrency: input.preferredCurrencyCode,
+                providerCurrency: snapshot?.currencyCode ?? "USD")
+        }
+        let note: String? = if snapshot == nil {
+            nil
+        } else if !reportsSpend {
+            L("api_credits_unmetered_note")
+        } else if !status.coversStartDay {
+            L("api_credits_partial_note", budget.startDay)
+        } else {
+            nil
+        }
+        var metric = Metric(
+            id: "api-credit-budget",
+            title: L("Credits"),
+            percent: style == .used ? 100 - remainingPercent : remainingPercent,
+            percentStyle: style,
+            resetText: L("api_credits_of_amount", money(status.remaining), money(budget.amount)),
+            detailText: note,
+            detailLeftText: nil,
+            detailRightText: nil,
+            pacePercent: nil,
+            paceOnTop: false)
+        metric.showsResetTextWhenCompact = true
+        return metric
     }
 }
