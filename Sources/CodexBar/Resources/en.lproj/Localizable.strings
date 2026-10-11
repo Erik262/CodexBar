@@ -2534,10 +2534,11 @@
 "menu_section_latest_tokens" = "Latest tokens / requests";
 "menu_section_current_window" = "Current window cost & tokens";
 "menu_section_cost_details" = "Cost details (top model, notes)";
-"menu_visibility_provider_title" = "Provider";
 "status_components_inline_title" = "Show status inline";
 "status_components_inline_subtitle" = "Replaces the Status Page submenu with a compact list of components. Click it to open the status page.";
 "app_actions_overview_only_title" = "App actions on Overview only";
 "app_actions_overview_only_subtitle" = "Refresh, Settings, About, and Quit appear only on the Overview tab. Needs merged icons with the Overview tab enabled.";
 "stacked_bars_show_icons_title" = "Show provider icons";
 "api_credits_unmetered_note" = "Shows your entered balance: costs here are local estimates, not API billing.";
+"section_menu_layout" = "Menu layout";
+"section_menu_layout_footer" = "Menu sections and prepaid API credits are set per provider under Providers.";

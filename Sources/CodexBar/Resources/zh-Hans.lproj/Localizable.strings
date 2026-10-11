@@ -2523,10 +2523,11 @@
 "menu_section_latest_tokens" = "最近令牌／请求";
 "menu_section_current_window" = "当前窗口费用和令牌";
 "menu_section_cost_details" = "费用详情（主要模型、说明）";
-"menu_visibility_provider_title" = "提供商";
 "status_components_inline_title" = "内联显示状态";
 "status_components_inline_subtitle" = "用紧凑的组件列表替换状态页子菜单。点击可打开状态页。";
 "app_actions_overview_only_title" = "应用操作仅显示在概览";
 "app_actions_overview_only_subtitle" = "刷新、设置、关于和退出仅显示在概览标签页。需要合并图标并启用概览标签页。";
 "stacked_bars_show_icons_title" = "显示提供商图标";
 "api_credits_unmetered_note" = "显示你输入的余额：此处费用为本地估算，并非 API 账单。";
+"section_menu_layout" = "菜单布局";
+"section_menu_layout_footer" = "菜单分区和预付 API 额度在“提供商”中按提供商分别设置。";

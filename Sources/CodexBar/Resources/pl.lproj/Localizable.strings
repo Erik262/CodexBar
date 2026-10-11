@@ -2533,10 +2533,11 @@
 "menu_section_latest_tokens" = "Ostatnie tokeny / żądania";
 "menu_section_current_window" = "Koszt i tokeny bieżącego okna";
 "menu_section_cost_details" = "Szczegóły kosztów (główny model, uwagi)";
-"menu_visibility_provider_title" = "Dostawca";
 "status_components_inline_title" = "Pokazuj stan bezpośrednio";
 "status_components_inline_subtitle" = "Zastępuje podmenu strony stanu zwięzłą listą komponentów. Kliknij, aby otworzyć stronę stanu.";
 "app_actions_overview_only_title" = "Akcje aplikacji tylko w Przeglądzie";
 "app_actions_overview_only_subtitle" = "Odśwież, Ustawienia, O programie i Zakończ pojawiają się tylko na karcie Przegląd. Wymaga scalonych ikon z włączoną kartą Przegląd.";
 "stacked_bars_show_icons_title" = "Pokaż ikony dostawców";
 "api_credits_unmetered_note" = "Pokazuje wprowadzone saldo: koszty tutaj to lokalne szacunki, a nie rozliczenia API.";
+"section_menu_layout" = "Układ menu";
+"section_menu_layout_footer" = "Sekcje menu i przedpłacone kredyty API ustawiasz dla każdego dostawcy w sekcji Dostawcy.";

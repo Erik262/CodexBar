@@ -2534,10 +2534,11 @@
 "menu_section_latest_tokens" = "أحدث الرموز / الطلبات";
 "menu_section_current_window" = "تكلفة ورموز النافذة الحالية";
 "menu_section_cost_details" = "تفاصيل التكلفة (النموذج الأعلى، ملاحظات)";
-"menu_visibility_provider_title" = "المزوّد";
 "status_components_inline_title" = "إظهار الحالة مباشرة";
 "status_components_inline_subtitle" = "يستبدل القائمة الفرعية لصفحة الحالة بقائمة مكونات مختصرة. انقر لفتح صفحة الحالة.";
 "app_actions_overview_only_title" = "إجراءات التطبيق في النظرة العامة فقط";
 "app_actions_overview_only_subtitle" = "تظهر التحديث والإعدادات وحول والإنهاء في علامة تبويب النظرة العامة فقط. يتطلب دمج الأيقونات مع تفعيل علامة النظرة العامة.";
 "stacked_bars_show_icons_title" = "إظهار أيقونات المزوّدين";
 "api_credits_unmetered_note" = "يعرض الرصيد الذي أدخلته: التكاليف هنا تقديرات محلية وليست فواتير API.";
+"section_menu_layout" = "تخطيط القائمة";
+"section_menu_layout_footer" = "تُضبط أقسام القائمة وأرصدة API المدفوعة مسبقًا لكل مزوّد ضمن «مقدمو الخدمات».";

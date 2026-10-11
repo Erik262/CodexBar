@@ -2533,10 +2533,11 @@
 "menu_section_latest_tokens" = "Son tokenlar / istekler";
 "menu_section_current_window" = "Geçerli pencere maliyeti ve tokenları";
 "menu_section_cost_details" = "Maliyet ayrıntıları (en çok kullanılan model, notlar)";
-"menu_visibility_provider_title" = "Sağlayıcı";
 "status_components_inline_title" = "Durumu satır içinde göster";
 "status_components_inline_subtitle" = "Durum sayfası alt menüsünü kompakt bir bileşen listesiyle değiştirir. Durum sayfasını açmak için tıklayın.";
 "app_actions_overview_only_title" = "Uygulama eylemleri yalnızca Genel Bakış’ta";
 "app_actions_overview_only_subtitle" = "Yenile, Ayarlar, Hakkında ve Çık yalnızca Genel Bakış sekmesinde görünür. Genel Bakış sekmesi açık birleşik simgeler gerekir.";
 "stacked_bars_show_icons_title" = "Sağlayıcı simgelerini göster";
 "api_credits_unmetered_note" = "Girdiğiniz bakiye gösterilir: buradaki maliyetler API faturası değil, yerel tahminlerdir.";
+"section_menu_layout" = "Menü düzeni";
+"section_menu_layout_footer" = "Menü bölümleri ve ön ödemeli API kredileri Sağlayıcılar altında sağlayıcı başına ayarlanır.";

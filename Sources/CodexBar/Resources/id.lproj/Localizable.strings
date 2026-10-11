@@ -2533,10 +2533,11 @@
 "menu_section_latest_tokens" = "Token / permintaan terbaru";
 "menu_section_current_window" = "Biaya & token jendela saat ini";
 "menu_section_cost_details" = "Detail biaya (model teratas, catatan)";
-"menu_visibility_provider_title" = "Penyedia";
 "status_components_inline_title" = "Tampilkan status langsung";
 "status_components_inline_subtitle" = "Mengganti submenu Halaman Status dengan daftar komponen yang ringkas. Klik untuk membuka halaman status.";
 "app_actions_overview_only_title" = "Tindakan aplikasi hanya di Ikhtisar";
 "app_actions_overview_only_subtitle" = "Segarkan, Pengaturan, Tentang, dan Keluar hanya muncul di tab Ikhtisar. Memerlukan ikon gabungan dengan tab Ikhtisar aktif.";
 "stacked_bars_show_icons_title" = "Tampilkan ikon penyedia";
 "api_credits_unmetered_note" = "Menampilkan saldo yang Anda masukkan: biaya di sini adalah perkiraan lokal, bukan tagihan API.";
+"section_menu_layout" = "Tata letak menu";
+"section_menu_layout_footer" = "Bagian menu dan kredit API prabayar diatur per penyedia di Penyedia.";

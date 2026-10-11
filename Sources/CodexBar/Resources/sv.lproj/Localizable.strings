@@ -2529,10 +2529,11 @@
 "menu_section_latest_tokens" = "Senaste tokens / förfrågningar";
 "menu_section_current_window" = "Kostnad och tokens i aktuellt fönster";
 "menu_section_cost_details" = "Kostnadsdetaljer (toppmodell, anteckningar)";
-"menu_visibility_provider_title" = "Leverantör";
 "status_components_inline_title" = "Visa status direkt";
 "status_components_inline_subtitle" = "Ersätter undermenyn Statussida med en kompakt lista över komponenter. Klicka för att öppna statussidan.";
 "app_actions_overview_only_title" = "Appåtgärder endast i Översikt";
 "app_actions_overview_only_subtitle" = "Uppdatera, Inställningar, Om och Avsluta visas bara på fliken Översikt. Kräver sammanslagna symboler med fliken Översikt aktiverad.";
 "stacked_bars_show_icons_title" = "Visa leverantörsikoner";
 "api_credits_unmetered_note" = "Visar ditt angivna saldo: kostnaderna här är lokala uppskattningar, inte API-debitering.";
+"section_menu_layout" = "Menylayout";
+"section_menu_layout_footer" = "Menyavsnitt och förbetalda API-krediter ställs in per leverantör under Leverantörer.";

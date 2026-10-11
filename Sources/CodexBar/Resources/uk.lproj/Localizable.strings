@@ -2530,10 +2530,11 @@
 "menu_section_latest_tokens" = "Останні токени / запити";
 "menu_section_current_window" = "Витрати й токени поточного вікна";
 "menu_section_cost_details" = "Деталі витрат (основна модель, примітки)";
-"menu_visibility_provider_title" = "Постачальник";
 "status_components_inline_title" = "Показувати стан прямо в меню";
 "status_components_inline_subtitle" = "Замінює підменю сторінки стану компактним списком компонентів. Натисніть, щоб відкрити сторінку стану.";
 "app_actions_overview_only_title" = "Дії застосунку лише в «Огляді»";
 "app_actions_overview_only_subtitle" = "«Оновити», «Налаштування», «Про програму» і «Вийти» показуються лише на вкладці «Огляд». Потрібні об’єднані значки з увімкненою вкладкою «Огляд».";
 "stacked_bars_show_icons_title" = "Показувати значки постачальників";
 "api_credits_unmetered_note" = "Показано введений баланс: витрати тут — локальні оцінки, а не списання API.";
+"section_menu_layout" = "Макет меню";
+"section_menu_layout_footer" = "Розділи меню та передплачені кредити API налаштовуються для кожного провайдера в розділі «Провайдери».";

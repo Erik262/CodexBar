@@ -5,19 +5,6 @@ import SwiftUI
 struct MenuPane: View {
     @Bindable var settings: SettingsStore
     @Bindable var store: UsageStore
-    @State private var visibilityProvider: UsageProvider?
-
-    private var visibilityProviders: [UsageProvider] {
-        self.store.enabledFirstPartyProvidersForDisplay()
-    }
-
-    private var selectedVisibilityProvider: UsageProvider? {
-        let providers = self.visibilityProviders
-        if let chosen = self.visibilityProvider, providers.contains(chosen) {
-            return chosen
-        }
-        return providers.first
-    }
 
     var body: some View {
         Form {
@@ -40,12 +27,6 @@ struct MenuPane: View {
                     SettingsRowLabel(
                         L("show_pace_title"),
                         subtitle: L("show_pace_subtitle"))
-                }
-
-                Toggle(isOn: self.$settings.menuCardHoverHighlightEnabled) {
-                    SettingsRowLabel(
-                        L("menu_card_hover_highlight_title"),
-                        subtitle: L("menu_card_hover_highlight_subtitle"))
                 }
 
                 SettingsMenuPicker(
@@ -114,21 +95,10 @@ struct MenuPane: View {
             }
 
             Section {
-                if let provider = self.selectedVisibilityProvider {
-                    SettingsMenuPicker(
-                        selection: Binding(
-                            get: { provider },
-                            set: { self.visibilityProvider = $0 }),
-                        options: self.visibilityProviders,
-                        label: { Text(L("menu_visibility_provider_title")) },
-                        optionLabel: { provider in
-                            Text(ProviderDescriptorRegistry.descriptor(for: provider).metadata.displayName)
-                        })
-                    ForEach(MenuSectionToggle.allCases) { section in
-                        Toggle(section.label, isOn: Binding(
-                            get: { self.settings.isMenuSectionVisible(section, for: provider) },
-                            set: { self.settings.setMenuSection(section, visible: $0, for: provider) }))
-                    }
+                Toggle(isOn: self.$settings.menuCardHoverHighlightEnabled) {
+                    SettingsRowLabel(
+                        L("menu_card_hover_highlight_title"),
+                        subtitle: L("menu_card_hover_highlight_subtitle"))
                 }
 
                 Toggle(isOn: self.$settings.statusComponentsInline) {
@@ -144,9 +114,9 @@ struct MenuPane: View {
                 }
                 .disabled(!self.settings.mergeIcons)
             } header: {
-                Text(L("section_menu_visibility"))
+                Text(L("section_menu_layout"))
             } footer: {
-                SettingsSectionFooter(L("section_menu_visibility_footer"))
+                SettingsSectionFooter(L("section_menu_layout_footer"))
             }
 
             Section(L("section_widgets")) {
@@ -271,12 +241,6 @@ struct CostSummarySettingsSection: View {
                         subtitle: L("cost_comparison_periods_subtitle"))
                 }
 
-                if !self.budgetProviders.isEmpty {
-                    SettingsRowLabel(L("api_credits_settings_title"), subtitle: L("api_credits_settings_subtitle"))
-                    ForEach(self.budgetProviders, id: \.self) { provider in
-                        APICreditBudgetSettingsRow(settings: self.settings, provider: provider)
-                    }
-                }
             }
         } header: {
             Text(L("section_cost_summary"))
@@ -297,11 +261,6 @@ struct CostSummarySettingsSection: View {
 
     static func costDataExplanation() -> String {
         L("cost_data_explanation")
-    }
-
-    private var budgetProviders: [UsageProvider] {
-        let enabled = Set(self.store.enabledFirstPartyProvidersForDisplay())
-        return APICreditBudget.supportedProviders.filter { enabled.contains($0) }
     }
 
     static var costStatusProviders: [UsageProvider] {

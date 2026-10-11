@@ -2531,10 +2531,11 @@
 "menu_section_latest_tokens" = "Token / yêu cầu gần nhất";
 "menu_section_current_window" = "Chi phí & token của khung hiện tại";
 "menu_section_cost_details" = "Chi tiết chi phí (mô hình chính, ghi chú)";
-"menu_visibility_provider_title" = "Nhà cung cấp";
 "status_components_inline_title" = "Hiển thị trạng thái trực tiếp";
 "status_components_inline_subtitle" = "Thay menu con Trang trạng thái bằng danh sách thành phần gọn. Nhấp để mở trang trạng thái.";
 "app_actions_overview_only_title" = "Thao tác ứng dụng chỉ ở Tổng quan";
 "app_actions_overview_only_subtitle" = "Làm mới, Cài đặt, Giới thiệu và Thoát chỉ hiện ở tab Tổng quan. Cần gộp biểu tượng và bật tab Tổng quan.";
 "stacked_bars_show_icons_title" = "Hiển thị biểu tượng nhà cung cấp";
 "api_credits_unmetered_note" = "Hiển thị số dư bạn nhập: chi phí ở đây là ước tính cục bộ, không phải hóa đơn API.";
+"section_menu_layout" = "Bố cục menu";
+"section_menu_layout_footer" = "Các mục menu và tín dụng API trả trước được đặt theo từng nhà cung cấp trong Nhà cung cấp.";

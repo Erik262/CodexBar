@@ -2508,10 +2508,11 @@
 "menu_section_latest_tokens" = "最近權杖／請求";
 "menu_section_current_window" = "目前視窗費用與權杖";
 "menu_section_cost_details" = "費用詳情（主要模型、說明）";
-"menu_visibility_provider_title" = "供應商";
 "status_components_inline_title" = "內嵌顯示狀態";
 "status_components_inline_subtitle" = "以精簡的元件清單取代狀態頁子選單。點按即可開啟狀態頁。";
 "app_actions_overview_only_title" = "App 動作僅顯示於總覽";
 "app_actions_overview_only_subtitle" = "重新整理、設定、關於與結束僅顯示於總覽標籤頁。需要合併圖示並啟用總覽標籤頁。";
 "stacked_bars_show_icons_title" = "顯示供應商圖示";
 "api_credits_unmetered_note" = "顯示你輸入的餘額：此處費用為本機估算，並非 API 帳單。";
+"section_menu_layout" = "選單版面";
+"section_menu_layout_footer" = "選單區段與預付 API 額度在「提供者」中依提供者分別設定。";

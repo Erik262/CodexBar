@@ -2534,10 +2534,11 @@
 "menu_section_latest_tokens" = "Últims tokens / sol·licituds";
 "menu_section_current_window" = "Cost i tokens de la finestra actual";
 "menu_section_cost_details" = "Detalls de cost (model principal, notes)";
-"menu_visibility_provider_title" = "Proveïdor";
 "status_components_inline_title" = "Mostra l’estat integrat";
 "status_components_inline_subtitle" = "Substitueix el submenú de la pàgina d’estat per una llista compacta de components. Fes-hi clic per obrir la pàgina d’estat.";
 "app_actions_overview_only_title" = "Accions de l’app només a Resum";
 "app_actions_overview_only_subtitle" = "Actualitza, Configuració, Quant a i Surt només apareixen a la pestanya Resum. Cal combinar les icones amb la pestanya Resum activada.";
 "stacked_bars_show_icons_title" = "Mostra les icones dels proveïdors";
 "api_credits_unmetered_note" = "Mostra el saldo introduït: els costos d’aquí són estimacions locals, no facturació de l’API.";
+"section_menu_layout" = "Disseny del menú";
+"section_menu_layout_footer" = "Les seccions del menú i els crèdits d'API prepagats es configuren per proveïdor a Proveïdors.";

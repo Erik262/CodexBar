@@ -2534,10 +2534,11 @@
 "menu_section_latest_tokens" = "โทเค็น / คำขอล่าสุด";
 "menu_section_current_window" = "ค่าใช้จ่ายและโทเค็นของช่วงปัจจุบัน";
 "menu_section_cost_details" = "รายละเอียดค่าใช้จ่าย (โมเดลหลัก หมายเหตุ)";
-"menu_visibility_provider_title" = "ผู้ให้บริการ";
 "status_components_inline_title" = "แสดงสถานะในเมนู";
 "status_components_inline_subtitle" = "แทนที่เมนูย่อยหน้าสถานะด้วยรายการส่วนประกอบแบบกะทัดรัด คลิกเพื่อเปิดหน้าสถานะ";
 "app_actions_overview_only_title" = "การทำงานของแอปเฉพาะในภาพรวม";
 "app_actions_overview_only_subtitle" = "รีเฟรช การตั้งค่า เกี่ยวกับ และออก จะแสดงเฉพาะในแท็บภาพรวม ต้องรวมไอคอนและเปิดแท็บภาพรวม";
 "stacked_bars_show_icons_title" = "แสดงไอคอนผู้ให้บริการ";
 "api_credits_unmetered_note" = "แสดงยอดคงเหลือที่คุณป้อน ค่าใช้จ่ายที่นี่เป็นค่าประมาณในเครื่อง ไม่ใช่การเรียกเก็บเงินของ API";
+"section_menu_layout" = "เลย์เอาต์เมนู";
+"section_menu_layout_footer" = "ส่วนของเมนูและเครดิต API แบบเติมเงินตั้งค่าแยกตามผู้ให้บริการในหน้าผู้ให้บริการ";

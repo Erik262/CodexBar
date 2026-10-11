@@ -19,7 +19,7 @@ struct APICreditBudgetSettingsRow: View {
                     .disabled(self.settings.apiCreditBudget(for: self.provider) == nil)
             }
         } label: {
-            Text(ProviderDescriptorRegistry.descriptor(for: self.provider).metadata.displayName)
+            Text(L("api_credits_amount_placeholder"))
         }
     }
 

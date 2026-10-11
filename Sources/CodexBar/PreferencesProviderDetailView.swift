@@ -186,6 +186,8 @@ struct ProviderDetailView<SupplementaryContent: View>: View {
                     items: self.usageItems)
             }
 
+            ProviderMenuCustomizationSettingsView(provider: self.provider, settings: self.store.settings)
+
             if self.accountUsageOverview == nil, let errorDisplay {
                 Section {
                     ProviderErrorView(

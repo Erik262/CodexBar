@@ -2531,10 +2531,11 @@
 "menu_section_latest_tokens" = "Последние токены / запросы";
 "menu_section_current_window" = "Расходы и токены текущего окна";
 "menu_section_cost_details" = "Детали расходов (основная модель, заметки)";
-"menu_visibility_provider_title" = "Провайдер";
 "status_components_inline_title" = "Показывать статус прямо в меню";
 "status_components_inline_subtitle" = "Заменяет подменю страницы статуса компактным списком компонентов. Нажмите, чтобы открыть страницу статуса.";
 "app_actions_overview_only_title" = "Действия приложения только в «Обзоре»";
 "app_actions_overview_only_subtitle" = "«Обновить», «Настройки», «О программе» и «Выйти» отображаются только на вкладке «Обзор». Требуются объединённые значки с включённой вкладкой «Обзор».";
 "stacked_bars_show_icons_title" = "Показывать значки провайдеров";
 "api_credits_unmetered_note" = "Показан введённый баланс: расходы здесь — локальные оценки, а не списания API.";
+"section_menu_layout" = "Макет меню";
+"section_menu_layout_footer" = "Разделы меню и предоплаченные кредиты API настраиваются для каждого провайдера в разделе «Провайдеры».";

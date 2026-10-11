@@ -2529,10 +2529,11 @@
 "menu_section_latest_tokens" = "Derniers jetons / requêtes";
 "menu_section_current_window" = "Coût et jetons de la fenêtre actuelle";
 "menu_section_cost_details" = "Détails des coûts (modèle principal, notes)";
-"menu_visibility_provider_title" = "Fournisseur";
 "status_components_inline_title" = "Afficher l’état directement";
 "status_components_inline_subtitle" = "Remplace le sous-menu Page d’état par une liste compacte des composants. Cliquez pour ouvrir la page d’état.";
 "app_actions_overview_only_title" = "Actions de l’app uniquement dans Aperçu";
 "app_actions_overview_only_subtitle" = "Actualiser, Réglages, À propos et Quitter n’apparaissent que dans l’onglet Aperçu. Nécessite les icônes fusionnées avec l’onglet Aperçu activé.";
 "stacked_bars_show_icons_title" = "Afficher les icônes des fournisseurs";
 "api_credits_unmetered_note" = "Affiche le solde saisi : les coûts ici sont des estimations locales, pas la facturation de l’API.";
+"section_menu_layout" = "Disposition du menu";
+"section_menu_layout_footer" = "Les sections du menu et les crédits API prépayés se règlent par fournisseur dans Fournisseurs.";

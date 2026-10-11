@@ -2529,10 +2529,11 @@
 "menu_section_latest_tokens" = "Laatste tokens / verzoeken";
 "menu_section_current_window" = "Kosten & tokens huidig venster";
 "menu_section_cost_details" = "Kostendetails (topmodel, notities)";
-"menu_visibility_provider_title" = "Aanbieder";
 "status_components_inline_title" = "Status direct tonen";
 "status_components_inline_subtitle" = "Vervangt het submenu Statuspagina door een compacte lijst met onderdelen. Klik om de statuspagina te openen.";
 "app_actions_overview_only_title" = "App-acties alleen in Overzicht";
 "app_actions_overview_only_subtitle" = "Vernieuwen, Instellingen, Over en Stop verschijnen alleen op het tabblad Overzicht. Vereist samengevoegde pictogrammen met het tabblad Overzicht aan.";
 "stacked_bars_show_icons_title" = "Providerpictogrammen tonen";
 "api_credits_unmetered_note" = "Toont je ingevoerde saldo: de kosten hier zijn lokale schattingen, geen API-facturering.";
+"section_menu_layout" = "Menu-indeling";
+"section_menu_layout_footer" = "Menusecties en vooruitbetaald API-tegoed stel je per aanbieder in onder Aanbieders.";

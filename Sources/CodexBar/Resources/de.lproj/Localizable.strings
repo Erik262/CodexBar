@@ -2528,10 +2528,11 @@
 "menu_section_latest_tokens" = "Letzte Tokens / Anfragen";
 "menu_section_current_window" = "Kosten & Tokens im aktuellen Fenster";
 "menu_section_cost_details" = "Kostendetails (Top-Modell, Hinweise)";
-"menu_visibility_provider_title" = "Anbieter";
 "status_components_inline_title" = "Status direkt anzeigen";
 "status_components_inline_subtitle" = "Ersetzt das Statusseiten-Untermenü durch eine kompakte Komponentenliste. Ein Klick öffnet die Statusseite.";
 "app_actions_overview_only_title" = "App-Aktionen nur in der Übersicht";
 "app_actions_overview_only_subtitle" = "Aktualisieren, Einstellungen, Über und Beenden erscheinen nur im Übersicht-Tab. Erfordert zusammengeführte Symbole mit aktivem Übersicht-Tab.";
 "stacked_bars_show_icons_title" = "Anbietersymbole anzeigen";
 "api_credits_unmetered_note" = "Zeigt dein eingegebenes Guthaben: Die Kosten hier sind lokale Schätzungen, keine API-Abrechnung.";
+"section_menu_layout" = "Menülayout";
+"section_menu_layout_footer" = "Menübereiche und vorausbezahltes API-Guthaben stellst du pro Anbieter unter „Anbieter“ ein.";
