@@ -91,7 +91,7 @@ struct MenuCardModelCodexBusinessCreditsTests {
             credits: credits,
             error: nil)
 
-        #expect(line == nil)
+        #expect(line == "Credits · Balance: Unavailable")
         #expect(credits.displayRemaining == nil)
         #expect(UsageMenuCardView.Model.creditsProgressPercent(credits: credits) == nil)
     }

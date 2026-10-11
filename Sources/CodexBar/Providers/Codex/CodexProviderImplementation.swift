@@ -223,11 +223,12 @@ struct CodexProviderImplementation: ProviderImplementation {
             context.store.credits,
             attached: context.snapshot?.providerCost)
         {
-            // An unreadable or empty balance is left out instead of showing "Unavailable" or zero credits.
-            if let remaining = credits.displayRemaining, remaining > 0 || credits.codexCreditLimit != nil {
+            if let remaining = credits.displayRemaining {
                 entries.append(.text(
                     String(format: L("credits_remaining"), UsageFormatter.creditsString(from: remaining)),
                     .primary))
+            } else {
+                entries.append(.text("\(L("Credits")) · \(L("Balance")): \(L("Unavailable"))", .secondary))
             }
             if let limit = credits.codexCreditLimit {
                 var parts = [
