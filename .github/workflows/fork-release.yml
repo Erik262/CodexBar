@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "Existing release tag to (re)build and attach"
+        description: "Release tag; a missing release is created at the dispatched commit"
         required: true
         type: string
 
@@ -32,7 +32,8 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: ${{ github.event.release.tag_name || inputs.tag }}
+          # A published release builds its tag; a manual run builds the commit it was dispatched from.
+          ref: ${{ github.event.release.tag_name || github.sha }}
 
       - name: Select Xcode 26.6
         run: |
@@ -79,7 +80,14 @@ jobs:
       - name: Attach to release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release upload "$TAG" dist/*.zip dist/appcast.xml --clobber --repo "$GITHUB_REPOSITORY"
+        run: |
+          set -euo pipefail
+          # Manual runs can publish a new release; it becomes "latest", which the appcast URL follows.
+          if ! gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+              --title "$TAG" --generate-notes
+          fi
+          gh release upload "$TAG" dist/*.zip dist/appcast.xml --clobber --repo "$GITHUB_REPOSITORY"
 
       - name: Remove signing key
         if: always()

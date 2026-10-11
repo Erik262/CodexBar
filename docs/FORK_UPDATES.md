@@ -28,6 +28,9 @@ Losing the key means installed builds reject later updates; reinstall manually w
 2. Publish a GitHub release with a new tag, for example `v0.74.1-fork.1`.
 3. Wait for the "Fork release" workflow; it attaches the zip and `appcast.xml` to the release.
 
+Alternatively, run "Fork release" from the Actions tab on `main` with a new tag: it builds that commit and
+creates the release itself.
+
 The build number is `BUILD_NUMBER` from `version.env` plus the workflow run number (for example
 `167.12`), so every release is newer than the previous one and than a local build of the same version.
 The build targets Apple silicon (`ARCHES=arm64`).
