@@ -2553,3 +2553,7 @@
 "status_page_inline_subtitle" = "Elenca i componenti del servizio nel menu. Fai clic sull'elenco per aprire la pagina di stato.";
 "status_page_inline_requires_checks" = "La modalità in linea richiede «Controlla stato provider» in Generale; fino ad allora il menu mostra il collegamento.";
 "menu_bar_layout_token_stacked_bars" = "Barre sessione e settimana";
+"section_menu_bar_item" = "Elemento della barra dei menu";
+"section_appearance" = "Aspetto";
+"merged_icon_style_subtitle_all" = "Il selettore mostra un fornitore alla volta. Impilato mostra due fornitori come righe di testo. Le barre impilate disegnano due o tre fornitori come indicatori.";
+"stacked_bars_section_footer" = "Le barre seguono la direzione di riempimento impostata in Menu (rimanente o usato).";

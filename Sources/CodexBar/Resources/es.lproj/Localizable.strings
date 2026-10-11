@@ -2547,3 +2547,7 @@
 "status_page_inline_subtitle" = "Muestra los componentes del servicio en el menú. Haz clic en la lista para abrir la página de estado.";
 "status_page_inline_requires_checks" = "El modo integrado necesita «Comprobar estado del proveedor» en General; hasta entonces el menú muestra el enlace.";
 "menu_bar_layout_token_stacked_bars" = "Barras de sesión y semanal";
+"section_menu_bar_item" = "Elemento de la barra de menús";
+"section_appearance" = "Apariencia";
+"merged_icon_style_subtitle_all" = "El selector muestra un proveedor cada vez. Apilado muestra dos proveedores como filas de texto. Las barras apiladas dibujan dos o tres proveedores como medidores.";
+"stacked_bars_section_footer" = "Las barras siguen la dirección de llenado definida en Menú (restante o usado).";

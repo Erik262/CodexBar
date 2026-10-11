@@ -2548,3 +2548,7 @@
 "status_page_inline_subtitle" = "Liste les composants du service dans le menu. Cliquez sur la liste pour ouvrir la page d'état.";
 "status_page_inline_requires_checks" = "Le mode intégré nécessite « Vérifier l'état des fournisseurs » dans Général ; d'ici là, le menu affiche le lien.";
 "menu_bar_layout_token_stacked_bars" = "Barres session et hebdo";
+"section_menu_bar_item" = "Élément de la barre des menus";
+"section_appearance" = "Apparence";
+"merged_icon_style_subtitle_all" = "Le sélecteur affiche un fournisseur à la fois. Empilé affiche deux fournisseurs en lignes de texte. Les barres empilées dessinent deux ou trois fournisseurs sous forme de jauges.";
+"stacked_bars_section_footer" = "Les barres suivent le sens de remplissage défini dans Menu (restant ou utilisé).";

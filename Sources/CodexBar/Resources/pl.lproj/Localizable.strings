@@ -2552,3 +2552,7 @@
 "status_page_inline_subtitle" = "Pokazuje komponenty usługi w menu. Kliknij listę, aby otworzyć stronę stanu.";
 "status_page_inline_requires_checks" = "Tryb w menu wymaga opcji „Sprawdzaj status dostawców” w Ogólnych; do tego czasu menu pokazuje link.";
 "menu_bar_layout_token_stacked_bars" = "Paski sesji i tygodnia";
+"section_menu_bar_item" = "Element paska menu";
+"section_appearance" = "Wygląd";
+"merged_icon_style_subtitle_all" = "Przełącznik pokazuje jednego dostawcę naraz. Stos pokazuje dwóch dostawców jako wiersze tekstu. Paski w stosie rysują dwóch lub trzech dostawców jako wskaźniki.";
+"stacked_bars_section_footer" = "Paski są wypełniane zgodnie z kierunkiem ustawionym w sekcji Menu (pozostało lub zużyto).";

@@ -2550,3 +2550,7 @@
 "status_page_inline_subtitle" = "Liệt kê các thành phần dịch vụ trong menu. Nhấp vào danh sách để mở trang trạng thái.";
 "status_page_inline_requires_checks" = "Chế độ nội tuyến cần bật “Kiểm tra Nhà cung cấp trạng thái” trong Chung; trước đó menu hiển thị liên kết.";
 "menu_bar_layout_token_stacked_bars" = "Thanh phiên + tuần";
+"section_menu_bar_item" = "Mục thanh menu";
+"section_appearance" = "Giao diện";
+"merged_icon_style_subtitle_all" = "Bộ chuyển hiển thị từng nhà cung cấp một. Xếp chồng hiển thị hai nhà cung cấp dưới dạng dòng chữ. Thanh xếp chồng vẽ hai hoặc ba nhà cung cấp dưới dạng thước đo.";
+"stacked_bars_section_footer" = "Các thanh theo hướng tô đã đặt trong Menu (còn lại hoặc đã dùng).";

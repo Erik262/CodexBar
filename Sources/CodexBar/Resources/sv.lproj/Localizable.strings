@@ -2548,3 +2548,7 @@
 "status_page_inline_subtitle" = "Listar tjänstens komponenter i menyn. Klicka på listan för att öppna statussidan.";
 "status_page_inline_requires_checks" = "Infogat läge kräver ”Kontrollera leverantörsstatus” under Allmänt; tills dess visar menyn länken.";
 "menu_bar_layout_token_stacked_bars" = "Sessions- och veckostaplar";
+"section_menu_bar_item" = "Menyradsobjekt";
+"section_appearance" = "Utseende";
+"merged_icon_style_subtitle_all" = "Växlaren visar en leverantör i taget. Staplad visar två leverantörer som textrader. Staplade staplar ritar två eller tre leverantörer som mätare.";
+"stacked_bars_section_footer" = "Staplarna följer fyllningsriktningen under Meny (kvar eller använt).";

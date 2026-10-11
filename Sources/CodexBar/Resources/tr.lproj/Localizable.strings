@@ -2552,3 +2552,7 @@
 "status_page_inline_subtitle" = "Hizmet bileşenlerini menüde listeler. Durum sayfasını açmak için listeye tıklayın.";
 "status_page_inline_requires_checks" = "Satır içi görünüm için Genel'de “Sağlayıcı durumunu denetle” açık olmalıdır; o zamana kadar menü bağlantıyı gösterir.";
 "menu_bar_layout_token_stacked_bars" = "Oturum + haftalık çubuklar";
+"section_menu_bar_item" = "Menü çubuğu öğesi";
+"section_appearance" = "Görünüm";
+"merged_icon_style_subtitle_all" = "Değiştirici her seferinde bir sağlayıcı gösterir. Yığın, iki sağlayıcıyı metin satırları olarak gösterir. Yığılmış çubuklar iki veya üç sağlayıcıyı gösterge olarak çizer.";
+"stacked_bars_section_footer" = "Çubuklar Menü altında ayarlanan doldurma yönünü izler (kalan veya kullanılan).";

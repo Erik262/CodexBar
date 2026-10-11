@@ -17,89 +17,44 @@ struct MenuBarPane: View {
         style == .iconAndPercent
     }
 
+    /// The merged style when icons are combined; nil while each provider has its own item.
+    private var combinedStyle: MergedIconDisplayStyle? {
+        self.settings.mergeIcons ? self.mergedIconPresentation.effectiveStyle : nil
+    }
+
+    /// Stacked bars draw their own image and Stacked text rows need Icon & percent, so the style picker
+    /// only matters for separate items and the switcher.
+    private var showsIconStylePicker: Bool {
+        switch self.combinedStyle {
+        case .bars?, .stacked?: false
+        default: true
+        }
+    }
+
     private var showsPercentOptions: Bool {
-        self.settings.menuBarIconStyle == .iconAndPercent
+        self.settings.menuBarIconStyle == .iconAndPercent && self.combinedStyle != .bars
     }
 
     var body: some View {
         Form {
-            Section {
-                SettingsMenuPicker(
-                    selection: self.$settings.menuBarIconStyle,
-                    options: MenuBarSettingsMenuOptions.iconStyles,
-                    label: {
-                        SettingsRowLabel(
-                            L("menu_bar_style_title"),
-                            subtitle: L("menu_bar_style_subtitle"))
-                    },
-                    optionLabel: { style in
-                        Text(style.label)
-                    })
+            self.menuBarItemSection
 
-                // Percent-only options stay hidden for icon-only styles instead of showing as disabled rows.
-                if Self.inactiveDisplayContrastAvailable(for: self.settings.menuBarIconStyle) {
-                    Toggle(isOn: self.$settings.menuBarHighContrastOnInactiveDisplays) {
-                        SettingsRowLabel(
-                            L("menu_bar_inactive_display_contrast_title"),
-                            subtitle: L("menu_bar_inactive_display_contrast_subtitle"))
-                    }
-                }
+            if self.combinedStyle == .bars, let rows = self.mergedIconPresentation.barProviders {
+                self.stackedBarsSection(rows: rows)
+            }
 
-                if self.showsPercentOptions {
-                    Toggle(isOn: self.$settings.menuBarColorPace) {
-                        SettingsRowLabel(
-                            L("Color Pace Indicator"),
-                            subtitle: L(
-                                "Green pace indicator when behind pace, red when ahead of pace " +
-                                    "(risk of running out early)"))
-                    }
-
-                    SettingsMenuPicker(
-                        selection: self.$settings.menuBarPaceReservePositive,
-                        options: [false, true],
-                        label: { Text(L("Pace sign")) },
-                        optionLabel: { reservePositive in
-                            Text(reservePositive ? L("Reserve is +") : L("Ahead of pace is +"))
-                        })
-                }
-
-                Toggle(isOn: self.$settings.menuBarColorByProvider) {
-                    Text(L("Color by provider"))
-                }
-
-                Toggle(isOn: self.$settings.menuBarStatusBadgeVisible) {
-                    SettingsRowLabel(
-                        L("menu_bar_status_badge_title"),
-                        subtitle: L("menu_bar_status_badge_subtitle"))
-                }
-            } header: {
-                Text(L("section_icon"))
+            if self.combinedStyle == .stacked, let pair = self.mergedIconPresentation.stackedProviders {
+                self.stackedRowsSection(pair: pair)
             }
 
             if self.showsPercentOptions {
-                Section {
-                    MenuBarLayoutEditor(settings: self.settings, store: self.store)
-                } header: {
-                    Text(L("menu_bar_layout_title"))
-                } footer: {
-                    SettingsSectionFooter(L("menu_bar_layout_footer"))
-                }
+                self.percentSection
+                self.layoutSection
             }
 
-            self.combinedIconSection
+            self.appearanceSection
 
             self.menuTabsSection
-
-            // Brand icons (including stacked rows, which require them) never draw blink frames.
-            if !self.settings.menuBarShowsBrandIconWithPercent {
-                Section {
-                    Toggle(isOn: self.$settings.randomBlinkEnabled) {
-                        SettingsRowLabel(L("surprise_me_title"), subtitle: L("surprise_me_subtitle"))
-                    }
-                } header: {
-                    Text(L("section_animation"))
-                }
-            }
         }
         .formStyle(.grouped)
         .toggleStyle(.switch)
@@ -122,7 +77,8 @@ struct MenuBarPane: View {
         }
     }
 
-    private var combinedIconSection: some View {
+    /// The one decision everything else hangs off: separate items or one combined icon, then its style.
+    private var menuBarItemSection: some View {
         Section {
             Toggle(isOn: self.$settings.mergeIcons) {
                 SettingsRowLabel(L("merge_icons_title"), subtitle: L("merge_icons_subtitle"))
@@ -132,39 +88,133 @@ struct MenuBarPane: View {
                 SettingsMenuPicker(
                     selection: Binding(
                         get: { self.mergedIconPresentation.effectiveStyle },
-                        set: { self.settings.mergedIconDisplayStyle = $0 }),
+                        set: { self.setCombinedStyle($0) }),
                     options: MenuBarSettingsMenuOptions.mergedIconStyles,
                     label: {
-                        SettingsRowLabel(L("merged_icon_style_title"), subtitle: L("merged_icon_style_subtitle"))
+                        SettingsRowLabel(L("merged_icon_style_title"), subtitle: L("merged_icon_style_subtitle_all"))
                     },
                     optionLabel: { style in
                         Text(style.label)
                     })
                     .disabled(self.mergedIconPresentation.eligibleProviders.count < 2)
+            }
 
-                if let barRows = self.mergedIconPresentation.barProviders {
-                    self.stackedBarsSettings(rows: barRows)
-                }
+            if self.showsIconStylePicker {
+                SettingsMenuPicker(
+                    selection: self.$settings.menuBarIconStyle,
+                    options: MenuBarSettingsMenuOptions.iconStyles,
+                    label: {
+                        SettingsRowLabel(
+                            L("menu_bar_style_title"),
+                            subtitle: L("menu_bar_style_subtitle"))
+                    },
+                    optionLabel: { style in
+                        Text(style.label)
+                    })
+            }
+        } header: {
+            Text(L("section_menu_bar_item"))
+        }
+    }
 
-                if let pair = self.mergedIconPresentation.stackedProviders {
-                    self.stackedRowProviderPicker(
-                        title: L("merge_icon_stacked_top_provider_title"),
-                        selection: Binding(
-                            get: { self.mergedIconPresentation.topSelection },
-                            set: { self.settings.mergeIconStackedTopProvider = $0 }),
-                        excluding: self.mergedIconPresentation.bottomSelection,
-                        automaticProvider: pair.top)
-                    self.stackedRowProviderPicker(
-                        title: L("merge_icon_stacked_bottom_provider_title"),
-                        selection: Binding(
-                            get: { self.mergedIconPresentation.bottomSelection },
-                            set: { self.settings.mergeIconStackedBottomProvider = $0 }),
-                        excluding: self.mergedIconPresentation.topSelection,
-                        automaticProvider: pair.bottom)
+    private func setCombinedStyle(_ style: MergedIconDisplayStyle) {
+        // Stacked text rows are built from Icon & percent layouts, so choosing them switches that style on
+        // instead of silently falling back to the switcher.
+        if style == .stacked {
+            self.settings.menuBarIconStyle = .iconAndPercent
+        }
+        self.settings.mergedIconDisplayStyle = style
+    }
+
+    private func stackedBarsSection(rows: [UsageProvider]) -> some View {
+        Section {
+            self.stackedBarsSettings(rows: rows)
+        } header: {
+            Text(L("merged_icon_style_bars"))
+        } footer: {
+            SettingsSectionFooter(L("stacked_bars_section_footer"))
+        }
+    }
+
+    private func stackedRowsSection(pair: MergedIconPresentation.Pair) -> some View {
+        Section {
+            self.stackedRowProviderPicker(
+                title: L("merge_icon_stacked_top_provider_title"),
+                selection: Binding(
+                    get: { self.mergedIconPresentation.topSelection },
+                    set: { self.settings.mergeIconStackedTopProvider = $0 }),
+                excluding: self.mergedIconPresentation.bottomSelection,
+                automaticProvider: pair.top)
+            self.stackedRowProviderPicker(
+                title: L("merge_icon_stacked_bottom_provider_title"),
+                selection: Binding(
+                    get: { self.mergedIconPresentation.bottomSelection },
+                    set: { self.settings.mergeIconStackedBottomProvider = $0 }),
+                excluding: self.mergedIconPresentation.topSelection,
+                automaticProvider: pair.bottom)
+        } header: {
+            Text(L("merged_icon_style_stacked"))
+        }
+    }
+
+    private var percentSection: some View {
+        Section {
+            Toggle(isOn: self.$settings.menuBarHighContrastOnInactiveDisplays) {
+                SettingsRowLabel(
+                    L("menu_bar_inactive_display_contrast_title"),
+                    subtitle: L("menu_bar_inactive_display_contrast_subtitle"))
+            }
+
+            Toggle(isOn: self.$settings.menuBarColorPace) {
+                SettingsRowLabel(
+                    L("Color Pace Indicator"),
+                    subtitle: L(
+                        "Green pace indicator when behind pace, red when ahead of pace " +
+                            "(risk of running out early)"))
+            }
+
+            SettingsMenuPicker(
+                selection: self.$settings.menuBarPaceReservePositive,
+                options: [false, true],
+                label: { Text(L("Pace sign")) },
+                optionLabel: { reservePositive in
+                    Text(reservePositive ? L("Reserve is +") : L("Ahead of pace is +"))
+                })
+        } header: {
+            Text(L("menu_bar_style_icon_percent"))
+        }
+    }
+
+    private var layoutSection: some View {
+        Section {
+            MenuBarLayoutEditor(settings: self.settings, store: self.store)
+        } header: {
+            Text(L("menu_bar_layout_title"))
+        } footer: {
+            SettingsSectionFooter(L("menu_bar_layout_footer"))
+        }
+    }
+
+    private var appearanceSection: some View {
+        Section {
+            Toggle(isOn: self.$settings.menuBarColorByProvider) {
+                Text(L("Color by provider"))
+            }
+
+            Toggle(isOn: self.$settings.menuBarStatusBadgeVisible) {
+                SettingsRowLabel(
+                    L("menu_bar_status_badge_title"),
+                    subtitle: L("menu_bar_status_badge_subtitle"))
+            }
+
+            // Brand icons and stacked bars never draw blink frames.
+            if !self.settings.menuBarShowsBrandIconWithPercent, self.combinedStyle != .bars {
+                Toggle(isOn: self.$settings.randomBlinkEnabled) {
+                    SettingsRowLabel(L("surprise_me_title"), subtitle: L("surprise_me_subtitle"))
                 }
             }
         } header: {
-            Text(L("section_combined_icon"))
+            Text(L("section_appearance"))
         }
     }
 

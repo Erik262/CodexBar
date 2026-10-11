@@ -2552,3 +2552,7 @@
 "status_page_inline_subtitle" = "Menampilkan komponen layanan di menu. Klik daftar untuk membuka halaman status.";
 "status_page_inline_requires_checks" = "Mode sebaris memerlukan “Periksa status penyedia” di Umum; sampai saat itu menu menampilkan tautan.";
 "menu_bar_layout_token_stacked_bars" = "Bilah sesi + mingguan";
+"section_menu_bar_item" = "Item bilah menu";
+"section_appearance" = "Tampilan";
+"merged_icon_style_subtitle_all" = "Pengalih menampilkan satu penyedia sekaligus. Bertumpuk menampilkan dua penyedia sebagai baris teks. Bilah bertumpuk menggambar dua atau tiga penyedia sebagai meter.";
+"stacked_bars_section_footer" = "Bilah mengikuti arah isian yang diatur di Menu (sisa atau terpakai).";

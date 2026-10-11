@@ -2517,3 +2517,7 @@
 "status_page_inline_subtitle" = "메뉴에 서비스 구성 요소를 나열합니다. 목록을 클릭하면 상태 페이지가 열립니다.";
 "status_page_inline_requires_checks" = "인라인 표시는 일반의 “공급자 상태 확인”이 필요합니다. 그 전까지는 메뉴에 링크가 표시됩니다.";
 "menu_bar_layout_token_stacked_bars" = "세션 + 주간 막대";
+"section_menu_bar_item" = "메뉴 막대 항목";
+"section_appearance" = "모양";
+"merged_icon_style_subtitle_all" = "전환기는 한 번에 하나의 공급자를 표시합니다. 스택은 두 공급자를 텍스트 행으로 표시합니다. 스택 막대는 두세 공급자를 게이지로 그립니다.";
+"stacked_bars_section_footer" = "막대는 메뉴에서 설정한 채우기 방향(남은 양 또는 사용량)을 따릅니다.";

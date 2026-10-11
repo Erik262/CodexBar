@@ -2527,3 +2527,7 @@
 "status_page_inline_subtitle" = "在選單中列出服務元件。點按列表可開啟狀態頁面。";
 "status_page_inline_requires_checks" = "內嵌顯示需要在「一般」中開啟「檢查提供者狀態」；在此之前選單會顯示連結。";
 "menu_bar_layout_token_stacked_bars" = "工作階段 + 每週列";
+"section_menu_bar_item" = "選單列項目";
+"section_appearance" = "外觀";
+"merged_icon_style_subtitle_all" = "切換器一次顯示一個提供者。堆疊以兩行文字顯示兩個提供者。堆疊列以量表形式繪製兩到三個提供者。";
+"stacked_bars_section_footer" = "列條遵循「選單」中設定的填滿方向（剩餘或已用）。";

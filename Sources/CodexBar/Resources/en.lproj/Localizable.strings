@@ -2553,3 +2553,7 @@
 "status_page_inline_subtitle" = "Lists service components in the menu. Click the list to open the status page.";
 "status_page_inline_requires_checks" = "Inline needs “Check provider status” in General; until then the menu shows the link.";
 "menu_bar_layout_token_stacked_bars" = "Session + weekly bars";
+"section_menu_bar_item" = "Menu bar item";
+"section_appearance" = "Appearance";
+"merged_icon_style_subtitle_all" = "Switcher shows one provider at a time. Stacked shows two providers as text rows. Stacked bars draw two or three providers as meters.";
+"stacked_bars_section_footer" = "Bars follow the fill direction set under Menu (remaining or used).";

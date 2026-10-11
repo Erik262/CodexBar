@@ -2549,3 +2549,7 @@
 "status_page_inline_subtitle" = "サービスのコンポーネントをメニューに一覧表示します。一覧をクリックするとステータスページを開きます。";
 "status_page_inline_requires_checks" = "インライン表示には「一般」の「プロバイダのステータスを確認」が必要です。それまではリンクが表示されます。";
 "menu_bar_layout_token_stacked_bars" = "セッション＋週間バー";
+"section_menu_bar_item" = "メニューバー項目";
+"section_appearance" = "外観";
+"merged_icon_style_subtitle_all" = "スイッチャーは一度に1つのプロバイダを表示します。スタックは2つのプロバイダをテキスト行で表示します。スタックバーは2〜3個のプロバイダをメーターで表示します。";
+"stacked_bars_section_footer" = "バーは「メニュー」で設定した塗りの向き（残り／使用済み）に従います。";

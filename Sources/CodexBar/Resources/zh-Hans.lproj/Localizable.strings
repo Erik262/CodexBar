@@ -2542,3 +2542,7 @@
 "status_page_inline_subtitle" = "在菜单中列出服务组件。点击列表可打开状态页。";
 "status_page_inline_requires_checks" = "内嵌显示需要在“通用”中开启“检查提供商状态”；在此之前菜单显示链接。";
 "menu_bar_layout_token_stacked_bars" = "会话 + 每周条";
+"section_menu_bar_item" = "菜单栏项";
+"section_appearance" = "外观";
+"merged_icon_style_subtitle_all" = "切换器一次显示一个提供商。堆叠以两行文字显示两个提供商。堆叠条以量表形式绘制两到三个提供商。";
+"stacked_bars_section_footer" = "条形遵循“菜单”中设置的填充方向（剩余或已用）。";

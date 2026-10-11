@@ -2548,3 +2548,7 @@
 "status_page_inline_subtitle" = "Mostra os compoñentes do servizo no menú. Fai clic na lista para abrir a páxina de estado.";
 "status_page_inline_requires_checks" = "O modo integrado precisa «Comprobar o estado do provedor» en Xeral; ata entón o menú mostra a ligazón.";
 "menu_bar_layout_token_stacked_bars" = "Barras de sesión e semanal";
+"section_menu_bar_item" = "Elemento da barra de menús";
+"section_appearance" = "Aparencia";
+"merged_icon_style_subtitle_all" = "O selector mostra un provedor de cada vez. Apilado mostra dous provedores como filas de texto. As barras apiladas debuxan dous ou tres provedores como indicadores.";
+"stacked_bars_section_footer" = "As barras seguen a dirección de enchido definida en Menú (restante ou usado).";
