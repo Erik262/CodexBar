@@ -770,6 +770,7 @@ extension UsageMenuCardView.Model {
 struct InlineUsageDashboardContent: View {
     private let model: InlineUsageDashboardModel
     @Environment(\.menuItemHighlighted) private var isHighlighted
+    @Environment(\.menuCardOverviewStyle) private var isOverviewStyle
 
     init(model: InlineUsageDashboardModel) {
         self.model = model
@@ -778,7 +779,7 @@ struct InlineUsageDashboardContent: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             self.kpis
-            if !self.model.points.isEmpty {
+            if !self.model.points.isEmpty, !self.isOverviewStyle {
                 MiniUsageBars(model: self.model)
                     .frame(height: 58)
                     .accessibilityElement(children: .contain)

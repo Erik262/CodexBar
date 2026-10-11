@@ -2,6 +2,8 @@ import SwiftUI
 
 extension EnvironmentValues {
     @Entry var menuItemHighlighted: Bool = false
+    /// Set by Overview rows: cards show the provider icon next to the name and skip the inline cost chart.
+    @Entry var menuCardOverviewStyle: Bool = false
     /// Optional live-refresh monitor injected into menu card views so the provider card
     /// subtitle can reflect the in-flight "Refreshing…" state in place while the NSMenu
     /// stays open, without rebuilding the menu during AppKit tracking.

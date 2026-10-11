@@ -646,6 +646,7 @@ extension StatusItemController {
                     additional: [
                         UsageMenuCardView.Model.heightFingerprintField("storage", storageText),
                         "layout=\(self.settings.mergedOverviewLayout.rawValue)",
+                        "overviewStyle=iconNoChart",
                     ]),
                 submenu: submenu,
                 containsInteractiveControls: row.model.subtitleStyle == .error || row.model.usesLiveSubtitle,

@@ -325,10 +325,19 @@ private struct UsageMenuCardHeaderView: View {
     var planAction: (() -> Void)?
     @Environment(\.menuItemHighlighted) private var isHighlighted
     @Environment(\.menuCardRefreshMonitor) private var refreshMonitor
+    @Environment(\.menuCardOverviewStyle) private var isOverviewStyle
 
     var body: some View {
         VStack(alignment: .leading, spacing: UsageMenuCardLayout.headerLineSpacing) {
             HStack(alignment: .firstTextBaseline, spacing: UsageMenuCardLayout.headerColumnSpacing) {
+                if self.isOverviewStyle, let icon = ProviderBrandIcon.image(for: self.model.provider) {
+                    Image(nsImage: icon)
+                        .resizable()
+                        .renderingMode(.template)
+                        .frame(width: 14, height: 14)
+                        .alignmentGuide(.firstTextBaseline) { $0[.bottom] - 2 }
+                        .accessibilityHidden(true)
+                }
                 Text(self.model.providerName).font(.headline)
                     .fontWeight(.semibold)
                     .lineLimit(1).truncationMode(.tail).layoutPriority(1)
