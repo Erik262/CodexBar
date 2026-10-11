@@ -774,83 +774,6 @@ final class MenuBarLayoutRenderer {
         }
     }
 
-    /// A rounded meter drawn like the stacked-bars icon, sized to the line: wide and 6 pt tall on one line,
-    /// narrower and 4 pt tall when two lines share the menu bar.
-    private static func barToken(
-        window: MenuBarLayoutRenderWindow?,
-        style: TokenStyle,
-        showUsed: Bool,
-        isMonochrome: Bool)
-        -> (value: NSAttributedString, accessibilityText: String?)
-    {
-        guard let window else {
-            return self.textToken(
-                self.missingValue,
-                accessibilityText: L("Usage bar unavailable"),
-                attributes: style.attributes)
-        }
-        let percent = (showUsed ? window.usedPercent : window.remainingPercent).clamped(to: 0...100)
-        let isStacked = style.iconHeight < 10
-        let size = NSSize(width: isStacked ? 18 : 26, height: isStacked ? 4 : 6)
-        let color = style.foregroundColor
-        let image = NSImage(size: size, flipped: false) { rect in
-            StackedBarsIconRenderer.drawBar(in: rect, percent: percent, color: color)
-            return true
-        }
-        image.isTemplate = isMonochrome
-        let attachment = NSTextAttachment()
-        attachment.image = image
-        attachment.bounds = NSRect(
-            x: 0,
-            y: ((style.font.capHeight - size.height) / 2).rounded(),
-            width: size.width,
-            height: size.height)
-        let value = NSMutableAttributedString(attachment: attachment)
-        value.addAttributes(style.attributes, range: NSRange(location: 0, length: value.length))
-        return (value, L("Usage bar, %d%%", Int(percent.rounded())))
-    }
-
-    /// Session over weekly, scaled to the line's icon height so it sits like the provider icon.
-    private static func stackedBarsToken(
-        data: MenuBarLayoutRenderData,
-        style: TokenStyle,
-        showUsed: Bool,
-        providerTintColor: NSColor?)
-        -> (value: NSAttributedString, accessibilityText: String?)
-    {
-        let windows = [(L("Session"), data.session ?? data.automatic), (L("Weekly"), data.weekly)]
-        guard windows.contains(where: { $0.1 != nil }) else {
-            return self.textToken(
-                self.missingValue,
-                accessibilityText: L("Usage bar unavailable"),
-                attributes: style.attributes)
-        }
-        let percents = windows.map { _, window in
-            window.map { (showUsed ? $0.usedPercent : $0.remainingPercent).clamped(to: 0...100) }
-        }
-        let base = StackedBarsIconRenderer.makeImage(
-            rows: percents.map { StackedBarsIconRenderer.Row(percent: $0, stale: false) },
-            icons: [])
-        let attachment = NSTextAttachment()
-        attachment.image = Self.attachmentImage(
-            base,
-            tint: providerTintColor ?? style.foregroundColor,
-            isMonochrome: providerTintColor == nil)
-        let height = style.iconHeight
-        let width = base.size.height > 0 ? base.size.width * height / base.size.height : height
-        attachment.bounds = NSRect(
-            x: 0,
-            y: ((style.font.capHeight - height) / 2).rounded(),
-            width: width,
-            height: height)
-        let value = NSMutableAttributedString(attachment: attachment)
-        value.addAttributes(style.attributes, range: NSRange(location: 0, length: value.length))
-        let accessibility = zip(windows, percents).compactMap { window, percent in
-            percent.map { "\(window.0) \(Int($0.rounded()))%" }
-        }.joined(separator: ", ")
-        return (value, accessibility)
-    }
-
     private static func renderPercent(
         _ window: PercentWindow,
         data: MenuBarLayoutRenderData,
@@ -1199,6 +1122,86 @@ final class MenuBarLayoutRenderer {
             return size == .small ? 8 : 9
         }
         return size == .small ? 14 : 18
+    }
+}
+
+/// Drawn meter tokens live in an extension to keep the renderer body within the type length limit.
+extension MenuBarLayoutRenderer {
+    /// A rounded meter drawn like the stacked-bars icon, sized to the line: wide and 6 pt tall on one line,
+    /// narrower and 4 pt tall when two lines share the menu bar.
+    private static func barToken(
+        window: MenuBarLayoutRenderWindow?,
+        style: TokenStyle,
+        showUsed: Bool,
+        isMonochrome: Bool)
+        -> (value: NSAttributedString, accessibilityText: String?)
+    {
+        guard let window else {
+            return self.textToken(
+                self.missingValue,
+                accessibilityText: L("Usage bar unavailable"),
+                attributes: style.attributes)
+        }
+        let percent = (showUsed ? window.usedPercent : window.remainingPercent).clamped(to: 0...100)
+        let isStacked = style.iconHeight < 10
+        let size = NSSize(width: isStacked ? 18 : 26, height: isStacked ? 4 : 6)
+        let color = style.foregroundColor
+        let image = NSImage(size: size, flipped: false) { rect in
+            StackedBarsIconRenderer.drawBar(in: rect, percent: percent, color: color)
+            return true
+        }
+        image.isTemplate = isMonochrome
+        let attachment = NSTextAttachment()
+        attachment.image = image
+        attachment.bounds = NSRect(
+            x: 0,
+            y: ((style.font.capHeight - size.height) / 2).rounded(),
+            width: size.width,
+            height: size.height)
+        let value = NSMutableAttributedString(attachment: attachment)
+        value.addAttributes(style.attributes, range: NSRange(location: 0, length: value.length))
+        return (value, L("Usage bar, %d%%", Int(percent.rounded())))
+    }
+
+    /// Session over weekly, scaled to the line's icon height so it sits like the provider icon.
+    private static func stackedBarsToken(
+        data: MenuBarLayoutRenderData,
+        style: TokenStyle,
+        showUsed: Bool,
+        providerTintColor: NSColor?)
+        -> (value: NSAttributedString, accessibilityText: String?)
+    {
+        let windows = [(L("Session"), data.session ?? data.automatic), (L("Weekly"), data.weekly)]
+        guard windows.contains(where: { $0.1 != nil }) else {
+            return self.textToken(
+                self.missingValue,
+                accessibilityText: L("Usage bar unavailable"),
+                attributes: style.attributes)
+        }
+        let percents = windows.map { _, window in
+            window.map { (showUsed ? $0.usedPercent : $0.remainingPercent).clamped(to: 0...100) }
+        }
+        let base = StackedBarsIconRenderer.makeImage(
+            rows: percents.map { StackedBarsIconRenderer.Row(percent: $0, stale: false) },
+            icons: [])
+        let attachment = NSTextAttachment()
+        attachment.image = Self.attachmentImage(
+            base,
+            tint: providerTintColor ?? style.foregroundColor,
+            isMonochrome: providerTintColor == nil)
+        let height = style.iconHeight
+        let width = base.size.height > 0 ? base.size.width * height / base.size.height : height
+        attachment.bounds = NSRect(
+            x: 0,
+            y: ((style.font.capHeight - height) / 2).rounded(),
+            width: width,
+            height: height)
+        let value = NSMutableAttributedString(attachment: attachment)
+        value.addAttributes(style.attributes, range: NSRange(location: 0, length: value.length))
+        let accessibility = zip(windows, percents).compactMap { window, percent in
+            percent.map { "\(window.0) \(Int($0.rounded()))%" }
+        }.joined(separator: ", ")
+        return (value, accessibility)
     }
 }
 
