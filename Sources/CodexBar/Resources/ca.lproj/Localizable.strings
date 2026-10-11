@@ -2522,8 +2522,6 @@
 "stacked_bars_window_title" = "Les barres mostren";
 "stacked_bars_window_session" = "Ús de la sessió";
 "stacked_bars_window_weekly" = "Ús setmanal";
-"stacked_bars_rows_title" = "Files";
-"stacked_bars_rows_subtitle" = "Marca dos o tres proveïdors. Arrossega per canviar l’ordre de dalt a baix.";
 "api_credits_partial_note" = "L’historial de costos comença després del %@, així que els crèdits restants poden estar sobreestimats.";
 "api_credits_settings_title" = "Crèdits d’API prepagats";
 "api_credits_settings_subtitle" = "Introdueix el saldo i el dia que el vas consultar. El menú mostra el saldo menys la despesa informada des de llavors.";
@@ -2554,9 +2552,12 @@
 "section_appearance" = "Aparença";
 "merged_icon_style_subtitle_all" = "El selector mostra un proveïdor alhora. Apilat mostra dos proveïdors com a files de text. Les barres apilades dibuixen dos o tres proveïdors com a indicadors.";
 "stacked_bars_section_footer" = "Les barres segueixen la direcció d'emplenament definida a Menú (restant o usat).";
-"menu_tab_order_title" = "Ordre de les pestanyes";
 "api_credits_of_amount" = "%1$@ de %2$@";
-"menu_tab_order_overview_subtitle" = "Marca fins a %@ proveïdors per a la pestanya Resum. Arrossega per canviar l'ordre de les pestanyes.";
 "menu_preview_title" = "Previsualització del menú";
 "menu_preview_footer" = "S'actualitza mentre canvies les opcions de sota. El menú real es tanca quan Configuració té el focus, així que no pot quedar obert aquí.";
 "menu_section_usage_summary" = "Resum d'ús (avui, 7 dies, sol·licituds, model principal)";
+"provider_zones_pinned_title" = "Fixats";
+"provider_zones_pinned_subtitle" = "Fins a %@ proveïdors. Omplen la pestanya Resum i les barres apilades, de dalt a baix, i encapçalen la barra de pestanyes.";
+"provider_zones_others_title" = "Altres pestanyes";
+"provider_zones_others_subtitle" = "Arrossega un proveïdor amunt per fixar-lo o avall per deixar de fixar-lo.";
+"provider_zones_drop_here" = "Deixa anar un proveïdor aquí";

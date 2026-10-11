@@ -2516,8 +2516,6 @@
 "stacked_bars_window_title" = "Las barras muestran";
 "stacked_bars_window_session" = "Uso de la sesión";
 "stacked_bars_window_weekly" = "Uso semanal";
-"stacked_bars_rows_title" = "Filas";
-"stacked_bars_rows_subtitle" = "Marca dos o tres proveedores. Arrastra para cambiar el orden de arriba abajo.";
 "api_credits_partial_note" = "El historial de costes empieza después del %@, así que los créditos restantes pueden estar sobrestimados.";
 "api_credits_settings_title" = "Créditos de API prepagados";
 "api_credits_settings_subtitle" = "Introduce tu saldo y el día en que lo comprobaste. El menú muestra el saldo menos el gasto informado desde entonces.";
@@ -2548,9 +2546,12 @@
 "section_appearance" = "Apariencia";
 "merged_icon_style_subtitle_all" = "El selector muestra un proveedor cada vez. Apilado muestra dos proveedores como filas de texto. Las barras apiladas dibujan dos o tres proveedores como medidores.";
 "stacked_bars_section_footer" = "Las barras siguen la dirección de llenado definida en Menú (restante o usado).";
-"menu_tab_order_title" = "Orden de pestañas";
 "api_credits_of_amount" = "%1$@ de %2$@";
-"menu_tab_order_overview_subtitle" = "Marca hasta %@ proveedores para la pestaña Resumen. Arrastra para cambiar el orden de las pestañas.";
 "menu_preview_title" = "Vista previa del menú";
 "menu_preview_footer" = "Se actualiza al cambiar las opciones de abajo. El menú real se cierra cuando Ajustes tiene el foco, por lo que no puede quedarse abierto aquí.";
 "menu_section_usage_summary" = "Resumen de uso (hoy, 7 días, solicitudes, modelo principal)";
+"provider_zones_pinned_title" = "Fijados";
+"provider_zones_pinned_subtitle" = "Hasta %@ proveedores. Llenan la pestaña Resumen y las barras apiladas, de arriba abajo, y encabezan la barra de pestañas.";
+"provider_zones_others_title" = "Otras pestañas";
+"provider_zones_others_subtitle" = "Arrastra un proveedor hacia arriba para fijarlo o hacia abajo para soltarlo.";
+"provider_zones_drop_here" = "Suelta un proveedor aquí";

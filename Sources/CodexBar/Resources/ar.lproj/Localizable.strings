@@ -2522,8 +2522,6 @@
 "stacked_bars_window_title" = "تعرض الأشرطة";
 "stacked_bars_window_session" = "استخدام الجلسة";
 "stacked_bars_window_weekly" = "الاستخدام الأسبوعي";
-"stacked_bars_rows_title" = "الصفوف";
-"stacked_bars_rows_subtitle" = "حدّد مزوّدَين أو ثلاثة. اسحب لتغيير الترتيب من الأعلى إلى الأسفل.";
 "api_credits_partial_note" = "يبدأ سجل التكاليف بعد %@، لذا قد يكون الرصيد المتبقي أعلى من الحقيقي.";
 "api_credits_settings_title" = "أرصدة API المدفوعة مسبقًا";
 "api_credits_settings_subtitle" = "أدخل رصيدك واليوم الذي تحققت منه فيه. تعرض القائمة الرصيد مطروحًا منه الإنفاق المُبلغ عنه منذ ذلك الحين.";
@@ -2554,9 +2552,12 @@
 "section_appearance" = "المظهر";
 "merged_icon_style_subtitle_all" = "المبدّل يعرض مزوّدًا واحدًا في كل مرة. المكدّس يعرض مزوّدَين كسطرين نصيين. الأشرطة المكدّسة ترسم مزوّدَين أو ثلاثة كمقاييس.";
 "stacked_bars_section_footer" = "تتبع الأشرطة اتجاه التعبئة المحدد في «القائمة» (المتبقي أو المستخدم).";
-"menu_tab_order_title" = "ترتيب علامات التبويب";
 "api_credits_of_amount" = "%1$@ من %2$@";
-"menu_tab_order_overview_subtitle" = "حدد حتى %@ من مقدمي الخدمات لعلامة تبويب النظرة العامة. اسحب لتغيير ترتيب علامات التبويب.";
 "menu_preview_title" = "معاينة القائمة";
 "menu_preview_footer" = "تتحدث أثناء تغيير الخيارات أدناه. تُغلق القائمة الحقيقية عندما تكون الإعدادات في المقدمة، لذا لا يمكن إبقاؤها مفتوحة هنا.";
 "menu_section_usage_summary" = "ملخص الاستخدام (اليوم، 7 أيام، الطلبات، النموذج الأكثر استخدامًا)";
+"provider_zones_pinned_title" = "المثبّتة";
+"provider_zones_pinned_subtitle" = "حتى %@ من مقدمي الخدمات. تملأ علامة تبويب النظرة العامة والأشرطة المكدّسة من الأعلى إلى الأسفل وتتصدر شريط علامات التبويب.";
+"provider_zones_others_title" = "علامات تبويب أخرى";
+"provider_zones_others_subtitle" = "اسحب مقدم خدمة لأعلى لتثبيته أو لأسفل لإلغاء تثبيته.";
+"provider_zones_drop_here" = "أفلت مقدم خدمة هنا";

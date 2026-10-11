@@ -2522,8 +2522,6 @@
 "stacked_bars_window_title" = "Le barre mostrano";
 "stacked_bars_window_session" = "Utilizzo della sessione";
 "stacked_bars_window_weekly" = "Utilizzo settimanale";
-"stacked_bars_rows_title" = "Righe";
-"stacked_bars_rows_subtitle" = "Seleziona due o tre provider. Trascina per cambiare l’ordine dall’alto in basso.";
 "api_credits_partial_note" = "La cronologia dei costi inizia dopo il %@, quindi i crediti rimanenti potrebbero essere sovrastimati.";
 "api_credits_settings_title" = "Crediti API prepagati";
 "api_credits_settings_subtitle" = "Inserisci il saldo e il giorno in cui l’hai controllato. Il menu mostra il saldo meno la spesa registrata da allora.";
@@ -2554,9 +2552,12 @@
 "section_appearance" = "Aspetto";
 "merged_icon_style_subtitle_all" = "Il selettore mostra un fornitore alla volta. Impilato mostra due fornitori come righe di testo. Le barre impilate disegnano due o tre fornitori come indicatori.";
 "stacked_bars_section_footer" = "Le barre seguono la direzione di riempimento impostata in Menu (rimanente o usato).";
-"menu_tab_order_title" = "Ordine delle schede";
 "api_credits_of_amount" = "%1$@ su %2$@";
-"menu_tab_order_overview_subtitle" = "Seleziona fino a %@ provider per la scheda Panoramica. Trascina per cambiare l'ordine delle schede.";
 "menu_preview_title" = "Anteprima del menu";
 "menu_preview_footer" = "Si aggiorna mentre modifichi le opzioni qui sotto. Il menu reale si chiude quando Impostazioni è in primo piano, quindi non può restare aperto qui.";
 "menu_section_usage_summary" = "Riepilogo utilizzo (oggi, 7 giorni, richieste, modello principale)";
+"provider_zones_pinned_title" = "Fissati";
+"provider_zones_pinned_subtitle" = "Fino a %@ provider. Riempiono la scheda Panoramica e le barre impilate, dall'alto in basso, e aprono la barra delle schede.";
+"provider_zones_others_title" = "Altre schede";
+"provider_zones_others_subtitle" = "Trascina un provider in alto per fissarlo o in basso per sbloccarlo.";
+"provider_zones_drop_here" = "Rilascia un provider qui";

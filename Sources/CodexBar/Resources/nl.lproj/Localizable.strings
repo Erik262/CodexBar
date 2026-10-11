@@ -2517,8 +2517,6 @@
 "stacked_bars_window_title" = "Balken tonen";
 "stacked_bars_window_session" = "Sessiegebruik";
 "stacked_bars_window_weekly" = "Weekgebruik";
-"stacked_bars_rows_title" = "Rijen";
-"stacked_bars_rows_subtitle" = "Vink twee of drie providers aan. Sleep om de volgorde van boven naar beneden te wijzigen.";
 "api_credits_partial_note" = "De kostengeschiedenis begint na %@, dus het resterende tegoed kan te hoog zijn.";
 "api_credits_settings_title" = "Vooraf betaald API-tegoed";
 "api_credits_settings_subtitle" = "Voer je saldo in en de dag waarop je het controleerde. Het menu toont het saldo min de sindsdien gemelde uitgaven.";
@@ -2549,9 +2547,12 @@
 "section_appearance" = "Weergave";
 "merged_icon_style_subtitle_all" = "Wisselaar toont één aanbieder tegelijk. Gestapeld toont twee aanbieders als tekstregels. Gestapelde balken tekenen twee of drie aanbieders als meters.";
 "stacked_bars_section_footer" = "Balken volgen de vulrichting die onder Menu is ingesteld (resterend of gebruikt).";
-"menu_tab_order_title" = "Tabvolgorde";
 "api_credits_of_amount" = "%1$@ van %2$@";
-"menu_tab_order_overview_subtitle" = "Vink maximaal %@ aanbieders aan voor het tabblad Overzicht. Sleep om de tabvolgorde te wijzigen.";
 "menu_preview_title" = "Menuvoorbeeld";
 "menu_preview_footer" = "Werkt bij terwijl je de opties hieronder wijzigt. Het echte menu sluit zodra Instellingen actief is en kan hier dus niet open blijven.";
 "menu_section_usage_summary" = "Gebruiksoverzicht (vandaag, 7 dagen, verzoeken, topmodel)";
+"provider_zones_pinned_title" = "Vastgezet";
+"provider_zones_pinned_subtitle" = "Tot %@ aanbieders. Ze vullen het tabblad Overzicht en de gestapelde balken van boven naar beneden en staan vooraan in de tabbalk.";
+"provider_zones_others_title" = "Andere tabbladen";
+"provider_zones_others_subtitle" = "Sleep een aanbieder omhoog om vast te zetten of omlaag om los te maken.";
+"provider_zones_drop_here" = "Zet hier een aanbieder neer";

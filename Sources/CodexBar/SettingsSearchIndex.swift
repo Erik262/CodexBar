@@ -56,9 +56,8 @@ enum SettingsSearchIndex {
                 "merged_icon_style_title",
                 "stacked_bars_window_title",
                 "stacked_bars_show_icons_title",
-                "stacked_bars_rows_title",
                 "switcher_rows_title",
-                "menu_tab_order_title",
+                "provider_zones_pinned_title",
                 "surprise_me_title",
             ]),
             (.menu, [

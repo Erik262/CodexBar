@@ -38,8 +38,8 @@ struct MenuBarPane: View {
         Form {
             self.menuBarItemSection
 
-            if self.combinedStyle == .bars, let rows = self.mergedIconPresentation.barProviders {
-                self.stackedBarsSection(rows: rows)
+            if self.combinedStyle == .bars {
+                self.stackedBarsSection
             }
 
             if self.combinedStyle == .stacked, let pair = self.mergedIconPresentation.stackedProviders {
@@ -119,9 +119,9 @@ struct MenuBarPane: View {
         self.settings.mergedIconDisplayStyle = style
     }
 
-    private func stackedBarsSection(rows: [UsageProvider]) -> some View {
+    private var stackedBarsSection: some View {
         Section {
-            self.stackedBarsSettings(rows: rows)
+            self.stackedBarsSettings
         } header: {
             Text(L("merged_icon_style_bars"))
         } footer: {
@@ -228,12 +228,10 @@ struct MenuBarPane: View {
                 }
 
                 if !self.activeProvidersInOrder.isEmpty {
-                    MenuTabOrderList(
+                    PinnedProviderZonesView(
                         settings: self.settings,
-                        providers: self.activeProvidersInOrder,
-                        overviewLimit: Self.maxOverviewProviders,
-                        isOnOverview: { self.overviewSelectedProviders.contains($0) },
-                        setOnOverview: { self.setOverviewProviderSelection(provider: $0, isSelected: $1) })
+                        enabled: self.activeProvidersInOrder,
+                        limit: min(Self.maxOverviewProviders, StackedBarsIconRenderer.maxRows))
                 }
             } header: {
                 Text(L("section_menu_tabs"))
@@ -244,7 +242,7 @@ struct MenuBarPane: View {
     }
 
     @ViewBuilder
-    private func stackedBarsSettings(rows: [UsageProvider]) -> some View {
+    private var stackedBarsSettings: some View {
         SettingsMenuPicker(
             selection: self.$settings.stackedBarsWindow,
             options: StackedBarsWindow.allCases,
@@ -253,10 +251,6 @@ struct MenuBarPane: View {
                 Text(window.label)
             })
         Toggle(L("stacked_bars_show_icons_title"), isOn: self.$settings.stackedBarsShowIcons)
-        StackedBarsProviderList(
-            settings: self.settings,
-            eligibleProviders: self.mergedIconPresentation.eligibleProviders,
-            activeRows: rows)
     }
 
     private var activeProvidersInOrder: [UsageProvider] {
@@ -283,22 +277,8 @@ struct MenuBarPane: View {
             })
     }
 
-    private var overviewSelectedProviders: [UsageProvider] {
-        self.settings.resolvedMergedOverviewProviders(
-            activeProviders: self.activeProvidersInOrder,
-            maxVisibleProviders: Self.maxOverviewProviders)
-    }
-
     private func providerDisplayName(_ provider: UsageProvider) -> String {
         ProviderDescriptorRegistry.descriptor(for: provider).metadata.displayName
-    }
-
-    private func setOverviewProviderSelection(provider: UsageProvider, isSelected: Bool) {
-        _ = self.settings.setMergedOverviewProviderSelection(
-            provider: provider,
-            isSelected: isSelected,
-            activeProviders: self.activeProvidersInOrder,
-            maxVisibleProviders: Self.maxOverviewProviders)
     }
 
     private func reconcileOverviewSelection() {

@@ -2516,8 +2516,6 @@
 "stacked_bars_window_title" = "Balken zeigen";
 "stacked_bars_window_session" = "Sitzungsnutzung";
 "stacked_bars_window_weekly" = "Wöchentliche Nutzung";
-"stacked_bars_rows_title" = "Zeilen";
-"stacked_bars_rows_subtitle" = "Wähle zwei oder drei Anbieter. Ziehen ändert die Reihenfolge von oben nach unten.";
 "api_credits_partial_note" = "Der Kostenverlauf beginnt nach dem %@, daher kann das Restguthaben zu hoch sein.";
 "api_credits_settings_title" = "Vorausbezahltes API-Guthaben";
 "api_credits_settings_subtitle" = "Gib dein Guthaben und das Datum ein, an dem du es geprüft hast. Das Menü zeigt das Guthaben abzüglich der seitdem gemeldeten Ausgaben.";
@@ -2548,9 +2546,12 @@
 "section_appearance" = "Darstellung";
 "merged_icon_style_subtitle_all" = "Umschalter zeigt jeweils einen Anbieter. Gestapelt zeigt zwei Anbieter als Textzeilen. Gestapelte Balken zeichnen zwei oder drei Anbieter als Anzeigen.";
 "stacked_bars_section_footer" = "Die Balken folgen der Füllrichtung unter „Menü“ (verbleibend oder verbraucht).";
-"menu_tab_order_title" = "Tab-Reihenfolge";
 "api_credits_of_amount" = "%1$@ von %2$@";
-"menu_tab_order_overview_subtitle" = "Wähle bis zu %@ Anbieter für den Übersicht-Tab. Ziehen ändert die Tab-Reihenfolge.";
 "menu_preview_title" = "Menüvorschau";
 "menu_preview_footer" = "Aktualisiert sich, während du die Optionen unten änderst. Das echte Menü schließt sich, sobald die Einstellungen aktiv sind, und kann hier nicht offen bleiben.";
 "menu_section_usage_summary" = "Nutzungsübersicht (heute, 7 Tage, Anfragen, Top-Modell)";
+"provider_zones_pinned_title" = "Angeheftet";
+"provider_zones_pinned_subtitle" = "Bis zu %@ Anbieter. Sie füllen den Übersicht-Tab und die gestapelten Balken von oben nach unten und stehen vorn in der Tab-Leiste.";
+"provider_zones_others_title" = "Weitere Tabs";
+"provider_zones_others_subtitle" = "Ziehe einen Anbieter nach oben, um ihn anzuheften, oder nach unten, um ihn zu lösen.";
+"provider_zones_drop_here" = "Anbieter hier ablegen";

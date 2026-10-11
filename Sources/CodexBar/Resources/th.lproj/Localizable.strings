@@ -2522,8 +2522,6 @@
 "stacked_bars_window_title" = "แถบแสดง";
 "stacked_bars_window_session" = "การใช้งานเซสชัน";
 "stacked_bars_window_weekly" = "การใช้งานรายสัปดาห์";
-"stacked_bars_rows_title" = "แถว";
-"stacked_bars_rows_subtitle" = "เลือกผู้ให้บริการสองหรือสามราย ลากเพื่อเปลี่ยนลำดับจากบนลงล่าง";
 "api_credits_partial_note" = "ประวัติค่าใช้จ่ายเริ่มหลัง %@ เครดิตคงเหลืออาจสูงกว่าความจริง";
 "api_credits_settings_title" = "เครดิต API แบบเติมเงินล่วงหน้า";
 "api_credits_settings_subtitle" = "ป้อนยอดคงเหลือและวันที่ตรวจสอบ เมนูจะแสดงยอดคงเหลือหักค่าใช้จ่ายที่รายงานตั้งแต่วันนั้น";
@@ -2554,9 +2552,12 @@
 "section_appearance" = "รูปลักษณ์";
 "merged_icon_style_subtitle_all" = "ตัวสลับแสดงผู้ให้บริการทีละราย แบบซ้อนแสดงผู้ให้บริการสองรายเป็นแถวข้อความ แถบซ้อนวาดผู้ให้บริการสองหรือสามรายเป็นมาตรวัด";
 "stacked_bars_section_footer" = "แถบจะเติมตามทิศทางที่ตั้งไว้ในเมนู (คงเหลือหรือใช้ไป)";
-"menu_tab_order_title" = "ลำดับแท็บ";
 "api_credits_of_amount" = "%1$@ จาก %2$@";
-"menu_tab_order_overview_subtitle" = "เลือกผู้ให้บริการได้สูงสุด %@ รายสำหรับแท็บภาพรวม ลากเพื่อเปลี่ยนลำดับแท็บ";
 "menu_preview_title" = "ตัวอย่างเมนู";
 "menu_preview_footer" = "อัปเดตเมื่อคุณเปลี่ยนตัวเลือกด้านล่าง เมนูจริงจะปิดเมื่อการตั้งค่าอยู่ด้านหน้า จึงเปิดค้างไว้ที่นี่ไม่ได้";
 "menu_section_usage_summary" = "สรุปการใช้งาน (วันนี้ 7 วัน คำขอ โมเดลที่ใช้มากที่สุด)";
+"provider_zones_pinned_title" = "ปักหมุด";
+"provider_zones_pinned_subtitle" = "สูงสุด %@ ผู้ให้บริการ จะแสดงในแท็บภาพรวมและแถบซ้อนจากบนลงล่าง และอยู่ต้นแถบแท็บ";
+"provider_zones_others_title" = "แท็บอื่น";
+"provider_zones_others_subtitle" = "ลากผู้ให้บริการขึ้นเพื่อปักหมุด หรือลงเพื่อเลิกปักหมุด";
+"provider_zones_drop_here" = "วางผู้ให้บริการที่นี่";
