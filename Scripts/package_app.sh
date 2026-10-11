@@ -281,7 +281,6 @@ BUNDLE_ID="com.steipete.codexbar"
 # CODEXBAR_FEED_URL and CODEXBAR_SPARKLE_PUBLIC_KEY point a build at another appcast and EdDSA key
 # (for example a fork's own releases); CODEXBAR_ALLOW_ADHOC_UPDATES=1 lets an ad-hoc signed build use it.
 FEED_URL="${CODEXBAR_FEED_URL:-https://raw.githubusercontent.com/steipete/CodexBar/main/appcast.xml}"
-SPARKLE_PUBLIC_KEY="${CODEXBAR_SPARKLE_PUBLIC_KEY:-AGCY8w5vHirVfGGDGc8Szc5iuOqupZSh9pMj/Qs67XI=}"
 AUTO_CHECKS=true
 # CODEXBAR_DEBUG_KEEPS_BUNDLE_ID=1 (compile_and_run.sh --fast) keeps the release bundle ID so a debug
 # build reads the same settings and shows no debug "D" marker in the menu bar.
@@ -386,7 +385,7 @@ cat > "$APP/Contents/Info.plist" <<PLIST
     <key>CFBundleIconFile</key><string>Icon</string>
     <key>NSHumanReadableCopyright</key><string>© 2026 Peter Steinberger. MIT License.</string>
     <key>SUFeedURL</key><string>${FEED_URL}</string>
-    <key>SUPublicEDKey</key><string>${SPARKLE_PUBLIC_KEY}</string>
+    <key>SUPublicEDKey</key><string>${CODEXBAR_SPARKLE_PUBLIC_KEY:-AGCY8w5vHirVfGGDGc8Szc5iuOqupZSh9pMj/Qs67XI=}</string>
     $(if [[ "${CODEXBAR_ALLOW_ADHOC_UPDATES:-0}" == "1" && -n "$FEED_URL" ]]; then echo "<key>CodexBarAllowsAdHocUpdates</key><true/>"; fi)
     <key>SUEnableAutomaticChecks</key><${AUTO_CHECKS}/>
     <key>CodexBuildTimestamp</key><string>${BUILD_TIMESTAMP}</string>
