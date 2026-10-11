@@ -86,71 +86,9 @@ struct MenuBarPane: View {
                 }
             }
 
-            Section {
-                Toggle(isOn: self.$settings.mergeIcons) {
-                    SettingsRowLabel(L("merge_icons_title"), subtitle: L("merge_icons_subtitle"))
-                }
+            self.combinedIconSection
 
-                if self.settings.mergeIcons {
-                    SettingsMenuPicker(
-                        selection: Binding(
-                            get: { self.mergedIconPresentation.effectiveStyle },
-                            set: { self.settings.mergedIconDisplayStyle = $0 }),
-                        options: MenuBarSettingsMenuOptions.mergedIconStyles,
-                        label: {
-                            SettingsRowLabel(L("merged_icon_style_title"), subtitle: L("merged_icon_style_subtitle"))
-                        },
-                        optionLabel: { style in
-                            Text(style.label)
-                        })
-                        .disabled(self.mergedIconPresentation.eligibleProviders.count < 2)
-
-                    if let barRows = self.mergedIconPresentation.barProviders {
-                        self.stackedBarsSettings(rows: barRows)
-                    }
-
-                    if let pair = self.mergedIconPresentation.stackedProviders {
-                        self.stackedRowProviderPicker(
-                            title: L("merge_icon_stacked_top_provider_title"),
-                            selection: Binding(
-                                get: { self.mergedIconPresentation.topSelection },
-                                set: { self.settings.mergeIconStackedTopProvider = $0 }),
-                            excluding: self.mergedIconPresentation.bottomSelection,
-                            automaticProvider: pair.top)
-                        self.stackedRowProviderPicker(
-                            title: L("merge_icon_stacked_bottom_provider_title"),
-                            selection: Binding(
-                                get: { self.mergedIconPresentation.bottomSelection },
-                                set: { self.settings.mergeIconStackedBottomProvider = $0 }),
-                            excluding: self.mergedIconPresentation.topSelection,
-                            automaticProvider: pair.bottom)
-                    }
-                }
-            } header: {
-                Text(L("section_combined_icon"))
-            }
-
-            if self.settings.mergeIcons {
-                Section {
-                    SettingsMenuPicker(
-                        selection: self.$settings.switcherRowsOption,
-                        options: MenuBarSettingsMenuOptions.switcherRows,
-                        label: { SettingsRowLabel(L("switcher_rows_title")) },
-                        optionLabel: { option in
-                            Text(option.label)
-                        })
-
-                    if self.mergedIconPresentation.effectiveStyle == .switcher {
-                        UnifiedIconSourcePicker(selection: self.$settings.unifiedIconSource)
-                    }
-
-                    self.overviewProviderRow
-                } header: {
-                    Text(L("section_menu_tabs"))
-                } footer: {
-                    SettingsSectionFooter(L("section_menu_tabs_footer"))
-                }
-            }
+            self.menuTabsSection
 
             // Brand icons (including stacked rows, which require them) never draw blink frames.
             if !self.settings.menuBarShowsBrandIconWithPercent {
@@ -181,6 +119,77 @@ struct MenuBarPane: View {
                 self.isOverviewProviderPopoverPresented = false
             }
             self.reconcileOverviewSelection()
+        }
+    }
+
+    private var combinedIconSection: some View {
+        Section {
+            Toggle(isOn: self.$settings.mergeIcons) {
+                SettingsRowLabel(L("merge_icons_title"), subtitle: L("merge_icons_subtitle"))
+            }
+
+            if self.settings.mergeIcons {
+                SettingsMenuPicker(
+                    selection: Binding(
+                        get: { self.mergedIconPresentation.effectiveStyle },
+                        set: { self.settings.mergedIconDisplayStyle = $0 }),
+                    options: MenuBarSettingsMenuOptions.mergedIconStyles,
+                    label: {
+                        SettingsRowLabel(L("merged_icon_style_title"), subtitle: L("merged_icon_style_subtitle"))
+                    },
+                    optionLabel: { style in
+                        Text(style.label)
+                    })
+                    .disabled(self.mergedIconPresentation.eligibleProviders.count < 2)
+
+                if let barRows = self.mergedIconPresentation.barProviders {
+                    self.stackedBarsSettings(rows: barRows)
+                }
+
+                if let pair = self.mergedIconPresentation.stackedProviders {
+                    self.stackedRowProviderPicker(
+                        title: L("merge_icon_stacked_top_provider_title"),
+                        selection: Binding(
+                            get: { self.mergedIconPresentation.topSelection },
+                            set: { self.settings.mergeIconStackedTopProvider = $0 }),
+                        excluding: self.mergedIconPresentation.bottomSelection,
+                        automaticProvider: pair.top)
+                    self.stackedRowProviderPicker(
+                        title: L("merge_icon_stacked_bottom_provider_title"),
+                        selection: Binding(
+                            get: { self.mergedIconPresentation.bottomSelection },
+                            set: { self.settings.mergeIconStackedBottomProvider = $0 }),
+                        excluding: self.mergedIconPresentation.topSelection,
+                        automaticProvider: pair.bottom)
+                }
+            }
+        } header: {
+            Text(L("section_combined_icon"))
+        }
+    }
+
+    @ViewBuilder
+    private var menuTabsSection: some View {
+        if self.settings.mergeIcons {
+            Section {
+                SettingsMenuPicker(
+                    selection: self.$settings.switcherRowsOption,
+                    options: MenuBarSettingsMenuOptions.switcherRows,
+                    label: { SettingsRowLabel(L("switcher_rows_title")) },
+                    optionLabel: { option in
+                        Text(option.label)
+                    })
+
+                if self.mergedIconPresentation.effectiveStyle == .switcher {
+                    UnifiedIconSourcePicker(selection: self.$settings.unifiedIconSource)
+                }
+
+                self.overviewProviderRow
+            } header: {
+                Text(L("section_menu_tabs"))
+            } footer: {
+                SettingsSectionFooter(L("section_menu_tabs_footer"))
+            }
         }
     }
 

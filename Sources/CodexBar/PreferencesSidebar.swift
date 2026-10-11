@@ -34,16 +34,22 @@ struct SettingsSidebarView: View {
         .padding(.horizontal, 8)
     }
 
-    private static let paneRows: [(pane: SettingsPane, systemImage: String, color: Color)] = [
-        (.general, "gearshape.fill", .gray),
-        (.iCloudSync, "icloud.fill", .blue),
-        (.usageSpend, "chart.bar.fill", .green),
-        (.notifications, "bell.badge.fill", .red),
-        (.menuBar, "menubar.rectangle", .blue),
-        (.menu, "filemenu.and.selection", .teal),
-        (.advanced, "slider.horizontal.3", .purple),
-        (.hooks, "bolt.horizontal.circle.fill", .orange),
-        (.plugins, "puzzlepiece.extension.fill", .indigo),
+    private struct PaneRow {
+        let pane: SettingsPane
+        let systemImage: String
+        let color: Color
+    }
+
+    private static let paneRows: [PaneRow] = [
+        PaneRow(pane: .general, systemImage: "gearshape.fill", color: .gray),
+        PaneRow(pane: .iCloudSync, systemImage: "icloud.fill", color: .blue),
+        PaneRow(pane: .usageSpend, systemImage: "chart.bar.fill", color: .green),
+        PaneRow(pane: .notifications, systemImage: "bell.badge.fill", color: .red),
+        PaneRow(pane: .menuBar, systemImage: "menubar.rectangle", color: .blue),
+        PaneRow(pane: .menu, systemImage: "filemenu.and.selection", color: .teal),
+        PaneRow(pane: .advanced, systemImage: "slider.horizontal.3", color: .purple),
+        PaneRow(pane: .hooks, systemImage: "bolt.horizontal.circle.fill", color: .orange),
+        PaneRow(pane: .plugins, systemImage: "puzzlepiece.extension.fill", color: .indigo),
     ]
 
     private var appPanesSection: some View {
