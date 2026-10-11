@@ -2537,3 +2537,9 @@
 "api_credits_unmetered_note" = "Amosa o saldo introducido: os custos aquí son estimacións locais, non facturación da API.";
 "section_menu_layout" = "Deseño do menú";
 "section_menu_layout_footer" = "As seccións do menú e os créditos de API de prepagamento configúranse por provedor en Provedores.";
+"stacked_bars_row_number" = "Fila %d";
+"Usage bar, %d%%" = "Barra de uso, %d%%";
+"settings_search_placeholder" = "Buscar axustes e provedores";
+"settings_search_results_title" = "Axustes";
+"section_menu_tabs" = "Lapelas do menú";
+"section_menu_tabs_footer" = "A barra de lapelas na parte superior do menú cando as iconas están combinadas.";

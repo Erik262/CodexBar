@@ -39,18 +39,19 @@ struct MenuPane: View {
                         Text(MenuSettingsMenuOptions.weeklyProgressWorkDaysLabel(workDays))
                     })
 
-                SettingsMenuPicker(
-                    selection: self.$settings.workdayTickAppearance,
-                    options: MenuSettingsMenuOptions.workdayTickAppearances,
-                    label: {
-                        SettingsRowLabel(
-                            L("workday_tick_appearance_title"),
-                            subtitle: L("workday_tick_appearance_subtitle"))
-                    },
-                    optionLabel: { appearance in
-                        Text(appearance.label)
-                    })
-                    .disabled(self.settings.weeklyProgressWorkDays == nil)
+                if self.settings.weeklyProgressWorkDays != nil {
+                    SettingsMenuPicker(
+                        selection: self.$settings.workdayTickAppearance,
+                        options: MenuSettingsMenuOptions.workdayTickAppearances,
+                        label: {
+                            SettingsRowLabel(
+                                L("workday_tick_appearance_title"),
+                                subtitle: L("workday_tick_appearance_subtitle"))
+                        },
+                        optionLabel: { appearance in
+                            Text(appearance.label)
+                        })
+                }
 
                 SettingsMenuPicker(
                     selection: self.$settings.resetTimesOption,
@@ -66,14 +67,15 @@ struct MenuPane: View {
             Section {
                 Toggle(L("show_provider_changelog_links_title"), isOn: self.$settings.providerChangelogLinksEnabled)
 
-                SettingsMenuPicker(
-                    selection: self.$settings.mergedOverviewLayout,
-                    options: MenuSettingsMenuOptions.mergedOverviewLayouts,
-                    label: {
-                        SettingsRowLabel(L("overview_layout_title"), subtitle: L("overview_layout_subtitle"))
-                    },
-                    optionLabel: { Text($0.label) })
-                    .disabled(!self.settings.mergeIcons)
+                if self.settings.mergeIcons {
+                    SettingsMenuPicker(
+                        selection: self.$settings.mergedOverviewLayout,
+                        options: MenuSettingsMenuOptions.mergedOverviewLayouts,
+                        label: {
+                            SettingsRowLabel(L("overview_layout_title"), subtitle: L("overview_layout_subtitle"))
+                        },
+                        optionLabel: { Text($0.label) })
+                }
 
                 Toggle(isOn: self.$settings.showOptionalCreditsAndExtraUsage) {
                     SettingsRowLabel(
@@ -107,12 +109,13 @@ struct MenuPane: View {
                         subtitle: L("status_components_inline_subtitle"))
                 }
 
-                Toggle(isOn: self.$settings.appActionsOnOverviewOnly) {
-                    SettingsRowLabel(
-                        L("app_actions_overview_only_title"),
-                        subtitle: L("app_actions_overview_only_subtitle"))
+                if self.settings.mergeIcons {
+                    Toggle(isOn: self.$settings.appActionsOnOverviewOnly) {
+                        SettingsRowLabel(
+                            L("app_actions_overview_only_title"),
+                            subtitle: L("app_actions_overview_only_subtitle"))
+                    }
                 }
-                .disabled(!self.settings.mergeIcons)
             } header: {
                 Text(L("section_menu_layout"))
             } footer: {

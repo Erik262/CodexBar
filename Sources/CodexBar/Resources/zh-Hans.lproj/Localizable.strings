@@ -2531,3 +2531,9 @@
 "api_credits_unmetered_note" = "显示你输入的余额：此处费用为本地估算，并非 API 账单。";
 "section_menu_layout" = "菜单布局";
 "section_menu_layout_footer" = "菜单分区和预付 API 额度在“提供商”中按提供商分别设置。";
+"stacked_bars_row_number" = "第 %d 行";
+"Usage bar, %d%%" = "用量条，%d%%";
+"settings_search_placeholder" = "搜索设置和提供商";
+"settings_search_results_title" = "设置";
+"section_menu_tabs" = "菜单标签页";
+"section_menu_tabs_footer" = "合并图标时菜单顶部的标签栏。";

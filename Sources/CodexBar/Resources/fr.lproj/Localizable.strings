@@ -2537,3 +2537,9 @@
 "api_credits_unmetered_note" = "Affiche le solde saisi : les coûts ici sont des estimations locales, pas la facturation de l’API.";
 "section_menu_layout" = "Disposition du menu";
 "section_menu_layout_footer" = "Les sections du menu et les crédits API prépayés se règlent par fournisseur dans Fournisseurs.";
+"stacked_bars_row_number" = "Ligne %d";
+"Usage bar, %d%%" = "Barre d'utilisation, %d %%";
+"settings_search_placeholder" = "Rechercher des réglages et des fournisseurs";
+"settings_search_results_title" = "Réglages";
+"section_menu_tabs" = "Onglets du menu";
+"section_menu_tabs_footer" = "La barre d'onglets en haut du menu lorsque les icônes sont fusionnées.";

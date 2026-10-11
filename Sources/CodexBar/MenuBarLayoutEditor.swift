@@ -53,6 +53,8 @@ enum MenuBarLayoutPaletteTokens {
             + MenuBarLayoutNamedExtra.availableTokens(provider: provider, snapshot: snapshot) + [
                 .percent(window: .automatic),
                 .usageBar,
+                .windowBar(window: .session),
+                .windowBar(window: .weekly),
                 .pace(window: .session),
                 .pace(window: .weekly),
                 .pace(window: .automatic),
@@ -79,6 +81,8 @@ enum MenuBarLayoutPaletteTokens {
         .percent(window: .scopedWeekly),
         .percent(window: .automatic),
         .usageBar,
+        .windowBar(window: .session),
+        .windowBar(window: .weekly),
         .pace(window: .session),
         .pace(window: .weekly),
         .pace(window: .automatic),
@@ -1248,6 +1252,7 @@ extension MenuBarLayoutToken {
         case .pace(window: .scopedWeekly): L("menu_bar_layout_token_weekly_pace")
         case .pace(window: .automatic): L("menu_bar_layout_token_auto_pace")
         case .usageBar: L("menu_bar_layout_token_bar")
+        case let .windowBar(window): L("%@: %@", Self.resetWindowLabel(window), L("menu_bar_layout_token_bar"))
         case .resetCountdown: L("menu_bar_layout_token_resets_in")
         case .resetAbsolute: L("menu_bar_layout_token_reset_at")
         case let .windowResetCountdown(window):
@@ -1300,7 +1305,7 @@ extension MenuBarLayoutToken {
         case .accountLabel: "person.crop.circle"
         case .percent, .lanePercent, .extraPercent: "percent"
         case .pace: "speedometer"
-        case .usageBar: "chart.bar.fill"
+        case .usageBar, .windowBar: "chart.bar.fill"
         case .resetCountdown, .windowResetCountdown: "timer"
         case .resetAbsolute, .windowResetAbsolute: "clock"
         case .runsOut, .runsOutCompact: "hourglass.bottomhalf.filled"

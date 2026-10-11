@@ -2537,3 +2537,9 @@
 "api_credits_unmetered_note" = "Toont je ingevoerde saldo: de kosten hier zijn lokale schattingen, geen API-facturering.";
 "section_menu_layout" = "Menu-indeling";
 "section_menu_layout_footer" = "Menusecties en vooruitbetaald API-tegoed stel je per aanbieder in onder Aanbieders.";
+"stacked_bars_row_number" = "Rij %d";
+"Usage bar, %d%%" = "Gebruiksbalk, %d%%";
+"settings_search_placeholder" = "Zoek instellingen en aanbieders";
+"settings_search_results_title" = "Instellingen";
+"section_menu_tabs" = "Menutabbladen";
+"section_menu_tabs_footer" = "De tabbalk boven in het menu wanneer symbolen zijn samengevoegd.";

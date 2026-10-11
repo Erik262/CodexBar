@@ -2506,3 +2506,9 @@
 "api_credits_unmetered_note" = "입력한 잔액을 표시합니다. 여기의 비용은 API 청구액이 아닌 로컬 추정치입니다.";
 "section_menu_layout" = "메뉴 레이아웃";
 "section_menu_layout_footer" = "메뉴 섹션과 선불 API 크레딧은 공급자에서 공급자별로 설정합니다.";
+"stacked_bars_row_number" = "%d행";
+"Usage bar, %d%%" = "사용량 막대, %d%%";
+"settings_search_placeholder" = "설정 및 공급자 검색";
+"settings_search_results_title" = "설정";
+"section_menu_tabs" = "메뉴 탭";
+"section_menu_tabs_footer" = "아이콘을 병합했을 때 메뉴 상단에 표시되는 탭 막대입니다.";

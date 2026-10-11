@@ -10,7 +10,7 @@ struct ProviderMenuCustomizationSettingsView: View {
 
     var body: some View {
         Section {
-            ForEach(MenuSectionToggle.allCases) { section in
+            ForEach(MenuSectionToggle.allCases.filter { $0.applies(to: self.provider) }) { section in
                 Toggle(section.label, isOn: Binding(
                     get: { self.settings.isMenuSectionVisible(section, for: self.provider) },
                     set: { self.settings.setMenuSection(section, visible: $0, for: self.provider) }))

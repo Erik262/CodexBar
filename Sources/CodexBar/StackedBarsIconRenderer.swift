@@ -93,17 +93,18 @@ enum StackedBarsIconRenderer {
         return image
     }
 
-    private static func drawBar(in rect: NSRect, percent: Double?) {
+    /// Shared with the menu bar layout's bar tokens so both meters look identical.
+    static func drawBar(in rect: NSRect, percent: Double?, color: NSColor = .black) {
         let radius = rect.height / 2
         let track = NSBezierPath(roundedRect: rect, xRadius: radius, yRadius: radius)
-        NSColor.black.withAlphaComponent(self.trackAlpha).setFill()
+        color.withAlphaComponent(self.trackAlpha).setFill()
         track.fill()
 
         let fill = self.fillWidth(percent: percent, barWidth: rect.width)
         guard fill > 0 else { return }
         NSGraphicsContext.saveGraphicsState()
         track.addClip()
-        NSColor.black.setFill()
+        color.setFill()
         NSBezierPath(rect: NSRect(x: rect.minX, y: rect.minY, width: fill, height: rect.height)).fill()
         NSGraphicsContext.restoreGraphicsState()
     }

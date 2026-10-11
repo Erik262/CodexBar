@@ -36,6 +36,28 @@ enum MenuSectionToggle: String, CaseIterable, Identifiable, Sendable {
         case .changelogLink: L("Changelog")
         }
     }
+
+    /// Provider-specific by design: only Codex offers Buy Credits in its menu.
+    private static let buyCreditsProviders: Set<UsageProvider> = [.codex]
+
+    /// Whether `provider`'s menu can show this section at all; Settings hides toggles that would do nothing.
+    func applies(to provider: UsageProvider) -> Bool {
+        let descriptor = ProviderDescriptorRegistry.descriptor(for: provider)
+        switch self {
+        case .todayCost, .latestTokens, .currentWindow, .costChart, .costDetails, .recentWindows:
+            return descriptor.tokenCost.supportsTokenCost
+        case .planUsage, .accountActions:
+            return true
+        case .buyCredits:
+            return Self.buyCreditsProviders.contains(provider)
+        case .dashboardLink:
+            return descriptor.metadata.dashboardURL != nil
+        case .statusPageLink:
+            return descriptor.metadata.statusPageURL != nil || descriptor.metadata.statusLinkURL != nil
+        case .changelogLink:
+            return descriptor.metadata.changelogURL != nil
+        }
+    }
 }
 
 extension SettingsStore {

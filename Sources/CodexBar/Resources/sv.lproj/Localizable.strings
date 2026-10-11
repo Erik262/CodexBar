@@ -2537,3 +2537,9 @@
 "api_credits_unmetered_note" = "Visar ditt angivna saldo: kostnaderna här är lokala uppskattningar, inte API-debitering.";
 "section_menu_layout" = "Menylayout";
 "section_menu_layout_footer" = "Menyavsnitt och förbetalda API-krediter ställs in per leverantör under Leverantörer.";
+"stacked_bars_row_number" = "Rad %d";
+"Usage bar, %d%%" = "Användningsstapel, %d %%";
+"settings_search_placeholder" = "Sök inställningar och leverantörer";
+"settings_search_results_title" = "Inställningar";
+"section_menu_tabs" = "Menyflikar";
+"section_menu_tabs_footer" = "Flikfältet högst upp i menyn när symbolerna är sammanslagna.";

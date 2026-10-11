@@ -2542,3 +2542,9 @@
 "api_credits_unmetered_note" = "แสดงยอดคงเหลือที่คุณป้อน ค่าใช้จ่ายที่นี่เป็นค่าประมาณในเครื่อง ไม่ใช่การเรียกเก็บเงินของ API";
 "section_menu_layout" = "เลย์เอาต์เมนู";
 "section_menu_layout_footer" = "ส่วนของเมนูและเครดิต API แบบเติมเงินตั้งค่าแยกตามผู้ให้บริการในหน้าผู้ให้บริการ";
+"stacked_bars_row_number" = "แถว %d";
+"Usage bar, %d%%" = "แถบการใช้งาน %d%%";
+"settings_search_placeholder" = "ค้นหาการตั้งค่าและผู้ให้บริการ";
+"settings_search_results_title" = "การตั้งค่า";
+"section_menu_tabs" = "แท็บเมนู";
+"section_menu_tabs_footer" = "แถบแท็บที่ด้านบนของเมนูเมื่อรวมไอคอน";

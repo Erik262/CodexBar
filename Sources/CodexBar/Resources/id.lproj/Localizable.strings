@@ -2541,3 +2541,9 @@
 "api_credits_unmetered_note" = "Menampilkan saldo yang Anda masukkan: biaya di sini adalah perkiraan lokal, bukan tagihan API.";
 "section_menu_layout" = "Tata letak menu";
 "section_menu_layout_footer" = "Bagian menu dan kredit API prabayar diatur per penyedia di Penyedia.";
+"stacked_bars_row_number" = "Baris %d";
+"Usage bar, %d%%" = "Bilah penggunaan, %d%%";
+"settings_search_placeholder" = "Cari pengaturan dan penyedia";
+"settings_search_results_title" = "Pengaturan";
+"section_menu_tabs" = "Tab menu";
+"section_menu_tabs_footer" = "Bilah tab di bagian atas menu saat ikon digabungkan.";

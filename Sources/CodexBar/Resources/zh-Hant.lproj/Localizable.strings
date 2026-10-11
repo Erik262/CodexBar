@@ -2516,3 +2516,9 @@
 "api_credits_unmetered_note" = "顯示你輸入的餘額：此處費用為本機估算，並非 API 帳單。";
 "section_menu_layout" = "選單版面";
 "section_menu_layout_footer" = "選單區段與預付 API 額度在「提供者」中依提供者分別設定。";
+"stacked_bars_row_number" = "第 %d 列";
+"Usage bar, %d%%" = "用量列，%d%%";
+"settings_search_placeholder" = "搜尋設定與提供者";
+"settings_search_results_title" = "設定";
+"section_menu_tabs" = "選單標籤頁";
+"section_menu_tabs_footer" = "合併圖示時選單頂端的標籤列。";

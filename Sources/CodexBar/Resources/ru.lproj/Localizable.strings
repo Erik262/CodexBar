@@ -2539,3 +2539,9 @@
 "api_credits_unmetered_note" = "Показан введённый баланс: расходы здесь — локальные оценки, а не списания API.";
 "section_menu_layout" = "Макет меню";
 "section_menu_layout_footer" = "Разделы меню и предоплаченные кредиты API настраиваются для каждого провайдера в разделе «Провайдеры».";
+"stacked_bars_row_number" = "Строка %d";
+"Usage bar, %d%%" = "Шкала использования, %d%%";
+"settings_search_placeholder" = "Поиск настроек и провайдеров";
+"settings_search_results_title" = "Настройки";
+"section_menu_tabs" = "Вкладки меню";
+"section_menu_tabs_footer" = "Панель вкладок вверху меню, когда значки объединены.";

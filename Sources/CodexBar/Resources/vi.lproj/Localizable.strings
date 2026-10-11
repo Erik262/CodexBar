@@ -2539,3 +2539,9 @@
 "api_credits_unmetered_note" = "Hiển thị số dư bạn nhập: chi phí ở đây là ước tính cục bộ, không phải hóa đơn API.";
 "section_menu_layout" = "Bố cục menu";
 "section_menu_layout_footer" = "Các mục menu và tín dụng API trả trước được đặt theo từng nhà cung cấp trong Nhà cung cấp.";
+"stacked_bars_row_number" = "Hàng %d";
+"Usage bar, %d%%" = "Thanh sử dụng, %d%%";
+"settings_search_placeholder" = "Tìm cài đặt và nhà cung cấp";
+"settings_search_results_title" = "Cài đặt";
+"section_menu_tabs" = "Tab menu";
+"section_menu_tabs_footer" = "Thanh tab ở đầu menu khi các biểu tượng được gộp.";

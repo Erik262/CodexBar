@@ -2538,3 +2538,9 @@
 "api_credits_unmetered_note" = "Показано введений баланс: витрати тут — локальні оцінки, а не списання API.";
 "section_menu_layout" = "Макет меню";
 "section_menu_layout_footer" = "Розділи меню та передплачені кредити API налаштовуються для кожного провайдера в розділі «Провайдери».";
+"stacked_bars_row_number" = "Рядок %d";
+"Usage bar, %d%%" = "Шкала використання, %d%%";
+"settings_search_placeholder" = "Пошук налаштувань і провайдерів";
+"settings_search_results_title" = "Налаштування";
+"section_menu_tabs" = "Вкладки меню";
+"section_menu_tabs_footer" = "Панель вкладок угорі меню, коли значки об’єднано.";

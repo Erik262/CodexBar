@@ -2542,3 +2542,9 @@
 "api_credits_unmetered_note" = "Mostra el saldo introduït: els costos d’aquí són estimacions locals, no facturació de l’API.";
 "section_menu_layout" = "Disseny del menú";
 "section_menu_layout_footer" = "Les seccions del menú i els crèdits d'API prepagats es configuren per proveïdor a Proveïdors.";
+"stacked_bars_row_number" = "Fila %d";
+"Usage bar, %d%%" = "Barra d'ús, %d%%";
+"settings_search_placeholder" = "Cerca configuració i proveïdors";
+"settings_search_results_title" = "Configuració";
+"section_menu_tabs" = "Pestanyes del menú";
+"section_menu_tabs_footer" = "La barra de pestanyes a la part superior del menú quan les icones estan combinades.";

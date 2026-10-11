@@ -2536,3 +2536,9 @@
 "api_credits_unmetered_note" = "Muestra el saldo introducido: los costes aquí son estimaciones locales, no facturación de la API.";
 "section_menu_layout" = "Diseño del menú";
 "section_menu_layout_footer" = "Las secciones del menú y los créditos de API prepagados se configuran por proveedor en Proveedores.";
+"stacked_bars_row_number" = "Fila %d";
+"Usage bar, %d%%" = "Barra de uso, %d%%";
+"settings_search_placeholder" = "Buscar ajustes y proveedores";
+"settings_search_results_title" = "Ajustes";
+"section_menu_tabs" = "Pestañas del menú";
+"section_menu_tabs_footer" = "La barra de pestañas en la parte superior del menú cuando los iconos están combinados.";

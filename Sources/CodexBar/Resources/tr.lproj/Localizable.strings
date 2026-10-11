@@ -2541,3 +2541,9 @@
 "api_credits_unmetered_note" = "Girdiğiniz bakiye gösterilir: buradaki maliyetler API faturası değil, yerel tahminlerdir.";
 "section_menu_layout" = "Menü düzeni";
 "section_menu_layout_footer" = "Menü bölümleri ve ön ödemeli API kredileri Sağlayıcılar altında sağlayıcı başına ayarlanır.";
+"stacked_bars_row_number" = "Satır %d";
+"Usage bar, %d%%" = "Kullanım çubuğu, %%%d";
+"settings_search_placeholder" = "Ayarları ve sağlayıcıları ara";
+"settings_search_results_title" = "Ayarlar";
+"section_menu_tabs" = "Menü sekmeleri";
+"section_menu_tabs_footer" = "Simgeler birleştirildiğinde menünün üstündeki sekme çubuğu.";

@@ -2542,3 +2542,9 @@
 "api_credits_unmetered_note" = "Mostra il saldo inserito: i costi qui sono stime locali, non la fatturazione API.";
 "section_menu_layout" = "Layout del menu";
 "section_menu_layout_footer" = "Le sezioni del menu e i crediti API prepagati si impostano per fornitore in Provider.";
+"stacked_bars_row_number" = "Riga %d";
+"Usage bar, %d%%" = "Barra di utilizzo, %d%%";
+"settings_search_placeholder" = "Cerca impostazioni e provider";
+"settings_search_results_title" = "Impostazioni";
+"section_menu_tabs" = "Schede del menu";
+"section_menu_tabs_footer" = "La barra delle schede in cima al menu quando le icone sono unite.";

@@ -21,7 +21,11 @@ struct SettingsSidebarView: View {
             .padding(.bottom, 8)
 
             List(selection: self.selectionBinding) {
-                self.appPanesSection
+                if self.isSearching {
+                    self.settingsResultsSection
+                } else {
+                    self.appPanesSection
+                }
                 self.providersSection
             }
             .listStyle(.sidebar)
@@ -30,20 +34,62 @@ struct SettingsSidebarView: View {
         .padding(.horizontal, 8)
     }
 
+    private static let paneRows: [(pane: SettingsPane, systemImage: String, color: Color)] = [
+        (.general, "gearshape.fill", .gray),
+        (.iCloudSync, "icloud.fill", .blue),
+        (.usageSpend, "chart.bar.fill", .green),
+        (.notifications, "bell.badge.fill", .red),
+        (.menuBar, "menubar.rectangle", .blue),
+        (.menu, "filemenu.and.selection", .teal),
+        (.advanced, "slider.horizontal.3", .purple),
+        (.hooks, "bolt.horizontal.circle.fill", .orange),
+        (.plugins, "puzzlepiece.extension.fill", .indigo),
+    ]
+
     private var appPanesSection: some View {
         Section {
-            SettingsSidebarPaneRow(pane: .general, systemImage: "gearshape.fill", color: .gray)
-            SettingsSidebarPaneRow(pane: .iCloudSync, systemImage: "icloud.fill", color: .blue)
-            SettingsSidebarPaneRow(pane: .usageSpend, systemImage: "chart.bar.fill", color: .green)
-            SettingsSidebarPaneRow(pane: .notifications, systemImage: "bell.badge.fill", color: .red)
-            SettingsSidebarPaneRow(pane: .menuBar, systemImage: "menubar.rectangle", color: .blue)
-            SettingsSidebarPaneRow(pane: .menu, systemImage: "filemenu.and.selection", color: .teal)
-            SettingsSidebarPaneRow(pane: .advanced, systemImage: "slider.horizontal.3", color: .purple)
-            SettingsSidebarPaneRow(pane: .hooks, systemImage: "bolt.horizontal.circle.fill", color: .orange)
-            SettingsSidebarPaneRow(pane: .plugins, systemImage: "puzzlepiece.extension.fill", color: .indigo)
+            ForEach(Self.paneRows, id: \.pane) { row in
+                SettingsSidebarPaneRow(pane: row.pane, systemImage: row.systemImage, color: row.color)
+            }
             SettingsSidebarAboutRow()
             if self.settings.debugMenuEnabled {
                 SettingsSidebarPaneRow(pane: .debug, systemImage: "ladybug.fill", color: .red)
+            }
+        }
+    }
+
+    private var isSearching: Bool {
+        !self.searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
+    /// While searching, matching setting rows replace the pane list; choosing one opens its pane.
+    @ViewBuilder
+    private var settingsResultsSection: some View {
+        let panes = Self.paneRows.filter { SettingsSearchIndex.text($0.pane.title, matches: self.searchText) }
+        let results = SettingsSearchIndex.matches(self.searchText)
+        if !panes.isEmpty || !results.isEmpty {
+            Section {
+                ForEach(panes, id: \.pane) { row in
+                    SettingsSidebarPaneRow(pane: row.pane, systemImage: row.systemImage, color: row.color)
+                }
+                ForEach(results) { entry in
+                    Button {
+                        self.selection = entry.pane
+                    } label: {
+                        VStack(alignment: .leading, spacing: 1) {
+                            Text(entry.title)
+                                .lineLimit(1)
+                            Text(entry.pane.title)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                }
+            } header: {
+                Text(L("settings_search_results_title"))
             }
         }
     }
@@ -63,7 +109,7 @@ struct SettingsSidebarView: View {
                 self.settings.moveProvider(fromOffsets: fromOffsets, toOffset: toOffset)
             }
 
-            if self.filteredProviders.isEmpty {
+            if self.filteredProviders.isEmpty, SettingsSearchIndex.matches(self.searchText).isEmpty {
                 Text(L("No matching providers"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
@@ -254,7 +300,7 @@ private struct SettingsSidebarSearchField: View {
                 .foregroundStyle(.secondary)
                 .accessibilityHidden(true)
 
-            TextField(L("Search providers"), text: self.$searchText)
+            TextField(L("settings_search_placeholder"), text: self.$searchText)
                 .textFieldStyle(.plain)
 
             if !self.searchText.isEmpty {

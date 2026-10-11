@@ -2536,3 +2536,9 @@
 "api_credits_unmetered_note" = "Zeigt dein eingegebenes Guthaben: Die Kosten hier sind lokale Schätzungen, keine API-Abrechnung.";
 "section_menu_layout" = "Menülayout";
 "section_menu_layout_footer" = "Menübereiche und vorausbezahltes API-Guthaben stellst du pro Anbieter unter „Anbieter“ ein.";
+"stacked_bars_row_number" = "Zeile %d";
+"Usage bar, %d%%" = "Nutzungsbalken, %d%%";
+"settings_search_placeholder" = "Einstellungen und Anbieter suchen";
+"settings_search_results_title" = "Einstellungen";
+"section_menu_tabs" = "Menü-Tabs";
+"section_menu_tabs_footer" = "Die Tab-Leiste oben im Menü, wenn Symbole zusammengeführt sind.";

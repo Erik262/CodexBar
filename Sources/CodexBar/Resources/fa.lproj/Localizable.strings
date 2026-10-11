@@ -2542,3 +2542,9 @@
 "api_credits_unmetered_note" = "موجودی واردشده را نشان می‌دهد: هزینه‌های اینجا برآورد محلی‌اند، نه صورت‌حساب API.";
 "section_menu_layout" = "چیدمان منو";
 "section_menu_layout_footer" = "بخش‌های منو و اعتبار پیش‌پرداخت API برای هر ارائه‌دهنده در بخش «ارائه دهندگان» تنظیم می‌شوند.";
+"stacked_bars_row_number" = "ردیف %d";
+"Usage bar, %d%%" = "نوار مصرف، %d%%";
+"settings_search_placeholder" = "جستجوی تنظیمات و ارائه‌دهندگان";
+"settings_search_results_title" = "تنظیمات";
+"section_menu_tabs" = "زبانه‌های منو";
+"section_menu_tabs_footer" = "نوار زبانه در بالای منو وقتی نمادها ادغام شده‌اند.";

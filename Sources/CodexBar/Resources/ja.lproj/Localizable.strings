@@ -2538,3 +2538,9 @@
 "api_credits_unmetered_note" = "入力した残高を表示しています。ここのコストはローカルの推定値で、API の請求額ではありません。";
 "section_menu_layout" = "メニューのレイアウト";
 "section_menu_layout_footer" = "メニューのセクションと前払いAPIクレジットは「プロバイダ」でプロバイダごとに設定します。";
+"stacked_bars_row_number" = "%d行目";
+"Usage bar, %d%%" = "使用量バー、%d%%";
+"settings_search_placeholder" = "設定とプロバイダを検索";
+"settings_search_results_title" = "設定";
+"section_menu_tabs" = "メニューのタブ";
+"section_menu_tabs_footer" = "アイコンを統合したときにメニュー上部に表示されるタブバーです。";

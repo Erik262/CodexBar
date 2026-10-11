@@ -2542,3 +2542,9 @@
 "api_credits_unmetered_note" = "يعرض الرصيد الذي أدخلته: التكاليف هنا تقديرات محلية وليست فواتير API.";
 "section_menu_layout" = "تخطيط القائمة";
 "section_menu_layout_footer" = "تُضبط أقسام القائمة وأرصدة API المدفوعة مسبقًا لكل مزوّد ضمن «مقدمو الخدمات».";
+"stacked_bars_row_number" = "الصف %d";
+"Usage bar, %d%%" = "شريط الاستخدام، %d%%";
+"settings_search_placeholder" = "ابحث في الإعدادات ومقدمي الخدمات";
+"settings_search_results_title" = "الإعدادات";
+"section_menu_tabs" = "علامات تبويب القائمة";
+"section_menu_tabs_footer" = "شريط علامات التبويب أعلى القائمة عند دمج الأيقونات.";
