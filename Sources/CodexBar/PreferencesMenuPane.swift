@@ -66,6 +66,7 @@ struct MenuPane: View {
 
             Section {
                 Toggle(L("show_provider_changelog_links_title"), isOn: self.$settings.providerChangelogLinksEnabled)
+                Toggle(L("highlight_menu_cards_on_hover_title"), isOn: self.$settings.highlightMenuCardsOnHover)
 
                 if self.settings.mergeIcons {
                     SettingsMenuPicker(
@@ -75,6 +76,12 @@ struct MenuPane: View {
                             SettingsRowLabel(L("overview_layout_title"), subtitle: L("overview_layout_subtitle"))
                         },
                         optionLabel: { Text($0.label) })
+
+                    Toggle(isOn: self.$settings.appActionsOnOverviewOnly) {
+                        SettingsRowLabel(
+                            L("app_actions_overview_only_title"),
+                            subtitle: L("app_actions_overview_only_subtitle"))
+                    }
                 }
 
                 Toggle(isOn: self.$settings.showOptionalCreditsAndExtraUsage) {
@@ -94,24 +101,6 @@ struct MenuPane: View {
                     })
             } header: {
                 Text(L("section_content"))
-            }
-
-            Section {
-                Toggle(isOn: self.$settings.menuCardHoverHighlightEnabled) {
-                    SettingsRowLabel(
-                        L("menu_card_hover_highlight_title"),
-                        subtitle: L("menu_card_hover_highlight_subtitle"))
-                }
-
-                if self.settings.mergeIcons {
-                    Toggle(isOn: self.$settings.appActionsOnOverviewOnly) {
-                        SettingsRowLabel(
-                            L("app_actions_overview_only_title"),
-                            subtitle: L("app_actions_overview_only_subtitle"))
-                    }
-                }
-            } header: {
-                Text(L("section_menu_layout"))
             } footer: {
                 SettingsSectionFooter(L("section_menu_layout_footer"))
             }

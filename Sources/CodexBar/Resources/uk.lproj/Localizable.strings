@@ -650,6 +650,7 @@
 "workday_tick_appearance_subtle" = "Ненав’язливі";
 "workday_tick_appearance_high_contrast" = "Високий контраст";
 "show_provider_changelog_links_title" = "Показати посилання журналу змін провайдера";
+"highlight_menu_cards_on_hover_title" = "Підсвічувати картки меню при наведенні";
 "show_provider_changelog_links_subtitle" = "Додає в меню посилання на примітки до випуску для підтримуваних постачальників, що підтримують CLI.";
 "show_credits_extra_usage_title" = "Показати кредити + додаткове використання";
 "show_credits_extra_usage_subtitle" = "Показувати кредити та додаткове використання для підтримуваних постачальників.";
@@ -2508,8 +2509,6 @@
 "Reserve is +" = "Запас — +";
 "menu_bar_status_badge_title" = "Показувати значок стану на іконці";
 "menu_bar_status_badge_subtitle" = "Малює крапку або знак оклику на іконці, коли сторінка стану постачальника повідомляє про інцидент.";
-"menu_card_hover_highlight_title" = "Підсвічувати картки під час наведення";
-"menu_card_hover_highlight_subtitle" = "Зафарбовує акцентним кольором клікабельні картки (графіки, витрати) під час наведення. Підменю відкриваються й коли вимкнено.";
 "menu_section_today_cost" = "Витрати за сьогодні";
 "menu_section_cost_chart" = "Графік щоденних витрат";
 "menu_section_account_actions" = "Змінити / додати обліковий запис";
@@ -2533,7 +2532,6 @@
 "app_actions_overview_only_subtitle" = "«Оновити», «Налаштування», «Про програму» і «Вийти» показуються лише на вкладці «Огляд». Потрібні об’єднані значки з увімкненою вкладкою «Огляд».";
 "stacked_bars_show_icons_title" = "Показувати значки постачальників";
 "api_credits_unmetered_note" = "Показано введений баланс: витрати тут — локальні оцінки, а не списання API.";
-"section_menu_layout" = "Макет меню";
 "section_menu_layout_footer" = "Розділи меню та передплачені кредити API налаштовуються для кожного провайдера в розділі «Провайдери».";
 "stacked_bars_row_number" = "Рядок %d";
 "Usage bar, %d%%" = "Шкала використання, %d%%";

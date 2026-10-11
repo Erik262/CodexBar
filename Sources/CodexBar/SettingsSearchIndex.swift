@@ -72,7 +72,7 @@ enum SettingsSearchIndex {
                 "overview_layout_title",
                 "show_credits_extra_usage_title",
                 "multi_account_layout_title",
-                "menu_card_hover_highlight_title",
+                "highlight_menu_cards_on_hover_title",
                 "app_actions_overview_only_title",
                 "account_widgets_title",
                 "cost_summary_title",

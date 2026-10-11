@@ -658,6 +658,7 @@
 "workday_tick_appearance_subtle" = "Samar";
 "workday_tick_appearance_high_contrast" = "Kontras tinggi";
 "show_provider_changelog_links_title" = "Tampilkan tautan changelog penyedia";
+"highlight_menu_cards_on_hover_title" = "Sorot kartu menu saat kursor diarahkan";
 "show_provider_changelog_links_subtitle" = "Menambahkan tautan catatan rilis untuk penyedia berbasis CLI yang didukung ke menu.";
 "show_credits_extra_usage_title" = "Tampilkan kredit + penggunaan ekstra";
 "show_credits_extra_usage_subtitle" = "Tampilkan kredit dan penggunaan tambahan untuk penyedia yang didukung.";
@@ -2511,8 +2512,6 @@
 "Reserve is +" = "Cadangan adalah +";
 "menu_bar_status_badge_title" = "Tampilkan lencana status pada ikon";
 "menu_bar_status_badge_subtitle" = "Menggambar titik atau tanda seru pada ikon saat halaman status penyedia melaporkan insiden.";
-"menu_card_hover_highlight_title" = "Sorot kartu saat diarahkan";
-"menu_card_hover_highlight_subtitle" = "Mewarnai latar kartu yang dapat diklik (grafik, biaya) dengan warna aksen saat penunjuk berada di atasnya. Submenu tetap terbuka saat nonaktif.";
 "menu_section_today_cost" = "Biaya hari ini";
 "menu_section_cost_chart" = "Grafik biaya harian";
 "menu_section_account_actions" = "Ganti / tambah akun";
@@ -2536,7 +2535,6 @@
 "app_actions_overview_only_subtitle" = "Segarkan, Pengaturan, Tentang, dan Keluar hanya muncul di tab Ikhtisar. Memerlukan ikon gabungan dengan tab Ikhtisar aktif.";
 "stacked_bars_show_icons_title" = "Tampilkan ikon penyedia";
 "api_credits_unmetered_note" = "Menampilkan saldo yang Anda masukkan: biaya di sini adalah perkiraan lokal, bukan tagihan API.";
-"section_menu_layout" = "Tata letak menu";
 "section_menu_layout_footer" = "Bagian menu dan kredit API prabayar diatur per penyedia di Penyedia.";
 "stacked_bars_row_number" = "Baris %d";
 "Usage bar, %d%%" = "Bilah penggunaan, %d%%";

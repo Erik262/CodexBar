@@ -649,6 +649,7 @@
 "workday_tick_appearance_subtle" = "柔和";
 "workday_tick_appearance_high_contrast" = "高對比度";
 "show_provider_changelog_links_title" = "顯示提供者版本資訊連結";
+"highlight_menu_cards_on_hover_title" = "滑鼠停留時反白選單卡片";
 "show_provider_changelog_links_subtitle" = "在選單中為支援的 CLI 提供者新增發行說明連結。";
 "show_credits_extra_usage_title" = "顯示額度 + 額外使用量";
 "show_credits_extra_usage_subtitle" = "顯示支援的供應商的額度和額外用量。";
@@ -2486,8 +2487,6 @@
 "Reserve is +" = "餘量為 +";
 "menu_bar_status_badge_title" = "在圖示上顯示狀態標記";
 "menu_bar_status_badge_subtitle" = "當供應商狀態頁回報事故時，在圖示上繪製圓點或驚嘆號。";
-"menu_card_hover_highlight_title" = "滑過時醒目標示卡片";
-"menu_card_hover_highlight_subtitle" = "指標滑過時，在可點按卡片（圖表、費用）後繪製強調色。關閉後子選單仍可開啟。";
 "menu_section_today_cost" = "今日費用";
 "menu_section_cost_chart" = "每日費用圖表";
 "menu_section_account_actions" = "切換／新增帳號";
@@ -2511,7 +2510,6 @@
 "app_actions_overview_only_subtitle" = "重新整理、設定、關於與結束僅顯示於總覽標籤頁。需要合併圖示並啟用總覽標籤頁。";
 "stacked_bars_show_icons_title" = "顯示供應商圖示";
 "api_credits_unmetered_note" = "顯示你輸入的餘額：此處費用為本機估算，並非 API 帳單。";
-"section_menu_layout" = "選單版面";
 "section_menu_layout_footer" = "選單區段與預付 API 額度在「提供者」中依提供者分別設定。";
 "stacked_bars_row_number" = "第 %d 列";
 "Usage bar, %d%%" = "用量列，%d%%";

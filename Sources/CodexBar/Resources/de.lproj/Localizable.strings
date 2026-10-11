@@ -650,6 +650,7 @@
 "workday_tick_appearance_subtle" = "Dezent";
 "workday_tick_appearance_high_contrast" = "Hoher Kontrast";
 "show_provider_changelog_links_title" = "Links zum Änderungsprotokoll des Anbieters anzeigen";
+"highlight_menu_cards_on_hover_title" = "Menükarten beim Darüberfahren hervorheben";
 "show_provider_changelog_links_subtitle" = "Fügt dem Menü Versionshinweise-Links für unterstützte CLI-gestützte Anbieter hinzu.";
 "show_credits_extra_usage_title" = "Credits + zusätzliche Nutzung anzeigen";
 "show_credits_extra_usage_subtitle" = "Zeigt Guthaben und zusätzliche Nutzung für unterstützte Anbieter.";
@@ -2506,8 +2507,6 @@
 "Reserve is +" = "Reserve ist +";
 "menu_bar_status_badge_title" = "Statusmarker am Symbol anzeigen";
 "menu_bar_status_badge_subtitle" = "Zeichnet einen Punkt oder ein Ausrufezeichen auf das Balkensymbol, wenn die Statusseite eines Anbieters eine Störung meldet.";
-"menu_card_hover_highlight_title" = "Karten beim Überfahren hervorheben";
-"menu_card_hover_highlight_subtitle" = "Hinterlegt anklickbare Karten (Diagramme, Kosten) beim Überfahren mit der Akzentfarbe. Untermenüs öffnen sich auch, wenn dies aus ist.";
 "menu_section_today_cost" = "Heutige Kosten";
 "menu_section_cost_chart" = "Tägliches Kostendiagramm";
 "menu_section_account_actions" = "Konto wechseln / hinzufügen";
@@ -2531,7 +2530,6 @@
 "app_actions_overview_only_subtitle" = "Aktualisieren, Einstellungen, Über und Beenden erscheinen nur im Übersicht-Tab. Erfordert zusammengeführte Symbole mit aktivem Übersicht-Tab.";
 "stacked_bars_show_icons_title" = "Anbietersymbole anzeigen";
 "api_credits_unmetered_note" = "Zeigt dein eingegebenes Guthaben: Die Kosten hier sind lokale Schätzungen, keine API-Abrechnung.";
-"section_menu_layout" = "Menülayout";
 "section_menu_layout_footer" = "Menübereiche und vorausbezahltes API-Guthaben stellst du pro Anbieter unter „Anbieter“ ein.";
 "stacked_bars_row_number" = "Zeile %d";
 "Usage bar, %d%%" = "Nutzungsbalken, %d%%";

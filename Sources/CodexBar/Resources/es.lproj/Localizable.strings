@@ -637,6 +637,7 @@
 "workday_tick_appearance_subtle" = "Sutiles";
 "workday_tick_appearance_high_contrast" = "Contraste alto";
 "show_provider_changelog_links_title" = "Mostrar enlaces al registro de cambios del proveedor";
+"highlight_menu_cards_on_hover_title" = "Resaltar las tarjetas del menú al pasar el cursor";
 "show_provider_changelog_links_subtitle" = "Añade al menú enlaces a las notas de versión de los proveedores compatibles basados en CLI.";
 "show_credits_extra_usage_title" = "Mostrar créditos + uso adicional";
 "show_credits_extra_usage_subtitle" = "Muestra créditos y uso adicional para los proveedores compatibles.";
@@ -2506,8 +2507,6 @@
 "Reserve is +" = "La reserva es +";
 "menu_bar_status_badge_title" = "Mostrar indicador de estado en el icono";
 "menu_bar_status_badge_subtitle" = "Dibuja un punto o un signo de exclamación en el icono cuando la página de estado de un proveedor informa de una incidencia.";
-"menu_card_hover_highlight_title" = "Resaltar tarjetas al pasar el cursor";
-"menu_card_hover_highlight_subtitle" = "Pinta el color de acento detrás de las tarjetas clicables (gráficos, costes) al pasar el puntero. Los submenús se siguen abriendo si está desactivado.";
 "menu_section_today_cost" = "Coste de hoy";
 "menu_section_cost_chart" = "Gráfico de coste diario";
 "menu_section_account_actions" = "Cambiar / añadir cuenta";
@@ -2531,7 +2530,6 @@
 "app_actions_overview_only_subtitle" = "Actualizar, Ajustes, Acerca de y Salir aparecen solo en la pestaña Resumen. Requiere iconos combinados con la pestaña Resumen activada.";
 "stacked_bars_show_icons_title" = "Mostrar iconos de proveedores";
 "api_credits_unmetered_note" = "Muestra el saldo introducido: los costes aquí son estimaciones locales, no facturación de la API.";
-"section_menu_layout" = "Diseño del menú";
 "section_menu_layout_footer" = "Las secciones del menú y los créditos de API prepagados se configuran por proveedor en Proveedores.";
 "stacked_bars_row_number" = "Fila %d";
 "Usage bar, %d%%" = "Barra de uso, %d%%";

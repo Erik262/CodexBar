@@ -640,6 +640,7 @@
 "workday_tick_appearance_subtle" = "은은하게";
 "workday_tick_appearance_high_contrast" = "고대비";
 "show_provider_changelog_links_title" = "공급자 변경 로그 링크 표시";
+"highlight_menu_cards_on_hover_title" = "마우스를 올리면 메뉴 카드 강조";
 "show_provider_changelog_links_subtitle" = "지원되는 CLI 기반 공급자의 릴리스 노트 링크를 메뉴에 추가합니다.";
 "show_credits_extra_usage_title" = "크레딧 + 추가 사용량 표시";
 "show_credits_extra_usage_subtitle" = "지원되는 제공업체의 크레딧 및 추가 사용량을 표시합니다.";
@@ -2476,8 +2477,6 @@
 "Reserve is +" = "여유분은 +";
 "menu_bar_status_badge_title" = "아이콘에 상태 배지 표시";
 "menu_bar_status_badge_subtitle" = "제공자 상태 페이지에 장애가 보고되면 미터 아이콘에 점이나 느낌표를 표시합니다.";
-"menu_card_hover_highlight_title" = "마우스를 올리면 카드 강조";
-"menu_card_hover_highlight_subtitle" = "포인터를 올리면 클릭 가능한 카드(차트, 비용) 뒤에 강조 색상을 칠합니다. 꺼도 하위 메뉴는 열립니다.";
 "menu_section_today_cost" = "오늘 비용";
 "menu_section_cost_chart" = "일별 비용 차트";
 "menu_section_account_actions" = "계정 전환 / 추가";
@@ -2501,7 +2500,6 @@
 "app_actions_overview_only_subtitle" = "새로 고침, 설정, 정보, 종료가 개요 탭에만 표시됩니다. 개요 탭이 켜진 아이콘 병합이 필요합니다.";
 "stacked_bars_show_icons_title" = "제공자 아이콘 표시";
 "api_credits_unmetered_note" = "입력한 잔액을 표시합니다. 여기의 비용은 API 청구액이 아닌 로컬 추정치입니다.";
-"section_menu_layout" = "메뉴 레이아웃";
 "section_menu_layout_footer" = "메뉴 섹션과 선불 API 크레딧은 공급자에서 공급자별로 설정합니다.";
 "stacked_bars_row_number" = "%d행";
 "Usage bar, %d%%" = "사용량 막대, %d%%";

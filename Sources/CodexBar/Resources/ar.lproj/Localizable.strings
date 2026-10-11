@@ -656,6 +656,7 @@
 "workday_tick_appearance_subtle" = "خفيفة";
 "workday_tick_appearance_high_contrast" = "تباين عالٍ";
 "show_provider_changelog_links_title" = "اعرض روابط سجل التغييرات لمزود الخدمة";
+"highlight_menu_cards_on_hover_title" = "تمييز بطاقات القائمة عند تمرير المؤشر";
 "show_provider_changelog_links_subtitle" = "يضيف روابط ملاحظات الإصدار لمزودي الخدمة المدعومين بدعم CLI إلى القائمة.";
 "show_credits_extra_usage_title" = "اعتمادات العرض + الاستخدام الإضافي";
 "show_credits_extra_usage_subtitle" = "عرض الأرصدة والاستخدام الإضافي لموفري الخدمات المدعومين.";
@@ -2512,8 +2513,6 @@
 "Reserve is +" = "الاحتياطي هو +";
 "menu_bar_status_badge_title" = "إظهار شارة الحالة على الأيقونة";
 "menu_bar_status_badge_subtitle" = "يرسم نقطة أو علامة تعجب على الأيقونة عندما تُبلغ صفحة حالة المزوّد عن حادث.";
-"menu_card_hover_highlight_title" = "تمييز البطاقات عند التمرير";
-"menu_card_hover_highlight_subtitle" = "يلوّن خلفية البطاقات القابلة للنقر (المخططات، التكاليف) بلون التمييز عند المرور فوقها. تظل القوائم الفرعية تفتح عند الإيقاف.";
 "menu_section_today_cost" = "تكلفة اليوم";
 "menu_section_cost_chart" = "مخطط التكلفة اليومية";
 "menu_section_account_actions" = "تبديل / إضافة حساب";
@@ -2537,7 +2536,6 @@
 "app_actions_overview_only_subtitle" = "تظهر التحديث والإعدادات وحول والإنهاء في علامة تبويب النظرة العامة فقط. يتطلب دمج الأيقونات مع تفعيل علامة النظرة العامة.";
 "stacked_bars_show_icons_title" = "إظهار أيقونات المزوّدين";
 "api_credits_unmetered_note" = "يعرض الرصيد الذي أدخلته: التكاليف هنا تقديرات محلية وليست فواتير API.";
-"section_menu_layout" = "تخطيط القائمة";
 "section_menu_layout_footer" = "تُضبط أقسام القائمة وأرصدة API المدفوعة مسبقًا لكل مزوّد ضمن «مقدمو الخدمات».";
 "stacked_bars_row_number" = "الصف %d";
 "Usage bar, %d%%" = "شريط الاستخدام، %d%%";

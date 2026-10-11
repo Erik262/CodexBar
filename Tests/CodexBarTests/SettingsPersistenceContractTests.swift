@@ -6,6 +6,24 @@ import Testing
 @MainActor
 struct SettingsPersistenceContractTests {
     @Test
+    func `menu hover highlighting defaults on and persists both choices`() {
+        let defaults = InMemoryUserDefaults()
+        let settings = testSettingsStore(suiteName: #function, userDefaults: defaults)
+        #expect(settings.highlightMenuCardsOnHover)
+        settings.highlightMenuCardsOnHover = false
+        let reloaded = testSettingsStore(suiteName: #function, userDefaults: defaults)
+        #expect(!reloaded.highlightMenuCardsOnHover)
+        reloaded.highlightMenuCardsOnHover = true
+        #expect(testSettingsStore(suiteName: #function, userDefaults: defaults).highlightMenuCardsOnHover)
+    }
+
+    @Test
+    func `menu hover highlighting keeps the earlier fork choice`() {
+        let defaults = InMemoryUserDefaults(values: ["menuCardHoverHighlightEnabled": false])
+        #expect(!testSettingsStore(suiteName: #function, userDefaults: defaults).highlightMenuCardsOnHover)
+    }
+
+    @Test
     func `optional and raw preferences round trip without boxed nil values`() {
         let defaults = InMemoryUserDefaults()
         let settings = testSettingsStore(suiteName: #function, userDefaults: defaults)
@@ -38,7 +56,6 @@ struct SettingsPersistenceContractTests {
         let defaults = InMemoryUserDefaults()
         let settings = testSettingsStore(suiteName: #function, userDefaults: defaults)
         #expect(MenuSectionToggle.allCases.allSatisfy { settings.isMenuSectionVisible($0, for: .claude) })
-        #expect(settings.menuCardHoverHighlightEnabled)
         #expect(!settings.menuBarStatusBadgeVisible)
         #expect(!settings.appActionsOnOverviewOnly)
         #expect(!settings.statusComponentsInline)
@@ -46,7 +63,6 @@ struct SettingsPersistenceContractTests {
         settings.setMenuSection(.todayCost, visible: false, for: .claude)
         settings.setMenuSection(.planUsage, visible: false, for: .claude)
         settings.setMenuSection(.accountActions, visible: false, for: .openai)
-        settings.menuCardHoverHighlightEnabled = false
         settings.menuBarStatusBadgeVisible = true
         settings.appActionsOnOverviewOnly = true
         settings.statusComponentsInline = true
@@ -55,7 +71,6 @@ struct SettingsPersistenceContractTests {
         #expect(reloaded.hiddenMenuSections(for: .claude) == [.todayCost, .planUsage])
         #expect(reloaded.hiddenMenuSections(for: .openai) == [.accountActions])
         #expect(reloaded.hiddenMenuSections(for: .codex).isEmpty)
-        #expect(!reloaded.menuCardHoverHighlightEnabled)
         #expect(reloaded.menuBarStatusBadgeVisible)
         #expect(reloaded.appActionsOnOverviewOnly)
         #expect(reloaded.statusComponentsInline)

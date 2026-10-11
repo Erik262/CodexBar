@@ -658,6 +658,7 @@
 "workday_tick_appearance_subtle" = "Subtelne";
 "workday_tick_appearance_high_contrast" = "Wysoki kontrast";
 "show_provider_changelog_links_title" = "Pokaż linki do changelogów dostawców";
+"highlight_menu_cards_on_hover_title" = "Podświetlaj karty menu po najechaniu kursorem";
 "show_provider_changelog_links_subtitle" = "Dodaje linki do informacji o wydaniach dla obsługiwanych dostawców CLI w menu.";
 "show_credits_extra_usage_title" = "Pokaż kredyty + dodatkowe użycie";
 "show_credits_extra_usage_subtitle" = "Pokazuje kredyty i dodatkowe użycie dla obsługiwanych dostawców.";
@@ -2511,8 +2512,6 @@
 "Reserve is +" = "Rezerwa to +";
 "menu_bar_status_badge_title" = "Pokaż znacznik stanu na ikonie";
 "menu_bar_status_badge_subtitle" = "Rysuje kropkę lub wykrzyknik na ikonie, gdy strona stanu dostawcy zgłasza incydent.";
-"menu_card_hover_highlight_title" = "Podświetlaj karty po najechaniu";
-"menu_card_hover_highlight_subtitle" = "Maluje kolor akcentu za klikalnymi kartami (wykresy, koszty) po najechaniu. Podmenu otwierają się także po wyłączeniu.";
 "menu_section_today_cost" = "Dzisiejszy koszt";
 "menu_section_cost_chart" = "Wykres dziennych kosztów";
 "menu_section_account_actions" = "Przełącz / dodaj konto";
@@ -2536,7 +2535,6 @@
 "app_actions_overview_only_subtitle" = "Odśwież, Ustawienia, O programie i Zakończ pojawiają się tylko na karcie Przegląd. Wymaga scalonych ikon z włączoną kartą Przegląd.";
 "stacked_bars_show_icons_title" = "Pokaż ikony dostawców";
 "api_credits_unmetered_note" = "Pokazuje wprowadzone saldo: koszty tutaj to lokalne szacunki, a nie rozliczenia API.";
-"section_menu_layout" = "Układ menu";
 "section_menu_layout_footer" = "Sekcje menu i przedpłacone kredyty API ustawiasz dla każdego dostawcy w sekcji Dostawcy.";
 "stacked_bars_row_number" = "Wiersz %d";
 "Usage bar, %d%%" = "Pasek użycia, %d%%";

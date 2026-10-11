@@ -656,6 +656,7 @@
 "workday_tick_appearance_subtle" = "Hafif";
 "workday_tick_appearance_high_contrast" = "Yüksek kontrast";
 "show_provider_changelog_links_title" = "Sağlayıcı değişiklik günlüğü bağlantılarını göster";
+"highlight_menu_cards_on_hover_title" = "Üzerine gelindiğinde menü kartlarını vurgula";
 "show_provider_changelog_links_subtitle" = "CLI kullanan desteklenen sağlayıcıların menüsüne sürüm notları bağlantıları ekler.";
 "show_credits_extra_usage_title" = "Krediler + ek kullanımı göster";
 "show_credits_extra_usage_subtitle" = "Desteklenen sağlayıcılar için kredileri ve ek kullanımı göster.";
@@ -2511,8 +2512,6 @@
 "Reserve is +" = "Rezerv +";
 "menu_bar_status_badge_title" = "Simgede durum rozetini göster";
 "menu_bar_status_badge_subtitle" = "Bir sağlayıcının durum sayfası bir olay bildirdiğinde simgeye nokta veya ünlem işareti çizer.";
-"menu_card_hover_highlight_title" = "Üzerine gelince kartları vurgula";
-"menu_card_hover_highlight_subtitle" = "İşaretçi üzerindeyken tıklanabilir kartların (grafikler, maliyetler) arkasını vurgu rengiyle boyar. Kapalıyken alt menüler yine açılır.";
 "menu_section_today_cost" = "Bugünün maliyeti";
 "menu_section_cost_chart" = "Günlük maliyet grafiği";
 "menu_section_account_actions" = "Hesap değiştir / ekle";
@@ -2536,7 +2535,6 @@
 "app_actions_overview_only_subtitle" = "Yenile, Ayarlar, Hakkında ve Çık yalnızca Genel Bakış sekmesinde görünür. Genel Bakış sekmesi açık birleşik simgeler gerekir.";
 "stacked_bars_show_icons_title" = "Sağlayıcı simgelerini göster";
 "api_credits_unmetered_note" = "Girdiğiniz bakiye gösterilir: buradaki maliyetler API faturası değil, yerel tahminlerdir.";
-"section_menu_layout" = "Menü düzeni";
 "section_menu_layout_footer" = "Menü bölümleri ve ön ödemeli API kredileri Sağlayıcılar altında sağlayıcı başına ayarlanır.";
 "stacked_bars_row_number" = "Satır %d";
 "Usage bar, %d%%" = "Kullanım çubuğu, %%%d";

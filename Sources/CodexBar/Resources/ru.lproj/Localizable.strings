@@ -651,6 +651,7 @@
 "workday_tick_appearance_subtle" = "Ненавязчивые";
 "workday_tick_appearance_high_contrast" = "Высокий контраст";
 "show_provider_changelog_links_title" = "Показывать ссылки на журналы изменений провайдеров";
+"highlight_menu_cards_on_hover_title" = "Подсвечивать карточки меню при наведении";
 "show_provider_changelog_links_subtitle" = "Добавляет в меню ссылки на заметки к релизам для поддерживаемых CLI-провайдеров.";
 "show_credits_extra_usage_title" = "Показывать кредиты и доп. использование";
 "show_credits_extra_usage_subtitle" = "Показывать кредиты и дополнительное использование для поддерживаемых провайдеров.";
@@ -2509,8 +2510,6 @@
 "Reserve is +" = "Запас — +";
 "menu_bar_status_badge_title" = "Показывать значок статуса на иконке";
 "menu_bar_status_badge_subtitle" = "Рисует точку или восклицательный знак на иконке, когда страница статуса провайдера сообщает об инциденте.";
-"menu_card_hover_highlight_title" = "Подсвечивать карточки при наведении";
-"menu_card_hover_highlight_subtitle" = "Закрашивает акцентным цветом кликабельные карточки (графики, расходы) при наведении. Подменю открываются и при выключенной опции.";
 "menu_section_today_cost" = "Расходы за сегодня";
 "menu_section_cost_chart" = "График ежедневных расходов";
 "menu_section_account_actions" = "Сменить / добавить аккаунт";
@@ -2534,7 +2533,6 @@
 "app_actions_overview_only_subtitle" = "«Обновить», «Настройки», «О программе» и «Выйти» отображаются только на вкладке «Обзор». Требуются объединённые значки с включённой вкладкой «Обзор».";
 "stacked_bars_show_icons_title" = "Показывать значки провайдеров";
 "api_credits_unmetered_note" = "Показан введённый баланс: расходы здесь — локальные оценки, а не списания API.";
-"section_menu_layout" = "Макет меню";
 "section_menu_layout_footer" = "Разделы меню и предоплаченные кредиты API настраиваются для каждого провайдера в разделе «Провайдеры».";
 "stacked_bars_row_number" = "Строка %d";
 "Usage bar, %d%%" = "Шкала использования, %d%%";

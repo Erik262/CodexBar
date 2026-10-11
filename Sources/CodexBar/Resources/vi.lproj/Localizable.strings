@@ -646,6 +646,7 @@
 "workday_tick_appearance_subtle" = "Nhẹ";
 "workday_tick_appearance_high_contrast" = "Tương phản cao";
 "show_provider_changelog_links_title" = "Hiển thị Nhà cung cấp liên kết nhật ký thay đổi";
+"highlight_menu_cards_on_hover_title" = "Tô sáng thẻ menu khi rê chuột qua";
 "show_provider_changelog_links_subtitle" = "Thêm liên kết ghi chú phát hành cho các nhà cung cấp được hỗ trợ CLI vào menu.";
 "show_credits_extra_usage_title" = "Hiển thị tín dụng + phần Mức sử dụng";
 "show_credits_extra_usage_subtitle" = "Hiển thị tín dụng và mức sử dụng bổ sung cho các nhà cung cấp được hỗ trợ.";
@@ -2509,8 +2510,6 @@
 "Reserve is +" = "Dự trữ là +";
 "menu_bar_status_badge_title" = "Hiển thị huy hiệu trạng thái trên biểu tượng";
 "menu_bar_status_badge_subtitle" = "Vẽ dấu chấm hoặc dấu chấm than trên biểu tượng khi trang trạng thái của nhà cung cấp báo cáo sự cố.";
-"menu_card_hover_highlight_title" = "Tô sáng thẻ khi di chuột";
-"menu_card_hover_highlight_subtitle" = "Tô màu nhấn phía sau các thẻ có thể nhấp (biểu đồ, chi phí) khi di chuột. Menu con vẫn mở khi tắt.";
 "menu_section_today_cost" = "Chi phí hôm nay";
 "menu_section_cost_chart" = "Biểu đồ chi phí hằng ngày";
 "menu_section_account_actions" = "Chuyển / thêm tài khoản";
@@ -2534,7 +2533,6 @@
 "app_actions_overview_only_subtitle" = "Làm mới, Cài đặt, Giới thiệu và Thoát chỉ hiện ở tab Tổng quan. Cần gộp biểu tượng và bật tab Tổng quan.";
 "stacked_bars_show_icons_title" = "Hiển thị biểu tượng nhà cung cấp";
 "api_credits_unmetered_note" = "Hiển thị số dư bạn nhập: chi phí ở đây là ước tính cục bộ, không phải hóa đơn API.";
-"section_menu_layout" = "Bố cục menu";
 "section_menu_layout_footer" = "Các mục menu và tín dụng API trả trước được đặt theo từng nhà cung cấp trong Nhà cung cấp.";
 "stacked_bars_row_number" = "Hàng %d";
 "Usage bar, %d%%" = "Thanh sử dụng, %d%%";

@@ -649,6 +649,7 @@
 "workday_tick_appearance_subtle" = "Diskreta";
 "workday_tick_appearance_high_contrast" = "Hög kontrast";
 "show_provider_changelog_links_title" = "Visa länkar till leverantörers ändringsloggar";
+"highlight_menu_cards_on_hover_title" = "Markera menykort vid hovring";
 "show_provider_changelog_links_subtitle" = "Lägger till länkar till utgåvekommentarer för stödda CLI-baserade leverantörer i menyn.";
 "show_credits_extra_usage_title" = "Visa krediter och extra användning";
 "show_credits_extra_usage_subtitle" = "Visa krediter och extra användning för leverantörer som stöds.";
@@ -2507,8 +2508,6 @@
 "Reserve is +" = "Reserv är +";
 "menu_bar_status_badge_title" = "Visa statusmärke på ikonen";
 "menu_bar_status_badge_subtitle" = "Ritar en punkt eller ett utropstecken på ikonen när en leverantörs statussida rapporterar en incident.";
-"menu_card_hover_highlight_title" = "Markera kort vid hovring";
-"menu_card_hover_highlight_subtitle" = "Färgar klickbara kort (diagram, kostnader) med accentfärgen vid hovring. Undermenyer öppnas även när detta är av.";
 "menu_section_today_cost" = "Dagens kostnad";
 "menu_section_cost_chart" = "Diagram över daglig kostnad";
 "menu_section_account_actions" = "Byt / lägg till konto";
@@ -2532,7 +2531,6 @@
 "app_actions_overview_only_subtitle" = "Uppdatera, Inställningar, Om och Avsluta visas bara på fliken Översikt. Kräver sammanslagna symboler med fliken Översikt aktiverad.";
 "stacked_bars_show_icons_title" = "Visa leverantörsikoner";
 "api_credits_unmetered_note" = "Visar ditt angivna saldo: kostnaderna här är lokala uppskattningar, inte API-debitering.";
-"section_menu_layout" = "Menylayout";
 "section_menu_layout_footer" = "Menyavsnitt och förbetalda API-krediter ställs in per leverantör under Leverantörer.";
 "stacked_bars_row_number" = "Rad %d";
 "Usage bar, %d%%" = "Användningsstapel, %d %%";

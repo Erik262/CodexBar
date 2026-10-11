@@ -637,6 +637,7 @@
 "workday_tick_appearance_subtle" = "Subtle";
 "workday_tick_appearance_high_contrast" = "High contrast";
 "show_provider_changelog_links_title" = "Show provider changelog links";
+"highlight_menu_cards_on_hover_title" = "Highlight menu cards on hover";
 "show_provider_changelog_links_subtitle" = "Adds release-notes links for supported CLI-backed providers to the menu.";
 "show_credits_extra_usage_title" = "Show credits & extra usage";
 "show_credits_extra_usage_subtitle" = "Show credits and extra usage for supported providers.";
@@ -2512,8 +2513,6 @@
 "Reserve is +" = "Reserve is +";
 "menu_bar_status_badge_title" = "Show status badge on icon";
 "menu_bar_status_badge_subtitle" = "Draws a dot or exclamation mark on the meter icon when a provider's status page reports an incident.";
-"menu_card_hover_highlight_title" = "Highlight cards on hover";
-"menu_card_hover_highlight_subtitle" = "Paints the accent color behind clickable cards (charts, costs) while the pointer is over them. Submenus still open when off.";
 "menu_section_today_cost" = "Today's cost";
 "menu_section_cost_chart" = "Daily cost chart";
 "menu_section_account_actions" = "Switch / Add Account";
@@ -2537,7 +2536,6 @@
 "app_actions_overview_only_subtitle" = "Refresh, Settings, About, and Quit appear only on the Overview tab. Needs merged icons with the Overview tab enabled.";
 "stacked_bars_show_icons_title" = "Show provider icons";
 "api_credits_unmetered_note" = "Shows your entered balance: costs here are local estimates, not API billing.";
-"section_menu_layout" = "Menu layout";
 "section_menu_layout_footer" = "Menu sections and prepaid API credits are set per provider under Providers.";
 "stacked_bars_row_number" = "Row %d";
 "Usage bar, %d%%" = "Usage bar, %d%%";

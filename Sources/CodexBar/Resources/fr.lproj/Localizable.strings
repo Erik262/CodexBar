@@ -650,6 +650,7 @@
 "workday_tick_appearance_subtle" = "Discrets";
 "workday_tick_appearance_high_contrast" = "Contraste élevé";
 "show_provider_changelog_links_title" = "Afficher les liens du journal des modifications du fournisseur";
+"highlight_menu_cards_on_hover_title" = "Mettre les cartes du menu en surbrillance au survol";
 "show_provider_changelog_links_subtitle" = "Ajoute au menu des liens de notes de version pour les fournisseurs pris en charge par CLI.";
 "show_credits_extra_usage_title" = "Afficher les crédits + utilisation supplémentaire";
 "show_credits_extra_usage_subtitle" = "Afficher les crédits et l’utilisation supplémentaire pour les fournisseurs compatibles.";
@@ -2507,8 +2508,6 @@
 "Reserve is +" = "Réserve : +";
 "menu_bar_status_badge_title" = "Afficher le badge d’état sur l’icône";
 "menu_bar_status_badge_subtitle" = "Affiche un point ou un point d’exclamation sur l’icône lorsque la page d’état d’un fournisseur signale un incident.";
-"menu_card_hover_highlight_title" = "Surligner les cartes au survol";
-"menu_card_hover_highlight_subtitle" = "Applique la couleur d’accent derrière les cartes cliquables (graphiques, coûts) au survol. Les sous-menus s’ouvrent toujours si désactivé.";
 "menu_section_today_cost" = "Coût du jour";
 "menu_section_cost_chart" = "Graphique des coûts quotidiens";
 "menu_section_account_actions" = "Changer / ajouter un compte";
@@ -2532,7 +2531,6 @@
 "app_actions_overview_only_subtitle" = "Actualiser, Réglages, À propos et Quitter n’apparaissent que dans l’onglet Aperçu. Nécessite les icônes fusionnées avec l’onglet Aperçu activé.";
 "stacked_bars_show_icons_title" = "Afficher les icônes des fournisseurs";
 "api_credits_unmetered_note" = "Affiche le solde saisi : les coûts ici sont des estimations locales, pas la facturation de l’API.";
-"section_menu_layout" = "Disposition du menu";
 "section_menu_layout_footer" = "Les sections du menu et les crédits API prépayés se règlent par fournisseur dans Fournisseurs.";
 "stacked_bars_row_number" = "Ligne %d";
 "Usage bar, %d%%" = "Barre d'utilisation, %d %%";

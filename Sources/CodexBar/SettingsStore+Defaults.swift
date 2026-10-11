@@ -298,6 +298,11 @@ extension SettingsStore {
         set { self.setDefault(\.providerChangelogLinksEnabled, newValue, key: "providerChangelogLinksEnabled") }
     }
 
+    var highlightMenuCardsOnHover: Bool {
+        get { self.defaultsState.highlightMenuCardsOnHover }
+        set { self.setDefault(\.highlightMenuCardsOnHover, newValue, key: "highlightMenuCardsOnHover") }
+    }
+
     var menuBarShowsBrandIconWithPercent: Bool {
         get { self.defaultsState.menuBarShowsBrandIconWithPercent }
         set { self.setDefault(\.menuBarShowsBrandIconWithPercent, newValue, key: "menuBarShowsBrandIconWithPercent") }
@@ -312,12 +317,6 @@ extension SettingsStore {
     var menuBarStatusBadgeVisible: Bool {
         get { self.defaultsState.menuBarStatusBadgeVisible }
         set { self.setDefault(\.menuBarStatusBadgeVisible, newValue, key: "menuBarStatusBadgeVisible") }
-    }
-
-    /// Paints the selection (accent) background behind clickable menu cards while hovered.
-    var menuCardHoverHighlightEnabled: Bool {
-        get { self.defaultsState.menuCardHoverHighlightEnabled }
-        set { self.setDefault(\.menuCardHoverHighlightEnabled, newValue, key: "menuCardHoverHighlightEnabled") }
     }
 
     var hiddenMenuSectionsRaw: [String] {

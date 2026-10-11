@@ -650,6 +650,7 @@
 "workday_tick_appearance_subtle" = "Subtiel";
 "workday_tick_appearance_high_contrast" = "Hoog contrast";
 "show_provider_changelog_links_title" = "Toon provider changelog-links";
+"highlight_menu_cards_on_hover_title" = "Menukaarten markeren bij aanwijzen";
 "show_provider_changelog_links_subtitle" = "Voegt koppelingen naar release-opmerkingen voor ondersteunde CLI-ondersteunde providers toe aan het menu.";
 "show_credits_extra_usage_title" = "Toon credits + extra gebruik";
 "show_credits_extra_usage_subtitle" = "Toon tegoeden en extra gebruik voor ondersteunde providers.";
@@ -2507,8 +2508,6 @@
 "Reserve is +" = "Reserve krijgt +";
 "menu_bar_status_badge_title" = "Statusbadge op pictogram tonen";
 "menu_bar_status_badge_subtitle" = "Tekent een stip of uitroepteken op het meterpictogram wanneer de statuspagina van een provider een storing meldt.";
-"menu_card_hover_highlight_title" = "Kaarten markeren bij aanwijzen";
-"menu_card_hover_highlight_subtitle" = "Kleurt klikbare kaarten (grafieken, kosten) met de accentkleur bij aanwijzen. Submenu’s openen ook als dit uit staat.";
 "menu_section_today_cost" = "Kosten van vandaag";
 "menu_section_cost_chart" = "Grafiek dagelijkse kosten";
 "menu_section_account_actions" = "Account wisselen / toevoegen";
@@ -2532,7 +2531,6 @@
 "app_actions_overview_only_subtitle" = "Vernieuwen, Instellingen, Over en Stop verschijnen alleen op het tabblad Overzicht. Vereist samengevoegde pictogrammen met het tabblad Overzicht aan.";
 "stacked_bars_show_icons_title" = "Providerpictogrammen tonen";
 "api_credits_unmetered_note" = "Toont je ingevoerde saldo: de kosten hier zijn lokale schattingen, geen API-facturering.";
-"section_menu_layout" = "Menu-indeling";
 "section_menu_layout_footer" = "Menusecties en vooruitbetaald API-tegoed stel je per aanbieder in onder Aanbieders.";
 "stacked_bars_row_number" = "Rij %d";
 "Usage bar, %d%%" = "Gebruiksbalk, %d%%";

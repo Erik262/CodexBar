@@ -656,6 +656,7 @@
 "workday_tick_appearance_subtle" = "ملایم";
 "workday_tick_appearance_high_contrast" = "کنتراست بالا";
 "show_provider_changelog_links_title" = "لینک های تغییرات ارائه دهنده را نمایش دهید";
+"highlight_menu_cards_on_hover_title" = "برجسته‌کردن کارت‌های منو هنگام قرارگیری نشانگر";
 "show_provider_changelog_links_subtitle" = "لینک های یادداشت های انتشار برای ارائه دهندگان پشتیبانی شده با پشتیبانی CLI به منو اضافه می شود.";
 "show_credits_extra_usage_title" = "نمایش اعتبارها + استفاده اضافی";
 "show_credits_extra_usage_subtitle" = "اعتبارها و استفادهٔ اضافی را برای ارائه‌دهندگان پشتیبانی‌شده نمایش دهید.";
@@ -2512,8 +2513,6 @@
 "Reserve is +" = "ذخیره یعنی +";
 "menu_bar_status_badge_title" = "نمایش نشان وضعیت روی نماد";
 "menu_bar_status_badge_subtitle" = "وقتی صفحهٔ وضعیت یک ارائه‌دهنده رخدادی گزارش کند، یک نقطه یا علامت تعجب روی نماد رسم می‌کند.";
-"menu_card_hover_highlight_title" = "برجسته‌سازی کارت‌ها هنگام عبور نشانگر";
-"menu_card_hover_highlight_subtitle" = "هنگام عبور نشانگر، رنگ تأکیدی را پشت کارت‌های قابل‌کلیک (نمودارها، هزینه‌ها) می‌کشد. در حالت خاموش زیرمنوها همچنان باز می‌شوند.";
 "menu_section_today_cost" = "هزینهٔ امروز";
 "menu_section_cost_chart" = "نمودار هزینهٔ روزانه";
 "menu_section_account_actions" = "تغییر / افزودن حساب";
@@ -2537,7 +2536,6 @@
 "app_actions_overview_only_subtitle" = "تازه‌سازی، تنظیمات، درباره و خروج فقط در زبانهٔ نمای کلی نمایش داده می‌شوند. نیاز به ادغام نمادها با زبانهٔ نمای کلی فعال دارد.";
 "stacked_bars_show_icons_title" = "نمایش نمادهای ارائه‌دهندگان";
 "api_credits_unmetered_note" = "موجودی واردشده را نشان می‌دهد: هزینه‌های اینجا برآورد محلی‌اند، نه صورت‌حساب API.";
-"section_menu_layout" = "چیدمان منو";
 "section_menu_layout_footer" = "بخش‌های منو و اعتبار پیش‌پرداخت API برای هر ارائه‌دهنده در بخش «ارائه دهندگان» تنظیم می‌شوند.";
 "stacked_bars_row_number" = "ردیف %d";
 "Usage bar, %d%%" = "نوار مصرف، %d%%";
