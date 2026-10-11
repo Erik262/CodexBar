@@ -152,12 +152,11 @@ extension UsageMenuCardView.Model {
             return nil
         }
         if let credits {
-            if let remaining = credits.displayRemaining {
-                // An empty prepaid balance is noise in the menu; a plan credit limit still shows its meter.
-                guard remaining > 0 || credits.codexCreditLimit != nil else { return nil }
-                return UsageFormatter.creditsString(from: remaining)
-            }
-            return "\(L("Credits")) · \(L("Balance")): \(L("Unavailable"))"
+            // An empty or unreadable prepaid balance is noise in the menu; a plan credit limit still shows its meter.
+            guard let remaining = credits.displayRemaining,
+                  remaining > 0 || credits.codexCreditLimit != nil
+            else { return nil }
+            return UsageFormatter.creditsString(from: remaining)
         }
         if let error, !error.isEmpty {
             return error.trimmingCharacters(in: .whitespacesAndNewlines)
