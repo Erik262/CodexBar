@@ -327,11 +327,14 @@ private func makeUpdaterController() -> UpdaterProviding {
             notifier: HomebrewUpdateNotifier(dependencies: .live))
     }
 
-    guard isDeveloperIDSigned(bundleURL: bundleURL) else {
+    // Ad-hoc builds (for example a fork's release workflow) opt in explicitly; their updates are trusted
+    // through the EdDSA-signed appcast instead of a Developer ID.
+    let allowsAdHocUpdates = Bundle.main.object(forInfoDictionaryKey: "CodexBarAllowsAdHocUpdates") as? Bool == true
+    guard isDeveloperIDSigned(bundleURL: bundleURL) || allowsAdHocUpdates else {
         return DisabledUpdaterController(unavailableReason: "Updates unavailable in this build.")
     }
 
-    // Fork builds ship without an appcast; never let Sparkle swap them for an upstream release.
+    // A build without an appcast must never fall back to another feed.
     guard let feed = Bundle.main.object(forInfoDictionaryKey: "SUFeedURL") as? String, !feed.isEmpty else {
         return DisabledUpdaterController(unavailableReason: "Updates unavailable in this build.")
     }

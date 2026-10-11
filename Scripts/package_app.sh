@@ -94,6 +94,8 @@ esac
 
 # Load version info
 source "$ROOT/version.env"
+# Release workflows may stamp their own build number (Sparkle compares CFBundleVersion).
+BUILD_NUMBER="${CODEXBAR_BUILD_NUMBER:-$BUILD_NUMBER}"
 source "$ROOT/Scripts/package_product_paths.sh"
 source "$ROOT/Scripts/sparkle_signing_paths.sh"
 
@@ -276,13 +278,11 @@ if [[ -f "$ICON_SOURCE" ]]; then
 fi
 
 BUNDLE_ID="com.steipete.codexbar"
-# This fork ships its own customizations, so it must not auto-update to upstream releases (that would
-# replace the build with stock CodexBar). Set CODEXBAR_FEED_URL to an appcast you publish to opt back in.
-FEED_URL="${CODEXBAR_FEED_URL:-}"
+# CODEXBAR_FEED_URL and CODEXBAR_SPARKLE_PUBLIC_KEY point a build at another appcast and EdDSA key
+# (for example a fork's own releases); CODEXBAR_ALLOW_ADHOC_UPDATES=1 lets an ad-hoc signed build use it.
+FEED_URL="${CODEXBAR_FEED_URL:-https://raw.githubusercontent.com/steipete/CodexBar/main/appcast.xml}"
+SPARKLE_PUBLIC_KEY="${CODEXBAR_SPARKLE_PUBLIC_KEY:-AGCY8w5vHirVfGGDGc8Szc5iuOqupZSh9pMj/Qs67XI=}"
 AUTO_CHECKS=true
-if [[ -z "$FEED_URL" ]]; then
-  AUTO_CHECKS=false
-fi
 # CODEXBAR_DEBUG_KEEPS_BUNDLE_ID=1 (compile_and_run.sh --fast) keeps the release bundle ID so a debug
 # build reads the same settings and shows no debug "D" marker in the menu bar.
 if [[ "$LOWER_CONF" == "debug" && "${CODEXBAR_DEBUG_KEEPS_BUNDLE_ID:-0}" != "1" ]]; then
@@ -293,7 +293,7 @@ elif [[ "$LOWER_CONF" == "debug" ]]; then
   FEED_URL=""
   AUTO_CHECKS=false
 fi
-if [[ "$SIGNING_MODE" == "adhoc" ]]; then
+if [[ "$SIGNING_MODE" == "adhoc" && "${CODEXBAR_ALLOW_ADHOC_UPDATES:-0}" != "1" ]]; then
   FEED_URL=""
   AUTO_CHECKS=false
 fi
@@ -386,7 +386,8 @@ cat > "$APP/Contents/Info.plist" <<PLIST
     <key>CFBundleIconFile</key><string>Icon</string>
     <key>NSHumanReadableCopyright</key><string>© 2026 Peter Steinberger. MIT License.</string>
     <key>SUFeedURL</key><string>${FEED_URL}</string>
-    <key>SUPublicEDKey</key><string>AGCY8w5vHirVfGGDGc8Szc5iuOqupZSh9pMj/Qs67XI=</string>
+    <key>SUPublicEDKey</key><string>${SPARKLE_PUBLIC_KEY}</string>
+    $(if [[ "${CODEXBAR_ALLOW_ADHOC_UPDATES:-0}" == "1" && -n "$FEED_URL" ]]; then echo "<key>CodexBarAllowsAdHocUpdates</key><true/>"; fi)
     <key>SUEnableAutomaticChecks</key><${AUTO_CHECKS}/>
     <key>CodexBuildTimestamp</key><string>${BUILD_TIMESTAMP}</string>
     <key>CodexGitCommit</key><string>${GIT_COMMIT}</string>
