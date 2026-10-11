@@ -2529,8 +2529,6 @@
 "menu_section_latest_tokens" = "Últimos tokens / solicitudes";
 "menu_section_current_window" = "Custo e tokens da xanela actual";
 "menu_section_cost_details" = "Detalles de custo (modelo principal, notas)";
-"status_components_inline_title" = "Mostrar o estado integrado";
-"status_components_inline_subtitle" = "Substitúe o submenú da páxina de estado por unha lista compacta de compoñentes. Fai clic para abrir a páxina de estado.";
 "app_actions_overview_only_title" = "Accións da app só en Resumo";
 "app_actions_overview_only_subtitle" = "Actualizar, Axustes, Acerca de e Saír só aparecen na lapela Resumo. Require iconas combinadas coa lapela Resumo activada.";
 "stacked_bars_show_icons_title" = "Mostrar as iconas dos provedores";
@@ -2543,3 +2541,9 @@
 "settings_search_results_title" = "Axustes";
 "section_menu_tabs" = "Lapelas do menú";
 "section_menu_tabs_footer" = "A barra de lapelas na parte superior do menú cando as iconas están combinadas.";
+"status_page_presentation_title" = "Páxina de estado";
+"status_page_off" = "Desactivado";
+"status_page_link" = "Ligazón";
+"status_page_inline" = "Integrado";
+"status_page_inline_subtitle" = "Mostra os compoñentes do servizo no menú. Fai clic na lista para abrir a páxina de estado.";
+"status_page_inline_requires_checks" = "O modo integrado precisa «Comprobar o estado do provedor» en Xeral; ata entón o menú mostra a ligazón.";

@@ -41,6 +41,7 @@ struct SettingsDefaultsState {
     var hiddenMenuSectionsByProviderRaw: [String: [String]]
     var appActionsOnOverviewOnly: Bool
     var statusComponentsInline: Bool
+    var statusInlineByProviderRaw: [String: Bool]
     var apiCreditBudgetAmountsRaw: [String: Double]
     var apiCreditBudgetStartDaysRaw: [String: String]
     var menuBarColorPace: Bool

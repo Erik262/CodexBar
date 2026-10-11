@@ -2530,8 +2530,6 @@
 "menu_section_latest_tokens" = "Tokens / solicitações recentes";
 "menu_section_current_window" = "Custo e tokens da janela atual";
 "menu_section_cost_details" = "Detalhes de custo (modelo principal, notas)";
-"status_components_inline_title" = "Mostrar status integrado";
-"status_components_inline_subtitle" = "Substitui o submenu da página de status por uma lista compacta de componentes. Clique para abrir a página de status.";
 "app_actions_overview_only_title" = "Ações do app apenas na Visão geral";
 "app_actions_overview_only_subtitle" = "Atualizar, Ajustes, Sobre e Encerrar aparecem só na aba Visão geral. Requer ícones mesclados com a aba Visão geral ativada.";
 "stacked_bars_show_icons_title" = "Mostrar ícones dos provedores";
@@ -2544,3 +2542,9 @@
 "settings_search_results_title" = "Ajustes";
 "section_menu_tabs" = "Abas do menu";
 "section_menu_tabs_footer" = "A barra de abas no topo do menu quando os ícones estão combinados.";
+"status_page_presentation_title" = "Página de status";
+"status_page_off" = "Desativado";
+"status_page_link" = "Link";
+"status_page_inline" = "Integrado";
+"status_page_inline_subtitle" = "Lista os componentes do serviço no menu. Clique na lista para abrir a página de status.";
+"status_page_inline_requires_checks" = "O modo integrado precisa de “Verificar status dos provedores” em Geral; até lá o menu mostra o link.";

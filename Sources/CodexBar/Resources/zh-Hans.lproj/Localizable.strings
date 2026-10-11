@@ -2523,8 +2523,6 @@
 "menu_section_latest_tokens" = "最近令牌／请求";
 "menu_section_current_window" = "当前窗口费用和令牌";
 "menu_section_cost_details" = "费用详情（主要模型、说明）";
-"status_components_inline_title" = "内联显示状态";
-"status_components_inline_subtitle" = "用紧凑的组件列表替换状态页子菜单。点击可打开状态页。";
 "app_actions_overview_only_title" = "应用操作仅显示在概览";
 "app_actions_overview_only_subtitle" = "刷新、设置、关于和退出仅显示在概览标签页。需要合并图标并启用概览标签页。";
 "stacked_bars_show_icons_title" = "显示提供商图标";
@@ -2537,3 +2535,9 @@
 "settings_search_results_title" = "设置";
 "section_menu_tabs" = "菜单标签页";
 "section_menu_tabs_footer" = "合并图标时菜单顶部的标签栏。";
+"status_page_presentation_title" = "状态页";
+"status_page_off" = "关闭";
+"status_page_link" = "链接";
+"status_page_inline" = "内嵌";
+"status_page_inline_subtitle" = "在菜单中列出服务组件。点击列表可打开状态页。";
+"status_page_inline_requires_checks" = "内嵌显示需要在“通用”中开启“检查提供商状态”；在此之前菜单显示链接。";

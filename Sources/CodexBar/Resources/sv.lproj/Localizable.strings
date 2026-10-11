@@ -2529,8 +2529,6 @@
 "menu_section_latest_tokens" = "Senaste tokens / förfrågningar";
 "menu_section_current_window" = "Kostnad och tokens i aktuellt fönster";
 "menu_section_cost_details" = "Kostnadsdetaljer (toppmodell, anteckningar)";
-"status_components_inline_title" = "Visa status direkt";
-"status_components_inline_subtitle" = "Ersätter undermenyn Statussida med en kompakt lista över komponenter. Klicka för att öppna statussidan.";
 "app_actions_overview_only_title" = "Appåtgärder endast i Översikt";
 "app_actions_overview_only_subtitle" = "Uppdatera, Inställningar, Om och Avsluta visas bara på fliken Översikt. Kräver sammanslagna symboler med fliken Översikt aktiverad.";
 "stacked_bars_show_icons_title" = "Visa leverantörsikoner";
@@ -2543,3 +2541,9 @@
 "settings_search_results_title" = "Inställningar";
 "section_menu_tabs" = "Menyflikar";
 "section_menu_tabs_footer" = "Flikfältet högst upp i menyn när symbolerna är sammanslagna.";
+"status_page_presentation_title" = "Statussida";
+"status_page_off" = "Av";
+"status_page_link" = "Länk";
+"status_page_inline" = "Infogad";
+"status_page_inline_subtitle" = "Listar tjänstens komponenter i menyn. Klicka på listan för att öppna statussidan.";
+"status_page_inline_requires_checks" = "Infogat läge kräver ”Kontrollera leverantörsstatus” under Allmänt; tills dess visar menyn länken.";

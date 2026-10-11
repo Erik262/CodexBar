@@ -2529,8 +2529,6 @@
 "menu_section_latest_tokens" = "Laatste tokens / verzoeken";
 "menu_section_current_window" = "Kosten & tokens huidig venster";
 "menu_section_cost_details" = "Kostendetails (topmodel, notities)";
-"status_components_inline_title" = "Status direct tonen";
-"status_components_inline_subtitle" = "Vervangt het submenu Statuspagina door een compacte lijst met onderdelen. Klik om de statuspagina te openen.";
 "app_actions_overview_only_title" = "App-acties alleen in Overzicht";
 "app_actions_overview_only_subtitle" = "Vernieuwen, Instellingen, Over en Stop verschijnen alleen op het tabblad Overzicht. Vereist samengevoegde pictogrammen met het tabblad Overzicht aan.";
 "stacked_bars_show_icons_title" = "Providerpictogrammen tonen";
@@ -2543,3 +2541,9 @@
 "settings_search_results_title" = "Instellingen";
 "section_menu_tabs" = "Menutabbladen";
 "section_menu_tabs_footer" = "De tabbalk boven in het menu wanneer symbolen zijn samengevoegd.";
+"status_page_presentation_title" = "Statuspagina";
+"status_page_off" = "Uit";
+"status_page_link" = "Link";
+"status_page_inline" = "Inline";
+"status_page_inline_subtitle" = "Toont de servicecomponenten in het menu. Klik op de lijst om de statuspagina te openen.";
+"status_page_inline_requires_checks" = "Inline vereist ‘Controleer de status van de provider’ onder Algemeen; tot die tijd toont het menu de link.";

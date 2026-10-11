@@ -336,10 +336,15 @@ extension SettingsStore {
         set { self.setDefault(\.appActionsOnOverviewOnly, newValue, key: "appActionsOnOverviewOnly") }
     }
 
-    /// Shows live status components as a compact card instead of the Status Page submenu.
+    /// Legacy app-wide "status inline" choice; providers without their own choice still follow it.
     var statusComponentsInline: Bool {
         get { self.defaultsState.statusComponentsInline }
         set { self.setDefault(\.statusComponentsInline, newValue, key: "statusComponentsInline") }
+    }
+
+    var statusInlineByProviderRaw: [String: Bool] {
+        get { self.defaultsState.statusInlineByProviderRaw }
+        set { self.setDefault(\.statusInlineByProviderRaw, newValue, key: "statusInlineByProvider") }
     }
 
     var apiCreditBudgetAmountsRaw: [String: Double] {

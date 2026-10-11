@@ -2531,8 +2531,6 @@
 "menu_section_latest_tokens" = "Token / yêu cầu gần nhất";
 "menu_section_current_window" = "Chi phí & token của khung hiện tại";
 "menu_section_cost_details" = "Chi tiết chi phí (mô hình chính, ghi chú)";
-"status_components_inline_title" = "Hiển thị trạng thái trực tiếp";
-"status_components_inline_subtitle" = "Thay menu con Trang trạng thái bằng danh sách thành phần gọn. Nhấp để mở trang trạng thái.";
 "app_actions_overview_only_title" = "Thao tác ứng dụng chỉ ở Tổng quan";
 "app_actions_overview_only_subtitle" = "Làm mới, Cài đặt, Giới thiệu và Thoát chỉ hiện ở tab Tổng quan. Cần gộp biểu tượng và bật tab Tổng quan.";
 "stacked_bars_show_icons_title" = "Hiển thị biểu tượng nhà cung cấp";
@@ -2545,3 +2543,9 @@
 "settings_search_results_title" = "Cài đặt";
 "section_menu_tabs" = "Tab menu";
 "section_menu_tabs_footer" = "Thanh tab ở đầu menu khi các biểu tượng được gộp.";
+"status_page_presentation_title" = "Trang trạng thái";
+"status_page_off" = "Tắt";
+"status_page_link" = "Liên kết";
+"status_page_inline" = "Nội tuyến";
+"status_page_inline_subtitle" = "Liệt kê các thành phần dịch vụ trong menu. Nhấp vào danh sách để mở trang trạng thái.";
+"status_page_inline_requires_checks" = "Chế độ nội tuyến cần bật “Kiểm tra Nhà cung cấp trạng thái” trong Chung; trước đó menu hiển thị liên kết.";

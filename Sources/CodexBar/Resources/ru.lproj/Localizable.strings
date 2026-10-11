@@ -2531,8 +2531,6 @@
 "menu_section_latest_tokens" = "Последние токены / запросы";
 "menu_section_current_window" = "Расходы и токены текущего окна";
 "menu_section_cost_details" = "Детали расходов (основная модель, заметки)";
-"status_components_inline_title" = "Показывать статус прямо в меню";
-"status_components_inline_subtitle" = "Заменяет подменю страницы статуса компактным списком компонентов. Нажмите, чтобы открыть страницу статуса.";
 "app_actions_overview_only_title" = "Действия приложения только в «Обзоре»";
 "app_actions_overview_only_subtitle" = "«Обновить», «Настройки», «О программе» и «Выйти» отображаются только на вкладке «Обзор». Требуются объединённые значки с включённой вкладкой «Обзор».";
 "stacked_bars_show_icons_title" = "Показывать значки провайдеров";
@@ -2545,3 +2543,9 @@
 "settings_search_results_title" = "Настройки";
 "section_menu_tabs" = "Вкладки меню";
 "section_menu_tabs_footer" = "Панель вкладок вверху меню, когда значки объединены.";
+"status_page_presentation_title" = "Страница статуса";
+"status_page_off" = "Выкл.";
+"status_page_link" = "Ссылка";
+"status_page_inline" = "В меню";
+"status_page_inline_subtitle" = "Показывает компоненты сервиса в меню. Нажмите на список, чтобы открыть страницу статуса.";
+"status_page_inline_requires_checks" = "Для режима «В меню» нужна опция «Проверить статус провайдера» в разделе «Основные»; до этого в меню будет ссылка.";

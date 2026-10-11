@@ -2534,8 +2534,6 @@
 "menu_section_latest_tokens" = "โทเค็น / คำขอล่าสุด";
 "menu_section_current_window" = "ค่าใช้จ่ายและโทเค็นของช่วงปัจจุบัน";
 "menu_section_cost_details" = "รายละเอียดค่าใช้จ่าย (โมเดลหลัก หมายเหตุ)";
-"status_components_inline_title" = "แสดงสถานะในเมนู";
-"status_components_inline_subtitle" = "แทนที่เมนูย่อยหน้าสถานะด้วยรายการส่วนประกอบแบบกะทัดรัด คลิกเพื่อเปิดหน้าสถานะ";
 "app_actions_overview_only_title" = "การทำงานของแอปเฉพาะในภาพรวม";
 "app_actions_overview_only_subtitle" = "รีเฟรช การตั้งค่า เกี่ยวกับ และออก จะแสดงเฉพาะในแท็บภาพรวม ต้องรวมไอคอนและเปิดแท็บภาพรวม";
 "stacked_bars_show_icons_title" = "แสดงไอคอนผู้ให้บริการ";
@@ -2548,3 +2546,9 @@
 "settings_search_results_title" = "การตั้งค่า";
 "section_menu_tabs" = "แท็บเมนู";
 "section_menu_tabs_footer" = "แถบแท็บที่ด้านบนของเมนูเมื่อรวมไอคอน";
+"status_page_presentation_title" = "หน้าสถานะ";
+"status_page_off" = "ปิด";
+"status_page_link" = "ลิงก์";
+"status_page_inline" = "แสดงในเมนู";
+"status_page_inline_subtitle" = "แสดงรายการส่วนประกอบของบริการในเมนู คลิกรายการเพื่อเปิดหน้าสถานะ";
+"status_page_inline_requires_checks" = "การแสดงในเมนูต้องเปิด “ตรวจสอบสถานะผู้ให้บริการ” ในทั่วไป จนกว่าจะเปิด เมนูจะแสดงลิงก์";

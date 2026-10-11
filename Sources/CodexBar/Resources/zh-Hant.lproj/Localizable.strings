@@ -2508,8 +2508,6 @@
 "menu_section_latest_tokens" = "最近權杖／請求";
 "menu_section_current_window" = "目前視窗費用與權杖";
 "menu_section_cost_details" = "費用詳情（主要模型、說明）";
-"status_components_inline_title" = "內嵌顯示狀態";
-"status_components_inline_subtitle" = "以精簡的元件清單取代狀態頁子選單。點按即可開啟狀態頁。";
 "app_actions_overview_only_title" = "App 動作僅顯示於總覽";
 "app_actions_overview_only_subtitle" = "重新整理、設定、關於與結束僅顯示於總覽標籤頁。需要合併圖示並啟用總覽標籤頁。";
 "stacked_bars_show_icons_title" = "顯示供應商圖示";
@@ -2522,3 +2520,9 @@
 "settings_search_results_title" = "設定";
 "section_menu_tabs" = "選單標籤頁";
 "section_menu_tabs_footer" = "合併圖示時選單頂端的標籤列。";
+"status_page_presentation_title" = "狀態頁面";
+"status_page_off" = "關閉";
+"status_page_link" = "連結";
+"status_page_inline" = "內嵌";
+"status_page_inline_subtitle" = "在選單中列出服務元件。點按列表可開啟狀態頁面。";
+"status_page_inline_requires_checks" = "內嵌顯示需要在「一般」中開啟「檢查提供者狀態」；在此之前選單會顯示連結。";

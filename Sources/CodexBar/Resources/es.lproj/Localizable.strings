@@ -2528,8 +2528,6 @@
 "menu_section_latest_tokens" = "Últimos tokens / solicitudes";
 "menu_section_current_window" = "Coste y tokens de la ventana actual";
 "menu_section_cost_details" = "Detalles de coste (modelo principal, notas)";
-"status_components_inline_title" = "Mostrar el estado integrado";
-"status_components_inline_subtitle" = "Sustituye el submenú de la página de estado por una lista compacta de componentes. Haz clic para abrir la página de estado.";
 "app_actions_overview_only_title" = "Acciones de la app solo en Resumen";
 "app_actions_overview_only_subtitle" = "Actualizar, Ajustes, Acerca de y Salir aparecen solo en la pestaña Resumen. Requiere iconos combinados con la pestaña Resumen activada.";
 "stacked_bars_show_icons_title" = "Mostrar iconos de proveedores";
@@ -2542,3 +2540,9 @@
 "settings_search_results_title" = "Ajustes";
 "section_menu_tabs" = "Pestañas del menú";
 "section_menu_tabs_footer" = "La barra de pestañas en la parte superior del menú cuando los iconos están combinados.";
+"status_page_presentation_title" = "Página de estado";
+"status_page_off" = "Desactivado";
+"status_page_link" = "Enlace";
+"status_page_inline" = "Integrado";
+"status_page_inline_subtitle" = "Muestra los componentes del servicio en el menú. Haz clic en la lista para abrir la página de estado.";
+"status_page_inline_requires_checks" = "El modo integrado necesita «Comprobar estado del proveedor» en General; hasta entonces el menú muestra el enlace.";

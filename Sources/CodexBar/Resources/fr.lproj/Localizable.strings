@@ -2529,8 +2529,6 @@
 "menu_section_latest_tokens" = "Derniers jetons / requêtes";
 "menu_section_current_window" = "Coût et jetons de la fenêtre actuelle";
 "menu_section_cost_details" = "Détails des coûts (modèle principal, notes)";
-"status_components_inline_title" = "Afficher l’état directement";
-"status_components_inline_subtitle" = "Remplace le sous-menu Page d’état par une liste compacte des composants. Cliquez pour ouvrir la page d’état.";
 "app_actions_overview_only_title" = "Actions de l’app uniquement dans Aperçu";
 "app_actions_overview_only_subtitle" = "Actualiser, Réglages, À propos et Quitter n’apparaissent que dans l’onglet Aperçu. Nécessite les icônes fusionnées avec l’onglet Aperçu activé.";
 "stacked_bars_show_icons_title" = "Afficher les icônes des fournisseurs";
@@ -2543,3 +2541,9 @@
 "settings_search_results_title" = "Réglages";
 "section_menu_tabs" = "Onglets du menu";
 "section_menu_tabs_footer" = "La barre d'onglets en haut du menu lorsque les icônes sont fusionnées.";
+"status_page_presentation_title" = "Page d'état";
+"status_page_off" = "Désactivé";
+"status_page_link" = "Lien";
+"status_page_inline" = "Intégré";
+"status_page_inline_subtitle" = "Liste les composants du service dans le menu. Cliquez sur la liste pour ouvrir la page d'état.";
+"status_page_inline_requires_checks" = "Le mode intégré nécessite « Vérifier l'état des fournisseurs » dans Général ; d'ici là, le menu affiche le lien.";

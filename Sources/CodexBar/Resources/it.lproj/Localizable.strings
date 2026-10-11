@@ -2534,8 +2534,6 @@
 "menu_section_latest_tokens" = "Ultimi token / richieste";
 "menu_section_current_window" = "Costo e token della finestra attuale";
 "menu_section_cost_details" = "Dettagli dei costi (modello principale, note)";
-"status_components_inline_title" = "Mostra lo stato in linea";
-"status_components_inline_subtitle" = "Sostituisce il sottomenu della pagina di stato con un elenco compatto dei componenti. Fai clic per aprire la pagina di stato.";
 "app_actions_overview_only_title" = "Azioni dell’app solo in Panoramica";
 "app_actions_overview_only_subtitle" = "Aggiorna, Impostazioni, Info e Esci compaiono solo nella scheda Panoramica. Richiede le icone unite con la scheda Panoramica attiva.";
 "stacked_bars_show_icons_title" = "Mostra le icone dei provider";
@@ -2548,3 +2546,9 @@
 "settings_search_results_title" = "Impostazioni";
 "section_menu_tabs" = "Schede del menu";
 "section_menu_tabs_footer" = "La barra delle schede in cima al menu quando le icone sono unite.";
+"status_page_presentation_title" = "Pagina di stato";
+"status_page_off" = "Disattivato";
+"status_page_link" = "Collegamento";
+"status_page_inline" = "In linea";
+"status_page_inline_subtitle" = "Elenca i componenti del servizio nel menu. Fai clic sull'elenco per aprire la pagina di stato.";
+"status_page_inline_requires_checks" = "La modalità in linea richiede «Controlla stato provider» in Generale; fino ad allora il menu mostra il collegamento.";

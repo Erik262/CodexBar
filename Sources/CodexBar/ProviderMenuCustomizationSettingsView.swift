@@ -10,7 +10,13 @@ struct ProviderMenuCustomizationSettingsView: View {
 
     var body: some View {
         Section {
-            ForEach(MenuSectionToggle.allCases.filter { $0.applies(to: self.provider) }) { section in
+            if MenuSectionToggle.statusPageLink.applies(to: self.provider) {
+                self.statusPagePicker
+            }
+
+            ForEach(MenuSectionToggle.allCases.filter {
+                $0 != .statusPageLink && $0.applies(to: self.provider)
+            }) { section in
                 Toggle(section.label, isOn: Binding(
                     get: { self.settings.isMenuSectionVisible(section, for: self.provider) },
                     set: { self.settings.setMenuSection(section, visible: $0, for: self.provider) }))
@@ -38,5 +44,26 @@ struct ProviderMenuCustomizationSettingsView: View {
                 SettingsSectionFooter(L("api_credits_settings_subtitle"))
             }
         }
+    }
+
+    private var statusPagePicker: some View {
+        Picker(selection: Binding(
+            get: { self.settings.statusPagePresentation(for: self.provider) },
+            set: { self.settings.setStatusPagePresentation($0, for: self.provider) }))
+        {
+            ForEach(StatusPagePresentation.options(for: self.provider)) { option in
+                Text(option.label).tag(option)
+            }
+        } label: {
+            SettingsRowLabel(L("status_page_presentation_title"), subtitle: self.statusPageSubtitle)
+        }
+        .pickerStyle(.segmented)
+    }
+
+    private var statusPageSubtitle: String? {
+        guard self.settings.statusPagePresentation(for: self.provider) == .inline else { return nil }
+        return self.settings.statusChecksEnabled
+            ? L("status_page_inline_subtitle")
+            : L("status_page_inline_requires_checks")
     }
 }

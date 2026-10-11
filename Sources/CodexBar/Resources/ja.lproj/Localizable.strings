@@ -2530,8 +2530,6 @@
 "menu_section_latest_tokens" = "最新のトークン／リクエスト";
 "menu_section_current_window" = "現在のウィンドウのコストとトークン";
 "menu_section_cost_details" = "コストの詳細（主要モデル、注記）";
-"status_components_inline_title" = "ステータスをインライン表示";
-"status_components_inline_subtitle" = "ステータスページのサブメニューをコンポーネントのコンパクトな一覧に置き換えます。クリックするとステータスページを開きます。";
 "app_actions_overview_only_title" = "アプリ操作は概要タブのみ";
 "app_actions_overview_only_subtitle" = "更新、設定、情報、終了は概要タブにのみ表示されます。概要タブを有効にしたアイコン統合が必要です。";
 "stacked_bars_show_icons_title" = "プロバイダのアイコンを表示";
@@ -2544,3 +2542,9 @@
 "settings_search_results_title" = "設定";
 "section_menu_tabs" = "メニューのタブ";
 "section_menu_tabs_footer" = "アイコンを統合したときにメニュー上部に表示されるタブバーです。";
+"status_page_presentation_title" = "ステータスページ";
+"status_page_off" = "オフ";
+"status_page_link" = "リンク";
+"status_page_inline" = "インライン";
+"status_page_inline_subtitle" = "サービスのコンポーネントをメニューに一覧表示します。一覧をクリックするとステータスページを開きます。";
+"status_page_inline_requires_checks" = "インライン表示には「一般」の「プロバイダのステータスを確認」が必要です。それまではリンクが表示されます。";

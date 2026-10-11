@@ -2534,8 +2534,6 @@
 "menu_section_latest_tokens" = "آخرین توکن‌ها / درخواست‌ها";
 "menu_section_current_window" = "هزینه و توکن‌های بازهٔ فعلی";
 "menu_section_cost_details" = "جزئیات هزینه (مدل اصلی، یادداشت‌ها)";
-"status_components_inline_title" = "نمایش وضعیت درون منو";
-"status_components_inline_subtitle" = "زیرمنوی صفحهٔ وضعیت را با فهرست فشرده‌ای از اجزا جایگزین می‌کند. برای باز کردن صفحهٔ وضعیت کلیک کنید.";
 "app_actions_overview_only_title" = "اقدامات برنامه فقط در نمای کلی";
 "app_actions_overview_only_subtitle" = "تازه‌سازی، تنظیمات، درباره و خروج فقط در زبانهٔ نمای کلی نمایش داده می‌شوند. نیاز به ادغام نمادها با زبانهٔ نمای کلی فعال دارد.";
 "stacked_bars_show_icons_title" = "نمایش نمادهای ارائه‌دهندگان";
@@ -2548,3 +2546,9 @@
 "settings_search_results_title" = "تنظیمات";
 "section_menu_tabs" = "زبانه‌های منو";
 "section_menu_tabs_footer" = "نوار زبانه در بالای منو وقتی نمادها ادغام شده‌اند.";
+"status_page_presentation_title" = "صفحه وضعیت";
+"status_page_off" = "خاموش";
+"status_page_link" = "پیوند";
+"status_page_inline" = "درون‌خطی";
+"status_page_inline_subtitle" = "اجزای سرویس را در منو فهرست می‌کند. برای باز کردن صفحه وضعیت روی فهرست کلیک کنید.";
+"status_page_inline_requires_checks" = "حالت درون‌خطی به «وضعیت ارائه دهنده را بررسی کنید» در بخش عمومی نیاز دارد؛ تا آن زمان منو پیوند را نشان می‌دهد.";

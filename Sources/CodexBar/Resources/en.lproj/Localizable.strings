@@ -2534,8 +2534,6 @@
 "menu_section_latest_tokens" = "Latest tokens / requests";
 "menu_section_current_window" = "Current window cost & tokens";
 "menu_section_cost_details" = "Cost details (top model, notes)";
-"status_components_inline_title" = "Show status inline";
-"status_components_inline_subtitle" = "Replaces the Status Page submenu with a compact list of components. Click it to open the status page.";
 "app_actions_overview_only_title" = "App actions on Overview only";
 "app_actions_overview_only_subtitle" = "Refresh, Settings, About, and Quit appear only on the Overview tab. Needs merged icons with the Overview tab enabled.";
 "stacked_bars_show_icons_title" = "Show provider icons";
@@ -2548,3 +2546,9 @@
 "settings_search_results_title" = "Settings";
 "section_menu_tabs" = "Menu tabs";
 "section_menu_tabs_footer" = "The tab bar at the top of the menu when icons are merged.";
+"status_page_presentation_title" = "Status page";
+"status_page_off" = "Off";
+"status_page_link" = "Link";
+"status_page_inline" = "Inline";
+"status_page_inline_subtitle" = "Lists service components in the menu. Click the list to open the status page.";
+"status_page_inline_requires_checks" = "Inline needs “Check provider status” in General; until then the menu shows the link.";

@@ -63,7 +63,7 @@ extension StatusItemController {
     /// Components for the inline status card: any provider whose status page published a component list,
     /// once the user opted in. Empty keeps the regular Status Page row and its summary line.
     static func inlineStatusComponents(store: UsageStore, provider: UsageProvider) -> [ProviderStatusComponent] {
-        guard store.settings.statusComponentsInline else { return [] }
+        guard store.settings.statusPagePresentation(for: provider) == .inline else { return [] }
         return self.filterStatusComponents(store.statusComponents(for: provider), for: provider)
     }
 

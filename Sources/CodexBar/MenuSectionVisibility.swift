@@ -84,3 +84,45 @@ extension SettingsStore {
         self.hiddenMenuSectionsByProviderRaw = byProvider
     }
 }
+
+/// How a provider's menu shows its service status: not at all, as the Status Page link, or as the
+/// compact component list. Inline falls back to the link until the status page has published components.
+enum StatusPagePresentation: String, CaseIterable, Identifiable, Sendable {
+    case off
+    case link
+    case inline
+
+    var id: String {
+        self.rawValue
+    }
+
+    var label: String {
+        switch self {
+        case .off: L("status_page_off")
+        case .link: L("status_page_link")
+        case .inline: L("status_page_inline")
+        }
+    }
+
+    /// Only statuspage.io-style feeds (`statusPageURL`) publish the component list the inline card needs.
+    static func options(for provider: UsageProvider) -> [StatusPagePresentation] {
+        let metadata = ProviderDescriptorRegistry.descriptor(for: provider).metadata
+        return metadata.statusPageURL != nil ? [.off, .link, .inline] : [.off, .link]
+    }
+}
+
+extension SettingsStore {
+    func statusPagePresentation(for provider: UsageProvider) -> StatusPagePresentation {
+        guard self.isMenuSectionVisible(.statusPageLink, for: provider) else { return .off }
+        let inline = self.statusInlineByProviderRaw[provider.rawValue] ?? self.statusComponentsInline
+        return inline ? .inline : .link
+    }
+
+    func setStatusPagePresentation(_ presentation: StatusPagePresentation, for provider: UsageProvider) {
+        self.setMenuSection(.statusPageLink, visible: presentation != .off, for: provider)
+        guard presentation != .off else { return }
+        var byProvider = self.statusInlineByProviderRaw
+        byProvider[provider.rawValue] = presentation == .inline
+        self.statusInlineByProviderRaw = byProvider
+    }
+}

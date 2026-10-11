@@ -2534,8 +2534,6 @@
 "menu_section_latest_tokens" = "Últims tokens / sol·licituds";
 "menu_section_current_window" = "Cost i tokens de la finestra actual";
 "menu_section_cost_details" = "Detalls de cost (model principal, notes)";
-"status_components_inline_title" = "Mostra l’estat integrat";
-"status_components_inline_subtitle" = "Substitueix el submenú de la pàgina d’estat per una llista compacta de components. Fes-hi clic per obrir la pàgina d’estat.";
 "app_actions_overview_only_title" = "Accions de l’app només a Resum";
 "app_actions_overview_only_subtitle" = "Actualitza, Configuració, Quant a i Surt només apareixen a la pestanya Resum. Cal combinar les icones amb la pestanya Resum activada.";
 "stacked_bars_show_icons_title" = "Mostra les icones dels proveïdors";
@@ -2548,3 +2546,9 @@
 "settings_search_results_title" = "Configuració";
 "section_menu_tabs" = "Pestanyes del menú";
 "section_menu_tabs_footer" = "La barra de pestanyes a la part superior del menú quan les icones estan combinades.";
+"status_page_presentation_title" = "Pàgina d'estat";
+"status_page_off" = "Desactivat";
+"status_page_link" = "Enllaç";
+"status_page_inline" = "Integrat";
+"status_page_inline_subtitle" = "Mostra els components del servei al menú. Fes clic a la llista per obrir la pàgina d'estat.";
+"status_page_inline_requires_checks" = "El mode integrat necessita «Comproveu l'estat del proveïdor» a General; fins aleshores el menú mostra l'enllaç.";

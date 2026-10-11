@@ -65,6 +65,27 @@ struct SettingsPersistenceContractTests {
     }
 
     @Test
+    func `status page presentation is chosen per provider and persists`() {
+        let defaults = InMemoryUserDefaults(values: ["statusComponentsInline": true])
+        let settings = testSettingsStore(suiteName: #function, userDefaults: defaults)
+        // The earlier app-wide switch is the default for providers without their own choice.
+        #expect(settings.statusPagePresentation(for: .codex) == .inline)
+
+        settings.setStatusPagePresentation(.link, for: .codex)
+        settings.setStatusPagePresentation(.off, for: .claude)
+
+        let reloaded = testSettingsStore(suiteName: #function, userDefaults: defaults)
+        #expect(reloaded.statusPagePresentation(for: .codex) == .link)
+        #expect(reloaded.statusPagePresentation(for: .claude) == .off)
+        #expect(!reloaded.isMenuSectionVisible(.statusPageLink, for: .claude))
+        #expect(reloaded.statusPagePresentation(for: .openai) == .inline)
+
+        reloaded.setStatusPagePresentation(.inline, for: .claude)
+        #expect(reloaded.statusPagePresentation(for: .claude) == .inline)
+        #expect(StatusPagePresentation.options(for: .openai).contains(.inline))
+    }
+
+    @Test
     func `providers without their own visibility choice inherit the earlier app-wide set`() {
         let defaults = InMemoryUserDefaults(values: ["hiddenMenuSections": ["costChart", "todayCost"]])
         let settings = testSettingsStore(suiteName: #function, userDefaults: defaults)

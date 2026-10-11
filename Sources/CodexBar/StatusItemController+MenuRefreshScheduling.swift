@@ -120,6 +120,7 @@ extension StatusItemController {
             "hiddenByProvider=\(hiddenByProvider)",
             "appActionsOverviewOnly=\(self.settings.appActionsOnOverviewOnly ? "1" : "0")",
             "statusInline=\(self.settings.statusComponentsInline ? "1" : "0")",
+            "statusInlineByProvider=\(self.settings.statusInlineByProviderRaw.sorted { $0.key < $1.key })",
             "openAIAttached=\(self.store.openAIDashboardAttachmentAuthorized ? "1" : "0")",
             "openAILogin=\(self.store.openAIDashboardRequiresLogin ? "1" : "0")",
             "openAIUpdated=\(Self.millisecondsSinceEpoch(dashboard?.updatedAt))",

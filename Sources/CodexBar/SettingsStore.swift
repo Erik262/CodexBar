@@ -590,6 +590,8 @@ extension SettingsStore {
                 forKey: "hiddenMenuSectionsByProvider") as? [String: [String]] ?? [:],
             appActionsOnOverviewOnly: userDefaults.object(forKey: "appActionsOnOverviewOnly") as? Bool ?? false,
             statusComponentsInline: userDefaults.object(forKey: "statusComponentsInline") as? Bool ?? false,
+            statusInlineByProviderRaw: userDefaults.dictionary(forKey: "statusInlineByProvider") as? [String: Bool]
+                ?? [:],
             apiCreditBudgetAmountsRaw: userDefaults.dictionary(forKey: "apiCreditBudgetAmounts") as? [String: Double]
                 ?? [:],
             apiCreditBudgetStartDaysRaw: userDefaults.dictionary(

@@ -2530,8 +2530,6 @@
 "menu_section_latest_tokens" = "Останні токени / запити";
 "menu_section_current_window" = "Витрати й токени поточного вікна";
 "menu_section_cost_details" = "Деталі витрат (основна модель, примітки)";
-"status_components_inline_title" = "Показувати стан прямо в меню";
-"status_components_inline_subtitle" = "Замінює підменю сторінки стану компактним списком компонентів. Натисніть, щоб відкрити сторінку стану.";
 "app_actions_overview_only_title" = "Дії застосунку лише в «Огляді»";
 "app_actions_overview_only_subtitle" = "«Оновити», «Налаштування», «Про програму» і «Вийти» показуються лише на вкладці «Огляд». Потрібні об’єднані значки з увімкненою вкладкою «Огляд».";
 "stacked_bars_show_icons_title" = "Показувати значки постачальників";
@@ -2544,3 +2542,9 @@
 "settings_search_results_title" = "Налаштування";
 "section_menu_tabs" = "Вкладки меню";
 "section_menu_tabs_footer" = "Панель вкладок угорі меню, коли значки об’єднано.";
+"status_page_presentation_title" = "Сторінка стану";
+"status_page_off" = "Вимк.";
+"status_page_link" = "Посилання";
+"status_page_inline" = "У меню";
+"status_page_inline_subtitle" = "Показує компоненти сервісу в меню. Натисніть на список, щоб відкрити сторінку стану.";
+"status_page_inline_requires_checks" = "Для режиму «У меню» потрібна опція «Перевірте статус провайдера» в розділі «Загальні»; доти в меню буде посилання.";

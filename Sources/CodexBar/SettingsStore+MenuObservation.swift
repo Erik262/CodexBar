@@ -37,6 +37,7 @@ extension SettingsStore {
         _ = self.hiddenMenuSectionsByProviderRaw
         _ = self.appActionsOnOverviewOnly
         _ = self.statusComponentsInline
+        _ = self.statusInlineByProviderRaw
         _ = self.apiCreditBudgetAmountsRaw
         _ = self.apiCreditBudgetStartDaysRaw
         _ = self.menuBarColorPace

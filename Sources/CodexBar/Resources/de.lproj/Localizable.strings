@@ -2528,8 +2528,6 @@
 "menu_section_latest_tokens" = "Letzte Tokens / Anfragen";
 "menu_section_current_window" = "Kosten & Tokens im aktuellen Fenster";
 "menu_section_cost_details" = "Kostendetails (Top-Modell, Hinweise)";
-"status_components_inline_title" = "Status direkt anzeigen";
-"status_components_inline_subtitle" = "Ersetzt das Statusseiten-Untermenü durch eine kompakte Komponentenliste. Ein Klick öffnet die Statusseite.";
 "app_actions_overview_only_title" = "App-Aktionen nur in der Übersicht";
 "app_actions_overview_only_subtitle" = "Aktualisieren, Einstellungen, Über und Beenden erscheinen nur im Übersicht-Tab. Erfordert zusammengeführte Symbole mit aktivem Übersicht-Tab.";
 "stacked_bars_show_icons_title" = "Anbietersymbole anzeigen";
@@ -2542,3 +2540,9 @@
 "settings_search_results_title" = "Einstellungen";
 "section_menu_tabs" = "Menü-Tabs";
 "section_menu_tabs_footer" = "Die Tab-Leiste oben im Menü, wenn Symbole zusammengeführt sind.";
+"status_page_presentation_title" = "Statusseite";
+"status_page_off" = "Aus";
+"status_page_link" = "Link";
+"status_page_inline" = "Eingebettet";
+"status_page_inline_subtitle" = "Listet die Dienstkomponenten im Menü auf. Ein Klick auf die Liste öffnet die Statusseite.";
+"status_page_inline_requires_checks" = "Eingebettet braucht „Anbieterstatus prüfen“ unter Allgemein; bis dahin zeigt das Menü den Link.";

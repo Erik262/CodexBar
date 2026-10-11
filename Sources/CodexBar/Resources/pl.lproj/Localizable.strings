@@ -2533,8 +2533,6 @@
 "menu_section_latest_tokens" = "Ostatnie tokeny / żądania";
 "menu_section_current_window" = "Koszt i tokeny bieżącego okna";
 "menu_section_cost_details" = "Szczegóły kosztów (główny model, uwagi)";
-"status_components_inline_title" = "Pokazuj stan bezpośrednio";
-"status_components_inline_subtitle" = "Zastępuje podmenu strony stanu zwięzłą listą komponentów. Kliknij, aby otworzyć stronę stanu.";
 "app_actions_overview_only_title" = "Akcje aplikacji tylko w Przeglądzie";
 "app_actions_overview_only_subtitle" = "Odśwież, Ustawienia, O programie i Zakończ pojawiają się tylko na karcie Przegląd. Wymaga scalonych ikon z włączoną kartą Przegląd.";
 "stacked_bars_show_icons_title" = "Pokaż ikony dostawców";
@@ -2547,3 +2545,9 @@
 "settings_search_results_title" = "Ustawienia";
 "section_menu_tabs" = "Karty menu";
 "section_menu_tabs_footer" = "Pasek kart u góry menu, gdy ikony są scalone.";
+"status_page_presentation_title" = "Strona stanu";
+"status_page_off" = "Wyłączone";
+"status_page_link" = "Link";
+"status_page_inline" = "W menu";
+"status_page_inline_subtitle" = "Pokazuje komponenty usługi w menu. Kliknij listę, aby otworzyć stronę stanu.";
+"status_page_inline_requires_checks" = "Tryb w menu wymaga opcji „Sprawdzaj status dostawców” w Ogólnych; do tego czasu menu pokazuje link.";

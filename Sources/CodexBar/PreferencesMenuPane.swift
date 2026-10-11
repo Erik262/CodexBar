@@ -103,12 +103,6 @@ struct MenuPane: View {
                         subtitle: L("menu_card_hover_highlight_subtitle"))
                 }
 
-                Toggle(isOn: self.$settings.statusComponentsInline) {
-                    SettingsRowLabel(
-                        L("status_components_inline_title"),
-                        subtitle: L("status_components_inline_subtitle"))
-                }
-
                 if self.settings.mergeIcons {
                     Toggle(isOn: self.$settings.appActionsOnOverviewOnly) {
                         SettingsRowLabel(

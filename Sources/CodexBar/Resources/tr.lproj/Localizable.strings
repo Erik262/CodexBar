@@ -2533,8 +2533,6 @@
 "menu_section_latest_tokens" = "Son tokenlar / istekler";
 "menu_section_current_window" = "Geçerli pencere maliyeti ve tokenları";
 "menu_section_cost_details" = "Maliyet ayrıntıları (en çok kullanılan model, notlar)";
-"status_components_inline_title" = "Durumu satır içinde göster";
-"status_components_inline_subtitle" = "Durum sayfası alt menüsünü kompakt bir bileşen listesiyle değiştirir. Durum sayfasını açmak için tıklayın.";
 "app_actions_overview_only_title" = "Uygulama eylemleri yalnızca Genel Bakış’ta";
 "app_actions_overview_only_subtitle" = "Yenile, Ayarlar, Hakkında ve Çık yalnızca Genel Bakış sekmesinde görünür. Genel Bakış sekmesi açık birleşik simgeler gerekir.";
 "stacked_bars_show_icons_title" = "Sağlayıcı simgelerini göster";
@@ -2547,3 +2545,9 @@
 "settings_search_results_title" = "Ayarlar";
 "section_menu_tabs" = "Menü sekmeleri";
 "section_menu_tabs_footer" = "Simgeler birleştirildiğinde menünün üstündeki sekme çubuğu.";
+"status_page_presentation_title" = "Durum sayfası";
+"status_page_off" = "Kapalı";
+"status_page_link" = "Bağlantı";
+"status_page_inline" = "Satır içi";
+"status_page_inline_subtitle" = "Hizmet bileşenlerini menüde listeler. Durum sayfasını açmak için listeye tıklayın.";
+"status_page_inline_requires_checks" = "Satır içi görünüm için Genel'de “Sağlayıcı durumunu denetle” açık olmalıdır; o zamana kadar menü bağlantıyı gösterir.";

@@ -2534,8 +2534,6 @@
 "menu_section_latest_tokens" = "أحدث الرموز / الطلبات";
 "menu_section_current_window" = "تكلفة ورموز النافذة الحالية";
 "menu_section_cost_details" = "تفاصيل التكلفة (النموذج الأعلى، ملاحظات)";
-"status_components_inline_title" = "إظهار الحالة مباشرة";
-"status_components_inline_subtitle" = "يستبدل القائمة الفرعية لصفحة الحالة بقائمة مكونات مختصرة. انقر لفتح صفحة الحالة.";
 "app_actions_overview_only_title" = "إجراءات التطبيق في النظرة العامة فقط";
 "app_actions_overview_only_subtitle" = "تظهر التحديث والإعدادات وحول والإنهاء في علامة تبويب النظرة العامة فقط. يتطلب دمج الأيقونات مع تفعيل علامة النظرة العامة.";
 "stacked_bars_show_icons_title" = "إظهار أيقونات المزوّدين";
@@ -2548,3 +2546,9 @@
 "settings_search_results_title" = "الإعدادات";
 "section_menu_tabs" = "علامات تبويب القائمة";
 "section_menu_tabs_footer" = "شريط علامات التبويب أعلى القائمة عند دمج الأيقونات.";
+"status_page_presentation_title" = "صفحة الحالة";
+"status_page_off" = "إيقاف";
+"status_page_link" = "رابط";
+"status_page_inline" = "مضمّن";
+"status_page_inline_subtitle" = "يعرض مكونات الخدمة في القائمة. انقر على القائمة لفتح صفحة الحالة.";
+"status_page_inline_requires_checks" = "يتطلب العرض المضمّن تفعيل «تحقق من حالة المزود» في «عام»؛ وحتى ذلك الحين تعرض القائمة الرابط.";
