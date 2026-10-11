@@ -2521,3 +2521,5 @@
 "section_appearance" = "모양";
 "merged_icon_style_subtitle_all" = "전환기는 한 번에 하나의 공급자를 표시합니다. 스택은 두 공급자를 텍스트 행으로 표시합니다. 스택 막대는 두세 공급자를 게이지로 그립니다.";
 "stacked_bars_section_footer" = "막대는 메뉴에서 설정한 채우기 방향(남은 양 또는 사용량)을 따릅니다.";
+"menu_tab_order_title" = "탭 순서";
+"menu_tab_order_subtitle" = "드래그하여 메뉴 상단의 공급자 탭 순서를 바꿉니다.";

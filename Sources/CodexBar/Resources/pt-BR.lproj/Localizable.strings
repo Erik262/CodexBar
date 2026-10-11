@@ -2553,3 +2553,5 @@
 "section_appearance" = "Aparência";
 "merged_icon_style_subtitle_all" = "O alternador mostra um provedor por vez. Empilhado mostra dois provedores como linhas de texto. Barras empilhadas desenham dois ou três provedores como medidores.";
 "stacked_bars_section_footer" = "As barras seguem a direção de preenchimento definida em Menu (restante ou usado).";
+"menu_tab_order_title" = "Ordem das abas";
+"menu_tab_order_subtitle" = "Arraste para reordenar as abas de provedores no topo do menu.";

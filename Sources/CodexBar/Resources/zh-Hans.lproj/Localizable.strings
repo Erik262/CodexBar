@@ -2546,3 +2546,5 @@
 "section_appearance" = "外观";
 "merged_icon_style_subtitle_all" = "切换器一次显示一个提供商。堆叠以两行文字显示两个提供商。堆叠条以量表形式绘制两到三个提供商。";
 "stacked_bars_section_footer" = "条形遵循“菜单”中设置的填充方向（剩余或已用）。";
+"menu_tab_order_title" = "标签顺序";
+"menu_tab_order_subtitle" = "拖动以重新排列菜单顶部的提供商标签。";

@@ -1,3 +1,4 @@
+import CodexBarCore
 import Testing
 @testable import CodexBar
 
@@ -33,5 +34,20 @@ struct MenuSectionToggleApplicabilityTests {
         #expect(MenuSectionToggle.costChart.applies(to: .claude))
         #expect(!MenuSectionToggle.costChart.applies(to: .gemini))
         #expect(MenuSectionToggle.planUsage.applies(to: .gemini))
+    }
+}
+
+struct MenuTabOrderTests {
+    @Test
+    func `dragging a tab lands below a later target and above an earlier one`() throws {
+        let order = [UsageProvider.codex, .openai, .claude].map(\.instanceID)
+        let down = try #require(SettingsStore.reorderedProviders(
+            order, moving: UsageProvider.codex.instanceID, onto: UsageProvider.openai.instanceID))
+        #expect(down == [UsageProvider.openai, .codex, .claude].map(\.instanceID))
+        let up = try #require(SettingsStore.reorderedProviders(
+            order, moving: UsageProvider.claude.instanceID, onto: UsageProvider.codex.instanceID))
+        #expect(up == [UsageProvider.claude, .codex, .openai].map(\.instanceID))
+        #expect(SettingsStore.reorderedProviders(
+            order, moving: UsageProvider.codex.instanceID, onto: UsageProvider.codex.instanceID) == nil)
     }
 }

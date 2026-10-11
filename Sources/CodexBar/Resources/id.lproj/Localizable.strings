@@ -2556,3 +2556,5 @@
 "section_appearance" = "Tampilan";
 "merged_icon_style_subtitle_all" = "Pengalih menampilkan satu penyedia sekaligus. Bertumpuk menampilkan dua penyedia sebagai baris teks. Bilah bertumpuk menggambar dua atau tiga penyedia sebagai meter.";
 "stacked_bars_section_footer" = "Bilah mengikuti arah isian yang diatur di Menu (sisa atau terpakai).";
+"menu_tab_order_title" = "Urutan tab";
+"menu_tab_order_subtitle" = "Seret untuk mengurutkan ulang tab penyedia di bagian atas menu.";

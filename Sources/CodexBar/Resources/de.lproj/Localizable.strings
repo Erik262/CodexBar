@@ -2551,3 +2551,5 @@
 "section_appearance" = "Darstellung";
 "merged_icon_style_subtitle_all" = "Umschalter zeigt jeweils einen Anbieter. Gestapelt zeigt zwei Anbieter als Textzeilen. Gestapelte Balken zeichnen zwei oder drei Anbieter als Anzeigen.";
 "stacked_bars_section_footer" = "Die Balken folgen der Füllrichtung unter „Menü“ (verbleibend oder verbraucht).";
+"menu_tab_order_title" = "Tab-Reihenfolge";
+"menu_tab_order_subtitle" = "Ziehen, um die Anbieter-Tabs oben im Menü neu anzuordnen.";

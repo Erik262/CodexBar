@@ -2531,3 +2531,5 @@
 "section_appearance" = "外觀";
 "merged_icon_style_subtitle_all" = "切換器一次顯示一個提供者。堆疊以兩行文字顯示兩個提供者。堆疊列以量表形式繪製兩到三個提供者。";
 "stacked_bars_section_footer" = "列條遵循「選單」中設定的填滿方向（剩餘或已用）。";
+"menu_tab_order_title" = "標籤順序";
+"menu_tab_order_subtitle" = "拖移以重新排列選單頂端的提供者標籤。";

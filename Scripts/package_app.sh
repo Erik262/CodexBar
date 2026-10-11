@@ -264,8 +264,13 @@ fi
 BUNDLE_ID="com.steipete.codexbar"
 FEED_URL="https://raw.githubusercontent.com/steipete/CodexBar/main/appcast.xml"
 AUTO_CHECKS=true
-if [[ "$LOWER_CONF" == "debug" ]]; then
+# CODEXBAR_DEBUG_KEEPS_BUNDLE_ID=1 (compile_and_run.sh --fast) keeps the release bundle ID so a debug
+# build reads the same settings and shows no debug "D" marker in the menu bar.
+if [[ "$LOWER_CONF" == "debug" && "${CODEXBAR_DEBUG_KEEPS_BUNDLE_ID:-0}" != "1" ]]; then
   BUNDLE_ID="com.steipete.codexbar.debug"
+  FEED_URL=""
+  AUTO_CHECKS=false
+elif [[ "$LOWER_CONF" == "debug" ]]; then
   FEED_URL=""
   AUTO_CHECKS=false
 fi

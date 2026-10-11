@@ -267,7 +267,7 @@ fi
 if [[ "${FAST_BUILD}" == "1" ]]; then
   # Debug builds compile incrementally (release re-optimizes the whole module on every change), and the
   # widget extension is an extra Xcode build that day-to-day UI work rarely needs.
-  PACKAGE_ENV+=(CODEXBAR_SKIP_WIDGET_EXTENSION=1)
+  PACKAGE_ENV+=(CODEXBAR_SKIP_WIDGET_EXTENSION=1 CODEXBAR_DEBUG_KEEPS_BUNDLE_ID=1)
   if [[ -n "${SIGNING_MODE}" ]]; then
     PACKAGE_ENV+=(CODEXBAR_SIGNING="${SIGNING_MODE}")
   fi

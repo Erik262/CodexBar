@@ -2557,3 +2557,5 @@
 "section_appearance" = "Appearance";
 "merged_icon_style_subtitle_all" = "Switcher shows one provider at a time. Stacked shows two providers as text rows. Stacked bars draw two or three providers as meters.";
 "stacked_bars_section_footer" = "Bars follow the fill direction set under Menu (remaining or used).";
+"menu_tab_order_title" = "Tab order";
+"menu_tab_order_subtitle" = "Drag to reorder the provider tabs at the top of the menu.";

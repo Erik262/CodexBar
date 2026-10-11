@@ -2551,3 +2551,5 @@
 "section_appearance" = "Apariencia";
 "merged_icon_style_subtitle_all" = "El selector muestra un proveedor cada vez. Apilado muestra dos proveedores como filas de texto. Las barras apiladas dibujan dos o tres proveedores como medidores.";
 "stacked_bars_section_footer" = "Las barras siguen la dirección de llenado definida en Menú (restante o usado).";
+"menu_tab_order_title" = "Orden de pestañas";
+"menu_tab_order_subtitle" = "Arrastra para reordenar las pestañas de proveedores en la parte superior del menú.";

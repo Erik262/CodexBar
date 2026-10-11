@@ -2556,3 +2556,5 @@
 "section_appearance" = "Görünüm";
 "merged_icon_style_subtitle_all" = "Değiştirici her seferinde bir sağlayıcı gösterir. Yığın, iki sağlayıcıyı metin satırları olarak gösterir. Yığılmış çubuklar iki veya üç sağlayıcıyı gösterge olarak çizer.";
 "stacked_bars_section_footer" = "Çubuklar Menü altında ayarlanan doldurma yönünü izler (kalan veya kullanılan).";
+"menu_tab_order_title" = "Sekme sırası";
+"menu_tab_order_subtitle" = "Menünün üstündeki sağlayıcı sekmelerini yeniden sıralamak için sürükleyin.";

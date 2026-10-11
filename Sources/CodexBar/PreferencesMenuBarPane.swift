@@ -234,6 +234,10 @@ struct MenuBarPane: View {
                     UnifiedIconSourcePicker(selection: self.$settings.unifiedIconSource)
                 }
 
+                if self.activeProvidersInOrder.count > 1 {
+                    MenuTabOrderList(settings: self.settings, providers: self.activeProvidersInOrder)
+                }
+
                 self.overviewProviderRow
             } header: {
                 Text(L("section_menu_tabs"))

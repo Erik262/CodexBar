@@ -2554,3 +2554,5 @@
 "section_appearance" = "Giao diện";
 "merged_icon_style_subtitle_all" = "Bộ chuyển hiển thị từng nhà cung cấp một. Xếp chồng hiển thị hai nhà cung cấp dưới dạng dòng chữ. Thanh xếp chồng vẽ hai hoặc ba nhà cung cấp dưới dạng thước đo.";
 "stacked_bars_section_footer" = "Các thanh theo hướng tô đã đặt trong Menu (còn lại hoặc đã dùng).";
+"menu_tab_order_title" = "Thứ tự tab";
+"menu_tab_order_subtitle" = "Kéo để sắp xếp lại các tab nhà cung cấp ở đầu menu.";

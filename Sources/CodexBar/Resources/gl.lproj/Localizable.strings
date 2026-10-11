@@ -2552,3 +2552,5 @@
 "section_appearance" = "Aparencia";
 "merged_icon_style_subtitle_all" = "O selector mostra un provedor de cada vez. Apilado mostra dous provedores como filas de texto. As barras apiladas debuxan dous ou tres provedores como indicadores.";
 "stacked_bars_section_footer" = "As barras seguen a dirección de enchido definida en Menú (restante ou usado).";
+"menu_tab_order_title" = "Orde das lapelas";
+"menu_tab_order_subtitle" = "Arrastra para reordenar as lapelas dos provedores na parte superior do menú.";

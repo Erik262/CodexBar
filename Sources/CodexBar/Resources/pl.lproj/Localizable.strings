@@ -2556,3 +2556,5 @@
 "section_appearance" = "Wygląd";
 "merged_icon_style_subtitle_all" = "Przełącznik pokazuje jednego dostawcę naraz. Stos pokazuje dwóch dostawców jako wiersze tekstu. Paski w stosie rysują dwóch lub trzech dostawców jako wskaźniki.";
 "stacked_bars_section_footer" = "Paski są wypełniane zgodnie z kierunkiem ustawionym w sekcji Menu (pozostało lub zużyto).";
+"menu_tab_order_title" = "Kolejność kart";
+"menu_tab_order_subtitle" = "Przeciągnij, aby zmienić kolejność kart dostawców u góry menu.";

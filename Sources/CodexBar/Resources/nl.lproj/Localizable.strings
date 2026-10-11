@@ -2552,3 +2552,5 @@
 "section_appearance" = "Weergave";
 "merged_icon_style_subtitle_all" = "Wisselaar toont één aanbieder tegelijk. Gestapeld toont twee aanbieders als tekstregels. Gestapelde balken tekenen twee of drie aanbieders als meters.";
 "stacked_bars_section_footer" = "Balken volgen de vulrichting die onder Menu is ingesteld (resterend of gebruikt).";
+"menu_tab_order_title" = "Tabvolgorde";
+"menu_tab_order_subtitle" = "Sleep om de aanbiedertabbladen boven in het menu te herschikken.";

@@ -2552,3 +2552,5 @@
 "section_appearance" = "Apparence";
 "merged_icon_style_subtitle_all" = "Le sélecteur affiche un fournisseur à la fois. Empilé affiche deux fournisseurs en lignes de texte. Les barres empilées dessinent deux ou trois fournisseurs sous forme de jauges.";
 "stacked_bars_section_footer" = "Les barres suivent le sens de remplissage défini dans Menu (restant ou utilisé).";
+"menu_tab_order_title" = "Ordre des onglets";
+"menu_tab_order_subtitle" = "Faites glisser pour réordonner les onglets des fournisseurs en haut du menu.";

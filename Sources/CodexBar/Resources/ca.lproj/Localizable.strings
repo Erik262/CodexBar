@@ -2557,3 +2557,5 @@
 "section_appearance" = "Aparença";
 "merged_icon_style_subtitle_all" = "El selector mostra un proveïdor alhora. Apilat mostra dos proveïdors com a files de text. Les barres apilades dibuixen dos o tres proveïdors com a indicadors.";
 "stacked_bars_section_footer" = "Les barres segueixen la direcció d'emplenament definida a Menú (restant o usat).";
+"menu_tab_order_title" = "Ordre de les pestanyes";
+"menu_tab_order_subtitle" = "Arrossega per reordenar les pestanyes de proveïdors a la part superior del menú.";

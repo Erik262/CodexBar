@@ -58,6 +58,7 @@ enum SettingsSearchIndex {
                 "stacked_bars_show_icons_title",
                 "stacked_bars_rows_title",
                 "switcher_rows_title",
+                "menu_tab_order_title",
                 "overview_tab_providers_title",
                 "surprise_me_title",
             ]),

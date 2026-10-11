@@ -2557,3 +2557,5 @@
 "section_appearance" = "Aspetto";
 "merged_icon_style_subtitle_all" = "Il selettore mostra un fornitore alla volta. Impilato mostra due fornitori come righe di testo. Le barre impilate disegnano due o tre fornitori come indicatori.";
 "stacked_bars_section_footer" = "Le barre seguono la direzione di riempimento impostata in Menu (rimanente o usato).";
+"menu_tab_order_title" = "Ordine delle schede";
+"menu_tab_order_subtitle" = "Trascina per riordinare le schede dei provider in cima al menu.";

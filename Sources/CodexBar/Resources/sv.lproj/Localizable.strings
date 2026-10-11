@@ -2552,3 +2552,5 @@
 "section_appearance" = "Utseende";
 "merged_icon_style_subtitle_all" = "Växlaren visar en leverantör i taget. Staplad visar två leverantörer som textrader. Staplade staplar ritar två eller tre leverantörer som mätare.";
 "stacked_bars_section_footer" = "Staplarna följer fyllningsriktningen under Meny (kvar eller använt).";
+"menu_tab_order_title" = "Flikordning";
+"menu_tab_order_subtitle" = "Dra för att ändra ordningen på leverantörsflikarna högst upp i menyn.";
