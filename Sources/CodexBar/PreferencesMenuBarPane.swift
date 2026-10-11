@@ -56,6 +56,7 @@ struct MenuBarPane: View {
             self.menuTabsSection
         }
         .formStyle(.grouped)
+        .settingsSearchScrollTarget()
         .toggleStyle(.switch)
         .scrollContentBackground(.hidden)
         .onAppear {
@@ -169,7 +170,7 @@ struct MenuBarPane: View {
             SettingsMenuPicker(
                 selection: self.$settings.menuBarPaceReservePositive,
                 options: [false, true],
-                label: { Text(L("Pace sign")) },
+                label: { Text(L("Pace sign")).settingsSearchAnchor(L("Pace sign")) },
                 optionLabel: { reservePositive in
                     Text(reservePositive ? L("Reserve is +") : L("Ahead of pace is +"))
                 })
@@ -246,11 +247,12 @@ struct MenuBarPane: View {
         SettingsMenuPicker(
             selection: self.$settings.stackedBarsWindow,
             options: StackedBarsWindow.allCases,
-            label: { Text(L("stacked_bars_window_title")) },
+            label: { Text(L("stacked_bars_window_title")).settingsSearchAnchor(L("stacked_bars_window_title")) },
             optionLabel: { window in
                 Text(window.label)
             })
         Toggle(L("stacked_bars_show_icons_title"), isOn: self.$settings.stackedBarsShowIcons)
+            .settingsSearchAnchor(L("stacked_bars_show_icons_title"))
     }
 
     private var activeProvidersInOrder: [UsageProvider] {

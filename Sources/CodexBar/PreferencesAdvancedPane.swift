@@ -66,6 +66,7 @@ struct AdvancedPane: View {
             }
         }
         .formStyle(.grouped)
+        .settingsSearchScrollTarget()
         .toggleStyle(.switch)
         .scrollContentBackground(.hidden)
     }

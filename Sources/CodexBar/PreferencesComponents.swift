@@ -1,5 +1,6 @@
 import AppKit
 import KeyboardShortcuts
+import Observation
 import SwiftUI
 
 /// Colored rounded-square symbol used for app panes in the settings sidebar,
@@ -47,6 +48,7 @@ struct SettingsRowLabel: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
+        .settingsSearchAnchor(self.title)
     }
 }
 
@@ -233,5 +235,93 @@ struct SettingsSection<Content: View>: View {
             .frame(maxWidth: .infinity, alignment: .leading)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+/// The setting chosen in the sidebar search; its pane scrolls to it and the row blinks.
+@MainActor
+@Observable
+final class SettingsSearchFocus {
+    static let shared = SettingsSearchFocus()
+
+    private(set) var title: String?
+    private(set) var token = 0
+    private var focusedAt = Date.distantPast
+
+    func focus(title: String) {
+        self.title = title
+        self.focusedAt = Date()
+        self.token &+= 1
+    }
+
+    /// A pane opened by the click appears after the token changed, so it checks for a recent focus instead.
+    func isFresh(for title: String, now: Date = Date()) -> Bool {
+        self.title == title && now.timeIntervalSince(self.focusedAt) < 2
+    }
+}
+
+/// Marks a row as a search target: it is the scroll anchor and blinks when its result is chosen.
+private struct SettingsSearchAnchor: ViewModifier {
+    let title: String
+    @State private var isFlashing = false
+
+    func body(content: Content) -> some View {
+        let focus = SettingsSearchFocus.shared
+        content
+            .background(
+                RoundedRectangle(cornerRadius: 6, style: .continuous)
+                    .fill(Color.accentColor.opacity(self.isFlashing ? 0.3 : 0))
+                    .padding(-4))
+            .id(self.title)
+            .onAppear {
+                if focus.isFresh(for: self.title) { self.blink() }
+            }
+            .onChange(of: focus.token) { _, _ in
+                if focus.title == self.title { self.blink() }
+            }
+    }
+
+    private func blink() {
+        Task { @MainActor in
+            for _ in 0..<3 {
+                withAnimation(.easeInOut(duration: 0.18)) { self.isFlashing = true }
+                try? await Task.sleep(for: .milliseconds(240))
+                withAnimation(.easeInOut(duration: 0.18)) { self.isFlashing = false }
+                try? await Task.sleep(for: .milliseconds(240))
+            }
+        }
+    }
+}
+
+/// Scrolls a settings pane to the row chosen in the sidebar search.
+private struct SettingsSearchScrollTarget: ViewModifier {
+    func body(content: Content) -> some View {
+        ScrollViewReader { proxy in
+            content
+                .onAppear { Self.scroll(proxy) }
+                .onChange(of: SettingsSearchFocus.shared.token) { _, _ in Self.scroll(proxy) }
+        }
+    }
+
+    private static func scroll(_ proxy: ScrollViewProxy) {
+        let focus = SettingsSearchFocus.shared
+        guard let title = focus.title, focus.isFresh(for: title) else { return }
+        Task { @MainActor in
+            // Let a freshly opened pane lay out before scrolling.
+            try? await Task.sleep(for: .milliseconds(80))
+            withAnimation(.easeInOut(duration: 0.25)) {
+                proxy.scrollTo(title, anchor: .center)
+            }
+        }
+    }
+}
+
+extension View {
+    func settingsSearchAnchor(_ title: String) -> some View {
+        self.modifier(SettingsSearchAnchor(title: title))
+    }
+
+    func settingsSearchScrollTarget() -> some View {
+        self.modifier(SettingsSearchScrollTarget())
     }
 }

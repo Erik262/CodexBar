@@ -80,6 +80,7 @@ struct SettingsSidebarView: View {
                 }
                 ForEach(results) { entry in
                     Button {
+                        SettingsSearchFocus.shared.focus(title: entry.title)
                         self.selection = entry.pane
                     } label: {
                         VStack(alignment: .leading, spacing: 1) {

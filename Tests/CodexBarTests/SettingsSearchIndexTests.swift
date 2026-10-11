@@ -1,4 +1,5 @@
 import CodexBarCore
+import Foundation
 import Testing
 @testable import CodexBar
 
@@ -16,6 +17,15 @@ struct SettingsSearchIndexTests {
         let results = SettingsSearchIndex.matches("icons provider show").map(\.titleKey)
         #expect(results.contains("stacked_bars_show_icons_title"))
         #expect(SettingsSearchIndex.matches("   ").isEmpty)
+    }
+
+    @Test
+    func `a chosen result stays fresh briefly for the pane it opens`() {
+        let focus = SettingsSearchFocus()
+        focus.focus(title: "Rows")
+        #expect(focus.isFresh(for: "Rows"))
+        #expect(!focus.isFresh(for: "Other"))
+        #expect(!focus.isFresh(for: "Rows", now: Date().addingTimeInterval(5)))
     }
 
     @Test
