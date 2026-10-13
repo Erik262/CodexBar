@@ -1282,7 +1282,6 @@
 "session_id=...\n\nor paste just the session_id value" = "session_id=...\n\nабо вставте лише значення session_id";
 "Clear" = "ясно";
 "No matching providers" = "Немає відповідних постачальників";
-"Search providers" = "Пошук провайдерів";
 "language_arabic" = "العربية";
 "language_persian" = "فارسی";
 "language_thai" = "ไทย";
@@ -2533,3 +2532,5 @@
 
 "Auto uses an API key when configured, otherwise browser cookies." = "Auto uses an API key when configured, otherwise browser cookies.";
 "Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY." = "Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY.";
+"settings_search_placeholder" = "Пошук налаштувань і провайдерів";
+"settings_search_results_title" = "Налаштування";

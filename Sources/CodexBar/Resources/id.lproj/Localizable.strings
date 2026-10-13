@@ -1301,7 +1301,6 @@
 "session_id=...\n\nor paste just the session_id value" = "session_id=...\n\natau tempel hanya nilai session_id";
 "Clear" = "Hapus";
 "No matching providers" = "Tidak ada penyedia cocok";
-"Search providers" = "Cari penyedia";
 
 "Request quota: %@ / %@" = "Kuota permintaan: %@ / %@";
 "language_arabic" = "العربية";
@@ -2536,3 +2535,5 @@
 
 "Auto uses an API key when configured, otherwise browser cookies." = "Auto uses an API key when configured, otherwise browser cookies.";
 "Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY." = "Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY.";
+"settings_search_placeholder" = "Cari pengaturan dan penyedia";
+"settings_search_results_title" = "Pengaturan";

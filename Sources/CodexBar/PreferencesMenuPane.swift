@@ -12,7 +12,7 @@ struct MenuPane: View {
                 SettingsMenuPicker(
                     selection: self.$settings.usageBarsFillOption,
                     options: MenuSettingsMenuOptions.usageBarsFill,
-                    label: { Text(L("usage_bars_fill_title")) },
+                    label: { Text(L("usage_bars_fill_title")).settingsSearchAnchor(L("usage_bars_fill_title")) },
                     optionLabel: { option in
                         Text(option.label)
                     })
@@ -34,6 +34,7 @@ struct MenuPane: View {
                     options: MenuSettingsMenuOptions.weeklyProgressWorkDays,
                     label: {
                         Text(L("weekly_progress_work_days_title"))
+                            .settingsSearchAnchor(L("weekly_progress_work_days_title"))
                     },
                     optionLabel: { workDays in
                         Text(MenuSettingsMenuOptions.weeklyProgressWorkDaysLabel(workDays))
@@ -55,7 +56,7 @@ struct MenuPane: View {
                 SettingsMenuPicker(
                     selection: self.$settings.resetTimesOption,
                     options: MenuSettingsMenuOptions.resetTimes,
-                    label: { Text(L("reset_times_title")) },
+                    label: { Text(L("reset_times_title")).settingsSearchAnchor(L("reset_times_title")) },
                     optionLabel: { option in
                         Text(option.label)
                     })
@@ -65,7 +66,9 @@ struct MenuPane: View {
 
             Section {
                 Toggle(L("show_provider_changelog_links_title"), isOn: self.$settings.providerChangelogLinksEnabled)
+                    .settingsSearchAnchor(L("show_provider_changelog_links_title"))
                 Toggle(L("highlight_menu_cards_on_hover_title"), isOn: self.$settings.highlightMenuCardsOnHover)
+                    .settingsSearchAnchor(L("highlight_menu_cards_on_hover_title"))
 
                 SettingsMenuPicker(
                     selection: self.$settings.mergedOverviewLayout,
@@ -86,7 +89,7 @@ struct MenuPane: View {
                     selection: self.$settings.multiAccountMenuLayout,
                     options: MenuSettingsMenuOptions.multiAccountLayouts,
                     label: {
-                        Text(L("multi_account_layout_title"))
+                        Text(L("multi_account_layout_title")).settingsSearchAnchor(L("multi_account_layout_title"))
                     },
                     optionLabel: { layout in
                         Text(layout.label)
@@ -114,6 +117,7 @@ struct MenuPane: View {
             AgentSessionsSettingsSection(settings: self.settings)
         }
         .formStyle(.grouped)
+        .settingsSearchScrollTarget()
         .toggleStyle(.switch)
         .scrollContentBackground(.hidden)
         .background(FocusResigningBackground())

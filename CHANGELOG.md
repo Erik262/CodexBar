@@ -4,6 +4,7 @@
 
 ### Added
 
+- Settings: the sidebar search also finds individual settings; choosing a result opens its pane, scrolls to the row, and highlights it. Thanks @Erik262!
 - Command Code: use a configured API key for billing usage on macOS and Linux, with browser cookies when no key is set and explicit source selection (#4462, #4460). Thanks @Shrub24!
 
 - Menu bar: add graphical progress-bar tokens for selected usage windows and a stacked-bars preset, with readable layouts when returning to older app versions (#4436). Thanks @happut!

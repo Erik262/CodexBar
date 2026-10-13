@@ -1149,7 +1149,6 @@
 "session_id=...\n\nor paste just the session_id value" = "session_id=...\n\n或只貼上 session_id 值";
 "Clear" = "清除";
 "No matching providers" = "沒有相符的提供者";
-"Search providers" = "搜尋提供者";
 
 "language_vietnamese" = "越南語";
 "reset_tomorrow_format" = "明天 %@";
@@ -2511,3 +2510,5 @@
 
 "Auto uses an API key when configured, otherwise browser cookies." = "Auto uses an API key when configured, otherwise browser cookies.";
 "Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY." = "Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY.";
+"settings_search_placeholder" = "搜尋設定與提供者";
+"settings_search_results_title" = "設定";

@@ -12,6 +12,9 @@ read_when:
 - The provider sidebar keeps saved order and the one-click alphabetical toggle (enabled first). The adjacent
   menu offers Only enabled providers and Restore default order. Search matches service names, provider IDs,
   CLI names, and CLI aliases, ignoring case and accents.
+- The same search field also finds individual settings. While a query is active, matching panes and setting rows
+  (`SettingsSearchIndex`) replace the pane list above the providers; choosing a row opens its pane, scrolls to the
+  setting, and briefly highlights it. Add new rows' title keys to `SettingsSearchIndex.titleKeysByPane`.
 - Browsing filters do not rewrite provider configuration or menu bar order. Dragging is available only in the
   unfiltered saved-order view and retains hidden plugin positions. Restore default order resets built-in service
   positions to the catalog order, preserving provider configuration and plugins. Undo (also available through

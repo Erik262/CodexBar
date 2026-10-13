@@ -58,14 +58,14 @@ struct MenuBarPane: View {
                 SettingsMenuPicker(
                     selection: self.$settings.menuBarPaceReservePositive,
                     options: [false, true],
-                    label: { Text(L("Pace sign")) },
+                    label: { Text(L("Pace sign")).settingsSearchAnchor(L("Pace sign")) },
                     optionLabel: { reservePositive in
                         Text(reservePositive ? L("Reserve is +") : L("Ahead of pace is +"))
                     })
                     .disabled(self.settings.menuBarIconStyle != .iconAndPercent)
 
                 Toggle(isOn: self.$settings.menuBarColorByProvider) {
-                    Text(L("Color by provider"))
+                    Text(L("Color by provider")).settingsSearchAnchor(L("Color by provider"))
                 }
             } header: {
                 Text(L("section_icon"))
@@ -75,7 +75,7 @@ struct MenuBarPane: View {
                 MenuBarLayoutEditor(settings: self.settings, store: self.store)
                     .disabled(self.settings.menuBarIconStyle != .iconAndPercent)
             } header: {
-                Text(L("menu_bar_layout_title"))
+                Text(L("menu_bar_layout_title")).settingsSearchAnchor(L("menu_bar_layout_title"))
             } footer: {
                 SettingsSectionFooter(L("menu_bar_layout_footer"))
             }
@@ -144,6 +144,7 @@ struct MenuBarPane: View {
             }
         }
         .formStyle(.grouped)
+        .settingsSearchScrollTarget()
         .toggleStyle(.switch)
         .scrollContentBackground(.hidden)
         .onAppear {

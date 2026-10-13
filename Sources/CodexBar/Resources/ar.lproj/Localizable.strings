@@ -1299,7 +1299,6 @@
 "session_id=...\n\nor paste just the session_id value" = "session_id=... \n\n أو لصق القيمة session_id فقط";
 "Clear" = "واضح";
 "No matching providers" = "لا يوجد مزودون مطابقون";
-"Search providers" = "مزودو البحث";
 
 "language_vietnamese" = "الفيتناميون";
 "language_indonesian" = "بهاسا إندونيسيا";
@@ -2537,3 +2536,5 @@
 
 "Auto uses an API key when configured, otherwise browser cookies." = "Auto uses an API key when configured, otherwise browser cookies.";
 "Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY." = "Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY.";
+"settings_search_placeholder" = "ابحث في الإعدادات ومقدمي الخدمات";
+"settings_search_results_title" = "الإعدادات";

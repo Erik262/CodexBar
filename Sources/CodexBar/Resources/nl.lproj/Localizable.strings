@@ -1282,7 +1282,6 @@
 "session_id=...\n\nor paste just the session_id value" = "session_id=...\n\nof plak alleen de session_id-waarde";
 "Clear" = "Duidelijk";
 "No matching providers" = "Geen overeenkomende aanbieders";
-"Search providers" = "Zoekaanbieders";
 "language_arabic" = "العربية";
 "language_persian" = "فارسی";
 "language_thai" = "ไทย";
@@ -2532,3 +2531,5 @@
 
 "Auto uses an API key when configured, otherwise browser cookies." = "Auto uses an API key when configured, otherwise browser cookies.";
 "Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY." = "Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY.";
+"settings_search_placeholder" = "Zoek instellingen en aanbieders";
+"settings_search_results_title" = "Instellingen";

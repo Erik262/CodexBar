@@ -1301,7 +1301,6 @@
 "session_id=...\n\nor paste just the session_id value" = "session_id=...\n\noppure incolla solo il valore di session_id";
 "Clear" = "Cancella";
 "No matching providers" = "Nessun provider corrispondente";
-"Search providers" = "Cerca provider";
 
 "Request quota: %@ / %@" = "Quota richieste: %@ / %@";
 "language_arabic" = "العربية";
@@ -2537,3 +2536,5 @@
 
 "Auto uses an API key when configured, otherwise browser cookies." = "Auto usa una chiave API se configurata, altrimenti i cookie del browser.";
 "Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY." = "Memorizzata nel file di configurazione di CodexBar. Puoi anche impostare COMMAND_CODE_API_KEY.";
+"settings_search_placeholder" = "Cerca impostazioni e provider";
+"settings_search_results_title" = "Impostazioni";

@@ -1249,7 +1249,6 @@
 "session_id=...\n\nor paste just the session_id value" = "session_id=...\n\n또는 session_id 값만 붙여넣으세요";
 "Clear" = "지우기";
 "No matching providers" = "일치하는 공급자 없음";
-"Search providers" = "공급자 검색";
 "language_vietnamese" = "베트남어";
 "language_turkish" = "Türkçe";
 "language_indonesian" = "인도네시아어";
@@ -2501,3 +2500,5 @@
 
 "Auto uses an API key when configured, otherwise browser cookies." = "Auto uses an API key when configured, otherwise browser cookies.";
 "Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY." = "Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY.";
+"settings_search_placeholder" = "설정 및 공급자 검색";
+"settings_search_results_title" = "설정";
