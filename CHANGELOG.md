@@ -17,6 +17,7 @@
 
 ### Changed
 
+- Development: `./Scripts/compile_and_run.sh --fast` packages an incremental debug build without the widget extension under the release bundle ID for quick iteration on UI changes. Thanks @Erik262!
 - Cursor: distinguish menu bar percentages with T, C, TP, and GB tags while keeping full names for VoiceOver (#4481). Thanks @marklights54-byte!
 - Browser Local Storage imports pick the current record by LevelDB sequence, so a sign-out followed by a sign-in no longer hides the new session.
 - Browser imports: recognize Ego Lite through the shared catalog; Cursor account login continues to require a verified application identifier.

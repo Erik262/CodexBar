@@ -279,7 +279,11 @@ BUNDLE_ID="com.steipete.codexbar"
 FEED_URL="https://raw.githubusercontent.com/steipete/CodexBar/main/appcast.xml"
 AUTO_CHECKS=true
 if [[ "$LOWER_CONF" == "debug" ]]; then
-  BUNDLE_ID="com.steipete.codexbar.debug"
+  # CODEXBAR_DEBUG_KEEPS_BUNDLE_ID=1 (compile_and_run.sh --fast) keeps the release bundle ID so a debug
+  # build reads the same settings and shows no debug "D" marker in the menu bar.
+  if [[ "${CODEXBAR_DEBUG_KEEPS_BUNDLE_ID:-0}" != "1" ]]; then
+    BUNDLE_ID="com.steipete.codexbar.debug"
+  fi
   FEED_URL=""
   AUTO_CHECKS=false
 fi
@@ -565,7 +569,13 @@ strip_release_binary "$APP/Contents/Helpers/CodexBarCLI"
 # Watchdog helper: ensures `claude` probes die when CodexBar crashes/gets killed.
 install_binary "CodexBarClaudeWatchdog" "$APP/Contents/Helpers/CodexBarClaudeWatchdog"
 strip_release_binary "$APP/Contents/Helpers/CodexBarClaudeWatchdog"
-install_widget_extension
+# Fast local loops can skip the Xcode-built widget extension, the slowest packaging step.
+if [[ "${CODEXBAR_SKIP_WIDGET_EXTENSION:-0}" == "1" ]]; then
+  echo "==> Skipping widget extension (CODEXBAR_SKIP_WIDGET_EXTENSION=1)"
+  rm -rf "$APP/Contents/PlugIns/CodexBarWidget.appex"
+else
+  install_widget_extension
+fi
 strip_release_binary "$APP/Contents/PlugIns/CodexBarWidget.appex/Contents/MacOS/CodexBarWidget"
 
 swiftpm_bin_path "${ARCH_LIST[0]}" PREFERRED_BUILD_DIR
