@@ -47,4 +47,27 @@ assert declarations == [{
 }]
 PY
 
+python3 - "$APP/Contents/Info.plist" <<'PY'
+import plistlib
+import sys
+from pathlib import Path
+
+plist = plistlib.loads(Path(sys.argv[1]).read_bytes())
+assert plist["SUPublicEDKey"] == "AGCY8w5vHirVfGGDGc8Szc5iuOqupZSh9pMj/Qs67XI="
+assert "CodexBarAllowsAdHocUpdates" not in plist
+PY
+
+# A fork build can point at its own appcast and EdDSA key and opt ad-hoc signed builds into updates.
+CODEXBAR_SPARKLE_PUBLIC_KEY=Zm9ya2tleQ== CODEXBAR_ALLOW_ADHOC_UPDATES=1 source "$PLIST_SCRIPT"
+python3 - "$APP/Contents/Info.plist" <<'PY'
+import plistlib
+import sys
+from pathlib import Path
+
+plist = plistlib.loads(Path(sys.argv[1]).read_bytes())
+assert plist["SUPublicEDKey"] == "Zm9ya2tleQ=="
+assert plist["SUFeedURL"] == "https://example.invalid/appcast.xml"
+assert plist["CodexBarAllowsAdHocUpdates"] is True
+PY
+
 echo "Package Info.plist tests passed."

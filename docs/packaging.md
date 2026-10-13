@@ -25,4 +25,13 @@ read_when:
 ## Releases
 - Full checklist in `docs/RELEASING.md`.
 
+## Fork update feeds
+Official builds are unchanged; these variables are only read when set. A fork that publishes its own releases can
+point its builds at its own appcast without a Developer ID certificate:
+- `CODEXBAR_FEED_URL`: appcast URL written to `SUFeedURL` (e.g. `https://github.com/<owner>/CodexBar/releases/latest/download/appcast.xml`).
+- `CODEXBAR_SPARKLE_PUBLIC_KEY`: base64 Ed25519 public key written to `SUPublicEDKey`; sign each update zip with the matching private key.
+- `CODEXBAR_ALLOW_ADHOC_UPDATES=1`: keeps the feed for ad-hoc signed builds and sets `CodexBarAllowsAdHocUpdates`, so
+  `SparkleUpdatePolicy` enables Sparkle without Developer ID. Updates are still verified against the EdDSA key.
+- `CODEXBAR_BUILD_NUMBER`: overrides `BUILD_NUMBER` from `version.env` so each fork release has a higher `CFBundleVersion`.
+
 See also: `docs/sparkle.md`.

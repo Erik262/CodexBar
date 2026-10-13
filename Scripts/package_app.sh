@@ -94,6 +94,8 @@ esac
 
 # Load version info
 source "$ROOT/version.env"
+# Release workflows may stamp their own build number (Sparkle compares CFBundleVersion).
+BUILD_NUMBER="${CODEXBAR_BUILD_NUMBER:-$BUILD_NUMBER}"
 source "$ROOT/Scripts/package_product_paths.sh"
 source "$ROOT/Scripts/sparkle_signing_paths.sh"
 
@@ -276,14 +278,16 @@ if [[ -f "$ICON_SOURCE" ]]; then
 fi
 
 BUNDLE_ID="com.steipete.codexbar"
-FEED_URL="https://raw.githubusercontent.com/steipete/CodexBar/main/appcast.xml"
+# CODEXBAR_FEED_URL and CODEXBAR_SPARKLE_PUBLIC_KEY point a build at another appcast and EdDSA key
+# (for example a fork's own releases); CODEXBAR_ALLOW_ADHOC_UPDATES=1 lets an ad-hoc signed build use it.
+FEED_URL="${CODEXBAR_FEED_URL:-https://raw.githubusercontent.com/steipete/CodexBar/main/appcast.xml}"
 AUTO_CHECKS=true
 if [[ "$LOWER_CONF" == "debug" ]]; then
   BUNDLE_ID="com.steipete.codexbar.debug"
   FEED_URL=""
   AUTO_CHECKS=false
 fi
-if [[ "$SIGNING_MODE" == "adhoc" ]]; then
+if [[ "$SIGNING_MODE" == "adhoc" && "${CODEXBAR_ALLOW_ADHOC_UPDATES:-0}" != "1" ]]; then
   FEED_URL=""
   AUTO_CHECKS=false
 fi
@@ -376,7 +380,8 @@ cat > "$APP/Contents/Info.plist" <<PLIST
     <key>CFBundleIconFile</key><string>Icon</string>
     <key>NSHumanReadableCopyright</key><string>© 2026 Peter Steinberger. MIT License.</string>
     <key>SUFeedURL</key><string>${FEED_URL}</string>
-    <key>SUPublicEDKey</key><string>AGCY8w5vHirVfGGDGc8Szc5iuOqupZSh9pMj/Qs67XI=</string>
+    <key>SUPublicEDKey</key><string>${CODEXBAR_SPARKLE_PUBLIC_KEY:-AGCY8w5vHirVfGGDGc8Szc5iuOqupZSh9pMj/Qs67XI=}</string>
+    $(if [[ "${CODEXBAR_ALLOW_ADHOC_UPDATES:-0}" == "1" && -n "$FEED_URL" ]]; then echo "<key>CodexBarAllowsAdHocUpdates</key><true/>"; fi)
     <key>SUEnableAutomaticChecks</key><${AUTO_CHECKS}/>
     <key>CodexBuildTimestamp</key><string>${BUILD_TIMESTAMP}</string>
     <key>CodexGitCommit</key><string>${GIT_COMMIT}</string>

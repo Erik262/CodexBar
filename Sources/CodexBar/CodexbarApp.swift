@@ -184,6 +184,18 @@ final class UpdateStatus {
     var isInstalling = false
 }
 
+/// Decides whether a packaged build runs Sparkle. Developer ID builds always may; an ad-hoc build may only when
+/// packaging opted in (`CODEXBAR_ALLOW_ADHOC_UPDATES=1`, e.g. a fork shipping its own EdDSA-signed appcast), so
+/// updates are still verified by the appcast's signing key. A build without a feed never falls back to another.
+enum SparkleUpdatePolicy {
+    static let allowsAdHocUpdatesKey = "CodexBarAllowsAdHocUpdates"
+
+    static func isEnabled(developerIDSigned: Bool, allowsAdHocUpdates: Bool, feedURL: String?) -> Bool {
+        guard developerIDSigned || allowsAdHocUpdates else { return false }
+        return feedURL?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
+    }
+}
+
 #if canImport(Sparkle) && ENABLE_SPARKLE
 import Sparkle
 
@@ -327,7 +339,12 @@ private func makeUpdaterController() -> UpdaterProviding {
             notifier: HomebrewUpdateNotifier(dependencies: .live))
     }
 
-    guard isDeveloperIDSigned(bundleURL: bundleURL) else {
+    let info = Bundle.main.infoDictionary ?? [:]
+    guard SparkleUpdatePolicy.isEnabled(
+        developerIDSigned: isDeveloperIDSigned(bundleURL: bundleURL),
+        allowsAdHocUpdates: info[SparkleUpdatePolicy.allowsAdHocUpdatesKey] as? Bool == true,
+        feedURL: info["SUFeedURL"] as? String)
+    else {
         return DisabledUpdaterController(unavailableReason: "Updates unavailable in this build.")
     }
 
