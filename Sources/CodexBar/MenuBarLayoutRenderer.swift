@@ -789,31 +789,31 @@ final class MenuBarLayoutRenderer {
     {
         switch item {
         case .usageBar:
-            return self.barToken(
+            self.barToken(
                 window: data.automatic,
                 style: style,
                 showUsed: options.showUsed,
                 isMonochrome: providerTintColor == nil)
         case let .windowBar(window):
-            return self.barToken(
+            self.barToken(
                 window: Self.window(window, data: data),
                 style: style,
                 showUsed: options.showUsed,
                 isMonochrome: providerTintColor == nil)
         case .stackedBars:
-            return self.stackedBarsToken(
+            self.stackedBarsToken(
                 data: data,
                 style: style,
                 showUsed: options.showUsed,
                 providerTintColor: providerTintColor)
         case let .progressBar(window):
-            return self.progressBarToken(
+            self.progressBarToken(
                 window,
                 data: data,
                 style: style,
                 options: options)
         default:
-            return nil
+            nil
         }
     }
 
