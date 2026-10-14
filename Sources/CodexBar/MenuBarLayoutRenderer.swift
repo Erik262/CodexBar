@@ -777,46 +777,6 @@ final class MenuBarLayoutRenderer {
         }
     }
 
-    /// Drawn `usageBar`, `windowBar`, `stackedBars` and graphical `progressBar` meters. Split out of
-    /// `renderItem` so that switch keeps a manageable branch count.
-    private static func renderUsageMeterItem(
-        _ item: MenuBarLayoutToken,
-        data: MenuBarLayoutRenderData,
-        style: TokenStyle,
-        options: MenuBarLayoutRenderOptions,
-        providerTintColor: NSColor?)
-        -> (value: NSAttributedString, accessibilityText: String?)?
-    {
-        switch item {
-        case .usageBar:
-            self.barToken(
-                window: data.automatic,
-                style: style,
-                showUsed: options.showUsed,
-                isMonochrome: providerTintColor == nil)
-        case let .windowBar(window):
-            self.barToken(
-                window: Self.window(window, data: data),
-                style: style,
-                showUsed: options.showUsed,
-                isMonochrome: providerTintColor == nil)
-        case .stackedBars:
-            self.stackedBarsToken(
-                data: data,
-                style: style,
-                showUsed: options.showUsed,
-                providerTintColor: providerTintColor)
-        case let .progressBar(window):
-            self.progressBarToken(
-                window,
-                data: data,
-                style: style,
-                options: options)
-        default:
-            nil
-        }
-    }
-
     private static func renderPercent(
         _ window: PercentWindow,
         data: MenuBarLayoutRenderData,
@@ -1194,6 +1154,46 @@ final class MenuBarLayoutRenderer {
 
 /// Drawn meter tokens live in an extension to keep the renderer body within the type length limit.
 extension MenuBarLayoutRenderer {
+    /// Drawn `usageBar`, `windowBar`, `stackedBars` and graphical `progressBar` meters. Split out of
+    /// `renderItem` so that switch keeps a manageable branch count.
+    private static func renderUsageMeterItem(
+        _ item: MenuBarLayoutToken,
+        data: MenuBarLayoutRenderData,
+        style: TokenStyle,
+        options: MenuBarLayoutRenderOptions,
+        providerTintColor: NSColor?)
+        -> (value: NSAttributedString, accessibilityText: String?)?
+    {
+        switch item {
+        case .usageBar:
+            self.barToken(
+                window: data.automatic,
+                style: style,
+                showUsed: options.showUsed,
+                isMonochrome: providerTintColor == nil)
+        case let .windowBar(window):
+            self.barToken(
+                window: Self.window(window, data: data),
+                style: style,
+                showUsed: options.showUsed,
+                isMonochrome: providerTintColor == nil)
+        case .stackedBars:
+            self.stackedBarsToken(
+                data: data,
+                style: style,
+                showUsed: options.showUsed,
+                providerTintColor: providerTintColor)
+        case let .progressBar(window):
+            self.progressBarToken(
+                window,
+                data: data,
+                style: style,
+                options: options)
+        default:
+            nil
+        }
+    }
+
     /// A rounded meter drawn like the stacked-bars icon, sized to the line: wide and 6 pt tall on one line,
     /// narrower and 4 pt tall when two lines share the menu bar.
     private static func barToken(
