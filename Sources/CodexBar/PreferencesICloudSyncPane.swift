@@ -34,8 +34,11 @@ struct ICloudSyncPane: View {
 
                 VStack(alignment: .leading, spacing: 8) {
                     Toggle(L("Include API keys, cookies, and tokens"), isOn: self.includeSecretsBinding)
+                        .settingsSearchAnchor(L("Include API keys, cookies, and tokens"))
                     Toggle(L("Sync usage snapshots"), isOn: self.snapshotsBinding)
+                        .settingsSearchAnchor(L("Sync usage snapshots"))
                     Toggle(L("Show accounts from other Macs"), isOn: self.showFleetAccountsBinding)
+                        .settingsSearchAnchor(L("Show accounts from other Macs"))
                 }
                 .toggleStyle(.checkbox)
                 .padding(.leading, 20)
@@ -86,6 +89,7 @@ struct ICloudSyncPane: View {
             }
         }
         .formStyle(.grouped)
+        .settingsSearchScrollTarget()
     }
 
     private var syncCanBeEnabled: Bool {

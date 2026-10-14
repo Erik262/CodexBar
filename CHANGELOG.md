@@ -2,6 +2,20 @@
 
 ## 0.75.1 — Unreleased
 
+### Added
+
+- Menu bar: a "Stacked bars" combined icon draws two or three pinned providers as session or weekly meters, with optional provider icons; pinned providers also lead the Overview tab and the menu tab bar, and Settings lets you drag providers between Pinned and Other tabs. Thanks @Erik262!
+- Menu bar layouts: drawn Session and Weekly bar elements plus a "Session + weekly bars" element that renders like the stacked-bars icon. Thanks @Erik262!
+- Menu: per-provider toggles for menu sections (today's cost, cost chart, usage summary, latest tokens, cost details, account actions, Buy Credits), a status page choice of Off, Link or Inline, an optional status badge on the icon, an app-actions-only-in-Overview option, and a live menu preview in Settings. Thanks @Erik262!
+- Providers: optional prepaid API credit tracking from a user-entered balance and date, drawn down only by vendor-reported spend. Thanks @Erik262!
+- Settings: the sidebar search also finds individual settings; choosing a result opens its pane, scrolls to the row, and highlights it. Thanks @Erik262!
+
+### Changed
+
+- Overview: keep reset times on compact usage rows and show provider icons, matching the provider tabs without adding height. Thanks @Erik262!
+- Development: `./Scripts/compile_and_run.sh --fast` packages an incremental debug build without the widget extension under the release bundle ID for quick UI iteration. Thanks @Erik262!
+- Packaging: `CODEXBAR_FEED_URL`, `CODEXBAR_SPARKLE_PUBLIC_KEY`, `CODEXBAR_ALLOW_ADHOC_UPDATES` and `CODEXBAR_BUILD_NUMBER` let a fork ship EdDSA-signed Sparkle updates from its own releases; official builds are unchanged. Thanks @Erik262!
+
 ## 0.75.0 — 2026-10-13
 
 ### Highlights

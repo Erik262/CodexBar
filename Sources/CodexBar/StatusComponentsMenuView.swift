@@ -110,3 +110,48 @@ struct StatusComponentsMenuView: View {
         }
     }
 }
+
+/// Compact, always-visible status card used instead of the Status Page submenu: one dense row per
+/// top-level component. Clicking the card opens the provider's status page.
+struct CompactStatusComponentsView: View {
+    let components: [ProviderStatusComponent]
+    @Environment(\.menuItemHighlighted) private var isHighlighted
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 3) {
+            HStack(spacing: 6) {
+                Image(systemName: MenuDescriptor.MenuActionSystemImage.statusPage.rawValue)
+                    .font(.system(size: 11, weight: .medium))
+                    .accessibilityHidden(true)
+                Text(L("Status Page"))
+                    .font(.system(size: 12, weight: .medium))
+                Spacer(minLength: 8)
+                Image(systemName: "arrow.up.right")
+                    .font(.system(size: 9, weight: .semibold))
+                    .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
+                    .accessibilityHidden(true)
+            }
+            ForEach(self.components) { component in
+                HStack(spacing: 6) {
+                    Circle()
+                        .fill(component.indicator.dotColor)
+                        .frame(width: 6, height: 6)
+                    Text(component.name)
+                        .font(.system(size: 11))
+                        .lineLimit(1)
+                    Spacer(minLength: 8)
+                    Text(component.statusLabel)
+                        .font(.system(size: 11))
+                        .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
+                        .lineLimit(1)
+                }
+                .padding(.leading, 18)
+                .accessibilityElement(children: .combine)
+            }
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 6)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .codexBarLocalized()
+    }
+}

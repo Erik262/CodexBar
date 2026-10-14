@@ -133,6 +133,7 @@ struct GeneralPane: View {
                     })
 
                 Toggle(L("start_at_login_title"), isOn: self.$settings.launchAtLogin)
+                    .settingsSearchAnchor(L("start_at_login_title"))
             } header: {
                 Text(L("section_system"))
             }
@@ -141,10 +142,11 @@ struct GeneralPane: View {
                 SettingsMenuPicker(
                     selection: self.$settings.refreshFrequency,
                     options: GeneralSettingsMenuOptions.refreshFrequencies,
-                    label: { Text(L("refresh_interval_title")) },
+                    label: { Text(L("refresh_interval_title")).settingsSearchAnchor(L("refresh_interval_title")) },
                     optionLabel: { option in Text(option.label) })
 
                 Toggle(L("refresh_on_open_title"), isOn: self.$settings.refreshAllProvidersOnMenuOpen)
+                    .settingsSearchAnchor(L("refresh_on_open_title"))
 
                 SettingsMenuPicker(
                     selection: self.$settings.backgroundWorkLowPowerModePreference,
@@ -193,6 +195,7 @@ struct GeneralPane: View {
             }
         }
         .formStyle(.grouped)
+        .settingsSearchScrollTarget()
         .toggleStyle(.switch)
         .scrollContentBackground(.hidden)
         .background(FocusResigningBackground())

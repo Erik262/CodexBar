@@ -54,7 +54,7 @@ struct InlineUsageDashboardModel: Equatable {
     let accessibilityLabel: String
     let valueStyle: ValueStyle
     let kpis: [KPI]
-    let points: [Point]
+    var points: [Point]
     let detailLines: [String]
     /// Codex/Claude weekly quota windows, newest first. Empty for other cost dashboards.
     var quotaWindows: [QuotaWindow] = []
@@ -77,7 +77,7 @@ extension UsageMenuCardView.Model {
             showOptionalUsage: input.showOptionalCreditsAndExtraUsage))
         {
         case let .openAIAPI(usage):
-            return self.openAIAPIUsageNotes(usage)
+            return input.hiddenMenuSections.contains(.usageSummary) ? [] : self.openAIAPIUsageNotes(usage)
         case let .localized(keys):
             return keys.map { L($0) }
         case .unhandled:
@@ -113,6 +113,9 @@ extension UsageMenuCardView.Model {
     static func inlineUsageDashboard(input: Input) -> InlineUsageDashboardModel? {
         guard var model = self.resolveInlineUsageDashboard(input: input) else { return nil }
         model.barColor = Self.inlineDashboardBarColor(for: input.provider)
+        if input.hiddenMenuSections.contains(.costChart) {
+            model.points = []
+        }
         return model
     }
 
@@ -339,7 +342,8 @@ extension UsageMenuCardView.Model {
             snapshot: snapshot,
             requestHistoryTitle: requestHistoryTitle,
             displayCurrencyCode: displayCurrencyCode)
-        if !quota.rows.isEmpty, let note = menuCardPresentation(for: input.provider).quotaWindowNote {
+        let quotaRows = input.hiddenMenuSections.contains(.recentWindows) ? [] : quota.rows
+        if !quotaRows.isEmpty, let note = menuCardPresentation(for: input.provider).quotaWindowNote {
             details.append(L(note))
         }
         let providerName = ProviderDefaults.metadata[input.provider]?.displayName ?? input.provider.rawValue
@@ -392,16 +396,51 @@ extension UsageMenuCardView.Model {
                     emphasis: true),
                 at: 0)
         }
+        Self.removeHiddenSections(
+            input.hiddenMenuSections,
+            from: &kpis,
+            details: &details,
+            hideable: HideableKPIs(
+                today: todayKPI,
+                trailing: trailingKPIs,
+                windowTitles: [weekCostTitle, weekTokenTitle]))
         var model = InlineUsageDashboardModel(
             accessibilityLabel: accessibilityLabel,
             valueStyle: Self.costValueStyle(currencyCode: displayCurrencyCode),
             kpis: kpis,
             points: points,
             detailLines: details)
-        model.quotaWindows = quota.rows
+        model.quotaWindows = quotaRows
         model.currencyCode = displayCurrencyCode
         model.chartTitle = L("Daily spend · %@", period)
         return model
+    }
+
+    /// The KPIs a user can switch off, identified by value (today, trailing) or title (current window).
+    private struct HideableKPIs {
+        let today: InlineUsageDashboardModel.KPI
+        let trailing: [InlineUsageDashboardModel.KPI]
+        let windowTitles: Set<String>
+    }
+
+    private static func removeHiddenSections(
+        _ hidden: Set<MenuSectionToggle>,
+        from kpis: inout [InlineUsageDashboardModel.KPI],
+        details: inout [String],
+        hideable: HideableKPIs)
+    {
+        if hidden.contains(.todayCost) {
+            kpis.removeAll { $0 == hideable.today }
+        }
+        if hidden.contains(.latestTokens) {
+            kpis.removeAll { hideable.trailing.contains($0) }
+        }
+        if hidden.contains(.currentWindow) {
+            kpis.removeAll { hideable.windowTitles.contains($0.title) }
+        }
+        if hidden.contains(.costDetails) {
+            details = []
+        }
     }
 
     private static func redeemedWeeklyResetInstants(from snapshot: UsageSnapshot?) -> [Date] {
@@ -697,6 +736,7 @@ struct InlineUsageDashboardContent: View {
     private let model: InlineUsageDashboardModel
     var showsChart = true
     @Environment(\.menuItemHighlighted) private var isHighlighted
+    @Environment(\.menuCardOverviewStyle) private var isOverviewStyle
 
     init(model: InlineUsageDashboardModel, showsChart: Bool = true) {
         self.model = model
@@ -706,7 +746,7 @@ struct InlineUsageDashboardContent: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             self.kpis
-            if self.showsChart, !self.model.points.isEmpty {
+            if self.showsChart, !self.model.points.isEmpty, !self.isOverviewStyle {
                 MiniUsageBars(model: self.model)
                     .frame(height: 58)
                     .accessibilityElement(children: .contain)

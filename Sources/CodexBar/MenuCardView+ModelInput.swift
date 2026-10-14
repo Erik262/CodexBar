@@ -52,6 +52,9 @@ extension UsageMenuCardView.Model {
         let costUsageBucketCalendar: Calendar
         let now: Date
         let observedWeeklyResets: [CostUsageQuotaResetObservation]
+        /// Menu sections the user switched off; settings previews always pass an empty set.
+        let hiddenMenuSections: Set<MenuSectionToggle>
+        let apiCreditBudget: APICreditBudget?
 
         init(
             provider: UsageProvider,
@@ -100,7 +103,9 @@ extension UsageMenuCardView.Model {
             preferredCurrencyCode: String = "auto",
             costUsageBucketCalendar: Calendar = .current,
             now: Date,
-            observedWeeklyResets: [CostUsageQuotaResetObservation] = [])
+            observedWeeklyResets: [CostUsageQuotaResetObservation] = [],
+            hiddenMenuSections: Set<MenuSectionToggle> = [],
+            apiCreditBudget: APICreditBudget? = nil)
         {
             self.throughputPresentation = throughputPresentation
             self.provider = provider
@@ -149,6 +154,8 @@ extension UsageMenuCardView.Model {
             self.costUsageBucketCalendar = costUsageBucketCalendar
             self.now = now
             self.observedWeeklyResets = observedWeeklyResets
+            self.hiddenMenuSections = hiddenMenuSections
+            self.apiCreditBudget = apiCreditBudget
         }
     }
 }

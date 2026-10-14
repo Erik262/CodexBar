@@ -12,7 +12,7 @@ struct MenuPane: View {
                 SettingsMenuPicker(
                     selection: self.$settings.usageBarsFillOption,
                     options: MenuSettingsMenuOptions.usageBarsFill,
-                    label: { Text(L("usage_bars_fill_title")) },
+                    label: { Text(L("usage_bars_fill_title")).settingsSearchAnchor(L("usage_bars_fill_title")) },
                     optionLabel: { option in
                         Text(option.label)
                     })
@@ -34,28 +34,30 @@ struct MenuPane: View {
                     options: MenuSettingsMenuOptions.weeklyProgressWorkDays,
                     label: {
                         Text(L("weekly_progress_work_days_title"))
+                            .settingsSearchAnchor(L("weekly_progress_work_days_title"))
                     },
                     optionLabel: { workDays in
                         Text(MenuSettingsMenuOptions.weeklyProgressWorkDaysLabel(workDays))
                     })
 
-                SettingsMenuPicker(
-                    selection: self.$settings.workdayTickAppearance,
-                    options: MenuSettingsMenuOptions.workdayTickAppearances,
-                    label: {
-                        SettingsRowLabel(
-                            L("workday_tick_appearance_title"),
-                            subtitle: L("workday_tick_appearance_subtitle"))
-                    },
-                    optionLabel: { appearance in
-                        Text(appearance.label)
-                    })
-                    .disabled(self.settings.weeklyProgressWorkDays == nil)
+                if self.settings.weeklyProgressWorkDays != nil {
+                    SettingsMenuPicker(
+                        selection: self.$settings.workdayTickAppearance,
+                        options: MenuSettingsMenuOptions.workdayTickAppearances,
+                        label: {
+                            SettingsRowLabel(
+                                L("workday_tick_appearance_title"),
+                                subtitle: L("workday_tick_appearance_subtitle"))
+                        },
+                        optionLabel: { appearance in
+                            Text(appearance.label)
+                        })
+                }
 
                 SettingsMenuPicker(
                     selection: self.$settings.resetTimesOption,
                     options: MenuSettingsMenuOptions.resetTimes,
-                    label: { Text(L("reset_times_title")) },
+                    label: { Text(L("reset_times_title")).settingsSearchAnchor(L("reset_times_title")) },
                     optionLabel: { option in
                         Text(option.label)
                     })
@@ -65,16 +67,25 @@ struct MenuPane: View {
 
             Section {
                 Toggle(L("show_provider_changelog_links_title"), isOn: self.$settings.providerChangelogLinksEnabled)
+                    .settingsSearchAnchor(L("show_provider_changelog_links_title"))
                 Toggle(L("highlight_menu_cards_on_hover_title"), isOn: self.$settings.highlightMenuCardsOnHover)
+                    .settingsSearchAnchor(L("highlight_menu_cards_on_hover_title"))
 
-                SettingsMenuPicker(
-                    selection: self.$settings.mergedOverviewLayout,
-                    options: MenuSettingsMenuOptions.mergedOverviewLayouts,
-                    label: {
-                        SettingsRowLabel(L("overview_layout_title"), subtitle: L("overview_layout_subtitle"))
-                    },
-                    optionLabel: { Text($0.label) })
-                    .disabled(!self.settings.mergeIcons)
+                if self.settings.mergeIcons {
+                    SettingsMenuPicker(
+                        selection: self.$settings.mergedOverviewLayout,
+                        options: MenuSettingsMenuOptions.mergedOverviewLayouts,
+                        label: {
+                            SettingsRowLabel(L("overview_layout_title"), subtitle: L("overview_layout_subtitle"))
+                        },
+                        optionLabel: { Text($0.label) })
+
+                    Toggle(isOn: self.$settings.appActionsOnOverviewOnly) {
+                        SettingsRowLabel(
+                            L("app_actions_overview_only_title"),
+                            subtitle: L("app_actions_overview_only_subtitle"))
+                    }
+                }
 
                 Toggle(isOn: self.$settings.showOptionalCreditsAndExtraUsage) {
                     SettingsRowLabel(
@@ -86,13 +97,15 @@ struct MenuPane: View {
                     selection: self.$settings.multiAccountMenuLayout,
                     options: MenuSettingsMenuOptions.multiAccountLayouts,
                     label: {
-                        Text(L("multi_account_layout_title"))
+                        Text(L("multi_account_layout_title")).settingsSearchAnchor(L("multi_account_layout_title"))
                     },
                     optionLabel: { layout in
                         Text(layout.label)
                     })
             } header: {
                 Text(L("section_content"))
+            } footer: {
+                SettingsSectionFooter(L("section_menu_layout_footer"))
             }
 
             Section(L("section_widgets")) {
@@ -114,6 +127,7 @@ struct MenuPane: View {
             AgentSessionsSettingsSection(settings: self.settings)
         }
         .formStyle(.grouped)
+        .settingsSearchScrollTarget()
         .toggleStyle(.switch)
         .scrollContentBackground(.hidden)
         .background(FocusResigningBackground())
@@ -289,6 +303,8 @@ struct CostSummarySettingsSection: View {
 
 @MainActor
 struct CostHistoryDaysEditor: View {
+    static let presetDays = [1, 3, 7, 14, 30, 90, 365]
+
     @Bindable var settings: SettingsStore
 
     static func title(days: Int) -> String {
@@ -299,10 +315,10 @@ struct CostHistoryDaysEditor: View {
         Picker(L("cost_history_window_title"), selection: self.$settings.costReportingPeriod) {
             Text(L("Month to date")).tag(CostReportingPeriod.monthToDate)
             Text(L("All")).tag(CostReportingPeriod.allTime)
-            ForEach([1, 7, 30, 90, 365], id: \.self) { days in
+            ForEach(Self.presetDays, id: \.self) { days in
                 Text(Self.title(days: days)).tag(CostReportingPeriod.rolling(days: days))
             }
-            if case let .rolling(days) = self.settings.costReportingPeriod, ![1, 7, 30, 90, 365].contains(days) {
+            if case let .rolling(days) = self.settings.costReportingPeriod, !Self.presetDays.contains(days) {
                 Text(Self.title(days: days)).tag(self.settings.costReportingPeriod)
             }
         }

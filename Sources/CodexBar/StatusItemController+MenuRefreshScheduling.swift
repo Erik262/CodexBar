@@ -108,10 +108,19 @@ extension StatusItemController {
         let dashboard = self.store.openAIDashboard
         let dashboardUsageBreakdown = OpenAIDashboardDailyBreakdown.removingSkillUsageServices(
             from: dashboard?.usageBreakdown ?? [])
+        let hiddenByProvider = self.settings.hiddenMenuSectionsByProviderRaw
+            .sorted { $0.key < $1.key }
+            .map { "\($0.key):\($0.value.joined(separator: ","))" }
+            .joined(separator: ";")
         var parts = [
             "costEnabled=\(self.settings.costUsageEnabled ? "1" : "0")",
             "codexLocalCost=\(self.settings.codexLocalSessionCostLedgerEnabled ? "1" : "0")",
             "costStyle=\(self.settings.costSummaryDisplayStyle.rawValue)",
+            "hiddenSections=\(self.settings.hiddenMenuSectionsRaw.joined(separator: ","))",
+            "hiddenByProvider=\(hiddenByProvider)",
+            "appActionsOverviewOnly=\(self.settings.appActionsOnOverviewOnly ? "1" : "0")",
+            "statusInline=\(self.settings.statusComponentsInline ? "1" : "0")",
+            "statusInlineByProvider=\(self.settings.statusInlineByProviderRaw.sorted { $0.key < $1.key })",
             "openAIAttached=\(self.store.openAIDashboardAttachmentAuthorized ? "1" : "0")",
             "openAILogin=\(self.store.openAIDashboardRequiresLogin ? "1" : "0")",
             "openAIUpdated=\(Self.millisecondsSinceEpoch(dashboard?.updatedAt))",

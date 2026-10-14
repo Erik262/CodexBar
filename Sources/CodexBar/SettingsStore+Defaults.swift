@@ -313,6 +313,49 @@ extension SettingsStore {
         set { self.setDefault(\.menuBarHidesCritters, newValue, key: "menuBarHidesCritters") }
     }
 
+    /// Draws the provider status-page badge (dot or exclamation) onto the menu bar meter icon.
+    var menuBarStatusBadgeVisible: Bool {
+        get { self.defaultsState.menuBarStatusBadgeVisible }
+        set { self.setDefault(\.menuBarStatusBadgeVisible, newValue, key: "menuBarStatusBadgeVisible") }
+    }
+
+    var hiddenMenuSectionsRaw: [String] {
+        get { self.defaultsState.hiddenMenuSectionsRaw }
+        set { self.setDefault(\.hiddenMenuSectionsRaw, newValue, key: "hiddenMenuSections") }
+    }
+
+    var hiddenMenuSectionsByProviderRaw: [String: [String]] {
+        get { self.defaultsState.hiddenMenuSectionsByProviderRaw }
+        set { self.setDefault(\.hiddenMenuSectionsByProviderRaw, newValue, key: "hiddenMenuSectionsByProvider") }
+    }
+
+    /// Keeps Refresh, Settings, About, and Quit on the Overview tab only when that tab exists.
+    var appActionsOnOverviewOnly: Bool {
+        get { self.defaultsState.appActionsOnOverviewOnly }
+        set { self.setDefault(\.appActionsOnOverviewOnly, newValue, key: "appActionsOnOverviewOnly") }
+    }
+
+    /// Legacy app-wide "status inline" choice; providers without their own choice still follow it.
+    var statusComponentsInline: Bool {
+        get { self.defaultsState.statusComponentsInline }
+        set { self.setDefault(\.statusComponentsInline, newValue, key: "statusComponentsInline") }
+    }
+
+    var statusInlineByProviderRaw: [String: Bool] {
+        get { self.defaultsState.statusInlineByProviderRaw }
+        set { self.setDefault(\.statusInlineByProviderRaw, newValue, key: "statusInlineByProvider") }
+    }
+
+    var apiCreditBudgetAmountsRaw: [String: Double] {
+        get { self.defaultsState.apiCreditBudgetAmountsRaw }
+        set { self.setDefault(\.apiCreditBudgetAmountsRaw, newValue, key: "apiCreditBudgetAmounts") }
+    }
+
+    var apiCreditBudgetStartDaysRaw: [String: String] {
+        get { self.defaultsState.apiCreditBudgetStartDaysRaw }
+        set { self.setDefault(\.apiCreditBudgetStartDaysRaw, newValue, key: "apiCreditBudgetStartDays") }
+    }
+
     var menuBarColorPace: Bool {
         get { self.defaultsState.menuBarColorPace }
         set { self.setDefault(\.menuBarColorPace, newValue, key: "menuBarColorPace") }
@@ -874,6 +917,26 @@ extension SettingsStore {
     var mergeIconsStacked: Bool {
         get { self.defaultsState.mergeIconsStacked }
         set { self.setDefault(\.mergeIconsStacked, newValue, key: "mergeIconsStacked") }
+    }
+
+    var mergeIconsStackedBars: Bool {
+        get { self.defaultsState.mergeIconsStackedBars }
+        set { self.setDefault(\.mergeIconsStackedBars, newValue, key: "mergeIconsStackedBars") }
+    }
+
+    var stackedBarsProvidersRaw: [String] {
+        get { self.defaultsState.stackedBarsProvidersRaw }
+        set { self.setDefault(\.stackedBarsProvidersRaw, newValue, key: "stackedBarsProviders") }
+    }
+
+    var stackedBarsShowIcons: Bool {
+        get { self.defaultsState.stackedBarsShowIcons }
+        set { self.setDefault(\.stackedBarsShowIcons, newValue, key: "stackedBarsShowIcons") }
+    }
+
+    var stackedBarsWindow: StackedBarsWindow {
+        get { StackedBarsWindow(rawValue: self.defaultsState.stackedBarsWindowRaw) ?? .session }
+        set { self.setDefault(\.stackedBarsWindowRaw, newValue.rawValue, key: "stackedBarsWindow") }
     }
 
     var mergeIconStackedTopProviderRaw: String? {

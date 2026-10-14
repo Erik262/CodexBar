@@ -63,6 +63,65 @@ struct InlineCostHistoryDashboardLabelTests {
     }
 
     @Test
+    func `hidden menu sections drop today, recent windows, and the chart from the inline dashboard`() throws {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = try #require(TimeZone(secondsFromGMT: 0))
+        let now = try #require(calendar.date(from: DateComponents(
+            timeZone: calendar.timeZone,
+            year: 2026,
+            month: 7,
+            day: 15,
+            hour: 12)))
+        let resetAt = try #require(calendar.date(from: DateComponents(
+            timeZone: calendar.timeZone,
+            year: 2026,
+            month: 7,
+            day: 18,
+            hour: 15)))
+        let metadata = try #require(ProviderDefaults.metadata[.antigravity])
+        let model = UsageMenuCardView.Model.make(.init(
+            provider: .antigravity,
+            metadata: metadata,
+            snapshot: UsageSnapshot(
+                primary: nil,
+                secondary: nil,
+                extraRateWindows: [
+                    NamedRateWindow(
+                        id: "antigravity-quota-summary-gemini",
+                        title: "Gemini",
+                        window: RateWindow(
+                            usedPercent: 40,
+                            windowMinutes: CostUsageTokenSnapshot.quotaWeekMinutes,
+                            resetsAt: resetAt,
+                            resetDescription: nil)),
+                ],
+                updatedAt: now),
+            credits: nil,
+            creditsError: nil,
+            dashboardError: nil,
+            tokenSnapshot: Self.antigravitySnapshot(now: now),
+            tokenError: nil,
+            account: AccountInfo(email: nil, plan: nil),
+            isRefreshing: false,
+            lastError: nil,
+            usageBarsShowUsed: false,
+            resetTimeDisplayStyle: .countdown,
+            tokenCostUsageEnabled: true,
+            showOptionalCreditsAndExtraUsage: true,
+            hidePersonalInfo: false,
+            costUsageBucketCalendar: calendar,
+            now: now,
+            hiddenMenuSections: [.todayCost, .recentWindows, .costChart, .currentWindow, .costDetails]))
+
+        let dashboard = try #require(model.inlineUsageDashboard)
+        #expect(!dashboard.kpis.map(\.title).contains("Today"))
+        #expect(!dashboard.kpis.map(\.title).contains { $0.contains("Current window") })
+        #expect(dashboard.quotaWindows.isEmpty)
+        #expect(dashboard.points.isEmpty)
+        #expect(dashboard.detailLines.isEmpty)
+    }
+
+    @Test
     func `a truncated Antigravity scan neither zero-fills days nor claims a complete window`() throws {
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = try #require(TimeZone(secondsFromGMT: 0))

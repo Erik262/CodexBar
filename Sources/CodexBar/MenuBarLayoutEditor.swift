@@ -53,6 +53,9 @@ enum MenuBarLayoutPaletteTokens {
             + MenuBarLayoutNamedExtra.availableTokens(provider: provider, snapshot: snapshot) + [
                 .percent(window: .automatic),
                 .usageBar,
+                .windowBar(window: .session),
+                .windowBar(window: .weekly),
+                .stackedBars,
                 .progressBar(window: .session),
                 .progressBar(window: .weekly),
                 .progressBar(window: .scopedWeekly),
@@ -85,6 +88,9 @@ enum MenuBarLayoutPaletteTokens {
         .percent(window: .scopedWeekly),
         .percent(window: .automatic),
         .usageBar,
+        .windowBar(window: .session),
+        .windowBar(window: .weekly),
+        .stackedBars,
         .progressBar(window: .session),
         .progressBar(window: .weekly),
         .progressBar(window: .scopedWeekly),
@@ -1155,6 +1161,8 @@ extension MenuBarLayoutToken {
         case .pace(window: .scopedWeekly): L("menu_bar_layout_token_weekly_pace")
         case .pace(window: .automatic): L("menu_bar_layout_token_auto_pace")
         case .usageBar: L("menu_bar_layout_token_bar")
+        case let .windowBar(window): L("%@: %@", Self.resetWindowLabel(window), L("menu_bar_layout_token_bar"))
+        case .stackedBars: L("menu_bar_layout_token_stacked_bars")
         case let .progressBar(window):
             L("%@ %@", Self.resetWindowLabel(window), L("menu_bar_layout_token_bar"))
         case .resetCountdown: L("menu_bar_layout_token_resets_in")
@@ -1211,7 +1219,8 @@ extension MenuBarLayoutToken {
         case .accountLabel: "person.crop.circle"
         case .percent, .lanePercent, .extraPercent: "percent"
         case .pace: "speedometer"
-        case .usageBar, .progressBar: "chart.bar.fill"
+        case .usageBar, .windowBar, .progressBar: "chart.bar.fill"
+        case .stackedBars: "rectangle.split.1x2"
         case .resetCountdown, .windowResetCountdown: "timer"
         case .resetAbsolute, .windowResetAbsolute: "clock"
         case .runsOut, .runsOutCompact: "hourglass.bottomhalf.filled"
