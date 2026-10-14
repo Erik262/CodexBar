@@ -386,7 +386,7 @@ extension StatusItemController {
                 for: button)
         } else {
             let signature = [
-                "mode=icon",
+                "mode=icon;measured=\(snapshot?.primary?.measured != nil)",
                 "provider=\(primaryProvider.rawValue)",
                 "style=\(String(describing: style))",
                 "primary=\(Self.iconSignatureValue(primary))",
@@ -418,7 +418,7 @@ extension StatusItemController {
                 tilt: tilt,
                 statusIndicator: statusIndicator,
                 hideCritters: self.settings.menuBarHidesCritters,
-                quotaLayoutPolicy: .provider(primaryProvider))
+                quotaLayoutPolicy: .provider(primaryProvider, snapshot: snapshot))
             self.setButtonContent(
                 image: warningFlash ? Self.quotaWarningFlashImage(base: image) : image,
                 title: nil,
@@ -651,7 +651,7 @@ extension StatusItemController {
                 for: button)
         } else {
             let signature = [
-                "mode=icon",
+                "mode=icon;measured=\(snapshot?.primary?.measured != nil)",
                 "provider=\(provider.rawValue)",
                 "style=\(String(describing: style))",
                 "primary=\(Self.iconSignatureValue(primary))",
@@ -683,7 +683,7 @@ extension StatusItemController {
                 tilt: tilt,
                 statusIndicator: statusIndicator,
                 hideCritters: self.settings.menuBarHidesCritters,
-                quotaLayoutPolicy: .provider(provider))
+                quotaLayoutPolicy: .provider(provider, snapshot: snapshot))
             self.setButtonContent(
                 image: warningFlash ? Self.quotaWarningFlashImage(base: image) : image,
                 title: nil,
