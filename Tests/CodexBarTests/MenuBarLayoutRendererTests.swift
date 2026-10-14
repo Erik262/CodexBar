@@ -43,7 +43,10 @@ struct MenuBarLayoutRendererTests {
             (.pace(window: .session), "-8%"),
             (.pace(window: .weekly), "+11%"),
             (.pace(window: .automatic), "0%"),
-            (.usageBar, "▮▮▯"),
+            (.usageBar, "\u{FFFC}"),
+            (.windowBar(window: .session), "\u{FFFC}"),
+            (.windowBar(window: .weekly), "\u{FFFC}"),
+            (.stackedBars, "\u{FFFC}"),
             (.resetCountdown, "in 2h"),
             (.runsOut, "Runs out in 1d 16h"),
             (.runsOutCompact, "1d 16h"),
@@ -1058,7 +1061,8 @@ struct MenuBarLayoutRendererTests {
                 isDebugApp: false,
                 now: self.now))
 
-        #expect(output.attributedTitle.string == "▮▮▮")
+        #expect(output.attributedTitle.string == "\u{FFFC}")
+        #expect(output.accessibilityLabel.contains("90%"))
     }
 
     @Test(arguments: [PercentWindow.session, .weekly, .scopedWeekly, .automatic])

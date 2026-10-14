@@ -581,13 +581,26 @@ extension SettingsStore {
             resetTimesShowAbsolute: userDefaults.object(forKey: "resetTimesShowAbsolute") as? Bool ?? false,
             providerChangelogLinksEnabled: userDefaults.object(
                 forKey: "providerChangelogLinksEnabled") as? Bool ?? false,
+            // Falls back to this fork's earlier "menuCardHoverHighlightEnabled" choice.
             highlightMenuCardsOnHover: Self.loadBoolDefault(
                 "highlightMenuCardsOnHover",
-                fallback: true,
+                fallback: userDefaults.object(forKey: "menuCardHoverHighlightEnabled") as? Bool ?? true,
                 from: userDefaults),
             menuBarShowsBrandIconWithPercent: userDefaults.object(
                 forKey: "menuBarShowsBrandIconWithPercent") as? Bool ?? false,
             menuBarHidesCritters: userDefaults.object(forKey: "menuBarHidesCritters") as? Bool ?? false,
+            menuBarStatusBadgeVisible: userDefaults.object(forKey: "menuBarStatusBadgeVisible") as? Bool ?? false,
+            hiddenMenuSectionsRaw: userDefaults.stringArray(forKey: "hiddenMenuSections") ?? [],
+            hiddenMenuSectionsByProviderRaw: userDefaults.dictionary(
+                forKey: "hiddenMenuSectionsByProvider") as? [String: [String]] ?? [:],
+            appActionsOnOverviewOnly: userDefaults.object(forKey: "appActionsOnOverviewOnly") as? Bool ?? false,
+            statusComponentsInline: userDefaults.object(forKey: "statusComponentsInline") as? Bool ?? false,
+            statusInlineByProviderRaw: userDefaults.dictionary(forKey: "statusInlineByProvider") as? [String: Bool]
+                ?? [:],
+            apiCreditBudgetAmountsRaw: userDefaults.dictionary(forKey: "apiCreditBudgetAmounts") as? [String: Double]
+                ?? [:],
+            apiCreditBudgetStartDaysRaw: userDefaults.dictionary(
+                forKey: "apiCreditBudgetStartDays") as? [String: String] ?? [:],
             menuBarColorPace: userDefaults.bool(forKey: "menuBarColorPace"),
             menuBarPaceReservePositive: userDefaults.bool(forKey: "menuBarPaceReservePositive"),
             menuBarColorByProvider: userDefaults.bool(forKey: "menuBarColorByProvider"),
@@ -671,6 +684,11 @@ extension SettingsStore {
             mergeIconsStacked: userDefaults.object(forKey: "mergeIconsStacked") as? Bool ?? false,
             mergeIconStackedTopProviderRaw: userDefaults.string(forKey: "mergeIconStackedTopProvider"),
             mergeIconStackedBottomProviderRaw: userDefaults.string(forKey: "mergeIconStackedBottomProvider"),
+            mergeIconsStackedBars: userDefaults.object(forKey: "mergeIconsStackedBars") as? Bool ?? false,
+            stackedBarsProvidersRaw: userDefaults.stringArray(forKey: "stackedBarsProviders") ?? [],
+            stackedBarsWindowRaw: userDefaults.string(forKey: "stackedBarsWindow")
+                ?? StackedBarsWindow.session.rawValue,
+            stackedBarsShowIcons: userDefaults.object(forKey: "stackedBarsShowIcons") as? Bool ?? true,
             mergedMenuLastSelectedWasOverview: userDefaults.object(
                 forKey: "mergedMenuLastSelectedWasOverview") as? Bool ?? false,
             mergedOverviewSelectedProvidersRaw: userDefaults.array(

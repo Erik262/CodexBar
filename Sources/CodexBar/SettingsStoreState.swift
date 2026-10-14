@@ -36,6 +36,14 @@ struct SettingsDefaultsState {
     var highlightMenuCardsOnHover: Bool
     var menuBarShowsBrandIconWithPercent: Bool
     var menuBarHidesCritters: Bool
+    var menuBarStatusBadgeVisible: Bool
+    var hiddenMenuSectionsRaw: [String]
+    var hiddenMenuSectionsByProviderRaw: [String: [String]]
+    var appActionsOnOverviewOnly: Bool
+    var statusComponentsInline: Bool
+    var statusInlineByProviderRaw: [String: Bool]
+    var apiCreditBudgetAmountsRaw: [String: Double]
+    var apiCreditBudgetStartDaysRaw: [String: String]
     var menuBarColorPace: Bool
     var menuBarPaceReservePositive: Bool
     var menuBarColorByProvider: Bool
@@ -91,6 +99,10 @@ struct SettingsDefaultsState {
     var mergeIconsStacked: Bool
     var mergeIconStackedTopProviderRaw: String?
     var mergeIconStackedBottomProviderRaw: String?
+    var mergeIconsStackedBars: Bool
+    var stackedBarsProvidersRaw: [String]
+    var stackedBarsWindowRaw: String
+    var stackedBarsShowIcons: Bool
     var mergedMenuLastSelectedWasOverview: Bool
     var mergedOverviewSelectedProvidersRaw: [String]
     var selectedMenuProviderRaw: String?

@@ -25,8 +25,8 @@ struct MetricRow: View {
                 MetricRowHeader(
                     title: presentation.titleText,
                     layoutTitle: layoutPresentation.titleText,
-                    resetText: self.compact ? nil : presentation.resetText,
-                    layoutResetText: self.compact ? nil : layoutPresentation.resetText,
+                    resetText: presentation.resetText,
+                    layoutResetText: layoutPresentation.resetText,
                     isHighlighted: self.isHighlighted)
                 UsageProgressBar(
                     percent: self.metric.percent,

@@ -175,7 +175,10 @@ extension UsageStore {
                     snapshot: snapshot,
                     historySelection: account?.historySelection,
                     usesLiveAccount: isLive)
-                : [])
+                : [],
+            // Settings previews follow the same choices as the menu so toggles visibly take effect there too.
+            hiddenMenuSections: self.settings.hiddenMenuSections(for: provider),
+            apiCreditBudget: self.settings.apiCreditBudget(for: provider))
     }
 
     private func menuCardSessionEquivalentForecast(

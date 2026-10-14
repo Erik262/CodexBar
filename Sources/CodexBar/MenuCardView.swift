@@ -339,10 +339,19 @@ private struct UsageMenuCardHeaderView: View {
     var planAction: (() -> Void)?
     @Environment(\.menuItemHighlighted) private var isHighlighted
     @Environment(\.menuCardRefreshMonitor) private var refreshMonitor
+    @Environment(\.menuCardOverviewStyle) private var isOverviewStyle
 
     var body: some View {
         VStack(alignment: .leading, spacing: UsageMenuCardLayout.headerLineSpacing) {
             HStack(alignment: .firstTextBaseline, spacing: UsageMenuCardLayout.headerColumnSpacing) {
+                if self.isOverviewStyle, let icon = ProviderBrandIcon.image(for: self.model.provider) {
+                    Image(nsImage: icon)
+                        .resizable()
+                        .renderingMode(.template)
+                        .frame(width: 14, height: 14)
+                        .alignmentGuide(.firstTextBaseline) { $0[.bottom] - 2 }
+                        .accessibilityHidden(true)
+                }
                 Text(self.model.providerName).font(.headline)
                     .fontWeight(.semibold)
                     .lineLimit(1).truncationMode(.tail).layoutPriority(1)
@@ -520,9 +529,11 @@ private struct TokenUsageSectionContent: View {
                         .accessibilityLabel(L("Refreshing"))
                 }
             }
-            Text(self.tokenUsage.sessionLine)
-                .font(self.lineFont)
-                .lineLimit(1)
+            if !self.tokenUsage.sessionLine.isEmpty {
+                Text(self.tokenUsage.sessionLine)
+                    .font(self.lineFont)
+                    .lineLimit(1)
+            }
             Text(self.tokenUsage.monthLine)
                 .font(self.lineFont)
                 .lineLimit(1)
@@ -881,7 +892,8 @@ extension UsageMenuCardView.Model {
             metadata: input.metadata)
         let paceVisible = input.paceVisible && ProviderDescriptorRegistry.descriptor(for: input.provider).pace
             .allowsPace(dataConfidence: input.snapshot?.dataConfidence ?? .unknown)
-        let metrics = Self.redactedMetrics(
+        let budgetMetrics = Self.creditBudgetMetric(input: input).map { [$0] } ?? []
+        let metrics = budgetMetrics + Self.redactedMetrics(
             Self.paceGatedMetrics(Self.metrics(input: input), paceVisible: paceVisible),
             provider: input.provider,
             hidePersonalInfo: input.hidePersonalInfo)
@@ -945,6 +957,7 @@ extension UsageMenuCardView.Model {
             snapshot: tokenUsageSnapshot,
             error: input.tokenError,
             preferredCurrencyCode: input.preferredCurrencyCode,
+            includesToday: !input.hiddenMenuSections.contains(.todayCost),
             calendar: input.costUsageBucketCalendar)
         let subtitle = input.subtitleOverride.map { (text: $0, style: SubtitleStyle.info) }
             ?? Self.subtitle(

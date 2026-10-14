@@ -101,6 +101,7 @@ struct MenuDescriptor {
         canCheckForUpdates: Bool = false,
         versionText: String = AppVersion.shortVersion,
         includeContextualActions: Bool = true,
+        includeAppActions: Bool = true,
         codexWorkspacesMenuEnabled: Bool = false,
         isKeepingAwake: Bool = false,
         agentSessionsEnabled: Bool = false,
@@ -171,12 +172,14 @@ struct MenuDescriptor {
                 hideUnreachableHosts: agentSessionsHideUnreachableHosts,
                 now: now))
         }
-        sections.append(Self.metaSection(
-            updateReady: updateReady,
-            availableUpdateVersion: availableUpdateVersion,
-            isInstallingUpdate: isInstallingUpdate,
-            canCheckForUpdates: canCheckForUpdates,
-            versionText: versionText))
+        if includeAppActions {
+            sections.append(Self.metaSection(
+                updateReady: updateReady,
+                availableUpdateVersion: availableUpdateVersion,
+                isInstallingUpdate: isInstallingUpdate,
+                canCheckForUpdates: canCheckForUpdates,
+                versionText: versionText))
+        }
 
         return MenuDescriptor(sections: sections)
     }
@@ -347,6 +350,7 @@ struct MenuDescriptor {
                 provider: provider,
                 snapshot: snap,
                 showOptionalUsage: settings.showOptionalCreditsAndExtraUsage,
+                showsUsageSummary: settings.isMenuSectionVisible(.usageSummary, for: provider),
                 preferredCurrencyCode: settings.preferredCurrencyCode)
             if snap.rateLimitsUnavailable(for: provider) {
                 entries.append(.text(L("Limits not available"), .secondary))
@@ -376,6 +380,7 @@ struct MenuDescriptor {
         provider: UsageProvider,
         snapshot: UsageSnapshot,
         showOptionalUsage: Bool,
+        showsUsageSummary: Bool = true,
         preferredCurrencyCode: String = "auto")
     {
         if let cost = snapshot.providerCost {
@@ -385,13 +390,13 @@ struct MenuDescriptor {
                 entries.append(.text("\(L("Quota")): \(used) / \(limit)", .primary))
             }
         }
-        if let openAIAPIUsage = snapshot.openAIAPIUsage {
+        if showsUsageSummary, let openAIAPIUsage = snapshot.openAIAPIUsage {
             Self.appendOpenAIAPIUsageSummary(
                 entries: &entries,
                 usage: openAIAPIUsage,
                 preferredCurrencyCode: preferredCurrencyCode)
         }
-        if let mistralUsage = snapshot.mistralUsage, !mistralUsage.daily.isEmpty {
+        if showsUsageSummary, let mistralUsage = snapshot.mistralUsage, !mistralUsage.daily.isEmpty {
             Self.appendMistralUsageSummary(
                 entries: &entries,
                 usage: mistralUsage,
@@ -573,6 +578,7 @@ struct MenuDescriptor {
 
         // Show "Add Account" if no account, "Switch Account" if logged in
         if let targetProvider,
+           store.settings.isMenuSectionVisible(.accountActions, for: targetProvider),
            let implementation = ProviderCatalog.implementation(for: targetProvider),
            implementation.supportsLoginFlow
         {
@@ -600,17 +606,26 @@ struct MenuDescriptor {
                 .appendActionMenuEntries(context: actionContext, entries: &entries)
         }
 
-        if metadata?.dashboardURL != nil {
+        let showsLink = { (section: MenuSectionToggle) -> Bool in
+            targetProvider.map { store.settings.isMenuSectionVisible(section, for: $0) } ?? true
+        }
+        if showsLink(.dashboardLink), metadata?.dashboardURL != nil {
             entries.append(.action(L("Usage Dashboard"), .dashboard))
         }
-        if metadata?.statusPageURL != nil || metadata?.statusLinkURL != nil {
+        if showsLink(.statusPageLink),
+           metadata?.statusPageURL != nil || metadata?.statusLinkURL != nil
+        {
             entries.append(.action(L("Status Page"), .statusPage))
         }
-        if store.settings.providerChangelogLinksEnabled, metadata?.changelogURL != nil {
+        if store.settings.providerChangelogLinksEnabled, showsLink(.changelogLink), metadata?.changelogURL != nil {
             entries.append(.action(L("Changelog"), .changelog))
         }
 
-        if let statusLine = self.statusLine(for: provider, store: store) {
+        // The inline status card already lists every component, so the summary line would repeat it.
+        let showsInlineStatus = targetProvider.map {
+            !StatusItemController.inlineStatusComponents(store: store, provider: $0).isEmpty
+        } == true
+        if !showsInlineStatus, let statusLine = self.statusLine(for: provider, store: store) {
             entries.append(.text(statusLine, .secondary))
         }
 

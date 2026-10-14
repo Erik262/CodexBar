@@ -5,7 +5,7 @@ extension StatusItemController {
         let shouldMonitor = FrontmostProviderMonitoringPolicy.shouldRun(
             source: self.settings.unifiedIconSource,
             mergeIcons: self.shouldMergeIcons,
-            isStacked: self.stackedMergeIconProvidersIfActive() != nil)
+            isStacked: self.stackedMergeIconProvidersIfActive() != nil || self.stackedBarProvidersIfActive() != nil)
         guard shouldMonitor else {
             self.frontmostProviderMonitor?.synchronize(shouldRun: false)
             self.frontmostProviderMonitor = nil

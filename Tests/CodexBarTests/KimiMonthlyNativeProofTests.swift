@@ -120,7 +120,7 @@ final class KimiMonthlyNativeProofTests: XCTestCase {
                         isDebugApp: false,
                         now: now))
                 let expectedPercent = showUsed ? automatic.usedPercent : automatic.remainingPercent
-                let expectedBar = expectedPercent == 100 ? "▮▮▮" : "▯▯▯"
+                let expectedBar = "\u{FFFC}"
                 XCTAssertEqual(rendered.attributedTitle.string, "Kimi \(Int(expectedPercent))% \(expectedBar)")
                 let rowY = CGFloat(132 - index * 50)
                 label(showUsed ? "Used" : "Remaining", y: rowY)

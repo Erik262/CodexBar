@@ -24,7 +24,7 @@ read_when:
 
 ## Notes
 - HTML release notes are embedded in the appcast entry; the Sparkle update dialog should show formatted bullets (not raw tags).
-- If you change the feed host or key, update Info.plist (`SUFeedURL`, `SUPublicEDKey`) and bump the app.
+- If you change the feed host or key, update Info.plist (`SUFeedURL`, `SUPublicEDKey`) and bump the app. Forks can set these at packaging time instead; see `docs/packaging.md` → Fork update feeds.
 - Auto-check toggle is persisted via Sparkle; manual “Check for Updates…” remains in About.
 - Sparkle retains installation control after a background download. The install-on-quit delegate records update readiness and returns `false`; returning `true` stalls Sparkle's update session and causes manual checks to do nothing. Dismissing a downloaded or staged installation keeps the update-ready menu action available.
 - CodexBar disables Sparkle in Homebrew and unsigned builds; those installs should be updated via `brew` or reinstalling from Releases. Homebrew installs check their receipt's owning cask version daily (official or steipete/tap, when automatic checks are on) and offer a one-click `brew upgrade` from the menu and About.

@@ -41,6 +41,12 @@ struct SettingsPersistenceContractTests {
     }
 
     @Test
+    func `menu hover highlighting keeps the earlier fork choice`() {
+        let defaults = InMemoryUserDefaults(values: ["menuCardHoverHighlightEnabled": false])
+        #expect(!testSettingsStore(suiteName: #function, userDefaults: defaults).highlightMenuCardsOnHover)
+    }
+
+    @Test
     func `optional and raw preferences round trip without boxed nil values`() {
         let defaults = InMemoryUserDefaults()
         let settings = testSettingsStore(suiteName: #function, userDefaults: defaults)
@@ -66,6 +72,66 @@ struct SettingsPersistenceContractTests {
         let cleared = testSettingsStore(suiteName: #function, userDefaults: defaults)
         #expect(cleared.weeklyProgressWorkDays == nil)
         #expect(cleared.mergeIconStackedTopProviderRaw == nil)
+    }
+
+    @Test
+    func `menu visibility toggles persist and default to visible`() {
+        let defaults = InMemoryUserDefaults()
+        let settings = testSettingsStore(suiteName: #function, userDefaults: defaults)
+        #expect(MenuSectionToggle.allCases.allSatisfy { settings.isMenuSectionVisible($0, for: .claude) })
+        #expect(!settings.menuBarStatusBadgeVisible)
+        #expect(!settings.appActionsOnOverviewOnly)
+        #expect(!settings.statusComponentsInline)
+
+        settings.setMenuSection(.todayCost, visible: false, for: .claude)
+        settings.setMenuSection(.planUsage, visible: false, for: .claude)
+        settings.setMenuSection(.accountActions, visible: false, for: .openai)
+        settings.menuBarStatusBadgeVisible = true
+        settings.appActionsOnOverviewOnly = true
+        settings.statusComponentsInline = true
+
+        let reloaded = testSettingsStore(suiteName: #function, userDefaults: defaults)
+        #expect(reloaded.hiddenMenuSections(for: .claude) == [.todayCost, .planUsage])
+        #expect(reloaded.hiddenMenuSections(for: .openai) == [.accountActions])
+        #expect(reloaded.hiddenMenuSections(for: .codex).isEmpty)
+        #expect(reloaded.menuBarStatusBadgeVisible)
+        #expect(reloaded.appActionsOnOverviewOnly)
+        #expect(reloaded.statusComponentsInline)
+
+        reloaded.setMenuSection(.todayCost, visible: true, for: .claude)
+        #expect(reloaded.hiddenMenuSections(for: .claude) == [.planUsage])
+    }
+
+    @Test
+    func `status page presentation is chosen per provider and persists`() {
+        let defaults = InMemoryUserDefaults(values: ["statusComponentsInline": true])
+        let settings = testSettingsStore(suiteName: #function, userDefaults: defaults)
+        // The earlier app-wide switch is the default for providers without their own choice.
+        #expect(settings.statusPagePresentation(for: .codex) == .inline)
+
+        settings.setStatusPagePresentation(.link, for: .codex)
+        settings.setStatusPagePresentation(.off, for: .claude)
+
+        let reloaded = testSettingsStore(suiteName: #function, userDefaults: defaults)
+        #expect(reloaded.statusPagePresentation(for: .codex) == .link)
+        #expect(reloaded.statusPagePresentation(for: .claude) == .off)
+        #expect(!reloaded.isMenuSectionVisible(.statusPageLink, for: .claude))
+        #expect(reloaded.statusPagePresentation(for: .openai) == .inline)
+
+        reloaded.setStatusPagePresentation(.inline, for: .claude)
+        #expect(reloaded.statusPagePresentation(for: .claude) == .inline)
+        #expect(StatusPagePresentation.options(for: .openai).contains(.inline))
+    }
+
+    @Test
+    func `providers without their own visibility choice inherit the earlier app-wide set`() {
+        let defaults = InMemoryUserDefaults(values: ["hiddenMenuSections": ["costChart", "todayCost"]])
+        let settings = testSettingsStore(suiteName: #function, userDefaults: defaults)
+        #expect(settings.hiddenMenuSections(for: .codex) == [.costChart, .todayCost])
+
+        settings.setMenuSection(.costChart, visible: true, for: .codex)
+        #expect(settings.hiddenMenuSections(for: .codex) == [.todayCost])
+        #expect(settings.hiddenMenuSections(for: .claude) == [.costChart, .todayCost])
     }
 
     @Test

@@ -495,6 +495,10 @@ enum MenuBarLayoutToken: Codable, Hashable, Sendable {
     /// `runsOut` answers "when does this end"; this token answers "how far off the even rate am I".
     case pace(window: PercentWindow)
     case usageBar
+    /// A drawn meter for one specific window (session or weekly), unlike `usageBar` which follows Automatic.
+    case windowBar(window: PercentWindow)
+    /// Session and weekly meters stacked in one element, drawn like the merged stacked-bars icon.
+    case stackedBars
     /// Graphical progress bar for a semantic window, drawn as an `NSTextAttachment` mini-bar.
     case progressBar(window: PercentWindow)
     case resetCountdown
@@ -520,7 +524,8 @@ enum MenuBarLayoutToken: Codable, Hashable, Sendable {
     /// Synthesized `Codable` keys each case by name; `costWindow` pins the discriminator written before the
     /// case was renamed, because 0.73.0 discards a persisted layout containing an unknown token.
     private enum CodingKeys: String, CodingKey {
-        case icon, providerName, accountLabel, percent, lanePercent, extraPercent, pace, usageBar, progressBar
+        case icon, providerName, accountLabel, percent, lanePercent, extraPercent, pace, usageBar, windowBar
+        case stackedBars, progressBar
         case resetCountdown, resetAbsolute, windowResetCountdown, windowResetAbsolute
         case runsOut, runsOutCompact, balance, costToday, tokensPerMinute, tokensSparkline
         case costWindow = "cost30d"
@@ -569,23 +574,23 @@ enum MenuBarLayoutToken: Codable, Hashable, Sendable {
     /// Tokens without an older representation are dropped after mapping graphical bars to percentages.
     var hasReleasedRepresentation: Bool {
         switch self {
-        case .extraPercent, .windowResetCountdown, .windowResetAbsolute, .progressBar, .tokensPerMinute,
-             .tokensSparkline: false
+        case .extraPercent, .windowResetCountdown, .windowResetAbsolute, .windowBar, .stackedBars, .progressBar,
+             .tokensPerMinute, .tokensSparkline: false
         default: true
         }
     }
 
     var hasV3Representation: Bool {
         switch self {
-        case .extraPercent, .progressBar, .tokensPerMinute, .tokensSparkline: false
+        case .extraPercent, .windowBar, .stackedBars, .progressBar, .tokensPerMinute, .tokensSparkline: false
         default: true
         }
     }
 
     var hasLegacyRepresentation: Bool {
         switch self {
-        case .conditional, .extraPercent, .hidden, .windowResetCountdown, .windowResetAbsolute,
-             .progressBar, .tokensPerMinute, .tokensSparkline: false
+        case .conditional, .extraPercent, .hidden, .windowResetCountdown, .windowResetAbsolute, .windowBar,
+             .stackedBars, .progressBar, .tokensPerMinute, .tokensSparkline: false
         default: true
         }
     }
