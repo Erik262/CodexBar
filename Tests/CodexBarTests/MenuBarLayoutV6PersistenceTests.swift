@@ -101,6 +101,21 @@ struct MenuBarLayoutV6PersistenceTests {
     }
 
     @Test
+    func `drawn meters project to graphical progress bars for V5 and older decoders`() {
+        let layout = MenuBarLayout(lines: [[.icon, .windowBar(window: .weekly)], [.stackedBars]])
+        #expect(layout.v5Compatible() == MenuBarLayout(lines: [
+            [.icon, .progressBar(window: .weekly)],
+            [.progressBar(window: .session)],
+        ]))
+        #expect(layout.v4Compatible() == MenuBarLayout(lines: [
+            [.icon, .percent(window: .weekly)],
+            [.percent(window: .session)],
+        ]))
+        #expect(!Self.rule(metric: .session, thenToken: .stackedBars).hasV5Representation)
+        #expect(!Self.rule(metric: .session, thenToken: .windowBar(window: .session)).hasV5Representation)
+    }
+
+    @Test
     func `conditionals reading spend metrics are omitted from V5 and older libraries`() throws {
         let readable = Self.rule(metric: .session, thenToken: .resetCountdown)
         let spendRules = [

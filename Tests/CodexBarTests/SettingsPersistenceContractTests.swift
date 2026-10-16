@@ -79,14 +79,14 @@ struct SettingsPersistenceContractTests {
         let defaults = InMemoryUserDefaults()
         let settings = testSettingsStore(suiteName: #function, userDefaults: defaults)
         #expect(MenuSectionToggle.allCases.allSatisfy { settings.isMenuSectionVisible($0, for: .claude) })
-        #expect(!settings.menuBarStatusBadgeVisible)
+        #expect(settings.menuBarStatusBadgeVisible)
         #expect(!settings.appActionsOnOverviewOnly)
         #expect(!settings.statusComponentsInline)
 
         settings.setMenuSection(.todayCost, visible: false, for: .claude)
         settings.setMenuSection(.planUsage, visible: false, for: .claude)
         settings.setMenuSection(.accountActions, visible: false, for: .openai)
-        settings.menuBarStatusBadgeVisible = true
+        settings.menuBarStatusBadgeVisible = false
         settings.appActionsOnOverviewOnly = true
         settings.statusComponentsInline = true
 
@@ -94,7 +94,7 @@ struct SettingsPersistenceContractTests {
         #expect(reloaded.hiddenMenuSections(for: .claude) == [.todayCost, .planUsage])
         #expect(reloaded.hiddenMenuSections(for: .openai) == [.accountActions])
         #expect(reloaded.hiddenMenuSections(for: .codex).isEmpty)
-        #expect(reloaded.menuBarStatusBadgeVisible)
+        #expect(!reloaded.menuBarStatusBadgeVisible)
         #expect(reloaded.appActionsOnOverviewOnly)
         #expect(reloaded.statusComponentsInline)
 

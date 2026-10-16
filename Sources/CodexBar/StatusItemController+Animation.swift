@@ -457,6 +457,10 @@ extension StatusItemController {
             "icons=\(self.settings.stackedBarsShowIcons ? "1" : "0")",
             "highContrast=\(self.shouldUseHighContrastStatusItemContent ? "1" : "0")",
         ] + rowSignatures).joined(separator: "|")
+        let accessibilityTitle = Self.stackedBarsAccessibilityTitle(providers: providers, rows: rows)
+        if button.accessibilityTitle() != accessibilityTitle {
+            button.setAccessibilityTitle(accessibilityTitle)
+        }
         let canSkipCachedRender = self.prepareButtonForImageOnlyCacheHit(button)
         if self.shouldSkipMergedIconRender(signature), canSkipCachedRender {
             self.noteIconPerfRender(skipped: true)
@@ -467,6 +471,18 @@ extension StatusItemController {
         self.setButtonContent(image: image, title: nil, tint: nil, for: button)
         self.noteIconPerfRender(skipped: false)
         return false
+    }
+
+    /// The bars are one image, so VoiceOver reads each row's provider and percentage from the button title.
+    static func stackedBarsAccessibilityTitle(
+        providers: [UsageProvider],
+        rows: [StackedBarsIconRenderer.Row]) -> String
+    {
+        zip(providers, rows).map { provider, row in
+            let name = ProviderDescriptorRegistry.descriptor(for: provider).metadata.displayName
+            guard let percent = row.percent else { return L("%@ unavailable", name) }
+            return "\(name) \(Int(percent.rounded()))%"
+        }.joined(separator: ", ")
     }
 
     private func applyStoredUnifiedMenuBarLayoutIfNeeded(

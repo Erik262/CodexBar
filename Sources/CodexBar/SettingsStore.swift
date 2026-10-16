@@ -609,7 +609,7 @@ extension SettingsStore {
             menuBarShowsBrandIconWithPercent: userDefaults.object(
                 forKey: "menuBarShowsBrandIconWithPercent") as? Bool ?? false,
             menuBarHidesCritters: userDefaults.object(forKey: "menuBarHidesCritters") as? Bool ?? false,
-            menuBarStatusBadgeVisible: userDefaults.object(forKey: "menuBarStatusBadgeVisible") as? Bool ?? false,
+            menuBarStatusBadgeVisible: userDefaults.object(forKey: "menuBarStatusBadgeVisible") as? Bool ?? true,
             hiddenMenuSectionsRaw: userDefaults.stringArray(forKey: "hiddenMenuSections") ?? [],
             hiddenMenuSectionsByProviderRaw: userDefaults.dictionary(
                 forKey: "hiddenMenuSectionsByProvider") as? [String: [String]] ?? [:],

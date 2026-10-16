@@ -35,11 +35,9 @@ struct ProviderMenuCustomizationSettingsView: View {
             }
 
             Button(L("Restore Defaults")) {
-                for section in MenuSectionToggle.allCases {
-                    self.settings.setMenuSection(section, visible: true, for: self.provider)
-                }
+                self.settings.resetMenuCustomization(for: self.provider)
             }
-            .disabled(self.settings.hiddenMenuSections(for: self.provider).isEmpty)
+            .disabled(!self.settings.hasMenuCustomization(for: self.provider))
         } header: {
             Text(L("section_menu_visibility"))
         } footer: {

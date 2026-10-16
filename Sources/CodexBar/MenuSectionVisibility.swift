@@ -127,4 +127,19 @@ extension SettingsStore {
         byProvider[provider.rawValue] = presentation == .inline
         self.statusInlineByProviderRaw = byProvider
     }
+
+    /// Whether Restore Defaults has anything to undo for this provider's menu.
+    func hasMenuCustomization(for provider: UsageProvider) -> Bool {
+        !self.hiddenMenuSections(for: provider).isEmpty || self.statusInlineByProviderRaw[provider.rawValue] != nil
+    }
+
+    /// Shows every section again and drops the provider's status-page override so it follows the global default.
+    func resetMenuCustomization(for provider: UsageProvider) {
+        for section in MenuSectionToggle.allCases {
+            self.setMenuSection(section, visible: true, for: provider)
+        }
+        var byProvider = self.statusInlineByProviderRaw
+        byProvider[provider.rawValue] = nil
+        self.statusInlineByProviderRaw = byProvider
+    }
 }
