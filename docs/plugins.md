@@ -72,6 +72,13 @@ See [WorkBuddy](workbuddy.md) for the request contract, bounded optional reset l
 [X API](xapi.md) uses the same cookie host with a bundled `ct0` header echo for account discovery and developer-console
 credits. Its script preserves dollar balances and debt without receiving cookie values or adding a native fetcher.
 
+[Gemini app](gemini.md) uses `gemini-web` for explicit web-source quotas on both engines. Request-URL-scoped,
+nonpersistent cookie sessions use the shared access gate; the existing Gemini CLI OAuth source stays native.
+
+[Claude Platform](claudeplatform.md) sends the opaque `sessionKey` cookie through the same cookie host, so its script
+never sees cookie values. It lists organizations, then reads required `prepaid/credits` (a 403 tries the next API
+organization) and optional `current_spend`, whose failures keep the balance. Both plugin engines run it.
+
 Manus, Muse (muse.ai), Perplexity, Hyper, Raycast, Sakana, and T3 Chat use the shared app implementation. Helmcode retains its tenant
 picker/snapshot, and Qoder retains its regional dashboard action and source-label adapter while sharing cookie UI.
 Provider-owned values resolvers retain token normalization and captured-header allowlists. Replicate and TypeSafe
@@ -122,6 +129,11 @@ defineProvider({
 - `icon` (optional): `{monogram, tint}`. `monogram` is 1–3 characters; `tint` is `#RRGGBB`. The fallback is the first
   letter of `name` with a neutral tint. File/SVG icons are not supported.
 - `topLevel` (optional, default `true`): gives an enabled plugin its own provider-switcher tab when Merge Icons is on. Set to `false` to keep an appended card.
+  Plugin tabs show a quota gauge from the most constrained reported seven-day window, otherwise the first available
+  primary, secondary, tertiary, or extra window. They follow the used/remaining display preference; unknown usage
+  stays unavailable. Enabled plugins can also be selected in **Settings → Menu Bar → Overview**; they share the
+  six-provider limit and render their existing usage card. Overview selections retain the same string-array format,
+  so older builds can still read the built-in providers while ignoring unknown plugin IDs.
 - `endpoints`: 1–16 declared network origins. A fixed endpoint is a normalized HTTPS origin such as
   `https://api.example.com` (no path, query, fragment, or user info). A settings-derived endpoint is
   `{setting: "BASE_URL", policy: "https"}`, `{setting: "BASE_URL", policy: "https-or-loopback-http"}`, or
@@ -314,6 +326,10 @@ abandoned evaluation thread behind. On Apple platforms, `CODEXBAR_PLUGIN_ENGINE=
 engine; the same rollback is available in **Settings → Debug → Provider Plugins** and takes effect after restarting
 CodexBar. JavaScriptCore has no public interrupt API, so a timed-out rollback-engine context is discarded but its
 abandoned evaluation thread can remain alive until process exit.
+
+QuickJS worker jobs drain autoreleased host objects when they finish, preventing refresh temporaries from building up
+across a plugin's lifetime. JavaScriptCore registration and completed-fetch callbacks do not keep retired runtimes or
+contexts alive; active evaluations and the existing fetch watchdog still determine when cleanup can finish.
 
 ## Snapshot result
 

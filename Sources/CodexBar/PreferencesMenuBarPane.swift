@@ -231,8 +231,9 @@ struct MenuBarPane: View {
                 if !self.activeProvidersInOrder.isEmpty {
                     PinnedProviderZonesView(
                         settings: self.settings,
-                        enabled: self.activeProvidersInOrder,
-                        limit: min(Self.maxOverviewProviders, StackedBarsIconRenderer.maxRows))
+                        enabled: self.store.enabledFirstPartyProvidersForDisplay(),
+                        allEnabled: self.activeProvidersInOrder,
+                        limit: Self.maxOverviewProviders)
                 }
             } header: {
                 Text(L("section_menu_tabs"))
@@ -255,8 +256,8 @@ struct MenuBarPane: View {
             .settingsSearchAnchor(L("stacked_bars_show_icons_title"))
     }
 
-    private var activeProvidersInOrder: [UsageProvider] {
-        self.store.enabledFirstPartyProviders()
+    private var activeProvidersInOrder: [ProviderInstanceID] {
+        self.store.enabledProvidersForDisplay()
     }
 
     private var mergedIconPresentation: MergedIconPresentation {

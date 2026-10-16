@@ -41,6 +41,10 @@ struct MenuBarLayoutRenderMetrics: Hashable {
     let balanceUsedUSD: Double?
     let costTodayUSD: Double?
     let cost30dUSD: Double?
+    var spendPaceDelta: Double?
+    /// USD-only like the cost amounts: nil for credit-denominated caps and currencies with no exchange rate.
+    var spendUsedUSD: Double?
+    var spendRemainingUSD: Double?
 
     static let unavailable = MenuBarLayoutRenderMetrics(
         sessionPaceDelta: nil,
@@ -90,6 +94,12 @@ struct MenuBarLayoutRenderData: Hashable {
     let cost30d: String?
     /// Numeric twins of the display strings above, for conditional predicates.
     let metrics: MenuBarLayoutRenderMetrics
+    /// Money is nil for credit-denominated caps, whose percent renders without a currency prefix.
+    var spend: MenuBarLayoutRenderWindow?
+    var spendPace: String?
+    var spendAmount: String?
+    var spendBudget: String?
+    var spendCurrencySymbol = "$"
 
     func extraTitle(_ id: String) -> String? {
         ProviderDescriptorRegistry.descriptor(for: self.provider).menuBarMetrics.namedExtras[id].map { title in
@@ -127,6 +137,7 @@ struct MenuBarLayoutRenderExtra: Hashable {
 
 struct MenuBarLayoutRenderOptions: Hashable {
     let size: MenuBarLayoutSize
+    let monospacedDigits: Bool
     let colorPace: Bool
     let colorByProvider: Bool
     let highContrast: Bool
@@ -163,9 +174,11 @@ struct MenuBarLayoutRenderOptions: Hashable {
         verticalAdjustment: Int = 0,
         colorPace: Bool = false,
         colorByProvider: Bool = false,
-        forceStackedStyle: Bool = false)
+        forceStackedStyle: Bool = false,
+        monospacedDigits: Bool = false)
     {
         self.size = size
+        self.monospacedDigits = monospacedDigits
         self.colorPace = colorPace
         self.colorByProvider = colorByProvider
         self.highContrast = highContrast
@@ -185,6 +198,7 @@ struct MenuBarLayoutRenderKey: Hashable {
     let layout: MenuBarLayout
     let data: MenuBarLayoutRenderData
     let size: MenuBarLayoutSize
+    let monospacedDigits: Bool
     let colorPace: Bool
     let colorByProvider: Bool
     let highContrast: Bool
@@ -324,6 +338,7 @@ final class MenuBarLayoutRenderer {
             layout: layout,
             data: data,
             size: options.size,
+            monospacedDigits: options.monospacedDigits,
             colorPace: options.colorPace,
             colorByProvider: options.colorByProvider,
             highContrast: options.highContrast,
@@ -386,7 +401,7 @@ final class MenuBarLayoutRenderer {
             attributedTitle: result,
             accessibilityLabel: accessibilityLabel,
             leadingIcon: nil,
-            statusImage: nil)
+            statusImage: Self.statusImage(title: result, foregroundColor: .controlTextColor))
     }
 
     private static func namingProvider(
@@ -432,7 +447,10 @@ final class MenuBarLayoutRenderer {
         Self.removeDuplicateBalanceResets(from: &renderedLines, data: data)
 
         let isStacked = options.forceStackedStyle || renderedLines.count == 2
-        let font = NSFont.systemFont(ofSize: Self.fontSize(size: options.size, isStacked: isStacked))
+        let fontSize = Self.fontSize(size: options.size, isStacked: isStacked)
+        let font = options.monospacedDigits
+            ? NSFont.monospacedDigitSystemFont(ofSize: fontSize, weight: .regular)
+            : NSFont.systemFont(ofSize: fontSize)
         let providerTintColor = Self.effectiveProviderTintColor(for: data.provider, options: options)
         let foregroundColor = if let providerTintColor {
             providerTintColor
@@ -446,8 +464,9 @@ final class MenuBarLayoutRenderer {
         let isTintActive = providerTintColor != nil
         let paragraphStyle = NSMutableParagraphStyle()
         if isStacked {
-            paragraphStyle.minimumLineHeight = 9.5
-            paragraphStyle.maximumLineHeight = 9.5
+            let lineHeight: CGFloat = options.size == .large ? 11 : 9.5
+            paragraphStyle.minimumLineHeight = lineHeight
+            paragraphStyle.maximumLineHeight = lineHeight
             paragraphStyle.lineSpacing = -1
         }
         var attributes: [NSAttributedString.Key: Any] = [
@@ -476,6 +495,13 @@ final class MenuBarLayoutRenderer {
             icon.map { Self.offsetLeadingIcon($0, adjustment: options.verticalAdjustment) }
         } else {
             nil
+        }
+
+        if isStacked, options.size == .large, leadingIcon == nil, icon != nil,
+           renderedLines.joined().contains(.icon)
+        {
+            // Inline attachments need less baseline lowering to fit both rows in the 22pt status bar.
+            attributes[.baselineOffset] = Self.stackedBaselineOffset + 2 + CGFloat(options.verticalAdjustment)
         }
 
         for (lineIndex, renderedLine) in renderedLines.enumerated() {
@@ -529,8 +555,8 @@ final class MenuBarLayoutRenderer {
             attributedTitle: result,
             accessibilityLabel: accessibilityLabel,
             leadingIcon: leadingIcon,
-            statusImage: !options.highContrast && !options.isStale && !isStacked && !isTintActive
-                && !renderedLines.joined().contains(.icon)
+            statusImage: !options.highContrast && !options.isStale && !isTintActive && leadingIcon == nil
+                && result.string.filter(\.isNewline).count == max(0, renderedLines.count - 1)
                 ? Self.statusImage(title: result, foregroundColor: foregroundColor)
                 : nil)
     }
@@ -580,16 +606,16 @@ final class MenuBarLayoutRenderer {
     }
 
     private static func statusImage(title: NSAttributedString, foregroundColor: NSColor) -> NSImage? {
-        guard title.length > 0, !title.string.contains(where: \.isNewline) else { return nil }
-        // Templates discard color. Preserve both explicitly colored text and fallback emoji glyphs.
+        guard title.length > 0 else { return nil }
+        // Preserve colored glyphs and attachments; monochrome attachment masks may join the template.
         let line = CTLineCreateWithAttributedString(title)
         guard let runs = CTLineGetGlyphRuns(line) as? [CTRun] else { return nil }
         for run in runs {
-            let attributes = CTRunGetAttributes(run) as NSDictionary
-            let range = CTRunGetStringRange(run)
-            let color = title.attribute(.foregroundColor, at: range.location, effectiveRange: nil) as? NSColor
-            guard color == foregroundColor,
-                  let font = attributes[kCTFontAttributeName] as? NSFont,
+            let runAttributes = CTRunGetAttributes(run) as NSDictionary
+            let attributes = title.attributes(at: CTRunGetStringRange(run).location, effectiveRange: nil)
+            guard attributes[.foregroundColor] as? NSColor == foregroundColor,
+                  (attributes[.attachment] as? NSTextAttachment)?.image?.isTemplate != false,
+                  let font = runAttributes[kCTFontAttributeName] as? NSFont,
                   !CTFontGetSymbolicTraits(font as CTFont).contains(.traitColorGlyphs)
             else { return nil }
         }
@@ -770,8 +796,9 @@ final class MenuBarLayoutRenderer {
                 self.missingValue,
                 accessibilityText: L("menu_bar_layout_conditional_unavailable"),
                 attributes: style.attributes)
-        case .providerName, .accountLabel, .lanePercent, .extraPercent, .tokensPerMinute, .tokensSparkline:
-            preconditionFailure("Provider text and throughput tokens should render before the main switch")
+        case .providerName, .accountLabel, .lanePercent, .extraPercent, .tokensPerMinute, .tokensSparkline,
+             .spendAmount, .spendBudget:
+            preconditionFailure("Provider text, throughput, and spend tokens should render before the main switch")
         case .usageBar, .progressBar, .windowBar, .stackedBars:
             preconditionFailure("Usage meter tokens should render before the main switch")
         }
@@ -818,6 +845,8 @@ final class MenuBarLayoutRenderer {
             prefix = data.scopedWeeklyTitle.map { String($0.prefix(1)).uppercased() } ?? "F"
         case .automatic:
             prefix = ""
+        case .spend:
+            prefix = data.spendCurrencySymbol
         }
         return prefix
     }
@@ -832,6 +861,7 @@ final class MenuBarLayoutRenderer {
         case .weekly: self.secondaryLabel(data: data) ?? L("Weekly")
         case .scopedWeekly: data.scopedWeeklyTitle ?? L("Scoped weekly")
         case .automatic: L("Usage")
+        case .spend: L("Spend")
         }
     }
 
@@ -865,6 +895,8 @@ final class MenuBarLayoutRenderer {
                 attributes: attributes)
         case let .extraPercent(id):
             self.extraPercentToken(id, data: data, showUsed: showUsed, attributes: attributes)
+        case .spendAmount, .spendBudget:
+            self.spendMoneyToken(item, data: data, attributes: attributes)
         default:
             nil
         }
@@ -1079,6 +1111,7 @@ final class MenuBarLayoutRenderer {
         case .weekly: data.weekly
         case .scopedWeekly: data.scopedWeekly
         case .automatic: data.automatic
+        case .spend: data.spend
         }
     }
 
@@ -1104,6 +1137,7 @@ final class MenuBarLayoutRenderer {
         case .weekly: data.weeklyPace
         case .scopedWeekly: nil
         case .automatic: data.automaticPace
+        case .spend: data.spendPace
         }
     }
 
@@ -1115,6 +1149,7 @@ final class MenuBarLayoutRenderer {
         case .session: data.metrics.sessionPaceDelta
         case .weekly: data.metrics.weeklyPaceDelta
         case .automatic: data.metrics.automaticPaceDelta
+        case .spend: data.metrics.spendPaceDelta
         case .scopedWeekly: nil
         }
     }
@@ -1136,12 +1171,22 @@ final class MenuBarLayoutRenderer {
         guard minutes.isMultiple(of: 60) else { return "\(minutes)m" }
         return "\(minutes / 60)h"
     }
+}
 
+extension MenuBarLayoutRenderer {
     private static func fontSize(size: MenuBarLayoutSize, isStacked: Bool) -> CGFloat {
         if isStacked {
-            return size == .small ? 8 : 9
+            return switch size {
+            case .small: 8
+            case .regular: 9
+            case .large: 10
+            }
         }
-        return size == .small ? 11 : NSFont.systemFontSize
+        return switch size {
+        case .small: 11
+        case .regular: NSFont.systemFontSize
+        case .large: 14
+        }
     }
 
     private static func iconHeight(size: MenuBarLayoutSize, isStacked: Bool) -> CGFloat {
@@ -1292,6 +1337,19 @@ extension MenuBarLayoutRenderer {
         default:
             nil
         }
+    }
+
+    private static func spendMoneyToken(
+        _ item: MenuBarLayoutToken,
+        data: MenuBarLayoutRenderData,
+        attributes: [NSAttributedString.Key: Any])
+        -> (value: NSAttributedString, accessibilityText: String?)
+    {
+        self.optionalTextToken(
+            item == .spendBudget ? data.spendBudget : data.spendAmount,
+            unavailableLabel: L("%@ unavailable", item.editorLabel(provider: data.provider)),
+            accessibilityPrefix: L("Spend"),
+            attributes: attributes)
     }
 
     private static func sparklineToken(
@@ -1501,6 +1559,7 @@ extension MenuBarLayoutConditional {
         return predicate.comparison.evaluate(value, predicate.threshold)
     }
 
+    // swiftlint:disable cyclomatic_complexity
     /// nil == the datum is unavailable, so the predicate evaluates false instead of comparing a
     /// fabricated zero. Percent and reset readings come from the render windows; pace, run-out, balance
     /// and cost come from `data.metrics`, whose display strings cannot be compared numerically.
@@ -1515,6 +1574,7 @@ extension MenuBarLayoutConditional {
         case .weekly: self.percent(data.weekly, predicate.direction)
         case .scopedWeekly: self.percent(data.scopedWeekly, predicate.direction)
         case .automatic: self.percent(data.automatic, predicate.direction)
+        case .spend: self.percent(data.spend, predicate.direction)
         case .primaryLane: self.percent(data.primary, predicate.direction)
         case .secondaryLane: self.percent(data.secondary, predicate.direction)
         case .tertiaryLane: self.percent(data.tertiary, predicate.direction)
@@ -1522,17 +1582,24 @@ extension MenuBarLayoutConditional {
         case .weeklyResetsIn: self.hoursUntilReset(data.weekly, now: now)
         case .scopedWeeklyResetsIn: self.hoursUntilReset(data.scopedWeekly, now: now)
         case .automaticResetsIn: self.hoursUntilReset(data.automatic, now: now)
+        case .spendResetsIn: self.hoursUntilReset(data.spend, now: now)
         case .sessionPace: data.metrics.sessionPaceDelta
         case .weeklyPace: data.metrics.weeklyPaceDelta
         case .automaticPace: data.metrics.automaticPaceDelta
+        case .spendPace: data.metrics.spendPaceDelta
         case .runsOutIn: data.metrics.runsOutMinutes.map { Double($0) / 60 }
         case .balance: predicate.direction == .used
             ? data.metrics.balanceUsedUSD
             : data.metrics.balanceRemainingUSD
         case .costToday: data.metrics.costTodayUSD
         case .costWindow: data.metrics.cost30dUSD
+        case .spendAmount: predicate.direction == .used
+            ? data.metrics.spendUsedUSD
+            : data.metrics.spendRemainingUSD
         }
     }
+
+    // swiftlint:enable cyclomatic_complexity
 
     private static func percent(
         _ window: MenuBarLayoutRenderWindow?,
