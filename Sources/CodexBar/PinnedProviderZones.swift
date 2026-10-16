@@ -3,8 +3,9 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 /// Pinned providers (top, up to `limit`) and the remaining tabs (below), arranged by dragging between and
-/// within the two zones. Pinned providers are the Overview tab's rows and the stacked-bars rows, top to
-/// bottom; tab order is the pinned providers first, then the rest.
+/// within the two zones. Pinned providers are the Overview tab's rows, top to bottom, and the first
+/// `StackedBarsIconRenderer.maxRows` of them are the stacked-bars rows; tab order is the pinned providers
+/// first, then the rest.
 struct ProviderZones: Equatable {
     enum Zone: Equatable {
         case pinned
@@ -18,13 +19,11 @@ struct ProviderZones: Equatable {
         self.pinned + self.others
     }
 
-    /// Pinned keeps its saved order; the rest follow the enabled order. Without a saved pin, the first
-    /// enabled providers are pinned so the Overview and bars start populated.
-    static func resolve(pinned saved: [UsageProvider], enabled: [UsageProvider], limit: Int) -> Self {
-        var pinned = Array(saved.filter { enabled.contains($0) }.prefix(limit))
-        if pinned.isEmpty {
-            pinned = Array(enabled.prefix(limit))
-        }
+    /// Pinned mirrors the Overview selection in enabled order, so reading the zones never rewrites a saved
+    /// selection; the rest follow the enabled order.
+    static func resolve(overview: [ProviderInstanceID], enabled: [UsageProvider], limit: Int) -> Self {
+        let selected = Set(overview)
+        let pinned = Array(enabled.filter { selected.contains($0.instanceID) }.prefix(limit))
         return Self(pinned: pinned, others: enabled.filter { !pinned.contains($0) })
     }
 
@@ -58,30 +57,47 @@ struct ProviderZones: Equatable {
 }
 
 extension SettingsStore {
-    /// The saved pin list, shared with the stacked-bars rows.
-    func providerZones(enabled: [UsageProvider], limit: Int) -> ProviderZones {
-        ProviderZones.resolve(pinned: self.stackedBarsProviders, enabled: enabled, limit: limit)
+    /// Pins come from the Overview selection, which keeps its own unset/empty distinction and limit.
+    func providerZones(
+        enabled: [UsageProvider],
+        allEnabled: [ProviderInstanceID],
+        limit: Int) -> ProviderZones
+    {
+        let overview = self.resolvedMergedOverviewProviders(activeProviders: allEnabled, maxVisibleProviders: limit)
+        return ProviderZones.resolve(overview: overview, enabled: enabled, limit: limit)
     }
 
-    /// Saves pinned providers as both the stacked-bars rows and the Overview selection, and reorders the
-    /// enabled providers as pinned-then-others while disabled providers keep their slots.
-    func applyProviderZones(_ zones: ProviderZones, enabled: [UsageProvider]) {
+    /// Saves a drag: pinned providers become the Overview selection (plugin selections are kept) and the
+    /// stacked-bars rows, and enabled providers are reordered pinned-then-others while disabled providers
+    /// keep their slots.
+    func applyProviderZones(_ zones: ProviderZones, allEnabled: [ProviderInstanceID], limit: Int) {
         self.stackedBarsProviders = zones.pinned
         let order = self.orderedProviders()
         var queue = zones.tabOrder.map(\.instanceID)
-        let enabledIDs = Set(enabled.map(\.instanceID))
+        let movable = Set(queue)
         let reordered = order.map { id -> ProviderInstanceID in
-            guard enabledIDs.contains(id), !queue.isEmpty else { return id }
+            guard movable.contains(id), !queue.isEmpty else { return id }
             return queue.removeFirst()
         }
         if reordered != order {
             self.setProviderOrder(reordered)
         }
-        for provider in enabled where !zones.pinned.contains(provider) {
-            _ = self.setMergedOverviewProviderSelection(provider: provider, isSelected: false, activeProviders: enabled)
+        let enabledIDs = Set(allEnabled)
+        let active = reordered.filter { enabledIDs.contains($0) }
+        let pinnedIDs = Set(zones.pinned.map(\.instanceID))
+        for id in zones.tabOrder.map(\.instanceID) where !pinnedIDs.contains(id) {
+            _ = self.setMergedOverviewProviderSelection(
+                provider: id,
+                isSelected: false,
+                activeProviders: active,
+                maxVisibleProviders: limit)
         }
         for provider in zones.pinned {
-            _ = self.setMergedOverviewProviderSelection(provider: provider, isSelected: true, activeProviders: enabled)
+            _ = self.setMergedOverviewProviderSelection(
+                provider: provider.instanceID,
+                isSelected: true,
+                activeProviders: active,
+                maxVisibleProviders: limit)
         }
     }
 }
@@ -90,11 +106,12 @@ extension SettingsStore {
 struct PinnedProviderZonesView: View {
     @Bindable var settings: SettingsStore
     let enabled: [UsageProvider]
+    let allEnabled: [ProviderInstanceID]
     let limit: Int
     @State private var draggedProvider: UsageProvider?
 
     private var zones: ProviderZones {
-        self.settings.providerZones(enabled: self.enabled, limit: self.limit)
+        self.settings.providerZones(enabled: self.enabled, allEnabled: self.allEnabled, limit: self.limit)
     }
 
     var body: some View {
@@ -102,7 +119,6 @@ struct PinnedProviderZonesView: View {
         SettingsRowLabel(
             L("provider_zones_pinned_title"),
             subtitle: L("provider_zones_pinned_subtitle", String(self.limit)))
-            .onAppear { self.syncIfNeeded() }
         self.rows(zones.pinned, zone: .pinned, zones: zones)
         if zones.pinned.isEmpty {
             self.placeholder(zone: .pinned, zones: zones)
@@ -113,17 +129,6 @@ struct PinnedProviderZonesView: View {
         if zones.others.isEmpty {
             self.placeholder(zone: .others, zones: zones)
         }
-    }
-
-    /// Earlier builds kept the Overview selection, bar rows, and tab order apart; align them once so the
-    /// list matches the menu.
-    private func syncIfNeeded() {
-        let zones = self.zones
-        let overview = self.settings.resolvedMergedOverviewProviders(
-            activeProviders: self.enabled,
-            maxVisibleProviders: self.limit)
-        guard Set(overview) != Set(zones.pinned) || self.enabled != zones.tabOrder else { return }
-        self.settings.applyProviderZones(zones, enabled: self.enabled)
     }
 
     private func rows(_ providers: [UsageProvider], zone: ProviderZones.Zone, zones: ProviderZones) -> some View {
@@ -138,7 +143,9 @@ struct PinnedProviderZonesView: View {
                 }
                 Text(ProviderDescriptorRegistry.descriptor(for: provider).metadata.displayName)
                 Spacer(minLength: 0)
-                if zone == .pinned, let index = zones.pinned.firstIndex(of: provider) {
+                if zone == .pinned, let index = zones.pinned.firstIndex(of: provider),
+                   index < StackedBarsIconRenderer.maxRows
+                {
                     Text(String(format: L("stacked_bars_row_number"), index + 1))
                         .font(.caption)
                         .foregroundStyle(.secondary)
@@ -177,7 +184,7 @@ struct PinnedProviderZonesView: View {
             perform: { dragged in
                 guard let moved = zones.moving(dragged, to: zone, onto: target, limit: self.limit) else { return }
                 withAnimation(.easeInOut(duration: 0.15)) {
-                    self.settings.applyProviderZones(moved, enabled: self.enabled)
+                    self.settings.applyProviderZones(moved, allEnabled: self.allEnabled, limit: self.limit)
                 }
             })
     }

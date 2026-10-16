@@ -67,7 +67,8 @@ extension SettingsStore {
         externalIdentifier: String? = nil,
         usageScope: String? = nil,
         organizationID: String? = nil,
-        workspaceID: String? = nil)
+        workspaceID: String? = nil,
+        claudeConfigDirectory: String? = nil)
     {
         guard TokenAccountSupportCatalog.support(for: provider) != nil else { return }
         let trimmedToken = token.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -85,7 +86,8 @@ extension SettingsStore {
             externalIdentifier: Self.normalizedConfigField(externalIdentifier),
             usageScope: Self.normalizedConfigField(usageScope),
             organizationID: Self.normalizedConfigField(organizationID),
-            workspaceID: Self.normalizedConfigField(workspaceID))
+            workspaceID: Self.normalizedConfigField(workspaceID),
+            claudeConfigDirectory: Self.normalizedConfigField(claudeConfigDirectory))
         let updated = ProviderTokenAccountData(
             version: existing?.version ?? 1,
             accounts: accounts + [account],
@@ -114,6 +116,7 @@ extension SettingsStore {
         usageScope: String?? = nil,
         organizationID: String?? = nil,
         workspaceID: String?? = nil,
+        claudeConfigDirectory: String?? = nil,
         seatCreditEntitlement: String?? = nil)
     {
         guard let data = self.tokenAccountsData(for: provider), !data.accounts.isEmpty else { return }
@@ -136,6 +139,8 @@ extension SettingsStore {
             usageScope: usageScope.map(Self.normalizedConfigField) ?? existing.usageScope,
             organizationID: organizationID.map(Self.normalizedConfigField) ?? existing.organizationID,
             workspaceID: workspaceID.map(Self.normalizedConfigField) ?? existing.workspaceID,
+            claudeConfigDirectory: claudeConfigDirectory.map(Self.normalizedConfigField)
+                ?? existing.claudeConfigDirectory,
             seatCreditEntitlement: seatCreditEntitlement.map(Self.normalizedConfigField)
                 ?? existing.seatCreditEntitlement,
             modelRateLimits: existing.modelRateLimits)
@@ -200,26 +205,18 @@ extension SettingsStore {
     }
 
     func reloadTokenAccounts() {
-        let log = CodexBarLog.logger(LogCategories.tokenAccounts)
-        let accounts: [UsageProvider: ProviderTokenAccountData]
-        do {
-            guard let loaded = try self.configStore.load() else { return }
-            accounts = Dictionary(uniqueKeysWithValues: loaded.providers.compactMap { entry in
-                guard let provider = entry.id.firstPartyProvider,
-                      let data = entry.tokenAccounts
-                else { return nil }
-                return (provider, data)
-            })
-        } catch {
-            log.error("Failed to reload token accounts: \(error)")
-            return
-        }
-        self.updateProviderTokenAccounts(accounts)
+        self.reloadConfig(reason: "token-accounts", origin: .localFile)
     }
 
     func openTokenAccountsFile() {
         do {
-            try Self.writeConfig(self.config, to: self.configStore, watcher: self.configFileWatcher)
+            if !self.configNeedsReload {
+                try Self.writeConfig(
+                    self.config,
+                    to: self.configStore,
+                    watcher: self.configFileWatcher,
+                    permit: self.configPersistenceCoordinator.makeWritePermit())
+            }
         } catch {
             CodexBarLog.logger(LogCategories.tokenAccounts).error("Failed to persist config: \(error)")
             return

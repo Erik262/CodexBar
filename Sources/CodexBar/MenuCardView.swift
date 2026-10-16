@@ -49,6 +49,7 @@ struct UsageMenuCardView: View {
             let workdayTickAppearance: WorkdayTickAppearance
             let cardStyle: Bool
             var sessionEquivalentDetail: UsagePaceText.SessionEquivalentDetail?
+            let isSyntheticCreditLane: Bool
             var helpText: String?
 
             init(
@@ -68,7 +69,8 @@ struct UsageMenuCardView: View {
                 workdayMarkerPercents: [Double] = [],
                 workdayTickAppearance: WorkdayTickAppearance = .subtle,
                 cardStyle: Bool = false,
-                sessionEquivalentDetail: UsagePaceText.SessionEquivalentDetail? = nil)
+                sessionEquivalentDetail: UsagePaceText.SessionEquivalentDetail? = nil,
+                isSyntheticCreditLane: Bool = false)
             {
                 self.id = id
                 self.title = title
@@ -87,6 +89,7 @@ struct UsageMenuCardView: View {
                 self.workdayTickAppearance = workdayTickAppearance
                 self.cardStyle = cardStyle
                 self.sessionEquivalentDetail = sessionEquivalentDetail
+                self.isSyntheticCreditLane = isSyntheticCreditLane
             }
 
             var percentLabel: String {
@@ -1024,11 +1027,11 @@ extension UsageMenuCardView.Model {
     }
 
     private static func email(from input: Input) -> String {
-        // Provider-specific by design: claude-swap accountOverride is the display label
+        // Provider-specific by design: a claude-swap or tcr accountOverride is the display label
         // (alias or email · org). Other stacked sources keep fetched identity first.
         if input.accountIsAuthoritative,
            input.provider == .claude,
-           input.sourceLabel == ClaudeSwapAccountProjection.sourceLabel,
+           input.sourceLabel.flatMap(ClaudeSwapAccountSource.init(identitySource:)) != nil,
            let email = input.account.email, !email.isEmpty
         {
             return email

@@ -8,7 +8,7 @@ read_when:
 
 # Providers
 
-CodexBar currently registers 103 provider IDs. Some companies expose multiple surfaces, such as Codex vs OpenAI API or
+CodexBar currently registers 105 provider IDs. Some companies expose multiple surfaces, such as Codex vs OpenAI API or
 OpenCode vs OpenCode Go, because the auth source and quota shape differ.
 
 ## Fetch strategies (current)
@@ -77,7 +77,7 @@ complete when the available scan window covers fewer days.
 | OpenAI | Admin API key (`api`) for organization spend/usage; legacy API-key balance fallback. |
 | Azure OpenAI | API key + endpoint + deployment probe (`api`) for deployment status validation. |
 | Claude | Admin API key (`api`) when configured; otherwise App Auto: OAuth API (`oauth`) → CLI PTY (`claude`) → Web API (`web`). CLI Auto: Web API (`web`) → CLI PTY (`claude`). |
-| Gemini | OAuth-backed API via Gemini CLI credentials (`api`). |
+| Gemini | Gemini CLI OAuth quotas (`auto`/`api`, default), or opt-in Gemini app 5-hour/weekly limits via cookies (`web`). |
 | Antigravity | Local LSP/HTTP probe (`local`). |
 | Cursor | Web API via cookies → legacy stored session → Cursor.app local auth (`web`). |
 | OpenCode | Web dashboard via cookies (`web`). |
@@ -168,6 +168,7 @@ complete when the available scan window covers fewer days.
 |---|---|
 | [Langdock](langdock.md) | Selected Edge, Chrome, or Safari profile → personal included session and weekly limits (`web`, macOS). |
 | [X API](xapi.md) | Browser or manual console.x.com cookies for prepaid and free credits, including negative balances. |
+| [Future AGI](futureagi.md) | API key and secret key (billing-period usage, allowances, and estimated cost). |
 | [LithosAI](lithosai.md) | Browser or manual console cookies for prepaid USD balance and optional UTC spend. |
 | [WorkBuddy](workbuddy.md) | Chrome or manual www.workbuddy.cn cookies for the monthly credits allowance, plan name, and cycle reset. |
 | [Tavily](tavily.md) | API key for account-plan, per-key, and pay-as-you-go credit totals. |
@@ -181,6 +182,7 @@ complete when the available scan window covers fewer days.
 | [fal](fal.md) | API key with billing read access for the current account credit balance. |
 | [FLORA](flora.md) | API key with billing permission plus a workspace ID for the available USD balance and month-to-date spend. |
 | [Parallel](parallel.md) | Browser session on platform.parallel.ai for the prepaid credit balance and pending debit. |
+| [Claude Platform](claudeplatform.md) | Browser or manual platform.claude.com session cookies for Console API credit balance, expiring credit grants, and month-to-date spend. |
 
 <!-- End generated provider additions -->
 
@@ -219,6 +221,18 @@ complete when the available scan window covers fewer days.
   local-agent JSONL files for the configured history window.
 - Status: Statuspage.io (Anthropic).
 - Details: `docs/claude.md`.
+
+## Claude Platform
+- Browser `sessionKey` cookie for `platform.claude.com` (default browser order, since there is no per-provider
+  browser-list setting), or a manual Cookie header.
+- Reads the undocumented Claude Console billing endpoints with your platform.claude.com browser session:
+  `/api/organizations`, then `prepaid/credits` (required) for each organization with the `api` capability until one
+  is readable (HTTP 403 tries the next), then `current_spend` (optional) for that organization.
+- Cookies are required because the Anthropic Admin API is unavailable for individual Console accounts.
+- Shows the total prepaid API credit balance, expiring subscription and purchased credit grants, and month-to-date
+  spend as a Billing detail row.
+- Status: Statuspage.io (Anthropic).
+- Details: `docs/claudeplatform.md`.
 
 ## z.ai
 - API token from `~/.codexbar/config.json` (`providers[].apiKey`) or `Z_AI_API_KEY` env var.
@@ -264,7 +278,8 @@ complete when the available scan window covers fewer days.
 - Details: `docs/kilo.md`.
 
 ## Gemini
-- OAuth-backed quota API (`retrieveUserQuota`) using Gemini CLI credentials.
+- Default Gemini CLI source: OAuth-backed quota API (`retrieveUserQuota`) using Gemini CLI credentials.
+- Explicit Gemini app source: bundled cookie plugin for `gemini.google.com/usage` 5-hour and weekly limits.
 - Token refresh via Google OAuth if expired.
 - Tier detection via `loadCodeAssist`.
 - Status: Google Workspace incidents (Gemini product).

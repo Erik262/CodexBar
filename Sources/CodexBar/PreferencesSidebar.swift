@@ -8,6 +8,7 @@ struct SettingsSidebarView: View {
     @Bindable var settings: SettingsStore
     @Bindable var store: UsageStore
     @Binding var selection: SettingsPane
+    var onSelectAbout: () -> Void = {}
     @State private var searchText = ""
     @Environment(\.undoManager) private var undoManager
 
@@ -74,7 +75,7 @@ struct SettingsSidebarView: View {
             ForEach(Self.paneRows, id: \.pane) { row in
                 SettingsSidebarPaneRow(pane: row.pane, systemImage: row.systemImage, color: row.color)
             }
-            SettingsSidebarAboutRow()
+            SettingsSidebarAboutRow(onSelect: self.onSelectAbout)
             if self.settings.debugMenuEnabled {
                 SettingsSidebarPaneRow(pane: .debug, systemImage: "ladybug.fill", color: .red)
             }
@@ -240,6 +241,8 @@ private struct SettingsSidebarPaneRow: View {
 
 @MainActor
 private struct SettingsSidebarAboutRow: View {
+    let onSelect: () -> Void
+
     var body: some View {
         HStack(spacing: 8) {
             if let icon = NSApplication.shared.applicationIconImage {
@@ -253,6 +256,10 @@ private struct SettingsSidebarAboutRow: View {
             }
             Text(SettingsPane.about.title)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .contentShape(Rectangle())
+        // List selection ignores clicks on the already-selected row; this also returns a pushed subpage to About.
+        .simultaneousGesture(TapGesture().onEnded { self.onSelect() })
         .tag(SettingsPane.about)
     }
 }

@@ -232,7 +232,9 @@ extension SettingsStore {
             eligibleProviders: activeProviders,
             preferredTop: self.mergeIconStackedTopProvider,
             preferredBottom: self.mergeIconStackedBottomProvider,
-            preferredBars: self.stackedBarsProviders)
+            preferredBars: self.stackedBarsProviders.isEmpty
+                ? self.mergedOverviewSelectedProviders.compactMap(\.firstPartyProvider)
+                : self.stackedBarsProviders)
     }
 
     var usageBarsFillOption: UsageBarsFillOption {

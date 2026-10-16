@@ -41,6 +41,16 @@
 "7d" = "7 g";
 "A managed Codex login is already running. Wait for it to finish before adding " = "È già in corso un accesso gestito a Codex. Attendi che termini prima di aggiungere ";
 "API key" = "Chiave API";
+
+/* Future AGI provider */
+"Secret key" = "Chiave segreta";
+"Required with the API key. Saved in the local config file. Or set FI_SECRET_KEY." = "Richiesta insieme alla chiave API. Salvata nel file di configurazione locale. In alternativa, imposta FI_SECRET_KEY.";
+"Paste secret key…" = "Incolla la chiave segreta…";
+"AI credits" = "Crediti IA";
+"Gateway requests" = "Richieste al gateway";
+"Future AGI cost history is not available." = "La cronologia dei costi di Future AGI non è disponibile.";
+"Saved in CodexBar's local config file. Or set FI_API_KEY." = "Salvata nel file di configurazione locale di CodexBar. In alternativa, imposta FI_API_KEY.";
+
 "API region" = "Regione API";
 "API token" = "Token API";
 "API tokens" = "Token API";
@@ -724,6 +734,12 @@
 "link_website" = "Sito web";
 "link_twitter" = "X";
 "link_email" = "E-mail";
+"link_acknowledgements" = "Riconoscimenti";
+"acknowledgements_footer" = "CodexBar è realizzato con questi progetti open source.";
+"acknowledgements_others" = "altri %d";
+"acknowledgements_author" = "Autore";
+"acknowledgements_authors" = "Autori";
+"acknowledgements_license" = "Licenza";
 "check_updates_auto" = "Controlla automaticamente gli aggiornamenti";
 "update_channel" = "Canale aggiornamenti";
 "check_for_updates" = "Controlla aggiornamenti…";
@@ -1168,17 +1184,12 @@
 "CodexBar found another managed account that already uses the current system account. Resolve the duplicate account before switching." = "CodexBar ha trovato un altro account gestito che usa già l'account di sistema corrente. Risolvi il duplicato prima di cambiare.";
 "CodexBar will ask macOS Keychain for “%@” so it can decrypt browser cookies and authenticate your account. Click OK to continue." = "CodexBar chiederà al Portachiavi di macOS “%@” per poter decifrare i cookie del browser e autenticare il tuo account. Fai clic su OK per continuare.";
 "CodexBar will ask macOS Keychain for the Claude Code OAuth token so it can fetch your Claude usage. Click OK to continue." = "CodexBar chiederà al Portachiavi di macOS il token OAuth di Claude Code per recuperare il tuo utilizzo Claude. Fai clic su OK per continuare.";
-"CodexBar will ask macOS Keychain for your Amp cookie header so it can fetch usage. Click OK to continue." = "CodexBar chiederà al Portachiavi di macOS il tuo header Cookie di Amp per recuperare l'utilizzo. Fai clic su OK per continuare.";
-"CodexBar will ask macOS Keychain for your Augment cookie header so it can fetch usage. Click OK to continue." = "CodexBar chiederà al Portachiavi di macOS il tuo header Cookie di Augment per recuperare l'utilizzo. Fai clic su OK per continuare.";
+"CodexBar will ask macOS Keychain for your %@ cookie header so it can fetch usage. Click OK to continue." = "CodexBar chiederà al Portachiavi di macOS il tuo header Cookie di %@ per recuperare l'utilizzo. Fai clic su OK per continuare.";
 "CodexBar will ask macOS Keychain for your Claude cookie header so it can fetch Claude web usage. Click OK to continue." = "CodexBar chiederà al Portachiavi di macOS il tuo header Cookie di Claude per recuperare l'utilizzo web di Claude. Fai clic su OK per continuare.";
-"CodexBar will ask macOS Keychain for your Cursor cookie header so it can fetch usage. Click OK to continue." = "CodexBar chiederà al Portachiavi di macOS il tuo header Cookie di Cursor per recuperare l'utilizzo. Fai clic su OK per continuare.";
-"CodexBar will ask macOS Keychain for your Factory cookie header so it can fetch usage. Click OK to continue." = "CodexBar chiederà al Portachiavi di macOS il tuo header Cookie di Factory per recuperare l'utilizzo. Fai clic su OK per continuare.";
 "CodexBar will ask macOS Keychain for your GitHub Copilot token so it can fetch usage. Click OK to continue." = "CodexBar chiederà al Portachiavi di macOS il tuo token GitHub Copilot per recuperare l'utilizzo. Fai clic su OK per continuare.";
 "CodexBar will ask macOS Keychain for your Kimi auth token so it can fetch usage. Click OK to continue." = "CodexBar chiederà al Portachiavi di macOS il tuo token di autenticazione Kimi per recuperare l'utilizzo. Fai clic su OK per continuare.";
 "CodexBar will ask macOS Keychain for your MiniMax API token so it can fetch usage. Click OK to continue." = "CodexBar chiederà al Portachiavi di macOS il tuo token API MiniMax per recuperare l'utilizzo. Fai clic su OK per continuare.";
-"CodexBar will ask macOS Keychain for your MiniMax cookie header so it can fetch usage. Click OK to continue." = "CodexBar chiederà al Portachiavi di macOS il tuo header Cookie di MiniMax per recuperare l'utilizzo. Fai clic su OK per continuare.";
 "CodexBar will ask macOS Keychain for your OpenAI cookie header so it can fetch Codex dashboard extras. Click OK to continue." = "CodexBar chiederà al Portachiavi di macOS il tuo header Cookie OpenAI per recuperare gli extra della dashboard Codex. Fai clic su OK per continuare.";
-"CodexBar will ask macOS Keychain for your OpenCode cookie header so it can fetch usage. Click OK to continue." = "CodexBar chiederà al Portachiavi di macOS il tuo header Cookie OpenCode per recuperare l'utilizzo. Fai clic su OK per continuare.";
 "CodexBar will ask macOS Keychain for your Synthetic API key so it can fetch usage. Click OK to continue." = "CodexBar chiederà al Portachiavi di macOS la tua chiave API Synthetic per recuperare l'utilizzo. Fai clic su OK per continuare.";
 "CodexBar will ask macOS Keychain for your z.ai API token so it can fetch usage. Click OK to continue." = "CodexBar chiederà al Portachiavi di macOS il tuo token API z.ai per recuperare l'utilizzo. Fai clic su OK per continuare.";
 "Could not open Cursor login in your browser." = "Impossibile aprire l'accesso Cursor nel browser.";
@@ -1431,6 +1442,8 @@
 "menu_bar_layout_size" = "Dimensione";
 "menu_bar_layout_size_small" = "Piccola";
 "menu_bar_layout_size_regular" = "Normale";
+"menu_bar_layout_size_large" = "Grande";
+"menu_bar_layout_monospaced_digits" = "Cifre a spaziatura fissa";
 "menu_bar_layout_gap" = "Spaziatura";
 "menu_bar_layout_gap_tight" = "Stretta";
 "menu_bar_layout_gap_regular" = "Normale";
@@ -1453,6 +1466,9 @@
 "menu_bar_layout_token_runs_out" = "Termina";
 "menu_bar_layout_token_cost_today" = "Costo oggi";
 "menu_bar_layout_token_cost_window" = "Costo (Finestra storica)";
+"menu_bar_layout_token_spend" = "Spesa %";
+"menu_bar_layout_token_spend_pace" = "Ritmo spesa";
+"menu_bar_layout_token_spend_budget" = "Spesa / bilancio";
 "menu_bar_layout_token_space" = "Spazio";
 "menu_bar_layout_token_line_break" = "Interruzione di riga";
 "menu_bar_layout_token_separator_accessibility" = "Punto separatore";
@@ -1615,6 +1631,7 @@
 "menu_bar_layout_conditional_default_session_spent" = "Sessione quasi esaurita";
 "menu_bar_layout_conditional_default_either_high" = "Sessione o settimana a livello alto";
 "menu_bar_layout_conditional_default_scoped_weekly" = "Settimana per modello oltre il 60%";
+"menu_bar_layout_conditional_default_spend_high" = "Spesa oltre il 90% usata";
 "Visible usage items" = "Elementi di utilizzo visibili";
 "Restore Defaults" = "Ripristina impostazioni predefinite";
 "Choose which usage rows appear in this provider's menu, Settings preview, and Overview." = "Scegli quali righe di utilizzo mostrare nel menu di questo provider, nell’anteprima delle Impostazioni e nella Panoramica.";
@@ -1798,6 +1815,9 @@
 "Gateway URL" = "Gateway URL";
 "Gemini CLI login is no longer supported" = "L'accesso Gemini CLI non è più supportato";
 "Gemini CLI migration" = "Migrazione Gemini CLI";
+"Gemini app" = "Gemini app";
+"Gemini CLI" = "Gemini CLI";
+"Gemini app limits use your browser account and are separate from Gemini CLI quotas." = "I limiti dell’app Gemini si riferiscono al tuo account nel browser e sono separati dalle quote di Gemini CLI.";
 "Generated locally by CodexBar · Data through %@" = "Generato localmente da CodexBar · Dati al %@";
 "GitHub cookies" = "GitHub cookies";
 "GitHub does not publish this value. Enter it to show a usage bar. Applies to the selected GitHub account." = "GitHub non pubblica questo valore. Inseriscilo per mostrare una barra di utilizzo. Si applica all'account GitHub selezionato.";
@@ -1901,6 +1921,7 @@
 "Paste the Cookie header from a billing-page request. It must contain sessionid." = "Incolla l'intestazione Cookie da una richiesta della pagina di fatturazione. Deve contenere sessionid.";
 "Paste z.ai / GLM API key…" = "Incolla la chiave z.ai / GLM API…";
 "Path to the cswap executable (github.com/realiti4/claude-swap)." = "Percorso dell'eseguibile cswap (github.com/realiti4/claude-swap).";
+"Path to the tcr executable (github.com/dhkts1/teamclaude-rs)." = "Percorso dell'eseguibile tcr (github.com/dhkts1/teamclaude-rs).";
 "Peak %@" = "Picco %@";
 "Percent left" = "Percentuale rimanente";
 "Pick another Codex account before importing OpenAI cookies." = "Scegli un altro account Codex prima di importare OpenAI cookies.";
@@ -1932,7 +1953,7 @@
 "Refresh the profile before refreshing OpenAI web data." = "Aggiorna il profilo prima di aggiornare i dati web OpenAI.";
 "Refreshing account status…" = "Aggiornamento dello stato dell'account…";
 "Remaining budget compared with an ideal steady burn rate." = "Budget rimanente rispetto a una velocità di combustione costante ideale.";
-"Renews: %@" = "Rinnova: %@";
+"Plan renews: %@" = "Il piano si rinnova: %@";
 "Request quota" = "Richiedi Limite";
 "Requesting login…" = "Richiesta di accesso…";
 "Required. Enter a regular API key or a Management API key here. Management keys also enable account Activity on the official OpenRouter API." = "Obbligatorio. Inserisci qui una chiave API normale o una chiave di gestione API. Le chiavi di gestione abilitano anche l'attività dell'account sullo OpenRouter API ufficiale.";
@@ -1955,6 +1976,8 @@
 "Select the provider to display." = "Seleziona il fornitore da visualizzare.";
 "Session (5-hour)" = "Sessione (5 ore)";
 "Session and weekly usage with credits and costs." = "Sessione e utilizzo settimanale con Crediti e costi.";
+"Set the cswap executable path below." = "Imposta qui sotto il percorso dell'eseguibile cswap.";
+"Set the tcr executable path below." = "Imposta qui sotto il percorso dell'eseguibile tcr.";
 "Settings unavailable." = "Impostazioni non disponibili.";
 "Show account card when only one account is available" = "Mostra la carta conto quando è disponibile un solo conto";
 "Show model-specific weekly usage in widgets" = "Mostra l'utilizzo settimanale specifico del modello nei widget";
@@ -1962,6 +1985,7 @@
 "Shows model-specific Claude quotas, such as Fable, in desktop widgets." = "Mostra Claude Limite specifico del modello, come Fable, nei widget desktop.";
 "Shows the hidden accounts" = "Mostra gli account nascosti";
 "Shows usage and lets you switch accounts through `cswap`. Credentials stay managed by claude-swap; CodexBar never reads them." = "Mostra l'utilizzo e ti consente di cambiare account tramite `cswap`. Le credenziali rimangono gestite da claude-swap; CodexBar non li legge mai.";
+"Shows usage from `tcr`; it does not switch accounts, because tcr picks the account for each request. Credentials stay managed by tcr; CodexBar never reads them." = "Mostra l'utilizzo da `tcr`; non cambia account, perché tcr sceglie l'account per ogni richiesta. Le credenziali rimangono gestite da tcr; CodexBar non le legge mai.";
 "Stay Awake" = "Rimani sveglio";
 "Stored in the CodexBar config file. Reads monthly budget and routed usage from /v1/usage." = "Memorizzato nel file di configurazione CodexBar. Legge il budget mensile e l'utilizzo indirizzato da /v1/usage.";
 "Stored in ~/.codexbar/config.json. OPENAI_ADMIN_KEY is required for organization usage; legacy/user keys only get a best-effort balance fallback." = "Memorizzato in ~/.codexbar/config.json. OPENAI_ADMIN_KEY è richiesto per l'utilizzo da parte dell'organizzazione; le chiavi legacy/utente ottengono solo un fallback con il miglior equilibrio possibile.";
@@ -1970,6 +1994,7 @@
 "SuperGrok OAuth" = "SuperGrok OAuth";
 "Switch Account…" = "Cambia account...";
 "Switch Claude Code account" = "Cambia account Claude Code";
+"Claude accounts in tcr" = "Account Claude in tcr";
 "Switch Claude Code to %@" = "Passare da Claude Code a %@";
 "Switch Provider" = "Cambia fornitore";
 "Switch the provider shown in the widget." = "Cambia il provider mostrato nel widget.";
@@ -2056,6 +2081,7 @@
 "sk-ant-admin..." = "sk-ant-admin...";
 "sk-or-v1-..." = "sk-or-v1-...";
 "spent" = "Limite esaurito";
+"tcr executable" = "Eseguibile tcr";
 "under pace" = "utilizzo inferiore al ritmo pianificato";
 "us-east-1" = "us-east-1";
 "used" = "utilizzato";
@@ -2066,6 +2092,7 @@
 "~%@ est" = "~%@ stimato";
 "~%@ tracked tokens (partial)" = "~%@ Token registrati (PARZIALE)";
 "~/.local/bin/cswap" = "~/.local/bin/cswap";
+"/Applications/TcrBar.app/Contents/MacOS/tcr" = "/Applications/TcrBar.app/Contents/MacOS/tcr";
 "~/Library/Application Support/JetBrains/IntelliJIdea2024.3" = "~/Library/Application Support/JetBrains/IntelliJIdea2024.3";
 "00000000-0000-0000-0000-000000000000" = "00000000-0000-0000-0000-000000000000";
 
@@ -2411,6 +2438,7 @@
 
 "X API cost history is not available." = "La cronologia dei costi di X API non è disponibile.";
 "Paste a console.x.com Cookie header containing auth_token and ct0." = "Incolla un’intestazione Cookie di console.x.com contenente auth_token e ct0.";
+"Paste a platform.claude.com Cookie header containing sessionKey." = "Incolla un’intestazione Cookie di platform.claude.com contenente sessionKey.";
 "Open X Developer Console" = "Apri la console sviluppatori di X";
 "update_available_notification_body" = "Fai clic per aprire le impostazioni di aggiornamento e installare la nuova versione.";
 // Structured session performance layout.
@@ -2562,6 +2590,8 @@
 "provider_zones_others_title" = "Altre schede";
 "provider_zones_others_subtitle" = "Trascina un provider in alto per fissarlo o in basso per sbloccarlo.";
 "provider_zones_drop_here" = "Rilascia un provider qui";
+"Back" = "Indietro";
+"Forward" = "Avanti";
 
 "cost_reset_inferred_tooltip" = "Dedotto: %@ non comunica questa data. I limiti di spesa mensili si reimpostano alle 00:00 UTC del giorno 1.";
 /* fal provider credentials */
@@ -2674,3 +2704,32 @@
 "Daily spend · %@" = "Spesa giornaliera · %@";
 "Applies to the selected token account “%@”. Each account keeps its own limits." = "Si applica all’account token selezionato «%@». Ogni account mantiene i propri limiti.";
 "Applies to the OpenAI API key, not to token accounts." = "Si applica alla chiave API OpenAI, non agli account token.";
+"CodexBar will ask macOS Keychain for the Muse Code login token so it can fetch your Muse Code subscription usage. Click OK to continue." = "CodexBar chiederà al Portachiavi di macOS il token di accesso di Muse Code per recuperare l'utilizzo del tuo abbonamento Muse Code. Fai clic su OK per continuare.";
+/* Claude Platform provider */
+"API credit" = "Credito API";
+"Purchased credit" = "Credito acquistato";
+"Claude Platform exposes Console credit balance and monthly spend, not local token cost history." = "Claude Platform mostra il saldo del credito e la spesa mensile della Console, non la cronologia locale dei costi dei token.";
+
+"Claude config directory" = "Cartella di configurazione di Claude";
+/* App-managed HTTP server */
+"http_server_title" = "Server HTTP";
+"http_server_enable" = "Abilita server HTTP";
+"http_server_bind" = "Indirizzo IPv4 di ascolto";
+"http_server_port" = "Porta";
+"http_server_token" = "Token del server";
+"http_server_show" = "Mostra";
+"http_server_generate" = "Genera";
+"http_server_cache" = "Intervallo cache (secondi)";
+"http_server_timeout" = "Timeout richieste (secondi; 0 disabilita)";
+"http_server_all_accounts" = "Includi tutti gli account nelle istantanee";
+"http_server_identity" = "Identità nella dashboard";
+"http_server_redacted" = "Oscurata";
+"http_server_warning" = "Espone utilizzo, costi e informazioni su account e progetti, mai le credenziali dei provider. HTTP invia il token del server senza crittografia. Usa solo una connessione VPN o Tailscale attendibile.";
+"http_server_plain_http" = "Consenti HTTP non crittografato fuori da questo Mac";
+"http_server_dashboard" = "Dashboard";
+"http_server_wildcard" = "Sugli altri dispositivi, sostituisci 0.0.0.0 con l’indirizzo IPv4 VPN o Tailscale di questo Mac.";
+"http_server_footer" = "Disattivato per impostazione predefinita. Si avvia con CodexBar e si arresta alla chiusura. Impostazioni e token restano su questo Mac e sono esclusi da sincronizzazione ed esportazioni. Mantieni il Mac attivo per l’accesso remoto.";
+/* Claude desktop cookie source */
+"Claude desktop app" = "App desktop Claude";
+"Use Claude desktop app cookies" = "Usa i cookie dell’app desktop Claude";
+"For Web usage, follow the account signed into Claude.app instead of a browser." = "Per l’utilizzo web, usa l’account connesso a Claude.app anziché quello del browser.";

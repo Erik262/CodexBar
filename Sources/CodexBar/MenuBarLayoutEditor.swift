@@ -49,6 +49,7 @@ enum MenuBarLayoutPaletteTokens {
             .percent(window: .session),
             .percent(window: .weekly),
             .percent(window: .scopedWeekly),
+            .percent(window: .spend),
         ] + MenuBarLayoutLane.available(for: provider, snapshot: snapshot).map { .lanePercent(lane: $0) }
             + MenuBarLayoutNamedExtra.availableTokens(provider: provider, snapshot: snapshot) + [
                 .percent(window: .automatic),
@@ -65,6 +66,7 @@ enum MenuBarLayoutPaletteTokens {
                 .pace(window: .session),
                 .pace(window: .weekly),
                 .pace(window: .automatic),
+                .pace(window: .spend),
             ]
     }
 
@@ -75,6 +77,8 @@ enum MenuBarLayoutPaletteTokens {
         .windowResetAbsolute(window: .session),
         .windowResetCountdown(window: .weekly),
         .windowResetAbsolute(window: .weekly),
+        .windowResetCountdown(window: .spend),
+        .windowResetAbsolute(window: .spend),
         .runsOut,
         .runsOutCompact,
     ]
@@ -86,6 +90,7 @@ enum MenuBarLayoutPaletteTokens {
         .percent(window: .session),
         .percent(window: .weekly),
         .percent(window: .scopedWeekly),
+        .percent(window: .spend),
         .percent(window: .automatic),
         .usageBar,
         .windowBar(window: .session),
@@ -98,12 +103,15 @@ enum MenuBarLayoutPaletteTokens {
         .pace(window: .session),
         .pace(window: .weekly),
         .pace(window: .automatic),
+        .pace(window: .spend),
     ] + Self.time + [
         .balance,
         .costToday,
         .tokensPerMinute,
         .tokensSparkline,
         .costWindow,
+        .spendAmount,
+        .spendBudget,
         .separatorDot,
         .space,
         .hidden,
@@ -312,6 +320,16 @@ struct MenuBarLayoutEditor: View {
             })
     }
 
+    private var monospacedDigitsBinding: Binding<Bool> {
+        Binding(
+            get: { self.settings.menuBarLayoutMonospacedDigits },
+            set: { enabled in
+                self.settings.menuBarLayoutMonospacedDigits = enabled
+                MenuBarLayoutEditorPersistence.activate(
+                    self.layout, for: self.persistenceProvider, settings: self.settings)
+            })
+    }
+
     private var gapBinding: Binding<MenuBarLayoutGap> {
         Binding(
             get: { self.settings.menuBarLayoutGap },
@@ -346,7 +364,7 @@ struct MenuBarLayoutEditor: View {
             MenuBarLayoutPaletteGroup(
                 id: "money",
                 title: L("menu_bar_layout_group_money"),
-                tokens: [.balance, .costToday, .costWindow],
+                tokens: [.balance, .costToday, .costWindow, .spendAmount, .spendBudget],
                 includesLineBreak: false),
             MenuBarLayoutPaletteGroup(
                 id: "structure",
@@ -741,7 +759,8 @@ struct MenuBarLayoutEditor: View {
         MenuBarLayoutDisplayOptions(
             size: self.sizeBinding,
             gap: self.gapBinding,
-            verticalAdjustment: self.$settings.menuBarLayoutVerticalAdjustment)
+            verticalAdjustment: self.$settings.menuBarLayoutVerticalAdjustment,
+            monospacedDigits: self.monospacedDigitsBinding)
     }
 
     private func applyPreset(_ preset: MenuBarLayoutPreset) {
@@ -937,7 +956,8 @@ struct MenuBarLayoutPreview: View {
                 now: minute,
                 verticalAdjustment: self.settings.menuBarLayoutVerticalAdjustment,
                 colorPace: self.settings.menuBarColorPace,
-                colorByProvider: self.settings.menuBarColorByProvider))
+                colorByProvider: self.settings.menuBarColorByProvider,
+                monospacedDigits: self.settings.menuBarLayoutMonospacedDigits))
         MenuBarLayoutPreviewText(rendered: rendered)
     }
 
@@ -996,6 +1016,11 @@ struct MenuBarLayoutPreview: View {
         let samplePaceDelta = { (window: RateWindow) -> Double? in
             UsagePace.weekly(window: window, now: now)?.deltaPercent.rounded()
         }
+        let spend = RateWindow(
+            usedPercent: 46,
+            windowMinutes: 30 * 24 * 60,
+            resetsAt: now.addingTimeInterval(12 * 24 * 60 * 60),
+            resetDescription: nil)
         return MenuBarLayoutRenderData(
             provider: provider,
             iconKey: "\(provider.rawValue)-representative",
@@ -1034,7 +1059,14 @@ struct MenuBarLayoutPreview: View {
                 balanceRemainingUSD: provider == .openrouter ? 12.34 : nil,
                 balanceUsedUSD: provider == .openrouter ? 7.66 : nil,
                 costTodayUSD: 1.25,
-                cost30dUSD: 20))
+                cost30dUSD: 20,
+                spendPaceDelta: samplePaceDelta(spend),
+                spendUsedUSD: 460,
+                spendRemainingUSD: 540),
+            spend: MenuBarLayoutRenderWindow(spend),
+            spendPace: samplePace(spend),
+            spendAmount: "$460",
+            spendBudget: "$460 / $1,000")
     }
 }
 
@@ -1097,6 +1129,7 @@ extension MenuBarLayoutSize {
         switch self {
         case .small: L("menu_bar_layout_size_small")
         case .regular: L("menu_bar_layout_size_regular")
+        case .large: L("menu_bar_layout_size_large")
         }
     }
 }
@@ -1154,12 +1187,14 @@ extension MenuBarLayoutToken {
         case .percent(window: .weekly): L("menu_bar_layout_token_weekly")
         case .percent(window: .scopedWeekly): L("menu_bar_layout_token_scoped_weekly")
         case .percent(window: .automatic): L("menu_bar_layout_token_auto")
+        case .percent(window: .spend): L("menu_bar_layout_token_spend")
         case let .lanePercent(lane): L("%@ %@", lane.rawValue.capitalized, "%")
         case .extraPercent: L("%@ %@", L("Usage"), "%")
         case .pace(window: .session): L("menu_bar_layout_token_session_pace")
         case .pace(window: .weekly): L("menu_bar_layout_token_weekly_pace")
         case .pace(window: .scopedWeekly): L("menu_bar_layout_token_weekly_pace")
         case .pace(window: .automatic): L("menu_bar_layout_token_auto_pace")
+        case .pace(window: .spend): L("menu_bar_layout_token_spend_pace")
         case .usageBar: L("menu_bar_layout_token_bar")
         case let .windowBar(window): L("%@: %@", Self.resetWindowLabel(window), L("menu_bar_layout_token_bar"))
         case .stackedBars: L("menu_bar_layout_token_stacked_bars")
@@ -1178,6 +1213,8 @@ extension MenuBarLayoutToken {
         case .tokensSparkline: L("Tokens / min graph")
         case .costToday: L("menu_bar_layout_token_cost_today")
         case .costWindow: L("menu_bar_layout_token_cost_window")
+        case .spendAmount: L("Spend")
+        case .spendBudget: L("menu_bar_layout_token_spend_budget")
         case .separatorDot: "·"
         case .space: L("menu_bar_layout_token_space")
         case .conditional: L("menu_bar_layout_token_conditional")
@@ -1191,6 +1228,7 @@ extension MenuBarLayoutToken {
         case .weekly: L("Weekly")
         case .scopedWeekly: L("menu_bar_layout_conditional_metric_scoped_weekly")
         case .automatic: L("Automatic")
+        case .spend: L("Spend")
         }
     }
 
@@ -1227,7 +1265,7 @@ extension MenuBarLayoutToken {
         case .balance: "creditcard"
         case .tokensPerMinute: "speedometer"
         case .tokensSparkline: "chart.bar.xaxis"
-        case .costToday: "dollarsign.circle"
+        case .costToday, .spendAmount, .spendBudget: "dollarsign.circle"
         case .costWindow: "calendar.badge.clock"
         case .separatorDot: "smallcircle.filled.circle"
         case .space: "space"
@@ -1243,61 +1281,66 @@ struct MenuBarLayoutDisplayOptions: View {
     @Binding var size: MenuBarLayoutSize
     @Binding var gap: MenuBarLayoutGap
     @Binding var verticalAdjustment: Int
+    @Binding var monospacedDigits: Bool
 
     var body: some View {
-        HStack(spacing: 18) {
-            HStack(spacing: 8) {
-                Text(L("menu_bar_layout_size"))
-                    .lineLimit(1)
-                    .fixedSize()
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 18) {
+                HStack(spacing: 8) {
+                    Text(L("menu_bar_layout_size"))
+                        .lineLimit(1)
+                        .fixedSize()
 
-                Picker(L("menu_bar_layout_size"), selection: self.$size) {
-                    ForEach(MenuBarLayoutSize.allCases) { size in
-                        Text(size.label).tag(size)
+                    Picker(L("menu_bar_layout_size"), selection: self.$size) {
+                        ForEach(MenuBarLayoutSize.allCases) { size in
+                            Text(size.label).tag(size)
+                        }
                     }
-                }
-                .labelsHidden()
-                .pickerStyle(.menu)
-                .fixedSize()
-            }
-
-            HStack(spacing: 8) {
-                Text(L("menu_bar_layout_gap"))
-                    .lineLimit(1)
-                    .fixedSize()
-
-                Picker(L("menu_bar_layout_gap"), selection: self.$gap) {
-                    ForEach(MenuBarLayoutGap.allCases) { gap in
-                        Text(gap.label).tag(gap)
-                    }
-                }
-                .labelsHidden()
-                .pickerStyle(.menu)
-                .fixedSize()
-            }
-
-            HStack(spacing: 8) {
-                Text(L("menu_bar_layout_vertical_adjustment"))
-                    .lineLimit(1)
-                    .fixedSize()
-
-                TextField(
-                    "",
-                    value: self.$verticalAdjustment,
-                    format: .number)
                     .labelsHidden()
-                    .textFieldStyle(.roundedBorder)
-                    .multilineTextAlignment(.trailing)
-                    .monospacedDigit()
-                    .frame(width: 44)
-
-                Stepper(value: self.$verticalAdjustment, in: -20...20, step: 1) {
-                    EmptyView()
+                    .pickerStyle(.menu)
+                    .fixedSize()
                 }
-                .labelsHidden()
-            }
 
-            Spacer()
+                HStack(spacing: 8) {
+                    Text(L("menu_bar_layout_gap"))
+                        .lineLimit(1)
+                        .fixedSize()
+
+                    Picker(L("menu_bar_layout_gap"), selection: self.$gap) {
+                        ForEach(MenuBarLayoutGap.allCases) { gap in
+                            Text(gap.label).tag(gap)
+                        }
+                    }
+                    .labelsHidden()
+                    .pickerStyle(.menu)
+                    .fixedSize()
+                }
+
+                HStack(spacing: 8) {
+                    Text(L("menu_bar_layout_vertical_adjustment"))
+                        .lineLimit(1)
+                        .fixedSize()
+
+                    TextField(
+                        "",
+                        value: self.$verticalAdjustment,
+                        format: .number)
+                        .labelsHidden()
+                        .textFieldStyle(.roundedBorder)
+                        .multilineTextAlignment(.trailing)
+                        .monospacedDigit()
+                        .frame(width: 44)
+
+                    Stepper(value: self.$verticalAdjustment, in: -20...20, step: 1) {
+                        EmptyView()
+                    }
+                    .labelsHidden()
+                }
+
+                Spacer()
+            }
+            Toggle(L("menu_bar_layout_monospaced_digits"), isOn: self.$monospacedDigits)
+                .toggleStyle(.checkbox)
         }
     }
 }

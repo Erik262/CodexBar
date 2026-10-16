@@ -30,13 +30,38 @@ struct StackedBarsIconTests {
     }
 
     @Test
-    func `pinned zone keeps saved order and fills from enabled providers`() {
+    func `pinned zone mirrors the overview selection in enabled order`() {
         let enabled: [UsageProvider] = [.codex, .claude, .openai, .cursor]
-        let saved = ProviderZones.resolve(pinned: [.openai, .codex], enabled: enabled, limit: 3)
-        #expect(saved.pinned == [.openai, .codex])
-        #expect(saved.others == [.claude, .cursor])
-        #expect(saved.tabOrder == [.openai, .codex, .claude, .cursor])
-        #expect(ProviderZones.resolve(pinned: [], enabled: enabled, limit: 3).pinned == [.codex, .claude, .openai])
+        let zones = ProviderZones.resolve(
+            overview: [UsageProvider.openai.instanceID, UsageProvider.codex.instanceID],
+            enabled: enabled,
+            limit: 6)
+        #expect(zones.pinned == [.codex, .openai])
+        #expect(zones.others == [.claude, .cursor])
+        #expect(zones.tabOrder == [.codex, .openai, .claude, .cursor])
+        #expect(ProviderZones.resolve(overview: [], enabled: enabled, limit: 6).pinned.isEmpty)
+    }
+
+    @Test
+    func `reading pinned zones keeps a saved six provider overview and an empty selection`() {
+        let settings = testSettingsStore(suiteName: #function, userDefaults: InMemoryUserDefaults())
+        let enabled: [UsageProvider] = [.codex, .claude, .openai, .cursor, .gemini, .copilot, .zai]
+        let ids = enabled.map(\.instanceID)
+        let six = Array(ids.suffix(6))
+        for id in ids {
+            _ = settings.setMergedOverviewProviderSelection(
+                provider: id,
+                isSelected: six.contains(id),
+                activeProviders: ids)
+        }
+        let zones = settings.providerZones(enabled: enabled, allEnabled: ids, limit: 6)
+        #expect(zones.pinned == Array(enabled.suffix(6)))
+        #expect(settings.resolvedMergedOverviewProviders(activeProviders: ids) == six)
+
+        for id in six {
+            _ = settings.setMergedOverviewProviderSelection(provider: id, isSelected: false, activeProviders: ids)
+        }
+        #expect(settings.providerZones(enabled: enabled, allEnabled: ids, limit: 6).pinned.isEmpty)
     }
 
     @Test
