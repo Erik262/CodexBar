@@ -602,10 +602,21 @@ enum MenuBarLayoutToken: Codable, Hashable, Sendable {
         }
     }
 
+    /// 0.75.0 and older decoders have no case for the fork's drawn meters, so V5 and older projections
+    /// write the matching graphical `progressBar` instead.
+    var v5Compatible: MenuBarLayoutToken {
+        switch self {
+        case let .windowBar(window): .progressBar(window: window)
+        case .stackedBars: .progressBar(window: .session)
+        default: self
+        }
+    }
+
     /// V5 layouts drop Spend tokens: 0.75.0 decodes V5 and has no Spend cases.
     var hasV5Representation: Bool {
         switch self {
-        case .spendAmount, .spendBudget: false
+        // Layout lines map the drawn meters through `v5Compatible` first; conditional branches cannot.
+        case .spendAmount, .spendBudget, .windowBar, .stackedBars: false
         case let .percent(window), let .pace(window), let .progressBar(window),
              let .windowResetCountdown(window), let .windowResetAbsolute(window): window != .spend
         default: true
@@ -835,7 +846,7 @@ struct MenuBarLayout: Codable, Hashable, Sendable {
     }
 
     func v5Compatible() -> MenuBarLayout {
-        self.projected { $0.hasV5Representation ? $0 : nil }
+        self.projected { $0.v5Compatible.hasV5Representation ? $0.v5Compatible : nil }
     }
 
     func v4Compatible() -> MenuBarLayout {

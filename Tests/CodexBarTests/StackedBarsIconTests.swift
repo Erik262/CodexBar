@@ -65,6 +65,19 @@ struct StackedBarsIconTests {
     }
 
     @Test
+    func `stacked bars accessibility title reads each row`() {
+        let title = StatusItemController.stackedBarsAccessibilityTitle(
+            providers: [.codex, .claude],
+            rows: [
+                StackedBarsIconRenderer.Row(percent: 41.6, stale: false),
+                StackedBarsIconRenderer.Row(percent: nil, stale: true),
+            ])
+        let codex = ProviderDescriptorRegistry.descriptor(for: .codex).metadata.displayName
+        let claude = ProviderDescriptorRegistry.descriptor(for: .claude).metadata.displayName
+        #expect(title == "\(codex) 42%, \(L("%@ unavailable", claude))")
+    }
+
+    @Test
     func `dragging between zones respects the pinned limit`() throws {
         let zones = ProviderZones(pinned: [.codex, .claude], others: [.openai, .cursor, .gemini])
         let added = try #require(zones.moving(.openai, to: .pinned, onto: .codex, limit: 3))
