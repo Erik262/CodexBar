@@ -7,6 +7,7 @@ struct MenuBarPane: View {
 
     @Bindable var settings: SettingsStore
     @Bindable var store: UsageStore
+    @State private var isOverviewProviderPopoverPresented = false
 
     static func overviewProviderLimitText(limit: Int = Self.maxOverviewProviders) -> String {
         L("overview_choose_providers", String(limit))
@@ -63,10 +64,16 @@ struct MenuBarPane: View {
             self.reconcileOverviewSelection()
         }
         .onChange(of: self.settings.mergeIcons) { _, isEnabled in
-            guard isEnabled else { return }
+            guard isEnabled else {
+                self.isOverviewProviderPopoverPresented = false
+                return
+            }
             self.reconcileOverviewSelection()
         }
         .onChange(of: self.activeProvidersInOrder) { _, _ in
+            if self.activeProvidersInOrder.isEmpty {
+                self.isOverviewProviderPopoverPresented = false
+            }
             self.reconcileOverviewSelection()
         }
     }
@@ -228,13 +235,15 @@ struct MenuBarPane: View {
                     UnifiedIconSourcePicker(selection: self.$settings.unifiedIconSource)
                 }
 
-                if !self.activeProvidersInOrder.isEmpty {
-                    PinnedProviderZonesView(
-                        settings: self.settings,
-                        enabled: self.store.enabledFirstPartyProvidersForDisplay(),
-                        allEnabled: self.activeProvidersInOrder,
-                        limit: Self.maxOverviewProviders)
+                self.overviewProviderRow
+                    .disabled(!self.settings.mergeIcons)
+                Toggle(isOn: self.$settings.mergedOverviewAllAccounts) {
+                    SettingsRowLabel(
+                        L("Show all accounts in Overview"),
+                        subtitle: L(
+                            "Expand cached account usage. The six-provider limit still applies."))
                 }
+                .disabled(!self.settings.mergeIcons)
             } header: {
                 Text(L("section_menu_tabs"))
             } footer: {
@@ -254,6 +263,64 @@ struct MenuBarPane: View {
             })
         Toggle(L("stacked_bars_show_icons_title"), isOn: self.$settings.stackedBarsShowIcons)
             .settingsSearchAnchor(L("stacked_bars_show_icons_title"))
+    }
+
+    private var overviewProviderRow: some View {
+        LabeledContent {
+            if self.showsOverviewConfigureButton {
+                Button(L("configure")) {
+                    self.isOverviewProviderPopoverPresented = true
+                }
+                .popover(isPresented: self.$isOverviewProviderPopoverPresented, arrowEdge: .bottom) {
+                    self.overviewProviderPopover
+                }
+            }
+        } label: {
+            SettingsRowLabel(L("overview_tab_providers_title"), subtitle: self.overviewProviderSubtitle)
+        }
+    }
+
+    private var overviewProviderSubtitle: String {
+        if !self.settings.mergeIcons {
+            L("overview_enable_merge_icons_hint")
+        } else if self.activeProvidersInOrder.isEmpty {
+            L("overview_no_providers_hint")
+        } else {
+            self.overviewProviderSelectionSummary
+        }
+    }
+
+    private var overviewProviderPopover: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text(Self.overviewProviderLimitText())
+                .font(.headline)
+            Text(L("overview_rows_follow_order"))
+                .font(.footnote)
+                .foregroundStyle(.tertiary)
+
+            ScrollView(.vertical, showsIndicators: true) {
+                VStack(alignment: .leading, spacing: 6) {
+                    ForEach(self.activeProvidersInOrder, id: \.self) { provider in
+                        Toggle(
+                            isOn: Binding(
+                                get: { self.overviewSelectedProviders.contains(provider) },
+                                set: { shouldSelect in
+                                    self.setOverviewProviderSelection(provider: provider, isSelected: shouldSelect)
+                                })) {
+                            Text(self.providerDisplayName(provider))
+                                .font(.body)
+                        }
+                        .toggleStyle(.checkbox)
+                        .disabled(
+                            !self.overviewSelectedProviders.contains(provider) &&
+                                self.overviewSelectedProviders.count >= Self.maxOverviewProviders)
+                    }
+                }
+            }
+            .frame(maxHeight: 220)
+        }
+        .padding(12)
+        .frame(width: 280)
     }
 
     private var activeProvidersInOrder: [ProviderInstanceID] {
@@ -280,8 +347,37 @@ struct MenuBarPane: View {
             })
     }
 
+    private var overviewSelectedProviders: [ProviderInstanceID] {
+        self.settings.resolvedMergedOverviewProviders(
+            activeProviders: self.activeProvidersInOrder,
+            maxVisibleProviders: Self.maxOverviewProviders)
+    }
+
+    private var showsOverviewConfigureButton: Bool {
+        self.settings.mergeIcons && !self.activeProvidersInOrder.isEmpty
+    }
+
+    private var overviewProviderSelectionSummary: String {
+        let selectedNames = self.overviewSelectedProviders.map(self.providerDisplayName)
+        guard !selectedNames.isEmpty else { return L("overview_no_providers_selected") }
+        return selectedNames.joined(separator: ", ")
+    }
+
+    private func providerDisplayName(_ instanceID: ProviderInstanceID) -> String {
+        if let provider = instanceID.firstPartyProvider { return self.providerDisplayName(provider) }
+        return UserProviderPluginRegistry.plugin(for: instanceID)?.manifest.name ?? instanceID.rawValue
+    }
+
     private func providerDisplayName(_ provider: UsageProvider) -> String {
         ProviderDescriptorRegistry.descriptor(for: provider).metadata.displayName
+    }
+
+    private func setOverviewProviderSelection(provider: ProviderInstanceID, isSelected: Bool) {
+        _ = self.settings.setMergedOverviewProviderSelection(
+            provider: provider,
+            isSelected: isSelected,
+            activeProviders: self.activeProvidersInOrder,
+            maxVisibleProviders: Self.maxOverviewProviders)
     }
 
     private func reconcileOverviewSelection() {

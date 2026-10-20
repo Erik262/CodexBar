@@ -30,54 +30,19 @@ struct StackedBarsIconTests {
     }
 
     @Test
-    func `pinned zone mirrors the overview selection in enabled order`() {
-        let enabled: [UsageProvider] = [.codex, .claude, .openai, .cursor]
-        let zones = ProviderZones.resolve(
-            overview: [UsageProvider.openai.instanceID, UsageProvider.codex.instanceID],
-            enabled: enabled,
-            limit: 6)
-        #expect(zones.pinned == [.codex, .openai])
-        #expect(zones.others == [.claude, .cursor])
-        #expect(zones.tabOrder == [.codex, .openai, .claude, .cursor])
-        #expect(ProviderZones.resolve(overview: [], enabled: enabled, limit: 6).pinned.isEmpty)
-    }
-
-    @Test
-    func `reading pinned zones keeps a saved six provider overview and an empty selection`() {
+    func `bar rows follow the overview selection in provider order`() {
         let settings = testSettingsStore(suiteName: #function, userDefaults: InMemoryUserDefaults())
-        let enabled: [UsageProvider] = [.codex, .claude, .openai, .cursor, .gemini, .copilot, .zai]
+        let enabled: [UsageProvider] = [.codex, .claude, .openai, .cursor]
         let ids = enabled.map(\.instanceID)
-        let six = Array(ids.suffix(6))
+        settings.mergeIcons = true
+        settings.mergedIconDisplayStyle = .bars
         for id in ids {
             _ = settings.setMergedOverviewProviderSelection(
                 provider: id,
-                isSelected: six.contains(id),
+                isSelected: id == UsageProvider.openai.instanceID || id == UsageProvider.codex.instanceID,
                 activeProviders: ids)
         }
-        let zones = settings.providerZones(enabled: enabled, allEnabled: ids, limit: 6)
-        #expect(zones.pinned == Array(enabled.suffix(6)))
-        #expect(settings.resolvedMergedOverviewProviders(activeProviders: ids) == six)
-
-        for id in six {
-            _ = settings.setMergedOverviewProviderSelection(provider: id, isSelected: false, activeProviders: ids)
-        }
-        #expect(settings.providerZones(enabled: enabled, allEnabled: ids, limit: 6).pinned.isEmpty)
-    }
-
-    @Test
-    func `dragging between zones respects the pinned limit`() throws {
-        let zones = ProviderZones(pinned: [.codex, .claude], others: [.openai, .cursor, .gemini])
-        let added = try #require(zones.moving(.openai, to: .pinned, onto: .codex, limit: 3))
-        #expect(added.pinned == [.openai, .codex, .claude])
-        #expect(added.others == [.cursor, .gemini])
-        #expect(added.moving(.cursor, to: .pinned, onto: .claude, limit: 3) == nil)
-
-        let reordered = try #require(added.moving(.openai, to: .pinned, onto: .claude, limit: 3))
-        #expect(reordered.pinned == [.codex, .claude, .openai])
-
-        let unpinned = try #require(added.moving(.codex, to: .others, onto: nil, limit: 3))
-        #expect(unpinned.pinned == [.openai, .claude])
-        #expect(unpinned.others == [.cursor, .gemini, .codex])
+        #expect(settings.mergedIconPresentation(activeProviders: enabled).barProviders == [.codex, .openai])
     }
 
     @Test
@@ -85,13 +50,11 @@ struct StackedBarsIconTests {
         let defaults = InMemoryUserDefaults()
         let settings = testSettingsStore(suiteName: #function, userDefaults: defaults)
         settings.mergedIconDisplayStyle = .bars
-        settings.stackedBarsProviders = [.claude, .codex, .claude, .cursor, .gemini]
         settings.stackedBarsWindow = .weekly
 
         let reloaded = testSettingsStore(suiteName: #function, userDefaults: defaults)
         #expect(reloaded.mergedIconDisplayStyle == .bars)
         #expect(!reloaded.mergeIconsStacked)
-        #expect(reloaded.stackedBarsProviders == [.claude, .codex, .cursor])
         #expect(reloaded.stackedBarsWindow == .weekly)
 
         reloaded.mergedIconDisplayStyle = .stacked

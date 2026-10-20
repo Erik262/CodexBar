@@ -199,18 +199,6 @@ extension SettingsStore {
         }
     }
 
-    /// Ordered rows chosen for the stacked-bars icon; unknown or disabled providers are filtered later.
-    var stackedBarsProviders: [UsageProvider] {
-        get { self.stackedBarsProvidersRaw.compactMap(UsageProvider.init(rawValue:)) }
-        set {
-            var seen: Set<UsageProvider> = []
-            self.stackedBarsProvidersRaw = newValue
-                .filter { seen.insert($0).inserted }
-                .prefix(StackedBarsIconRenderer.maxRows)
-                .map(\.rawValue)
-        }
-    }
-
     var mergeIconStackedTopProvider: UsageProvider? {
         get { self.mergeIconStackedTopProviderRaw.flatMap(UsageProvider.init(rawValue:)) }
         set { self.mergeIconStackedTopProviderRaw = newValue?.rawValue }
@@ -225,16 +213,16 @@ extension SettingsStore {
         activeProviders: [UsageProvider],
         mergeIcons: Bool? = nil) -> MergedIconPresentation
     {
-        MergedIconPresentation(
+        let overview = Set(self.mergedOverviewSelectedProviders)
+        return MergedIconPresentation(
             mergeIcons: mergeIcons ?? self.mergeIcons,
             iconStyle: self.menuBarIconStyle,
             requestedStyle: self.mergedIconDisplayStyle,
             eligibleProviders: activeProviders,
             preferredTop: self.mergeIconStackedTopProvider,
             preferredBottom: self.mergeIconStackedBottomProvider,
-            preferredBars: self.stackedBarsProviders.isEmpty
-                ? self.mergedOverviewSelectedProviders.compactMap(\.firstPartyProvider)
-                : self.stackedBarsProviders)
+            // Bar rows are the Overview providers in provider order, matching the Overview tab rows.
+            preferredBars: activeProviders.filter { overview.contains($0.instanceID) })
     }
 
     var usageBarsFillOption: UsageBarsFillOption {

@@ -7,16 +7,20 @@ extension StatusItemController {
         let mergeIcons = self.shouldMergeIcons
         let visibleProviders = self.store.enabledProvidersForDisplay().map(\.rawValue).sorted().joined(separator: ",")
         let providerSignatures: String
-        let primaryProvider: UsageProvider?
+        let primaryProvider: ProviderInstanceID?
         if let barProviders = self.stackedBarProvidersIfActive() {
-            primaryProvider = barProviders.first
+            primaryProvider = barProviders.first?.instanceID
             providerSignatures = barProviders
-                .map { self.providerStoreIconObservationSignature(for: $0, showBrandPercent: showBrandPercent) }
+                .map {
+                    self.providerStoreIconObservationSignature(for: $0.instanceID, showBrandPercent: showBrandPercent)
+                }
                 .joined(separator: "||")
         } else if let stackedProviders = self.stackedMergeIconProvidersIfActive() {
-            primaryProvider = stackedProviders.top
+            primaryProvider = stackedProviders.top.instanceID
             providerSignatures = [stackedProviders.top, stackedProviders.bottom]
-                .map { self.providerStoreIconObservationSignature(for: $0, showBrandPercent: showBrandPercent) }
+                .map {
+                    self.providerStoreIconObservationSignature(for: $0.instanceID, showBrandPercent: showBrandPercent)
+                }
                 .joined(separator: "||")
         } else if mergeIcons {
             let primary = self.primaryProviderForUnifiedIcon()
@@ -28,7 +32,9 @@ extension StatusItemController {
             primaryProvider = nil
             providerSignatures = UsageProvider.allCases
                 .filter { self.isVisible($0) }
-                .map { self.providerStoreIconObservationSignature(for: $0, showBrandPercent: showBrandPercent) }
+                .map {
+                    self.providerStoreIconObservationSignature(for: $0.instanceID, showBrandPercent: showBrandPercent)
+                }
                 .joined(separator: "||")
         }
         return [
@@ -48,7 +54,16 @@ extension StatusItemController {
         ].joined(separator: "|")
     }
 
-    private func providerStoreIconObservationSignature(for provider: UsageProvider, showBrandPercent: Bool) -> String {
+    private func providerStoreIconObservationSignature(
+        for instanceID: ProviderInstanceID, showBrandPercent: Bool) -> String
+    {
+        guard let provider = instanceID.firstPartyProvider else {
+            let percent = Self.pluginSwitcherMetricPercent(
+                snapshot: self.store.menuBarSnapshot(for: instanceID), showUsed: self.settings.usageBarsShowUsed)
+            let source = UserProviderPluginRegistry.plugin(for: instanceID)?.sourceHash ?? ""
+            return "\(instanceID.rawValue)|percent=\(Self.iconSignatureValue(percent))" +
+                "|error=\(self.store.errors[instanceID] != nil)|source=\(source)"
+        }
         let snapshot = self.store.menuBarSnapshot(for: provider.instanceID)
         let style = self.store.style(for: provider)
         let resolved = self.resolvedMenuBarIconPercents(
