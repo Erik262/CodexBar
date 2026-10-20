@@ -1459,7 +1459,7 @@ extension MenuBarLayoutRenderer {
             height: barSize.height)
 
         // Keep the window label ("5h" / "W") beside the bar so stacked rows stay unambiguous.
-        let prefix = self.windowPrefix(window, data: data, showWindowLabels: options.showWindowLabels)
+        let prefix = self.windowPrefix(window, data: data)
 
         let result = NSMutableAttributedString()
         if !prefix.isEmpty {
