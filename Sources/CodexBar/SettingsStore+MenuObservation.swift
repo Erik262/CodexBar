@@ -55,6 +55,7 @@ extension SettingsStore {
         _ = self.menuBarLayout
         _ = self.menuBarLayoutOverrides
         _ = self.menuBarLayoutMonospacedDigits
+        _ = self.menuBarLayoutShowWindowLabels
         _ = self.menuBarLayoutSize
         _ = self.menuBarLayoutGap
         _ = self.menuBarLayoutVerticalAdjustment
@@ -88,6 +89,7 @@ extension SettingsStore {
         _ = self.providerStorageFootprintsEnabled
         _ = self.stayAwakeEnabled
         _ = self.agentSessionsEnabled
+        _ = self.agentSessionsRemoteEnabled
         _ = self.agentSessionLabelStyle
         _ = self.agentSessionsManualHosts
         _ = self.agentSessionsHideUnreachableHosts
@@ -116,6 +118,7 @@ extension SettingsStore {
         _ = self.ollamaCookieSource
         _ = self.mergeIcons
         _ = self.mergedOverviewLayout
+        _ = self.mergedOverviewAllAccounts
         _ = self.switcherShowsIcons
         _ = self.mergeIconsStacked
         _ = self.mergeIconStackedTopProviderRaw

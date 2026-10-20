@@ -161,7 +161,7 @@ extension StatusItemController {
             return [stackedProviders.top, stackedProviders.bottom]
         }
         if self.shouldMergeIcons {
-            return [self.primaryProviderForUnifiedIcon()]
+            return [self.primaryProviderForUnifiedIcon()].compactMap(\.firstPartyProvider)
         }
         return UsageProvider.allCases.filter(self.isVisible)
     }
