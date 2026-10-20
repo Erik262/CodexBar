@@ -2592,11 +2592,6 @@
 "menu_preview_title" = "Pratinjau menu";
 "menu_preview_footer" = "Diperbarui saat Anda mengubah opsi di bawah. Menu asli tertutup saat Pengaturan aktif, jadi tidak bisa tetap terbuka di sini.";
 "menu_section_usage_summary" = "Ringkasan penggunaan (hari ini, 7 hari, permintaan, model teratas)";
-"provider_zones_pinned_title" = "Disematkan";
-"provider_zones_pinned_subtitle" = "Hingga %@ penyedia. Mengisi tab Ringkasan dan bilah bertumpuk dari atas ke bawah, serta berada di depan bilah tab.";
-"provider_zones_others_title" = "Tab lainnya";
-"provider_zones_others_subtitle" = "Seret penyedia ke atas untuk menyematkan atau ke bawah untuk melepas.";
-"provider_zones_drop_here" = "Letakkan penyedia di sini";
 "Back" = "Kembali";
 "Forward" = "Maju";
 

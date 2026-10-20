@@ -2587,11 +2587,6 @@
 "menu_preview_title" = "Menuvoorbeeld";
 "menu_preview_footer" = "Werkt bij terwijl je de opties hieronder wijzigt. Het echte menu sluit zodra Instellingen actief is en kan hier dus niet open blijven.";
 "menu_section_usage_summary" = "Gebruiksoverzicht (vandaag, 7 dagen, verzoeken, topmodel)";
-"provider_zones_pinned_title" = "Vastgezet";
-"provider_zones_pinned_subtitle" = "Tot %@ aanbieders. Ze vullen het tabblad Overzicht en de gestapelde balken van boven naar beneden en staan vooraan in de tabbalk.";
-"provider_zones_others_title" = "Andere tabbladen";
-"provider_zones_others_subtitle" = "Sleep een aanbieder omhoog om vast te zetten of omlaag om los te maken.";
-"provider_zones_drop_here" = "Zet hier een aanbieder neer";
 "Back" = "Terug";
 "Forward" = "Vooruit";
 

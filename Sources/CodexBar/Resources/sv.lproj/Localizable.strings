@@ -2587,11 +2587,6 @@
 "menu_preview_title" = "Förhandsvisning av menyn";
 "menu_preview_footer" = "Uppdateras när du ändrar alternativen nedan. Den riktiga menyn stängs när Inställningar är aktivt, så den kan inte vara öppen här.";
 "menu_section_usage_summary" = "Användningssammanfattning (i dag, 7 dagar, förfrågningar, toppmodell)";
-"provider_zones_pinned_title" = "Fästa";
-"provider_zones_pinned_subtitle" = "Upp till %@ leverantörer. De fyller fliken Översikt och de staplade staplarna uppifrån och ned och står först i flikfältet.";
-"provider_zones_others_title" = "Andra flikar";
-"provider_zones_others_subtitle" = "Dra en leverantör uppåt för att fästa den eller nedåt för att lossa den.";
-"provider_zones_drop_here" = "Släpp en leverantör här";
 "Back" = "Bakåt";
 "Forward" = "Framåt";
 

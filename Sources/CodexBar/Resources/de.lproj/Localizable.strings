@@ -2586,11 +2586,6 @@
 "menu_preview_title" = "Menüvorschau";
 "menu_preview_footer" = "Aktualisiert sich, während du die Optionen unten änderst. Das echte Menü schließt sich, sobald die Einstellungen aktiv sind, und kann hier nicht offen bleiben.";
 "menu_section_usage_summary" = "Nutzungsübersicht (heute, 7 Tage, Anfragen, Top-Modell)";
-"provider_zones_pinned_title" = "Angeheftet";
-"provider_zones_pinned_subtitle" = "Bis zu %@ Anbieter. Sie füllen den Übersicht-Tab und die gestapelten Balken von oben nach unten und stehen vorn in der Tab-Leiste.";
-"provider_zones_others_title" = "Weitere Tabs";
-"provider_zones_others_subtitle" = "Ziehe einen Anbieter nach oben, um ihn anzuheften, oder nach unten, um ihn zu lösen.";
-"provider_zones_drop_here" = "Anbieter hier ablegen";
 "Back" = "Zurück";
 "Forward" = "Vorwärts";
 

@@ -2566,11 +2566,6 @@
 "menu_preview_title" = "選單預覽";
 "menu_preview_footer" = "變更下方選項時會即時更新。設定視窗處於作用中時真實選單會關閉，因此無法在此保持開啟。";
 "menu_section_usage_summary" = "用量摘要（今天、7 天、請求、主要模型）";
-"provider_zones_pinned_title" = "已釘選";
-"provider_zones_pinned_subtitle" = "最多 %@ 個提供者。它們由上而下填入「概覽」標籤與堆疊列，並排在標籤列最前面。";
-"provider_zones_others_title" = "其他標籤";
-"provider_zones_others_subtitle" = "將提供者向上拖移以釘選，向下拖移以取消釘選。";
-"provider_zones_drop_here" = "將提供者拖放到這裡";
 "Back" = "返回";
 "Forward" = "前進";
 

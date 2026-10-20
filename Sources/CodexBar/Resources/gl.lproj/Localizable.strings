@@ -2587,11 +2587,6 @@
 "menu_preview_title" = "Vista previa do menú";
 "menu_preview_footer" = "Actualízase ao cambiar as opcións de abaixo. O menú real péchase cando Axustes ten o foco, polo que non pode quedar aberto aquí.";
 "menu_section_usage_summary" = "Resumo de uso (hoxe, 7 días, solicitudes, modelo principal)";
-"provider_zones_pinned_title" = "Fixados";
-"provider_zones_pinned_subtitle" = "Ata %@ provedores. Enchen a lapela Resumo e as barras apiladas, de arriba abaixo, e encabezan a barra de lapelas.";
-"provider_zones_others_title" = "Outras lapelas";
-"provider_zones_others_subtitle" = "Arrastra un provedor cara arriba para fixalo ou cara abaixo para soltalo.";
-"provider_zones_drop_here" = "Solta un provedor aquí";
 "Back" = "Atrás";
 "Forward" = "Adiante";
 

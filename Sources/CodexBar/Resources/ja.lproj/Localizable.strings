@@ -2588,11 +2588,6 @@
 "menu_preview_title" = "メニューのプレビュー";
 "menu_preview_footer" = "下のオプションを変更すると更新されます。設定が前面にあると実際のメニューは閉じるため、ここでは開いたままにできません。";
 "menu_section_usage_summary" = "使用状況の概要（今日、7日間、リクエスト、主なモデル）";
-"provider_zones_pinned_title" = "固定";
-"provider_zones_pinned_subtitle" = "最大%@個のプロバイダ。概要タブと積み上げバーを上から順に埋め、タブバーの先頭に並びます。";
-"provider_zones_others_title" = "その他のタブ";
-"provider_zones_others_subtitle" = "プロバイダを上にドラッグすると固定、下にドラッグすると固定を解除します。";
-"provider_zones_drop_here" = "ここにプロバイダをドロップ";
 "Back" = "戻る";
 "Forward" = "進む";
 

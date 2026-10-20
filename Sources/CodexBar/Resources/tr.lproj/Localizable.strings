@@ -2591,11 +2591,6 @@
 "menu_preview_title" = "Menü önizlemesi";
 "menu_preview_footer" = "Aşağıdaki seçenekleri değiştirdikçe güncellenir. Ayarlar etkinken gerçek menü kapanır, bu yüzden burada açık kalamaz.";
 "menu_section_usage_summary" = "Kullanım özeti (bugün, 7 gün, istekler, en çok kullanılan model)";
-"provider_zones_pinned_title" = "Sabitlenenler";
-"provider_zones_pinned_subtitle" = "En fazla %@ sağlayıcı. Genel Bakış sekmesini ve yığılmış çubukları yukarıdan aşağıya doldurur ve sekme çubuğunda en önde yer alır.";
-"provider_zones_others_title" = "Diğer sekmeler";
-"provider_zones_others_subtitle" = "Sabitlemek için bir sağlayıcıyı yukarı, sabitlemeyi kaldırmak için aşağı sürükleyin.";
-"provider_zones_drop_here" = "Sağlayıcıyı buraya bırakın";
 "Back" = "Geri";
 "Forward" = "İleri";
 

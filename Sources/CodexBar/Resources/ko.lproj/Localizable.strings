@@ -2556,11 +2556,6 @@
 "menu_preview_title" = "메뉴 미리보기";
 "menu_preview_footer" = "아래 옵션을 변경하면 업데이트됩니다. 설정이 활성화되면 실제 메뉴가 닫히므로 여기서 열어 둘 수 없습니다.";
 "menu_section_usage_summary" = "사용량 요약(오늘, 7일, 요청, 주요 모델)";
-"provider_zones_pinned_title" = "고정됨";
-"provider_zones_pinned_subtitle" = "최대 %@개 공급자. 개요 탭과 스택 막대를 위에서 아래로 채우고 탭 막대의 앞쪽에 표시됩니다.";
-"provider_zones_others_title" = "기타 탭";
-"provider_zones_others_subtitle" = "공급자를 위로 드래그하면 고정되고 아래로 드래그하면 고정이 해제됩니다.";
-"provider_zones_drop_here" = "여기에 공급자를 놓으세요";
 "Back" = "뒤로";
 "Forward" = "앞으로";
 

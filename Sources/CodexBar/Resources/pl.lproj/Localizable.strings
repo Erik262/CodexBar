@@ -2591,11 +2591,6 @@
 "menu_preview_title" = "Podgląd menu";
 "menu_preview_footer" = "Aktualizuje się podczas zmiany opcji poniżej. Prawdziwe menu zamyka się, gdy aktywne są Ustawienia, więc nie może tu pozostać otwarte.";
 "menu_section_usage_summary" = "Podsumowanie użycia (dziś, 7 dni, żądania, główny model)";
-"provider_zones_pinned_title" = "Przypięte";
-"provider_zones_pinned_subtitle" = "Do %@ dostawców. Wypełniają kartę Przegląd i paski w stosie od góry do dołu oraz otwierają pasek kart.";
-"provider_zones_others_title" = "Inne karty";
-"provider_zones_others_subtitle" = "Przeciągnij dostawcę w górę, aby go przypiąć, lub w dół, aby odpiąć.";
-"provider_zones_drop_here" = "Upuść tu dostawcę";
 "Back" = "Wstecz";
 "Forward" = "Dalej";
 

@@ -2588,11 +2588,6 @@
 "menu_preview_title" = "Prévia do menu";
 "menu_preview_footer" = "Atualiza conforme você muda as opções abaixo. O menu real fecha quando os Ajustes estão em foco, então não pode ficar aberto aqui.";
 "menu_section_usage_summary" = "Resumo de uso (hoje, 7 dias, solicitações, modelo principal)";
-"provider_zones_pinned_title" = "Fixados";
-"provider_zones_pinned_subtitle" = "Até %@ provedores. Eles preenchem a aba Visão geral e as barras empilhadas, de cima para baixo, e abrem a barra de abas.";
-"provider_zones_others_title" = "Outras abas";
-"provider_zones_others_subtitle" = "Arraste um provedor para cima para fixar ou para baixo para soltar.";
-"provider_zones_drop_here" = "Solte um provedor aqui";
 "Back" = "Voltar";
 "Forward" = "Avançar";
 

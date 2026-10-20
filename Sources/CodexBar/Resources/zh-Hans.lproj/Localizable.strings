@@ -2581,11 +2581,6 @@
 "menu_preview_title" = "菜单预览";
 "menu_preview_footer" = "更改下方选项时会实时更新。设置窗口处于活动状态时真实菜单会关闭，因此无法在此保持打开。";
 "menu_section_usage_summary" = "用量摘要（今天、7 天、请求、主要模型）";
-"provider_zones_pinned_title" = "已固定";
-"provider_zones_pinned_subtitle" = "最多 %@ 个提供商。它们自上而下填充“概览”标签和堆叠条，并排在标签栏最前面。";
-"provider_zones_others_title" = "其他标签";
-"provider_zones_others_subtitle" = "将提供商向上拖动以固定，向下拖动以取消固定。";
-"provider_zones_drop_here" = "将提供商拖放到这里";
 "Back" = "后退";
 "Forward" = "前进";
 

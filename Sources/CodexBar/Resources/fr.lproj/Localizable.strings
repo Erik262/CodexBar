@@ -2587,11 +2587,6 @@
 "menu_preview_title" = "Aperçu du menu";
 "menu_preview_footer" = "Se met à jour quand vous modifiez les options ci-dessous. Le vrai menu se ferme quand les Réglages sont au premier plan ; il ne peut donc pas rester ouvert ici.";
 "menu_section_usage_summary" = "Résumé d'utilisation (aujourd'hui, 7 jours, requêtes, modèle principal)";
-"provider_zones_pinned_title" = "Épinglés";
-"provider_zones_pinned_subtitle" = "Jusqu'à %@ fournisseurs. Ils remplissent l'onglet Vue d'ensemble et les barres empilées, de haut en bas, et ouvrent la barre d'onglets.";
-"provider_zones_others_title" = "Autres onglets";
-"provider_zones_others_subtitle" = "Faites glisser un fournisseur vers le haut pour l'épingler ou vers le bas pour le désépingler.";
-"provider_zones_drop_here" = "Déposez un fournisseur ici";
 "Back" = "Précédent";
 "Forward" = "Suivant";
 

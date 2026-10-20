@@ -57,7 +57,8 @@ enum SettingsSearchIndex {
                 "stacked_bars_window_title",
                 "stacked_bars_show_icons_title",
                 "switcher_rows_title",
-                "provider_zones_pinned_title",
+                "overview_tab_providers_title",
+                "Show all accounts in Overview",
                 "surprise_me_title",
             ]),
             (.menu, [

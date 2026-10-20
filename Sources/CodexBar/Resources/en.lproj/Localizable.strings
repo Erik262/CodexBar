@@ -2592,11 +2592,6 @@
 "menu_preview_title" = "Menu preview";
 "menu_preview_footer" = "Updates as you change the options below. The real menu closes while Settings has focus, so it can't stay open here.";
 "menu_section_usage_summary" = "Usage summary (today, 7 days, requests, top model)";
-"provider_zones_pinned_title" = "Pinned";
-"provider_zones_pinned_subtitle" = "Up to %@ providers. They fill the Overview tab top to bottom and lead the tab bar; the first three are the stacked bars.";
-"provider_zones_others_title" = "Other tabs";
-"provider_zones_others_subtitle" = "Drag a provider up to pin it or down to unpin it.";
-"provider_zones_drop_here" = "Drop a provider here";
 "Back" = "Back";
 "Forward" = "Forward";
 

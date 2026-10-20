@@ -2589,11 +2589,6 @@
 "menu_preview_title" = "Xem trước menu";
 "menu_preview_footer" = "Cập nhật khi bạn thay đổi các tùy chọn bên dưới. Menu thật sẽ đóng khi Cài đặt được chọn, nên không thể mở sẵn ở đây.";
 "menu_section_usage_summary" = "Tóm tắt sử dụng (hôm nay, 7 ngày, yêu cầu, mô hình hàng đầu)";
-"provider_zones_pinned_title" = "Đã ghim";
-"provider_zones_pinned_subtitle" = "Tối đa %@ nhà cung cấp. Chúng lấp đầy tab Tổng quan và các thanh xếp chồng từ trên xuống, và đứng đầu thanh tab.";
-"provider_zones_others_title" = "Tab khác";
-"provider_zones_others_subtitle" = "Kéo nhà cung cấp lên để ghim hoặc xuống để bỏ ghim.";
-"provider_zones_drop_here" = "Thả nhà cung cấp vào đây";
 "Back" = "Quay lại";
 "Forward" = "Tiếp";
 
