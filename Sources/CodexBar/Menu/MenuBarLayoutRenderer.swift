@@ -139,6 +139,7 @@ struct MenuBarLayoutRenderOptions: Hashable {
     let size: MenuBarLayoutSize
     let monospacedDigits: Bool
     let showWindowLabels: Bool
+    let barStyle: MenuBarLayoutBarStyle
     let colorPace: Bool
     let colorByProvider: Bool
     let highContrast: Bool
@@ -177,11 +178,13 @@ struct MenuBarLayoutRenderOptions: Hashable {
         colorByProvider: Bool = false,
         forceStackedStyle: Bool = false,
         monospacedDigits: Bool = false,
-        showWindowLabels: Bool = true)
+        showWindowLabels: Bool = true,
+        barStyle: MenuBarLayoutBarStyle = .segmented)
     {
         self.size = size
         self.monospacedDigits = monospacedDigits
         self.showWindowLabels = showWindowLabels
+        self.barStyle = barStyle
         self.colorPace = colorPace
         self.colorByProvider = colorByProvider
         self.highContrast = highContrast
@@ -203,6 +206,7 @@ struct MenuBarLayoutRenderKey: Hashable {
     let size: MenuBarLayoutSize
     let monospacedDigits: Bool
     let showWindowLabels: Bool
+    let barStyle: MenuBarLayoutBarStyle
     let colorPace: Bool
     let highContrast: Bool
     let showUsed: Bool
@@ -351,6 +355,7 @@ final class MenuBarLayoutRenderer {
             size: options.size,
             monospacedDigits: options.monospacedDigits,
             showWindowLabels: options.showWindowLabels,
+            barStyle: options.barStyle,
             colorPace: options.colorPace,
             highContrast: options.highContrast,
             showUsed: options.showUsed,
@@ -1408,7 +1413,8 @@ extension MenuBarLayoutRenderer {
             fillPercent: clamped,
             size: barSize,
             tint: style.foregroundColor,
-            stale: options.isStale)
+            stale: options.isStale,
+            barStyle: options.barStyle)
         let attachment = NSTextAttachment()
         attachment.image = image
         attachment.bounds = NSRect(
@@ -1449,11 +1455,15 @@ extension MenuBarLayoutRenderer {
         fillPercent: Double,
         size: NSSize,
         tint: NSColor,
-        stale: Bool)
+        stale: Bool,
+        barStyle: MenuBarLayoutBarStyle)
         -> NSImage
     {
-        // Graphical counterpart to the persisted three-segment character usageBar.
         let alpha: CGFloat = stale ? 0.55 : 1.0
+        if barStyle == .pill {
+            return self.pillBarImage(fillPercent: fillPercent, size: size, tint: tint, alpha: alpha)
+        }
+        // Graphical counterpart to the persisted three-segment character usageBar.
         let segmentCount = 5
         let gap: CGFloat = 2
         let corner = min(size.height, 3) / 2
@@ -1473,6 +1483,31 @@ extension MenuBarLayoutRenderer {
                     path.stroke()
                 }
             }
+            return true
+        }
+    }
+
+    /// One continuous rounded track with a fill clipped to its capsule shape.
+    private static func pillBarImage(
+        fillPercent: Double,
+        size: NSSize,
+        tint: NSColor,
+        alpha: CGFloat)
+        -> NSImage
+    {
+        NSImage(size: size, flipped: false) { rect in
+            let radius = rect.height / 2
+            let track = NSBezierPath(roundedRect: rect, xRadius: radius, yRadius: radius)
+            tint.withAlphaComponent(0.38 * alpha).setFill()
+            track.fill()
+            // Snap to half points so the fill edge stays crisp on Retina displays.
+            let fill = (rect.width * CGFloat(fillPercent.clamped(to: 0...100) / 100) * 2).rounded() / 2
+            guard fill > 0 else { return true }
+            NSGraphicsContext.saveGraphicsState()
+            track.addClip()
+            tint.withAlphaComponent(alpha).setFill()
+            NSBezierPath(rect: NSRect(x: rect.minX, y: rect.minY, width: fill, height: rect.height)).fill()
+            NSGraphicsContext.restoreGraphicsState()
             return true
         }
     }
