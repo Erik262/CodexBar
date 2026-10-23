@@ -2,6 +2,10 @@
 
 ## 0.81.1 — Unreleased
 
+### Added
+
+- Menu bar: add a Bar style layout option that draws graphical progress bars as one continuous pill instead of five segments; segmented stays the default and saved layouts are unchanged. Thanks @Erik262!
+
 ## 0.81.0 — 2026-10-24
 
 ### Highlights
