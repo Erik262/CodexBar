@@ -1136,7 +1136,9 @@ final class MenuBarLayoutRenderer {
     {
         (NSAttributedString(string: value, attributes: attributes), accessibilityText)
     }
+}
 
+extension MenuBarLayoutRenderer {
     private static func window(
         _ percentWindow: PercentWindow,
         data: MenuBarLayoutRenderData)
