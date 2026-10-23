@@ -471,6 +471,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         MenuBarStatusItemWindowProbe.trace("did-finish-launching")
+        WidgetExtensionRecovery.launch(reload: UsageStore.reloadWidgetTimelines)
         self.dockIconController.start()
         self.memoryPressureMonitor.start()
         #if DEBUG
