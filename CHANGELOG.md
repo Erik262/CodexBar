@@ -62,6 +62,10 @@
 - Menu bar: make neutral pace percentages with font-scaled green/red state bars the default, preserving saved color choices (#4714, #4791). Thanks @arnodirlam!
 - Updates: refresh Sparkle to improve update installation, download progress, and release-note handling.
 
+### Added
+
+- Menu bar: add a Bar style layout option that draws graphical progress bars as one continuous pill instead of five segments; segmented stays the default and saved layouts are unchanged. Thanks @Erik262!
+
 ## 0.82.0 — 2026-10-26
 
 ### Highlights
