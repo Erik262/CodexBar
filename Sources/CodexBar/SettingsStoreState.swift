@@ -50,8 +50,11 @@ struct SettingsDefaultsState {
     var storedMenuBarLayout: MenuBarLayout?
     var menuBarLayoutConditionals: [MenuBarLayoutConditional]
     var menuBarLayoutOverridesRaw: [String: MenuBarLayout]
+    var menuBarLayoutMonospacedDigits: Bool
+    var menuBarLayoutShowWindowLabels: Bool
     var menuBarLayoutSizeRaw: String
     var menuBarLayoutGapRaw: String
+    var menuBarLayoutBarStyleRaw: String
     var menuBarLayoutVerticalAdjustment: Int
     var copilotBudgetExtrasEnabled: Bool
     var copilotIconSecondaryWindowIDRaw: String
@@ -87,6 +90,7 @@ struct SettingsDefaultsState {
     var jetbrainsIDEBasePath: String
     var mergeIcons: Bool
     var mergedOverviewLayoutRaw: String
+    var mergedOverviewAllAccounts: Bool
     var switcherShowsIcons: Bool
     var mergeIconsStacked: Bool
     var mergeIconStackedTopProviderRaw: String?
@@ -100,6 +104,7 @@ struct SettingsDefaultsState {
     var appLanguageRaw: String?
     var terminalAppRaw: String?
     var agentSessionsEnabled: Bool
+    var agentSessionsRemoteEnabled: Bool
     var agentSessionLabelStyleRaw: String
     var agentSessionsManualHosts: String
     var agentSessionsHideUnreachableHosts: Bool

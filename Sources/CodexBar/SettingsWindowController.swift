@@ -88,10 +88,8 @@ final class SettingsWindowController: NSWindowController {
                 backing: .buffered,
                 defer: false)
             window.contentViewController = hostingController
-            window.title = selection.pane.title
-            window.titlebarAppearsTransparent = true
-            window.titleVisibility = .visible
-            window.titlebarSeparatorStyle = .none
+            window.title = selection.title
+            SettingsWindowToolbar.configure(window)
             window.isReleasedWhenClosed = false
             SettingsWindowSizing.enforceMinimumSize(window)
             if !window.setFrameUsingName(SettingsWindowIdentity.frameAutosaveName) {
@@ -111,6 +109,9 @@ final class SettingsWindowController: NSWindowController {
     func open(pane: SettingsPane?) -> Outcome {
         if let pane {
             self.selection.pane = pane
+        }
+        if pane == .about {
+            self.selection.requestAboutRoot()
         }
 
         self.prepareToPresent()

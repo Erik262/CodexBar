@@ -3,44 +3,70 @@ import Foundation
 
 @MainActor
 extension UsageStore {
-    /// Returns the enabled candidate provider with the highest usage percentage (closest to rate limit).
+    /// Returns the enabled candidate closest to depletion, using the same forecast as Auto.
     /// Excludes providers that are fully rate-limited.
-    func providerWithHighestUsage(candidateProviders: [UsageProvider]? = nil, now: Date = Date())
+    func providerWithHighestUsage(
+        candidateProviders: [UsageProvider]? = nil,
+        usageSource: (@MainActor (UsageProvider) -> MenuBarUsageSource)? = nil,
+        now: Date = Date())
         -> (provider: UsageProvider, usedPercent: Double)?
     {
         let candidateSet = candidateProviders.map(Set.init)
-        var highest: (provider: UsageProvider, usedPercent: Double)?
-        for instanceID in self.enabledProviders() {
-            guard let provider = instanceID.firstPartyProvider,
-                  candidateSet?.contains(provider) ?? true,
-                  let snapshot = self.menuBarSnapshot(for: instanceID)
-            else { continue }
-            guard let window = self.menuBarMetricWindowForHighestUsage(
+        var highest: (provider: UsageProvider, selection: AutomaticQuotaSelection.Selection)?
+        for provider in self.enabledFirstPartyProvidersForDisplay() {
+            guard candidateSet?.contains(provider) ?? true else { continue }
+            let source = usageSource?(provider) ?? .local(self.menuBarSnapshot(for: provider.instanceID))
+            guard self.isEnabled(provider) || source.isFleet,
+                  let snapshot = source.snapshot else { continue }
+            let automatic = self.settings.menuBarMetricPreference(for: provider, snapshot: snapshot) == .automatic
+            // Provider-specific by design: Codex projection retains source pace slots after lane reclassification.
+            let selection: AutomaticQuotaSelection.Selection? = if provider == .codex, automatic, !source.isFleet {
+                self.codexConsumerProjection(
+                    surface: .menuBar,
+                    snapshotOverride: snapshot,
+                    now: now).automaticMenuBarSelection()
+            } else if let window = self.menuBarMetricWindowForHighestUsage(
                 provider: provider,
                 snapshot: snapshot,
+                includeLocalDerivedData: !source.isFleet,
                 now: now)
-            else {
-                continue
+            {
+                AutomaticQuotaSelection.selection(
+                    candidate: .init(
+                        window: window,
+                        paceSlot: automatic ? AutomaticQuotaSelection.paceSlot(for: window, in: snapshot) : nil),
+                    provider: provider,
+                    now: now,
+                    dataConfidence: snapshot.dataConfidence)
+            } else {
+                nil
             }
+            guard let selection else { continue }
+            let window = selection.window
             let percent = window.usedPercent
             guard !self.shouldExcludeFromHighestUsage(
                 provider: provider,
                 snapshot: snapshot,
                 metricPercent: percent,
+                includeLocalDerivedData: !source.isFleet,
                 now: now)
             else {
                 continue
             }
-            if highest == nil || percent > highest!.usedPercent {
-                highest = (provider, percent)
+            let priority = automatic
+                ? selection
+                : AutomaticQuotaSelection.Selection(candidate: selection.candidate, eta: nil)
+            if highest.map({ AutomaticQuotaSelection.precedes($0.selection, priority) }) ?? true {
+                highest = (provider, priority)
             }
         }
-        return highest
+        return highest.map { ($0.provider, $0.selection.window.usedPercent) }
     }
 
     private func menuBarMetricWindowForHighestUsage(
         provider: UsageProvider,
         snapshot: UsageSnapshot,
+        includeLocalDerivedData: Bool,
         now: Date) -> RateWindow?
     {
         let effectivePreference = self.settings.menuBarMetricPreference(for: provider, snapshot: snapshot)
@@ -51,7 +77,7 @@ extension UsageStore {
         {
             return Self.mostConstrainedAntigravityQuotaSummaryWindow(snapshot: snapshot)
         }
-        if provider == .codex {
+        if includeLocalDerivedData, provider == .codex {
             return self.codexMenuBarMetricWindow(snapshot: snapshot, now: now)
         }
         return MenuBarMetricWindowResolver.rateWindow(
@@ -67,6 +93,7 @@ extension UsageStore {
         provider: UsageProvider,
         snapshot: UsageSnapshot,
         metricPercent: Double,
+        includeLocalDerivedData: Bool,
         now: Date)
         -> Bool
     {
@@ -76,7 +103,7 @@ extension UsageStore {
         if provider == .codex || provider == .claude, effectivePreference == .primaryAndSecondary {
             if provider == .codex,
                self.codexConsumerProjection(
-                   surface: .menuBar,
+                   surface: includeLocalDerivedData ? .menuBar : .overrideCard,
                    snapshotOverride: snapshot,
                    now: now).hasBindingWeeklyCap
             {

@@ -4,6 +4,7 @@ import SwiftUI
 @MainActor
 struct AboutPane: View {
     let updater: UpdaterProviding
+    @Bindable var selection: PreferencesSelection
     @State private var iconHover = false
     @AppStorage("autoUpdateEnabled") private var autoUpdateEnabled: Bool = true
     @AppStorage(UpdateChannel.userDefaultsKey)
@@ -24,6 +25,14 @@ struct AboutPane: View {
     }
 
     var body: some View {
+        if self.selection.destination.aboutRoute == .acknowledgements {
+            AcknowledgementsView(acknowledgements: Acknowledgement.load())
+        } else {
+            self.form
+        }
+    }
+
+    private var form: some View {
         Form {
             Section {
                 self.hero
@@ -41,6 +50,23 @@ struct AboutPane: View {
                 AboutLinkRow(icon: "globe", title: L("link_website"), url: "https://codexbar.app")
                 AboutLinkRow(icon: "bird", title: L("link_twitter"), url: "https://twitter.com/steipete")
                 AboutLinkRow(icon: "envelope", title: L("link_email"), url: "mailto:peter@steipete.me")
+                Button {
+                    self.selection.showAcknowledgements()
+                } label: {
+                    HStack(spacing: 8) {
+                        Image(systemName: "heart.text.square")
+                            .frame(width: 18)
+                            .foregroundStyle(.secondary)
+                        Text(L("link_acknowledgements"))
+                        Spacer()
+                        Image(systemName: "chevron.forward")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(.tertiary)
+                    }
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(L("link_acknowledgements"))
             } header: {
                 Text(L("section_links"))
             } footer: {
@@ -157,6 +183,10 @@ struct AboutPane: View {
         guard let url = URL(string: "https://github.com/steipete/CodexBar") else { return }
         NSWorkspace.shared.open(url)
     }
+}
+
+enum AboutRoute: Hashable {
+    case acknowledgements
 }
 
 @MainActor

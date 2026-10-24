@@ -96,12 +96,84 @@ struct PreferencesView: View {
     }
 
     var body: some View {
+        Group {
+            if #available(macOS 26.0, *) {
+                self.splitViewLayout
+            } else {
+                self.legacyLayout
+            }
+        }
+        .frame(
+            minWidth: SettingsPane.windowMinWidth,
+            idealWidth: SettingsPane.windowWidth,
+            maxWidth: .infinity,
+            minHeight: SettingsPane.windowMinHeight,
+            idealHeight: SettingsPane.windowHeight,
+            maxHeight: .infinity)
+        .id(self.settings.appLanguage)
+        .codexBarLocalized()
+        .background {
+            SettingsWindowAppearanceBridge(colorScheme: self.colorScheme, windowTitle: self.selection.title)
+                .allowsHitTesting(false)
+        }
+        .onAppear {
+            self.ensureValidSelection()
+        }
+        .onChange(of: self.settings.debugMenuEnabled) { _, _ in
+            self.ensureValidSelection()
+        }
+        .onChange(of: self.settings.shouldRequestAdaptiveActivityScanConsent) { _, shouldRequest in
+            guard shouldRequest else { return }
+            AdaptiveActivityConsentPresenter.presentIfNeeded(settings: self.settings)
+        }
+    }
+
+    /// macOS 26+: a standard split view, so the sidebar, toolbar, search field and scroll edge
+    /// effects all come from the system and adopt Liquid Glass natively.
+    @available(macOS 26.0, *)
+    private var splitViewLayout: some View {
+        NavigationSplitView {
+            SettingsSidebarView(
+                settings: self.settings,
+                store: self.store,
+                selection: self.$selection.pane,
+                onSelectAbout: { self.selection.requestAboutRoot() })
+                .modifier(SettingsSidebarSizing(width: self.$sidebarWidth))
+        } detail: {
+            self.detailView
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .navigationTitle(self.selection.title)
+                // Panes that draw their own heading keep the window title for accessibility and the
+                // Window menu, but drop it from the toolbar.
+                .toolbar(removing: self.showsToolbarTitle ? nil : .title)
+                .toolbar {
+                    ToolbarItem(placement: .navigation) {
+                        SettingsHistoryButtons(selection: self.selection)
+                    }
+                }
+        }
+    }
+
+    private var showsToolbarTitle: Bool {
+        switch self.selection.pane {
+        case .usageSpend: false
+        case let .provider(instanceID): instanceID.firstPartyProvider == nil
+        default: true
+        }
+    }
+
+    /// macOS 14/15: hand-built sidebar and titlebar backing.
+    private var legacyLayout: some View {
         HStack(spacing: 0) {
             // Golden Gate-style sidebar: edge-to-edge material with a hairline separator,
             // no floating card chrome. The material ignores the safe area so it runs up
             // behind the transparent titlebar. The width is user-resizable via the
             // input-only drag strip overlaid on the detail pane's leading edge.
-            SettingsSidebarView(settings: self.settings, store: self.store, selection: self.$selection.pane)
+            SettingsSidebarView(
+                settings: self.settings,
+                store: self.store,
+                selection: self.$selection.pane,
+                onSelectAbout: { self.selection.requestAboutRoot() })
                 .frame(width: self.clampedSidebarWidth)
                 .background {
                     SettingsSidebarMaterial()
@@ -140,32 +212,14 @@ struct PreferencesView: View {
                         .ignoresSafeArea(edges: .top)
                         .allowsHitTesting(false)
                 }
+                .safeAreaInset(edge: .top, spacing: 0) {
+                    SettingsHistoryButtons(selection: self.selection)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(8)
+                }
                 .overlay(alignment: .leading) {
                     self.sidebarResizeHandle
                 }
-        }
-        .frame(
-            minWidth: SettingsPane.windowMinWidth,
-            idealWidth: SettingsPane.windowWidth,
-            maxWidth: .infinity,
-            minHeight: SettingsPane.windowMinHeight,
-            idealHeight: SettingsPane.windowHeight,
-            maxHeight: .infinity)
-        .id(self.settings.appLanguage)
-        .codexBarLocalized()
-        .background {
-            SettingsWindowAppearanceBridge(colorScheme: self.colorScheme, windowTitle: self.selection.pane.title)
-                .allowsHitTesting(false)
-        }
-        .onAppear {
-            self.ensureValidSelection()
-        }
-        .onChange(of: self.settings.debugMenuEnabled) { _, _ in
-            self.ensureValidSelection()
-        }
-        .onChange(of: self.settings.shouldRequestAdaptiveActivityScanConsent) { _, shouldRequest in
-            guard shouldRequest else { return }
-            AdaptiveActivityConsentPresenter.presentIfNeeded(settings: self.settings)
         }
     }
 
@@ -206,7 +260,7 @@ struct PreferencesView: View {
         case .plugins:
             PluginsPane(settings: self.settings, store: self.store)
         case .about:
-            AboutPane(updater: self.updater)
+            AboutPane(updater: self.updater, selection: self.selection)
         case .debug:
             DebugPane(settings: self.settings, store: self.store)
         case let .provider(instanceID):
@@ -224,9 +278,11 @@ struct PreferencesView: View {
     }
 
     private func ensureValidSelection() {
-        if !self.settings.debugMenuEnabled, self.selection.pane == .debug {
+        guard !self.settings.debugMenuEnabled else { return }
+        if self.selection.pane == .debug {
             self.selection.pane = .general
         }
+        self.selection.removeFromHistory { $0 == .debug }
     }
 }
 
@@ -400,24 +456,64 @@ final class SettingsWindowAppearanceView: NSView {
         if !window.styleMask.contains(.miniaturizable) {
             window.styleMask.insert(.miniaturizable)
         }
-        if !window.titlebarAppearsTransparent {
-            window.titlebarAppearsTransparent = true
-        }
-        if window.titleVisibility != .visible {
-            window.titleVisibility = .visible
-        }
-        if window.titlebarSeparatorStyle != .none {
-            window.titlebarSeparatorStyle = .none
-        }
-        if window.toolbar != nil {
-            window.toolbar = nil
-        }
+        SettingsWindowToolbar.configure(window)
         // Full-size content lets the sidebar material extend behind the titlebar so the
         // edge-to-edge sidebar reaches the top of the window; content stays below the
         // titlebar via the safe area.
         if !window.styleMask.contains(.fullSizeContentView) {
             window.styleMask.insert(.fullSizeContentView)
         }
+    }
+}
+
+@MainActor
+enum SettingsWindowToolbar {
+    static func configure(_ window: NSWindow) {
+        // On macOS 26+ the split view owns the toolbar and title through the hosting controller's
+        // scene bridging, so the titlebar keeps its native Liquid Glass and scroll edge behavior.
+        guard #unavailable(macOS 26.0) else { return }
+        if !window.titlebarAppearsTransparent {
+            window.titlebarAppearsTransparent = true
+        }
+        if window.titleVisibility != .visible {
+            window.titleVisibility = .visible
+        }
+        if window.toolbar != nil {
+            window.toolbar = nil
+        }
+        if window.titlebarSeparatorStyle != .none {
+            window.titlebarSeparatorStyle = .none
+        }
+    }
+}
+
+@MainActor
+struct SettingsHistoryButtons: View {
+    @Bindable var selection: PreferencesSelection
+
+    var body: some View {
+        ControlGroup {
+            Button {
+                self.selection.goBack()
+            } label: {
+                Label(L("Back"), systemImage: "chevron.backward")
+            }
+            .disabled(!self.selection.canGoBack)
+            .keyboardShortcut("[", modifiers: .command)
+            .help(L("Back"))
+
+            Button {
+                self.selection.goForward()
+            } label: {
+                Label(L("Forward"), systemImage: "chevron.forward")
+            }
+            .disabled(!self.selection.canGoForward)
+            .keyboardShortcut("]", modifiers: .command)
+            .help(L("Forward"))
+        }
+        .controlGroupStyle(.navigation)
+        .labelStyle(.iconOnly)
+        .fixedSize()
     }
 }
 

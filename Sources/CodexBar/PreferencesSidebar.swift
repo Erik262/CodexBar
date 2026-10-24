@@ -8,23 +8,44 @@ struct SettingsSidebarView: View {
     @Bindable var settings: SettingsStore
     @Bindable var store: UsageStore
     @Binding var selection: SettingsPane
+    var onSelectAbout: () -> Void = {}
     @State private var searchText = ""
     @Environment(\.undoManager) private var undoManager
 
     var body: some View {
-        VStack(spacing: 0) {
-            HStack(spacing: 6) {
-                SettingsSidebarSearchField(searchText: self.$searchText)
-                SettingsSidebarSortToggle(
-                    isOn: self.$settings.providersSortedAlphabetically,
-                    enabledOnly: self.$settings.providersEnabledOnly,
-                    onRestore: self.restoreProviderOrder)
+        if #available(macOS 26.0, *) {
+            self.content
+                .searchable(text: self.$searchText, placement: .sidebar, prompt: L("Search providers"))
+                .toolbar {
+                    SettingsSidebarSortToolbar(
+                        isOn: self.$settings.providersSortedAlphabetically,
+                        enabledOnly: self.$settings.providersEnabledOnly,
+                        canRestore: self.settings.canRestoreDefaultProviderOrder,
+                        onRestore: self.restoreProviderOrder)
+                }
+        } else {
+            VStack(spacing: 0) {
+                HStack(spacing: 6) {
+                    SettingsSidebarSearchField(searchText: self.$searchText)
+                    SettingsSidebarSortToggle(
+                        isOn: self.$settings.providersSortedAlphabetically,
+                        enabledOnly: self.$settings.providersEnabledOnly,
+                        canRestore: self.settings.canRestoreDefaultProviderOrder,
+                        onRestore: self.restoreProviderOrder)
+                }
+                .padding(.horizontal, 8)
+                .padding(.top, 16)
+                .padding(.bottom, 8)
+
+                self.content
             }
             .padding(.horizontal, 8)
-            .padding(.top, 16)
-            .padding(.bottom, 8)
+        }
+    }
 
-            List(selection: self.selectionBinding) {
+    private var content: some View {
+        VStack(spacing: 0) {
+            List(selection: Binding(self.$selection)) {
                 self.appPanesSection
                 self.providersSection
             }
@@ -44,7 +65,6 @@ struct SettingsSidebarView: View {
                 .accessibilityElement(children: .contain)
             }
         }
-        .padding(.horizontal, 8)
     }
 
     private var appPanesSection: some View {
@@ -58,7 +78,7 @@ struct SettingsSidebarView: View {
             SettingsSidebarPaneRow(pane: .advanced, systemImage: "slider.horizontal.3", color: .purple)
             SettingsSidebarPaneRow(pane: .hooks, systemImage: "bolt.horizontal.circle.fill", color: .orange)
             SettingsSidebarPaneRow(pane: .plugins, systemImage: "puzzlepiece.extension.fill", color: .indigo)
-            SettingsSidebarAboutRow()
+            SettingsSidebarAboutRow(onSelect: self.onSelectAbout)
             if self.settings.debugMenuEnabled {
                 SettingsSidebarPaneRow(pane: .debug, systemImage: "ladybug.fill", color: .red)
             }
@@ -76,7 +96,7 @@ struct SettingsSidebarView: View {
                 if self.settings.moveVisibleProviders(
                     visibleProviders.map(\.instanceID), fromOffsets: fromOffsets, toOffset: toOffset)
                 {
-                    self.registerOrderUndo()
+                    self.settings.registerProviderOrderUndo(in: self.undoManager)
                 }
             }
 
@@ -112,21 +132,7 @@ struct SettingsSidebarView: View {
     }
 
     private func restoreProviderOrder() {
-        if self.settings.restoreDefaultProviderOrder() { self.registerOrderUndo() }
-    }
-
-    private func registerOrderUndo() {
-        self.settings.registerProviderOrderUndo(in: self.undoManager)
-    }
-
-    private var selectionBinding: Binding<SettingsPane?> {
-        Binding(
-            get: { self.selection },
-            set: { newValue in
-                if let newValue {
-                    self.selection = newValue
-                }
-            })
+        if self.settings.restoreDefaultProviderOrder() { self.settings.registerProviderOrderUndo(in: self.undoManager) }
     }
 
     private var orderedProviders: [UsageProvider] {
@@ -187,6 +193,8 @@ private struct SettingsSidebarPaneRow: View {
 
 @MainActor
 private struct SettingsSidebarAboutRow: View {
+    let onSelect: () -> Void
+
     var body: some View {
         HStack(spacing: 8) {
             if let icon = NSApplication.shared.applicationIconImage {
@@ -200,6 +208,10 @@ private struct SettingsSidebarAboutRow: View {
             }
             Text(SettingsPane.about.title)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .contentShape(Rectangle())
+        // List selection ignores clicks on the already-selected row; this also returns a pushed subpage to About.
+        .simultaneousGesture(TapGesture().onEnded { self.onSelect() })
         .tag(SettingsPane.about)
     }
 }
@@ -323,9 +335,42 @@ private struct SettingsSidebarSearchField: View {
     }
 }
 
+/// macOS 26+ sidebar toolbar group: a standard toolbar toggle (which shows its own on state) and a
+/// sorting menu, so the toolbar supplies their shared Liquid Glass.
+private struct SettingsSidebarSortToolbar: ToolbarContent {
+    @Binding var isOn: Bool
+    @Binding var enabledOnly: Bool
+    let canRestore: Bool
+    let onRestore: () -> Void
+
+    var body: some ToolbarContent {
+        ToolbarItemGroup {
+            Toggle(isOn: self.$isOn) {
+                Label(L("Sort providers alphabetically"), systemImage: "arrow.up.arrow.down")
+            }
+            .help(self.isOn
+                ? L("Sorted alphabetically (enabled first) — click to use your custom order")
+                : L("Sort providers alphabetically (enabled first)"))
+
+            Menu {
+                Toggle(L("Only show enabled providers"), isOn: self.$enabledOnly)
+                Divider()
+                Button(L("Restore default order"), action: self.onRestore)
+                    .disabled(!self.canRestore)
+                    .help(L("Also restores the provider order in the menu bar. Can be undone."))
+            } label: {
+                Label(L("Provider sorting"), systemImage: "chevron.down")
+            }
+            .menuIndicator(.hidden)
+            .help(L("Provider sorting"))
+        }
+    }
+}
+
 private struct SettingsSidebarSortToggle: View {
     @Binding var isOn: Bool
     @Binding var enabledOnly: Bool
+    let canRestore: Bool
     let onRestore: () -> Void
 
     var body: some View {
@@ -347,9 +392,10 @@ private struct SettingsSidebarSortToggle: View {
             .accessibilityAddTraits(self.isOn ? .isSelected : [])
 
             Menu {
-                Toggle(L("Only enabled providers"), isOn: self.$enabledOnly)
+                Toggle(L("Only show enabled providers"), isOn: self.$enabledOnly)
                 Divider()
                 Button(L("Restore default order"), action: self.onRestore)
+                    .disabled(!self.canRestore)
                     .help(L("Also restores the provider order in the menu bar. Can be undone."))
             } label: {
                 Image(systemName: "chevron.down")
