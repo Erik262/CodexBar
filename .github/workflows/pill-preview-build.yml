@@ -1,0 +1,39 @@
+name: Pill preview build
+
+# Fork-only helper: builds an ad-hoc signed CodexBar.app from this branch and uploads it as a workflow
+# artifact. Ad-hoc builds ship without an update feed, so the preview never auto-updates. Not for upstream.
+
+on:
+  push:
+    branches: [claude/project-thread-bbegn3-build]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  macos-app:
+    runs-on: xcode-27
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Select Xcode 27
+        run: |
+          set -euo pipefail
+          sudo xcode-select -s /Applications/Xcode_27.0.app/Contents/Developer
+          echo "DEVELOPER_DIR=/Applications/Xcode_27.0.app/Contents/Developer" >> "$GITHUB_ENV"
+          /usr/bin/xcodebuild -version
+
+      - name: Package app
+        run: |
+          set -euo pipefail
+          CODEXBAR_SIGNING=adhoc ARCHES="arm64" ./Scripts/package_app.sh release
+          mkdir -p dist
+          ditto -c -k --sequesterRsrc --keepParent CodexBar.app dist/CodexBar-pill-preview.zip
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: CodexBar-pill-preview
+          path: dist/CodexBar-pill-preview.zip
+          retention-days: 14
