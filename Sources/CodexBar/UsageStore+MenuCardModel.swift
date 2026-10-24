@@ -225,6 +225,6 @@ extension UsageStore {
         guard self.settings.quotaWarningMarkersVisible,
               self.settings.quotaWarningEnabled(provider: provider, window: window)
         else { return [] }
-        return self.settings.resolvedQuotaWarningThresholds(provider: provider, window: window)
+        return self.settings.resolvedQuotaWarningThresholds(provider: provider.instanceID, window: window)
     }
 }
