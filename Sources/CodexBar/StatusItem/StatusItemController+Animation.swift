@@ -14,7 +14,7 @@ extension StatusItemController {
         // Stacked rows always render through the layout-token path (`applyStoredStackedMenuBarLayoutIfNeeded`
         // requires `menuBarShowsBrandIconWithPercent`), which has no phase-driven blink/wiggle/tilt/morph
         // rendering — scheduling the 30 FPS driver here would only burn CPU for frames that never change.
-        if self.stackedMergeIconProvidersIfActive() != nil {
+        if self.stackedMergeIconProvidersIfActive() != nil || self.stackedBarProvidersIfActive() != nil {
             return false
         }
         if self.shouldMergeIcons {
@@ -56,7 +56,9 @@ extension StatusItemController {
     }
 
     private func blinkingProviders() -> [UsageProvider] {
-        guard self.stackedMergeIconProvidersIfActive() == nil else { return [] }
+        guard self.stackedMergeIconProvidersIfActive() == nil, self.stackedBarProvidersIfActive() == nil else {
+            return []
+        }
         let merged = self.shouldMergeIcons
         let providers = merged
             ? [self.primaryProviderForUnifiedIcon()].compactMap(\.firstPartyProvider)
@@ -252,9 +254,14 @@ extension StatusItemController {
             return true
         }
         defer {
-            let providers = self.stackedMergeIconProvidersIfActive().map { [$0.top, $0.bottom] }
+            let providers = self.stackedBarProvidersIfActive()
+                ?? self.stackedMergeIconProvidersIfActive().map { [$0.top, $0.bottom] }
                 ?? self.primaryProviderForUnifiedIcon().firstPartyProvider.map { [$0] } ?? []
             self.updateMenuBarSourceDescription(for: button, providers: providers)
+        }
+
+        if let barProviders = self.stackedBarProvidersIfActive() {
+            return self.applyStackedBarsIcon(providers: barProviders, button: button)
         }
 
         if let rows = self.stackedMergeIconProvidersIfActive(),
@@ -293,6 +300,46 @@ extension StatusItemController {
             return false
         }
         return self.applyIcon(for: provider, phase: phase, statusItem: self.statusItem, merged: true)
+    }
+
+    /// One image with a brand icon and a meter per provider row; returns whether the render was skipped.
+    private func applyStackedBarsIcon(providers: [UsageProvider], button: NSStatusBarButton) -> Bool {
+        self.statusItem.length = NSStatusItem.variableLength
+        let window = self.settings.stackedBarsWindow
+        let rows = providers.map { provider in
+            let snapshot = self.menuBarUsageSource(for: provider).snapshot
+            let percents = self.resolvedMenuBarIconPercents(
+                provider: provider,
+                snapshot: snapshot,
+                style: self.store.style(for: provider),
+                showUsed: self.settings.usageBarsShowUsed)
+            // Single-lane providers fall back to their only lane instead of drawing a misleading empty track.
+            let percent = window == .session
+                ? percents?.primary ?? percents?.secondary
+                : percents?.secondary ?? percents?.primary
+            return StackedBarsIconRenderer.Row(
+                percent: percent,
+                stale: percent == nil || self.menuBarIsStale(for: provider))
+        }
+        let rowSignatures = zip(providers, rows).map { provider, row in
+            "\(provider.rawValue)=\(Self.iconSignatureValue(row.percent)):\(row.stale ? "1" : "0")"
+        }
+        let signature = ([
+            "mode=stackedBars",
+            "window=\(window.rawValue)",
+            "icons=\(self.settings.stackedBarsShowIcons ? "1" : "0")",
+            "highContrast=\(self.shouldUseHighContrastStatusItemContent ? "1" : "0")",
+        ] + rowSignatures).joined(separator: "|")
+        let canSkipCachedRender = self.prepareButtonForImageOnlyCacheHit(button)
+        if self.shouldSkipMergedIconRender(signature), canSkipCachedRender {
+            self.noteIconPerfRender(skipped: true)
+            return true
+        }
+        let icons = self.settings.stackedBarsShowIcons ? providers.map { self.brandIcon($0) } : []
+        let image = StackedBarsIconRenderer.makeImage(rows: rows, icons: icons)
+        self.setButtonContent(image: image, title: nil, tint: nil, for: button)
+        self.noteIconPerfRender(skipped: false)
+        return false
     }
 
     private func deferMergedIconRenderDuringMenuTrackingIfNeeded() -> Bool {
@@ -1173,7 +1220,7 @@ extension StatusItemController {
             source: self.settings.unifiedIconSource,
             focusedProvider: self.frontmostProviderMonitor?.currentProvider,
             isMergedMenuOpen: self.isMergedMenuOpen,
-            isStacked: self.stackedMergeIconProvidersIfActive() != nil)
+            isStacked: self.stackedMergeIconProvidersIfActive() != nil || self.stackedBarProvidersIfActive() != nil)
             .resolve(
                 fallback: fallback,
                 mergeIcons: self.shouldMergeIcons,

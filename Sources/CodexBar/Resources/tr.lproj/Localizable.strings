@@ -646,9 +646,15 @@
 "merge_icons_title" = "Simgeleri birleştir";
 "merge_icons_subtitle" = "Sağlayıcı seçicili tek bir menü çubuğu simgesi kullan.";
 "merged_icon_style_title" = "Birleşik simge stili";
-"merged_icon_style_subtitle" = "Değiştirici sağlayıcılar arasında tek tek geçiş yapar; Yığılmış ise iki sağlayıcıyı aynı anda, her biri kendi satırında gösterir.";
+"merged_icon_style_subtitle" = "Değiştirici her seferinde bir sağlayıcı gösterir. Yığın, iki sağlayıcıyı metin satırları olarak gösterir. Yığılmış çubuklar iki veya üç sağlayıcıyı gösterge olarak çizer.";
 "merged_icon_style_switcher" = "Değiştirici";
 "merged_icon_style_stacked" = "Yığılmış";
+"merged_icon_style_bars" = "Yığılmış çubuklar";
+"stacked_bars_window_title" = "Çubuklar gösterir";
+"stacked_bars_window_session" = "Oturum kullanımı";
+"stacked_bars_window_weekly" = "Haftalık kullanım";
+"stacked_bars_show_icons_title" = "Sağlayıcı simgelerini göster";
+"stacked_bars_section_footer" = "Çubuklar Menü altında ayarlanan doldurma yönünü izler (kalan veya kullanılan).";
 "merge_icon_stacked_top_provider_title" = "Üst satır";
 "merge_icon_stacked_bottom_provider_title" = "Alt satır";
 "display_mode_title" = "Görünüm modu";

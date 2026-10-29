@@ -47,6 +47,7 @@ struct LocalizationLanguageCatalogTests {
             "merged_icon_source_highest_usage",
             "merged_icon_source_subtitle",
             "merged_icon_source_title",
+            "merged_icon_style_bars",
             "menu_bar_layout_bar_style",
             "menu_bar_layout_bar_style_pill",
             "menu_bar_layout_bar_style_segmented",
@@ -68,6 +69,11 @@ struct LocalizationLanguageCatalogTests {
             "spend_performance_turn_count",
             "spend_performance_turns",
             "spend_turn_performance_help",
+            "stacked_bars_section_footer",
+            "stacked_bars_show_icons_title",
+            "stacked_bars_window_session",
+            "stacked_bars_window_title",
+            "stacked_bars_window_weekly",
         ]
         for language in AppLanguage.allCases where language != .system && language != .english {
             let url = resources.appendingPathComponent("\(language.rawValue).lproj/Localizable.strings")

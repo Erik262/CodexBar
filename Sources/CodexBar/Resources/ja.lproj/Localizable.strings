@@ -637,9 +637,15 @@
 "merge_icons_title" = "アイコンを統合";
 "merge_icons_subtitle" = "プロバイダ切替付きの単一のメニューバーアイコンを使用します。";
 "merged_icon_style_title" = "結合アイコンのスタイル";
-"merged_icon_style_subtitle" = "「切り替え」はプロバイダを1つずつ順番に表示し、「積み重ね」は2つのプロバイダを同時に1行ずつ表示します。";
+"merged_icon_style_subtitle" = "スイッチャーは一度に1つのプロバイダを表示します。スタックは2つのプロバイダをテキスト行で表示します。スタックバーは2〜3個のプロバイダをメーターで表示します。";
 "merged_icon_style_switcher" = "切り替え";
 "merged_icon_style_stacked" = "積み重ね";
+"merged_icon_style_bars" = "積み重ねバー";
+"stacked_bars_window_title" = "バーの表示内容";
+"stacked_bars_window_session" = "セッション使用量";
+"stacked_bars_window_weekly" = "週間使用量";
+"stacked_bars_show_icons_title" = "プロバイダのアイコンを表示";
+"stacked_bars_section_footer" = "バーは「メニュー」で設定した塗りの向き（残り／使用済み）に従います。";
 "merge_icon_stacked_top_provider_title" = "上段";
 "merge_icon_stacked_bottom_provider_title" = "下段";
 "display_mode_title" = "表示モード";

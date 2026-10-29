@@ -646,9 +646,15 @@
 "merge_icons_title" = "أيقونات الدمج";
 "merge_icons_subtitle" = "استخدم أيقونة شريط قائمة واحدة مع محول المزود.";
 "merged_icon_style_title" = "نمط الأيقونة المدمجة";
-"merged_icon_style_subtitle" = "يتنقل المبدّل بين المزوّدين واحدًا تلو الآخر؛ يعرض المكدّس مزوّدين في آن واحد، كل منهما في صف.";
+"merged_icon_style_subtitle" = "المبدّل يعرض مزوّدًا واحدًا في كل مرة. المكدّس يعرض مزوّدَين كسطرين نصيين. الأشرطة المكدّسة ترسم مزوّدَين أو ثلاثة كمقاييس.";
 "merged_icon_style_switcher" = "المبدّل";
 "merged_icon_style_stacked" = "مكدّس";
+"merged_icon_style_bars" = "أشرطة مكدّسة";
+"stacked_bars_window_title" = "تعرض الأشرطة";
+"stacked_bars_window_session" = "استخدام الجلسة";
+"stacked_bars_window_weekly" = "الاستخدام الأسبوعي";
+"stacked_bars_show_icons_title" = "إظهار أيقونات المزوّدين";
+"stacked_bars_section_footer" = "تتبع الأشرطة اتجاه التعبئة المحدد في «القائمة» (المتبقي أو المستخدم).";
 "merge_icon_stacked_top_provider_title" = "الصف العلوي";
 "merge_icon_stacked_bottom_provider_title" = "الصف السفلي";
 "display_mode_title" = "وضع العرض";

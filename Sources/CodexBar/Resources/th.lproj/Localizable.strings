@@ -646,9 +646,15 @@
 "merge_icons_title" = "ผสานไอคอน";
 "merge_icons_subtitle" = "ใช้ไอคอนแถบเมนูเดียวกับตัวสลับผู้ให้บริการ";
 "merged_icon_style_title" = "รูปแบบไอคอนรวม";
-"merged_icon_style_subtitle" = "ตัวสลับจะวนแสดงผู้ให้บริการทีละราย ส่วนแบบซ้อนจะแสดงผู้ให้บริการสองรายพร้อมกัน รายละแถว";
+"merged_icon_style_subtitle" = "ตัวสลับแสดงผู้ให้บริการทีละราย แบบซ้อนแสดงผู้ให้บริการสองรายเป็นแถวข้อความ แถบซ้อนวาดผู้ให้บริการสองหรือสามรายเป็นมาตรวัด";
 "merged_icon_style_switcher" = "ตัวสลับ";
 "merged_icon_style_stacked" = "แบบซ้อน";
+"merged_icon_style_bars" = "แถบซ้อนกัน";
+"stacked_bars_window_title" = "แถบแสดง";
+"stacked_bars_window_session" = "การใช้งานเซสชัน";
+"stacked_bars_window_weekly" = "การใช้งานรายสัปดาห์";
+"stacked_bars_show_icons_title" = "แสดงไอคอนผู้ให้บริการ";
+"stacked_bars_section_footer" = "แถบจะเติมตามทิศทางที่ตั้งไว้ในเมนู (คงเหลือหรือใช้ไป)";
 "merge_icon_stacked_top_provider_title" = "แถวบน";
 "merge_icon_stacked_bottom_provider_title" = "แถวล่าง";
 "display_mode_title" = "โหมดการแสดงผล";

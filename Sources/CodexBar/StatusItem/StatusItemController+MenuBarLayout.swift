@@ -92,6 +92,10 @@ extension StatusItemController {
         self.mergedIconPresentation.stackedProviders
     }
 
+    func stackedBarProvidersIfActive() -> [UsageProvider]? {
+        self.mergedIconPresentation.barProviders
+    }
+
     func renderedMenuBarLayoutResolution(for provider: UsageProvider) -> MenuBarLayoutResolution {
         self.mergedIconPresentation.renderedResolution(
             self.settings.menuBarLayoutResolution(for: provider), for: provider)

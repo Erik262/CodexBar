@@ -648,9 +648,15 @@
 "merge_icons_title" = "Scal ikony";
 "merge_icons_subtitle" = "Używaj jednej ikony paska menu z przełącznikiem dostawcy.";
 "merged_icon_style_title" = "Styl połączonej ikony";
-"merged_icon_style_subtitle" = "Przełącznik pokazuje dostawców po kolei; Ułożone w stosie pokazuje dwóch dostawców naraz, każdy w osobnym wierszu.";
+"merged_icon_style_subtitle" = "Przełącznik pokazuje jednego dostawcę naraz. Stos pokazuje dwóch dostawców jako wiersze tekstu. Paski w stosie rysują dwóch lub trzech dostawców jako wskaźniki.";
 "merged_icon_style_switcher" = "Przełącznik";
 "merged_icon_style_stacked" = "Ułożone w stosie";
+"merged_icon_style_bars" = "Paski ułożone w stos";
+"stacked_bars_window_title" = "Paski pokazują";
+"stacked_bars_window_session" = "Użycie sesji";
+"stacked_bars_window_weekly" = "Użycie tygodniowe";
+"stacked_bars_show_icons_title" = "Pokaż ikony dostawców";
+"stacked_bars_section_footer" = "Paski są wypełniane zgodnie z kierunkiem ustawionym w sekcji Menu (pozostało lub zużyto).";
 "merge_icon_stacked_top_provider_title" = "Górny wiersz";
 "merge_icon_stacked_bottom_provider_title" = "Dolny wiersz";
 "display_mode_title" = "Tryb wyświetlania";

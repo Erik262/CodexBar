@@ -639,9 +639,15 @@
 "merge_icons_title" = "合併圖示";
 "merge_icons_subtitle" = "使用單一選單列圖示，並提供提供者切換器。";
 "merged_icon_style_title" = "合併圖示樣式";
-"merged_icon_style_subtitle" = "「切換」會依序輪流顯示各提供者；「堆疊」會同時顯示兩個提供者,各佔一行。";
+"merged_icon_style_subtitle" = "切換器一次顯示一個提供者。堆疊以兩行文字顯示兩個提供者。堆疊列以量表形式繪製兩到三個提供者。";
 "merged_icon_style_switcher" = "切換";
 "merged_icon_style_stacked" = "堆疊";
+"merged_icon_style_bars" = "堆疊進度列";
+"stacked_bars_window_title" = "進度列顯示";
+"stacked_bars_window_session" = "工作階段用量";
+"stacked_bars_window_weekly" = "每週用量";
+"stacked_bars_show_icons_title" = "顯示供應商圖示";
+"stacked_bars_section_footer" = "列條遵循「選單」中設定的填滿方向（剩餘或已用）。";
 "merge_icon_stacked_top_provider_title" = "上排";
 "merge_icon_stacked_bottom_provider_title" = "下排";
 "display_mode_title" = "顯示模式";

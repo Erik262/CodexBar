@@ -4,6 +4,7 @@
 
 ### Added
 
+- Menu bar: add a Stacked bars combined icon style that draws two or three Overview providers as one icon with a brand icon and a meter per row, choosing Session or Weekly usage and optional provider icons; it works with every menu bar style. Thanks @Erik262!
 - Menu bar: add a Bar style layout option that draws graphical progress bars as one continuous pill instead of five segments; segmented stays the default and saved layouts are unchanged. Thanks @Erik262!
 
 ## 0.82.0 — 2026-10-26

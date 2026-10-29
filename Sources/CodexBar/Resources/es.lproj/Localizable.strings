@@ -627,9 +627,15 @@
 "merge_icons_title" = "Combinar iconos";
 "merge_icons_subtitle" = "Usar un único icono en la barra de menús con un selector de proveedor.";
 "merged_icon_style_title" = "Estilo de icono combinado";
-"merged_icon_style_subtitle" = "El selector recorre los proveedores uno a uno; Apilado muestra dos proveedores a la vez, uno por fila.";
+"merged_icon_style_subtitle" = "El selector muestra un proveedor cada vez. Apilado muestra dos proveedores como filas de texto. Las barras apiladas dibujan dos o tres proveedores como medidores.";
 "merged_icon_style_switcher" = "Selector";
 "merged_icon_style_stacked" = "Apilado";
+"merged_icon_style_bars" = "Barras apiladas";
+"stacked_bars_window_title" = "Las barras muestran";
+"stacked_bars_window_session" = "Uso de la sesión";
+"stacked_bars_window_weekly" = "Uso semanal";
+"stacked_bars_show_icons_title" = "Mostrar iconos de proveedores";
+"stacked_bars_section_footer" = "Las barras siguen la dirección de llenado definida en Menú (restante o usado).";
 "merge_icon_stacked_top_provider_title" = "Fila superior";
 "merge_icon_stacked_bottom_provider_title" = "Fila inferior";
 "display_mode_title" = "Modo de visualización";
