@@ -149,6 +149,10 @@ struct PluginsPane: View {
                     Text(subtitle).font(.caption).foregroundStyle(.secondary)
                 }
             }
+            ProviderMenuBarPercentWindowSettingsView(
+                instanceID: plugin.manifest.id,
+                settings: self.settings,
+                snapshot: self.store.snapshot(for: plugin.manifest.id))
             if let error = self.store.errors[plugin.manifest.id] {
                 Label(error, systemImage: "exclamationmark.triangle.fill")
                     .font(.callout)
@@ -276,6 +280,7 @@ struct PluginsPane: View {
         do {
             if let plugin = request.plugin {
                 try self.store.deleteUserPlugin(plugin)
+                self.settings.removeMenuBarLayoutOverride(forInstanceID: plugin.manifest.id)
             } else if FileManager.default.fileExists(atPath: request.fileURL.path) {
                 try FileManager.default.removeItem(at: request.fileURL)
             }
