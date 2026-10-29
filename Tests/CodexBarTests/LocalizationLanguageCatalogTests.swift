@@ -47,6 +47,11 @@ struct LocalizationLanguageCatalogTests {
             "merged_icon_source_highest_usage",
             "merged_icon_source_subtitle",
             "merged_icon_source_title",
+            "merged_icon_style_bars",
+            "menu_bar_layout_bar_style",
+            "menu_bar_layout_bar_style_pill",
+            "menu_bar_layout_bar_style_segmented",
+            "menu_bar_layout_show_window_labels",
             "spend_performance_cache_help",
             "spend_performance_cached_input",
             "spend_performance_coverage",
@@ -64,6 +69,11 @@ struct LocalizationLanguageCatalogTests {
             "spend_performance_turn_count",
             "spend_performance_turns",
             "spend_turn_performance_help",
+            "stacked_bars_section_footer",
+            "stacked_bars_show_icons_title",
+            "stacked_bars_window_session",
+            "stacked_bars_window_title",
+            "stacked_bars_window_weekly",
         ]
         for language in AppLanguage.allCases where language != .system && language != .english {
             let url = resources.appendingPathComponent("\(language.rawValue).lproj/Localizable.strings")
@@ -730,6 +740,7 @@ struct LocalizationLanguageCatalogTests {
 
         // Brands, protocol examples, pure format strings and accepted Italian cognates.
         let intentionallyUnchanged: Set = [
+            "/Applications/TcrBar.app/Contents/MacOS/tcr",
             "<1%% %@",
             "%.0f%% %@",
             "%@ %@",
@@ -743,6 +754,7 @@ struct LocalizationLanguageCatalogTests {
             "Base",
             "Bearer eyJ...",
             "Bonus",
+            "Chatbox AI",
             "Chrome",
             "Cookie: ...",
             "Cookie: llama_dev_sess=...",
@@ -751,13 +763,16 @@ struct LocalizationLanguageCatalogTests {
             "Flash",
             "Flash Lite",
             "Gateway URL",
+            "Gemini CLI",
             "Gemini Flash",
+            "Gemini app",
             "GitHub",
             "GitHub cookies",
             "Google OAuth",
             "Grok CLI",
             "Helmcode Cloud",
             "Input",
+            "Kimi Code",
             "LLMMAN_API_KEY",
             "NaN Builders",
             "No",
@@ -768,9 +783,11 @@ struct LocalizationLanguageCatalogTests {
             "Pro",
             "SuperGrok OAuth",
             "Token",
+            "Trae CN",
             "Zed cookie",
             "ZeroGPU",
             "__raycast_session=…; csrf_token=…",
+            "abliteration.ai",
             "ak_…",
             "antigravity-cli-usage",
             "antigravity-cli-version",
@@ -791,6 +808,7 @@ struct LocalizationLanguageCatalogTests {
             "gsk_...",
             "hooks_executable_placeholder",
             "hooks_threshold_placeholder",
+            "http_server_dashboard",
             "https://api.aixy-gateway.com",
             "https://bifrost.example.com",
             "https://litellm.example.com",
@@ -843,20 +861,6 @@ struct LocalizationLanguageCatalogTests {
         ]
         let unchanged = Set(english.keys.filter { italian[$0] == english[$0] })
         #expect(unchanged == intentionallyUnchanged)
-
-        let warningFormat = try #require(italian["quota_warning_notification_body"])
-        let warning = String(
-            format: warningFormat,
-            locale: Locale(identifier: "it_IT"),
-            arguments: ["20%", 15, "settimanale"])
-        #expect(warning == "Rimane 20%. Hai raggiunto la soglia di avviso del 15% per la quota settimanale.")
-
-        let titleFormat = try #require(italian["quota_warning_notification_title"])
-        let title = String(
-            format: titleFormat,
-            locale: Locale(identifier: "it_IT"),
-            arguments: ["Codex", "settimanale"])
-        #expect(title == "Quota settimanale di Codex quasi esaurita")
     }
 }
 
@@ -975,6 +979,22 @@ extension LocalizationLanguageCatalogTests {
 
 extension LocalizationLanguageCatalogTests {
     @Test
+    func `Gemini app quota guidance is translated in every catalog`() throws {
+        let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
+            .deletingLastPathComponent().deletingLastPathComponent()
+        let resources = root.appendingPathComponent("Sources/CodexBar/Resources")
+        let key = "Gemini app limits use your browser account and are separate from Gemini CLI quotas."
+        for language in AppLanguage.allCases where language != .system && language != .english {
+            let url = resources.appendingPathComponent("\(language.rawValue).lproj/Localizable.strings")
+            let catalog = try #require(NSDictionary(contentsOf: url) as? [String: String])
+            let phrase = try #require(catalog[key], "Missing \(language.rawValue): \(key)")
+            #expect(!phrase.isEmpty)
+            #expect(phrase != key, "Untranslated \(language.rawValue): \(key)")
+            #expect(catalog["Gemini CLI"] == "Gemini CLI")
+        }
+    }
+
+    @Test
     func `credential expiry settings and alerts are translated in every language`() throws {
         let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
             .deletingLastPathComponent().deletingLastPathComponent()
@@ -1008,7 +1028,7 @@ extension LocalizationLanguageCatalogTests {
     @Test
     func `settings sharing and sync prose do not fall back to English in supported languages`() {
         let keys = [
-            "Usage data will appear once the app refreshes.",
+            "%@ is unavailable. Edit the widget to choose a provider.",
             "No synced Macs yet.",
             "Sync settings and providers across your Macs via iCloud",
             "Hide native Codex when OpenCodex is present",

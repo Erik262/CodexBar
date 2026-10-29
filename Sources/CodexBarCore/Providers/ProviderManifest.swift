@@ -63,6 +63,7 @@ public enum ProviderManifest {
         BifrostProviderDescriptor.descriptor,
         AixyProviderDescriptor.descriptor,
         DeepgramProviderDescriptor.descriptor,
+        SonioxProviderDescriptor.descriptor,
         PoeProviderDescriptor.descriptor,
         ChutesProviderDescriptor.descriptor,
         NeuralWattProviderDescriptor.descriptor,
@@ -89,6 +90,7 @@ public enum ProviderManifest {
         TypeSafeProviderDescriptor.descriptor,
         HyperProviderDescriptor.descriptor,
         GitKrakenProviderDescriptor.descriptor,
+        FutureAGIProviderDescriptor.descriptor,
         DevPassProviderDescriptor.descriptor,
         AtlasCloudProviderDescriptor.descriptor,
         VercelProviderDescriptor.descriptor,
@@ -108,5 +110,10 @@ public enum ProviderManifest {
         FalProviderDescriptor.descriptor,
         FloraProviderDescriptor.descriptor,
         ParallelProviderDescriptor.descriptor,
+        ClaudePlatformProviderDescriptor.descriptor,
+        MunitoProviderDescriptor.descriptor,
+        TraeCNProviderDescriptor.descriptor,
+        ChatboxProviderDescriptor.descriptor,
+        AbliterationProviderDescriptor.descriptor,
     ]
 }
