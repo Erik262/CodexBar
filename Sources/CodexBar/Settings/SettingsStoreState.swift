@@ -98,6 +98,9 @@ struct SettingsDefaultsState {
     var mergeIconsStacked: Bool
     var mergeIconStackedTopProviderRaw: String?
     var mergeIconStackedBottomProviderRaw: String?
+    var mergeIconsStackedBars: Bool
+    var stackedBarsWindowRaw: String
+    var stackedBarsShowIcons: Bool
     var mergedMenuLastSelectedWasOverview: Bool
     var mergedOverviewSelectedProvidersRaw: [String]
     var selectedMenuProviderRaw: String?

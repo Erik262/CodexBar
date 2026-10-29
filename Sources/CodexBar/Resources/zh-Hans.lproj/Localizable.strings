@@ -619,9 +619,15 @@
 "merge_icons_title" = "合并图标";
 "merge_icons_subtitle" = "使用单个菜单栏图标并带提供商切换器。";
 "merged_icon_style_title" = "合并图标样式";
-"merged_icon_style_subtitle" = "“切换”逐个轮流显示各提供方；“堆叠”同时显示两个提供方,各占一行。";
+"merged_icon_style_subtitle" = "切换器一次显示一个提供商。堆叠以两行文字显示两个提供商。堆叠条以量表形式绘制两到三个提供商。";
 "merged_icon_style_switcher" = "切换";
 "merged_icon_style_stacked" = "堆叠";
+"merged_icon_style_bars" = "堆叠进度条";
+"stacked_bars_window_title" = "进度条显示";
+"stacked_bars_window_session" = "会话用量";
+"stacked_bars_window_weekly" = "每周用量";
+"stacked_bars_show_icons_title" = "显示提供商图标";
+"stacked_bars_section_footer" = "条形遵循“菜单”中设置的填充方向（剩余或已用）。";
 "merge_icon_stacked_top_provider_title" = "上排";
 "merge_icon_stacked_bottom_provider_title" = "下排";
 "display_mode_title" = "显示模式";

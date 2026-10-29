@@ -641,9 +641,15 @@
 "merge_icons_title" = "Slå ihop ikoner";
 "merge_icons_subtitle" = "Använd en enda menyradsikon med leverantörsväxlare.";
 "merged_icon_style_title" = "Kombinerad ikonstil";
-"merged_icon_style_subtitle" = "Växlaren växlar mellan leverantörer en i taget; Staplad visar två leverantörer samtidigt, en rad var.";
+"merged_icon_style_subtitle" = "Växlaren visar en leverantör i taget. Staplad visar två leverantörer som textrader. Staplade staplar ritar två eller tre leverantörer som mätare.";
 "merged_icon_style_switcher" = "Växlare";
 "merged_icon_style_stacked" = "Staplad";
+"merged_icon_style_bars" = "Staplade staplar";
+"stacked_bars_window_title" = "Staplarna visar";
+"stacked_bars_window_session" = "Sessionsanvändning";
+"stacked_bars_window_weekly" = "Veckoanvändning";
+"stacked_bars_show_icons_title" = "Visa leverantörsikoner";
+"stacked_bars_section_footer" = "Staplarna följer fyllningsriktningen under Meny (kvar eller använt).";
 "merge_icon_stacked_top_provider_title" = "Övre raden";
 "merge_icon_stacked_bottom_provider_title" = "Nedre raden";
 "display_mode_title" = "Visningsläge";

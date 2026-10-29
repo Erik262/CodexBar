@@ -625,9 +625,15 @@
 "merge_icons_title" = "Combina les icones";
 "merge_icons_subtitle" = "Feu servir una sola icona a la barra de menús amb un selector de proveïdor.";
 "merged_icon_style_title" = "Estil d'icona combinada";
-"merged_icon_style_subtitle" = "El commutador recorre els proveïdors d'un en un; Apilat mostra dos proveïdors alhora, una fila cadascun.";
+"merged_icon_style_subtitle" = "El selector mostra un proveïdor alhora. Apilat mostra dos proveïdors com a files de text. Les barres apilades dibuixen dos o tres proveïdors com a indicadors.";
 "merged_icon_style_switcher" = "Commutador";
 "merged_icon_style_stacked" = "Apilat";
+"merged_icon_style_bars" = "Barres apilades";
+"stacked_bars_window_title" = "Les barres mostren";
+"stacked_bars_window_session" = "Ús de la sessió";
+"stacked_bars_window_weekly" = "Ús setmanal";
+"stacked_bars_show_icons_title" = "Mostra les icones dels proveïdors";
+"stacked_bars_section_footer" = "Les barres segueixen la direcció d'emplenament definida a Menú (restant o usat).";
 "merge_icon_stacked_top_provider_title" = "Fila superior";
 "merge_icon_stacked_bottom_provider_title" = "Fila inferior";
 "display_mode_title" = "Mode de visualització";

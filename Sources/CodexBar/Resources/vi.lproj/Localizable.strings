@@ -638,9 +638,15 @@
 "merge_icons_title" = "Hợp nhất các biểu tượng";
 "merge_icons_subtitle" = "Sử dụng một biểu tượng thanh menu duy nhất với trình chuyển đổi Nhà cung cấp.";
 "merged_icon_style_title" = "Kiểu biểu tượng kết hợp";
-"merged_icon_style_subtitle" = "Bộ chuyển đổi lần lượt hiển thị từng nhà cung cấp; Xếp chồng hiển thị hai nhà cung cấp cùng lúc, mỗi nhà cung cấp một dòng.";
+"merged_icon_style_subtitle" = "Bộ chuyển hiển thị từng nhà cung cấp một. Xếp chồng hiển thị hai nhà cung cấp dưới dạng dòng chữ. Thanh xếp chồng vẽ hai hoặc ba nhà cung cấp dưới dạng thước đo.";
 "merged_icon_style_switcher" = "Bộ chuyển đổi";
 "merged_icon_style_stacked" = "Xếp chồng";
+"merged_icon_style_bars" = "Thanh xếp chồng";
+"stacked_bars_window_title" = "Thanh hiển thị";
+"stacked_bars_window_session" = "Mức dùng phiên";
+"stacked_bars_window_weekly" = "Mức dùng hằng tuần";
+"stacked_bars_show_icons_title" = "Hiển thị biểu tượng nhà cung cấp";
+"stacked_bars_section_footer" = "Các thanh theo hướng tô đã đặt trong Menu (còn lại hoặc đã dùng).";
 "merge_icon_stacked_top_provider_title" = "Dòng trên";
 "merge_icon_stacked_bottom_provider_title" = "Dòng dưới";
 "display_mode_title" = "Chế độ hiển thị";

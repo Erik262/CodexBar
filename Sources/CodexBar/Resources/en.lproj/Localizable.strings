@@ -631,9 +631,15 @@
 "merge_icons_title" = "Merge icons";
 "merge_icons_subtitle" = "Use a single menu bar icon with a provider switcher.";
 "merged_icon_style_title" = "Combined icon style";
-"merged_icon_style_subtitle" = "Switcher cycles through providers one at a time; Stacked shows two providers at once, one row each.";
+"merged_icon_style_subtitle" = "Switcher shows one provider at a time. Stacked shows two providers as text rows. Stacked bars draw two or three providers as meters.";
 "merged_icon_style_switcher" = "Switcher";
 "merged_icon_style_stacked" = "Stacked";
+"merged_icon_style_bars" = "Stacked bars";
+"stacked_bars_window_title" = "Bars show";
+"stacked_bars_window_session" = "Session usage";
+"stacked_bars_window_weekly" = "Weekly usage";
+"stacked_bars_show_icons_title" = "Show provider icons";
+"stacked_bars_section_footer" = "Bars follow the fill direction set under Menu (remaining or used).";
 "merge_icon_stacked_top_provider_title" = "Top row";
 "merge_icon_stacked_bottom_provider_title" = "Bottom row";
 "display_mode_title" = "Display mode";

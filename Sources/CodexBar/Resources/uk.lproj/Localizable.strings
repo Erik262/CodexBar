@@ -642,9 +642,15 @@
 "merge_icons_title" = "Об’єднати значки";
 "merge_icons_subtitle" = "Використовувати один значок у рядку меню з перемикачем постачальників.";
 "merged_icon_style_title" = "Стиль об'єднаного значка";
-"merged_icon_style_subtitle" = "Перемикач по черзі показує провайдерів; Стос показує двох провайдерів одночасно, кожного у своєму рядку.";
+"merged_icon_style_subtitle" = "Перемикач показує одного провайдера за раз. Стос показує двох провайдерів текстовими рядками. Шкали стосом малюють двох або трьох провайдерів як індикатори.";
 "merged_icon_style_switcher" = "Перемикач";
 "merged_icon_style_stacked" = "Стос";
+"merged_icon_style_bars" = "Смуги стовпчиком";
+"stacked_bars_window_title" = "Смуги показують";
+"stacked_bars_window_session" = "Використання за сесію";
+"stacked_bars_window_weekly" = "Використання за тиждень";
+"stacked_bars_show_icons_title" = "Показувати значки постачальників";
+"stacked_bars_section_footer" = "Шкали заповнюються в напрямку, заданому в розділі «Меню» (залишок або використано).";
 "merge_icon_stacked_top_provider_title" = "Верхній рядок";
 "merge_icon_stacked_bottom_provider_title" = "Нижній рядок";
 "display_mode_title" = "Режим відображення";

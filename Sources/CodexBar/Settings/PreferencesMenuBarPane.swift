@@ -91,7 +91,7 @@ struct MenuBarPane: View {
                 SettingsMenuPicker(
                     selection: Binding(
                         get: { self.mergedIconPresentation.effectiveStyle },
-                        set: { self.settings.mergedIconDisplayStyle = $0 }),
+                        set: { self.setCombinedStyle($0) }),
                     options: MenuBarSettingsMenuOptions.mergedIconStyles,
                     label: {
                         SettingsRowLabel(L("merged_icon_style_title"), subtitle: L("merged_icon_style_subtitle"))
@@ -99,7 +99,7 @@ struct MenuBarPane: View {
                     optionLabel: { style in
                         Text(style.label)
                     })
-                    .disabled(!self.mergedIconPresentation.canStack)
+                    .disabled(!self.settings.mergeIcons || self.mergedIconPresentation.eligibleProviders.count < 2)
 
                 if let pair = self.mergedIconPresentation.stackedProviders {
                     self.stackedRowProviderPicker(
@@ -118,6 +118,21 @@ struct MenuBarPane: View {
                         automaticProvider: pair.bottom)
                 }
 
+                if self.mergedIconPresentation.barProviders != nil {
+                    SettingsMenuPicker(
+                        selection: self.$settings.stackedBarsWindow,
+                        options: StackedBarsWindow.allCases,
+                        label: {
+                            SettingsRowLabel(
+                                L("stacked_bars_window_title"),
+                                subtitle: L("stacked_bars_section_footer"))
+                        },
+                        optionLabel: { window in
+                            Text(window.label)
+                        })
+                    Toggle(L("stacked_bars_show_icons_title"), isOn: self.$settings.stackedBarsShowIcons)
+                }
+
                 SettingsMenuPicker(
                     selection: self.$settings.switcherRowsOption,
                     options: MenuBarSettingsMenuOptions.switcherRows,
@@ -128,7 +143,7 @@ struct MenuBarPane: View {
                     .disabled(!self.settings.mergeIcons)
 
                 UnifiedIconSourcePicker(selection: self.$settings.unifiedIconSource)
-                    .disabled(!self.settings.mergeIcons || self.mergedIconPresentation.effectiveStyle == .stacked)
+                    .disabled(!self.settings.mergeIcons || self.mergedIconPresentation.effectiveStyle != .switcher)
 
                 self.overviewProviderRow
                     .disabled(!self.settings.mergeIcons)
@@ -172,6 +187,15 @@ struct MenuBarPane: View {
             }
             self.reconcileOverviewSelection()
         }
+    }
+
+    private func setCombinedStyle(_ style: MergedIconDisplayStyle) {
+        // Stacked text rows are built from Icon & percent layouts, so choosing them switches that style on
+        // instead of silently falling back to the switcher. Stacked bars draw their own image with any style.
+        if style == .stacked {
+            self.settings.menuBarIconStyle = .iconAndPercent
+        }
+        self.settings.mergedIconDisplayStyle = style
     }
 
     private var overviewProviderRow: some View {

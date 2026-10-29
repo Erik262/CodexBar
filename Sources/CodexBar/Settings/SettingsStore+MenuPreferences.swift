@@ -30,11 +30,26 @@ enum SwitcherRowsOption: String, CaseIterable {
 enum MergedIconDisplayStyle: String, CaseIterable {
     case switcher
     case stacked
+    case bars
 
     var label: String {
         switch self {
         case .switcher: L("merged_icon_style_switcher")
         case .stacked: L("merged_icon_style_stacked")
+        case .bars: L("merged_icon_style_bars")
+        }
+    }
+}
+
+/// Which quota lane the stacked-bars icon shows for every row.
+enum StackedBarsWindow: String, CaseIterable {
+    case session
+    case weekly
+
+    var label: String {
+        switch self {
+        case .session: L("stacked_bars_window_session")
+        case .weekly: L("stacked_bars_window_weekly")
         }
     }
 }
@@ -174,8 +189,14 @@ extension SettingsStore {
     }
 
     var mergedIconDisplayStyle: MergedIconDisplayStyle {
-        get { self.mergeIconsStacked ? .stacked : .switcher }
-        set { self.mergeIconsStacked = newValue == .stacked }
+        get {
+            if self.mergeIconsStackedBars { return .bars }
+            return self.mergeIconsStacked ? .stacked : .switcher
+        }
+        set {
+            self.mergeIconsStackedBars = newValue == .bars
+            self.mergeIconsStacked = newValue == .stacked
+        }
     }
 
     var mergeIconStackedTopProvider: UsageProvider? {
@@ -192,13 +213,16 @@ extension SettingsStore {
         activeProviders: [UsageProvider],
         mergeIcons: Bool? = nil) -> MergedIconPresentation
     {
-        MergedIconPresentation(
+        let overview = Set(self.mergedOverviewSelectedProviders)
+        return MergedIconPresentation(
             mergeIcons: mergeIcons ?? self.mergeIcons,
             iconStyle: self.menuBarIconStyle,
             requestedStyle: self.mergedIconDisplayStyle,
             eligibleProviders: activeProviders,
             preferredTop: self.mergeIconStackedTopProvider,
-            preferredBottom: self.mergeIconStackedBottomProvider)
+            preferredBottom: self.mergeIconStackedBottomProvider,
+            // Bar rows are the Overview providers in provider order, matching the Overview tab rows.
+            preferredBars: activeProviders.filter { overview.contains($0.instanceID) })
     }
 
     var usageBarsFillOption: UsageBarsFillOption {

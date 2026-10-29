@@ -632,9 +632,15 @@
 "merge_icons_title" = "아이콘 병합";
 "merge_icons_subtitle" = "공급자 전환기가 있는 단일 메뉴 막대 아이콘을 사용합니다.";
 "merged_icon_style_title" = "통합 아이콘 스타일";
-"merged_icon_style_subtitle" = "전환은 공급자를 한 번에 하나씩 순환하고, 쌓기는 두 공급자를 동시에 각각 한 줄로 표시합니다.";
+"merged_icon_style_subtitle" = "전환기는 한 번에 하나의 공급자를 표시합니다. 스택은 두 공급자를 텍스트 행으로 표시합니다. 스택 막대는 두세 공급자를 게이지로 그립니다.";
 "merged_icon_style_switcher" = "전환";
 "merged_icon_style_stacked" = "쌓기";
+"merged_icon_style_bars" = "쌓인 막대";
+"stacked_bars_window_title" = "막대 표시 항목";
+"stacked_bars_window_session" = "세션 사용량";
+"stacked_bars_window_weekly" = "주간 사용량";
+"stacked_bars_show_icons_title" = "제공자 아이콘 표시";
+"stacked_bars_section_footer" = "막대는 메뉴에서 설정한 채우기 방향(남은 양 또는 사용량)을 따릅니다.";
 "merge_icon_stacked_top_provider_title" = "위쪽 행";
 "merge_icon_stacked_bottom_provider_title" = "아래쪽 행";
 "display_mode_title" = "표시 모드";

@@ -642,9 +642,15 @@
 "merge_icons_title" = "Fusionner les icônes";
 "merge_icons_subtitle" = "Utilisez une seule icône de barre de menu avec un sélecteur de fournisseur.";
 "merged_icon_style_title" = "Style d'icône combinée";
-"merged_icon_style_subtitle" = "Le sélecteur bascule entre les fournisseurs un par un ; Empilé affiche deux fournisseurs à la fois, chacun sur sa ligne.";
+"merged_icon_style_subtitle" = "Le sélecteur affiche un fournisseur à la fois. Empilé affiche deux fournisseurs en lignes de texte. Les barres empilées dessinent deux ou trois fournisseurs sous forme de jauges.";
 "merged_icon_style_switcher" = "Sélecteur";
 "merged_icon_style_stacked" = "Empilé";
+"merged_icon_style_bars" = "Barres empilées";
+"stacked_bars_window_title" = "Les barres affichent";
+"stacked_bars_window_session" = "Utilisation de la session";
+"stacked_bars_window_weekly" = "Utilisation hebdomadaire";
+"stacked_bars_show_icons_title" = "Afficher les icônes des fournisseurs";
+"stacked_bars_section_footer" = "Les barres suivent le sens de remplissage défini dans Menu (restant ou utilisé).";
 "merge_icon_stacked_top_provider_title" = "Ligne du haut";
 "merge_icon_stacked_bottom_provider_title" = "Ligne du bas";
 "display_mode_title" = "Mode d'affichage";

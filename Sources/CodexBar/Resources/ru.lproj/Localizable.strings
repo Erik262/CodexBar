@@ -643,9 +643,15 @@
 "merge_icons_title" = "Объединять значки";
 "merge_icons_subtitle" = "Использовать один значок в строке меню с переключателем провайдеров.";
 "merged_icon_style_title" = "Стиль объединённого значка";
-"merged_icon_style_subtitle" = "Переключатель показывает провайдеров по очереди; Стопка показывает двух провайдеров одновременно, каждый в своей строке.";
+"merged_icon_style_subtitle" = "Переключатель показывает одного провайдера за раз. Стопка показывает двух провайдеров текстовыми строками. Шкалы стопкой рисуют двух или трёх провайдеров как индикаторы.";
 "merged_icon_style_switcher" = "Переключатель";
 "merged_icon_style_stacked" = "Стопка";
+"merged_icon_style_bars" = "Полосы стопкой";
+"stacked_bars_window_title" = "Полосы показывают";
+"stacked_bars_window_session" = "Использование за сессию";
+"stacked_bars_window_weekly" = "Использование за неделю";
+"stacked_bars_show_icons_title" = "Показывать значки провайдеров";
+"stacked_bars_section_footer" = "Шкалы заполняются в направлении, заданном в разделе «Меню» (осталось или использовано).";
 "merge_icon_stacked_top_provider_title" = "Верхняя строка";
 "merge_icon_stacked_bottom_provider_title" = "Нижняя строка";
 "display_mode_title" = "Режим отображения";

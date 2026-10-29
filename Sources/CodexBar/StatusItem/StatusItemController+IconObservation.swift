@@ -8,7 +8,10 @@ extension StatusItemController {
         let visibleProviders = self.store.enabledProvidersForDisplay().map(\.rawValue).sorted().joined(separator: ",")
         let primaryProvider: ProviderInstanceID?
         let providers: [ProviderInstanceID]
-        if let stackedProviders = self.stackedMergeIconProvidersIfActive() {
+        if let barProviders = self.stackedBarProvidersIfActive() {
+            primaryProvider = barProviders.first?.instanceID
+            providers = barProviders.map(\.instanceID)
+        } else if let stackedProviders = self.stackedMergeIconProvidersIfActive() {
             primaryProvider = stackedProviders.top.instanceID
             providers = [stackedProviders.top.instanceID, stackedProviders.bottom.instanceID]
         } else if mergeIcons {
@@ -32,6 +35,8 @@ extension StatusItemController {
             "showUsed=\(self.settings.usageBarsShowUsed ? "1" : "0")",
             "brandPercent=\(showBrandPercent ? "1" : "0")",
             "hideCritters=\(self.settings.menuBarHidesCritters ? "1" : "0")",
+            "barsWindow=\(self.settings.stackedBarsWindow.rawValue)",
+            "barsIcons=\(self.settings.stackedBarsShowIcons ? "1" : "0")",
             "needsAnimation=\(self.needsMenuBarIconAnimation() ? "1" : "0")",
             providerSignatures,
         ].joined(separator: "|")

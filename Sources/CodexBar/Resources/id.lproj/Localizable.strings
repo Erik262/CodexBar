@@ -650,9 +650,15 @@
 "merge_icons_title" = "Gabung Ikon";
 "merge_icons_subtitle" = "Gunakan satu ikon menu bar dengan pengalih penyedia.";
 "merged_icon_style_title" = "Gaya ikon gabungan";
-"merged_icon_style_subtitle" = "Switcher berpindah antar penyedia satu per satu; Bertumpuk menampilkan dua penyedia sekaligus, masing-masing satu baris.";
+"merged_icon_style_subtitle" = "Pengalih menampilkan satu penyedia sekaligus. Bertumpuk menampilkan dua penyedia sebagai baris teks. Bilah bertumpuk menggambar dua atau tiga penyedia sebagai meter.";
 "merged_icon_style_switcher" = "Pengalih";
 "merged_icon_style_stacked" = "Bertumpuk";
+"merged_icon_style_bars" = "Bilah bertumpuk";
+"stacked_bars_window_title" = "Bilah menampilkan";
+"stacked_bars_window_session" = "Penggunaan sesi";
+"stacked_bars_window_weekly" = "Penggunaan mingguan";
+"stacked_bars_show_icons_title" = "Tampilkan ikon penyedia";
+"stacked_bars_section_footer" = "Bilah mengikuti arah isian yang diatur di Menu (sisa atau terpakai).";
 "merge_icon_stacked_top_provider_title" = "Baris atas";
 "merge_icon_stacked_bottom_provider_title" = "Baris bawah";
 "display_mode_title" = "Mode tampilan";
