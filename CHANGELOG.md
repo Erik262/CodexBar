@@ -15,6 +15,7 @@
 
 ### Fixed
 
+- Cursor: support Brave Origin for browser login and shared cookie imports with SweetCookieKit 0.5.11 (#4837). Thanks @retX0!
 - AWS Bedrock: report unavailable Cost Explorer data instead of zero spend (#4846). Thanks @djbclark!
 - Claude: report the CLI's unavailable per-model breakdown in usage details while retaining current session and weekly quotas (#4809). Thanks @DreamyTalesPAN!
 - iCloud Sync: retry account snapshots after a dropped upload without allowing delayed results to confirm newer data (#4798). Thanks @audichuang!
