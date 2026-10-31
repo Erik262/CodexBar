@@ -693,6 +693,7 @@ JavaScriptCore is the macOS rollback engine. The committed `.js` is generated fr
 - API key from config or `LITELLM_API_KEY`; base URL from config `enterpriseHost` or `LITELLM_BASE_URL`.
 - Reads `/key/info` first, then `/user/info?user_id=...` for user-bound keys or `/team/info?team_id=...` for team-only keys.
 - User-bound keys show personal budget usage as the primary window and the key's exact matching team as the secondary window.
+- When a team key has no personal budget, the primary window shows the team-member budget (the member's own, else the team default from `/team/info`) with the member's spend.
 - Team-only keys show the team budget as their sole usage window. Automatic menu-bar selection prefers the enforced team budget.
 - Spend remains visible in the API-spend row when LiteLLM has no budget limit configured.
 - Accepts base URLs with or without a `/v1` suffix; management requests are sent to the proxy root.
