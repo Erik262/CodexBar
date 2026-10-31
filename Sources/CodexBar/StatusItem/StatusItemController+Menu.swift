@@ -257,7 +257,8 @@ extension StatusItemController {
         let descriptor = self.makeMenuDescriptor(
             provider: selectedProvider,
             includeContextualActions: !isOverviewSelected && !isPluginSelected,
-            includeAppActions: self.appActionsVisible(overview: isOverviewSelected, hasOverview: includesOverview))
+            includeAppActions: self.appActionsVisible(overview: isOverviewSelected, hasOverview: includesOverview),
+            selection: switcherSelection)
         let menuWidth = self.menuCardWidth(
             for: enabledProviders,
             selectedProvider: selectedProvider,
