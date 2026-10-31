@@ -82,7 +82,8 @@ extension StatusItemController {
             includeContextualActions: !isOverviewSelected && !isPluginSelected,
             includeAppActions: self.appActionsVisible(
                 overview: isOverviewSelected,
-                hasOverview: self.includesOverviewTab(enabledProviders: enabledProviders)))
+                hasOverview: self.includesOverviewTab(enabledProviders: enabledProviders)),
+            selection: selection)
         let menuWidth = self.menuCardWidth(
             for: enabledProviders,
             selectedProvider: selectedProvider,
