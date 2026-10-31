@@ -14,6 +14,7 @@
 
 ### Fixed
 
+- AWS Bedrock: report unavailable Cost Explorer data instead of zero spend (#4846). Thanks @djbclark!
 - Claude: report the CLI's unavailable per-model breakdown in usage details while retaining current session and weekly quotas (#4809). Thanks @DreamyTalesPAN!
 - iCloud Sync: retry account snapshots after a dropped upload without allowing delayed results to confirm newer data (#4798). Thanks @audichuang!
 - CI: clean up mounted Xcode toolchains after test discovery and make optional-request ordering tests deterministic.
