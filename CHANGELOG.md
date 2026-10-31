@@ -2,6 +2,7 @@
 
 ## 0.82.1 — Unreleased
 
+- CLI: expose descriptor-based authentication inputs and existing setup hints in provider inventory JSON. (#4705)
 - Plugins: support an explicitly approved Usage Dashboard link from a fixed URL or a plain setting. (#4725)
 ### Added
 
