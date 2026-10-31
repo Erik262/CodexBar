@@ -2,6 +2,7 @@
 
 ## 0.82.1 — Unreleased
 
+- Plugins: support an explicitly approved Usage Dashboard link from a fixed URL or a plain setting. (#4725)
 ### Added
 
 - OpenDesign: track the active workspace's five-hour and weekly subscription allowance through its browser session (#4601). Thanks @vimcaw and @irfndi!
