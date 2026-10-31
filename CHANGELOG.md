@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.83.1 — Unreleased
+
 ## 0.83.0 — 2026-10-31
 
 ### Highlights
