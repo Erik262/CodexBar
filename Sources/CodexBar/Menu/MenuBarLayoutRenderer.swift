@@ -1,3 +1,4 @@
+// swiftlint:disable file_length
 import AppKit
 import CodexBarCore
 import CoreText
@@ -307,6 +308,7 @@ final class MenuBarLayoutTitleCache {
 }
 
 @MainActor
+// swiftlint:disable:next type_body_length
 final class MenuBarLayoutRenderer {
     private static let missingValue = "–"
     private static let stackedBaselineOffset: CGFloat = -3 // Center multi-line NSStatusBarButton titles.
