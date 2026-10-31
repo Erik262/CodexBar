@@ -15,6 +15,7 @@
 
 ### Fixed
 
+- Plugins: import declared-domain cookies from the shared supported-browser catalog, including Aside, and continue through rejected sessions (#4792).
 - z.ai: show prepaid CNY balances for BigModel CN personal accounts without a Coding Plan, including the shared menu-bar Balance element (#4796). Thanks @AaronJiTuo!
 - Cursor: support Brave Origin for browser login and shared cookie imports with SweetCookieKit 0.5.11 (#4837). Thanks @retX0!
 - AWS Bedrock: report unavailable Cost Explorer data instead of zero spend (#4846). Thanks @djbclark!
