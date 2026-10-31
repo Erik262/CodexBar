@@ -42,6 +42,7 @@
 - Plugins: refresh the selected menu-bar percentage when its usage changes while the automatic window stays unchanged (#4787). Thanks @vincent-peng!
 - Codex: retain cached cost history when previously scanned rollouts become `.jsonl.zst` archives, without duplicate counting (#4523, #4534, #4818). Thanks @BananaIIya, @kali113, @kcharlan, and @cassiarota!
 - OpenCode Go: use the active OpenCode CLI API key stored under `opencode` for server quotas instead of falling back to local estimates. (#4815) Thanks @sreejithraman!
+- Kiro: prefer stateless usage reads to avoid probe chats when available, and use the V2 harness with older-CLI fallback when a CLI report is needed. (#4853, #4854, #4746) Thanks @jeanroloff!
 - Tests: keep Claude dashboard account-selection coverage independent of CI scheduling delays (#4821).
 
 ### Changed
