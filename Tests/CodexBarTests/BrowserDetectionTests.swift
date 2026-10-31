@@ -30,6 +30,34 @@ struct BrowserDetectionTests {
             profileAccessIssue: { _ in nil })
     }
 
+    @Test
+    func `Claude desktop discovers a root cookie store without browser profile directories`() throws {
+        let home = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        defer { try? FileManager.default.removeItem(at: home) }
+        let root = home.appendingPathComponent("Library/Application Support/Claude")
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        let detection = self.detection(homeDirectory: home.path, installedBrowsers: [.claudeDesktop])
+        #expect(!detection.isCookieSourceAvailable(.claudeDesktop))
+        try Data().write(to: root.appendingPathComponent("Cookies"))
+        #expect(detection.isCookieSourceAvailable(.claudeDesktop))
+        #expect(detection.hasUsableProfileData(.claudeDesktop))
+    }
+
+    @Test
+    func `Brave Origin imports only from its own installed profile`() throws {
+        let home = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        defer { try? FileManager.default.removeItem(at: home) }
+        let profile = home.appendingPathComponent("Library/Application Support/BraveSoftware/Brave-Origin/Default")
+        try FileManager.default.createDirectory(at: profile, withIntermediateDirectories: true)
+        let detection = self.detection(homeDirectory: home.path, installedBrowsers: [.braveOrigin])
+        #expect(!detection.isCookieSourceAvailable(.braveOrigin))
+        try Data().write(to: profile.appendingPathComponent("Cookies"))
+        #expect(detection.isCookieSourceAvailable(.braveOrigin))
+        #expect(!detection.isCookieSourceAvailable(.brave))
+        #expect(Browser.defaultImportOrder.browsersWithProfileData(using: detection) == [.braveOrigin])
+        #expect(ChromiumLocalStorageDiscovery.defaultBrowsers.contains(.braveOrigin))
+    }
+
     private static func labelIDs(for browser: Browser) -> [String] {
         browser.safeStorageLabels.map { self.labelID(service: $0.service, account: $0.account) }
     }
@@ -865,6 +893,43 @@ struct BrowserDetectionTests {
         try FileManager.default.createDirectory(at: profile, withIntermediateDirectories: true)
         FileManager.default.createFile(atPath: profile.appendingPathComponent("cookies.sqlite").path, contents: Data())
         #expect(detection.isCookieSourceAvailable(.zen) == true)
+    }
+
+    @Test(arguments: [
+        // Beta ships as Firefox.app, so release Firefox also passes detection.
+        (browser: Browser.firefoxBeta, profile: "abc.default-beta", channel: Browser.firefoxBeta),
+        (
+            browser: Browser.firefoxDeveloperEdition,
+            profile: "abc.dev-edition-default",
+            channel: Browser.firefoxDeveloperEdition),
+        (browser: Browser.firefoxNightly, profile: "abc.default-nightly", channel: Browser.firefoxNightly),
+    ])
+    func `channel only install stays reachable through shipped provider orders`(
+        browser: Browser,
+        profile: String,
+        channel: Browser) throws
+    {
+        let temp = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at: temp, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: temp) }
+
+        let profileDir = temp
+            .appendingPathComponent("Library")
+            .appendingPathComponent("Application Support")
+            .appendingPathComponent("Firefox")
+            .appendingPathComponent("Profiles")
+            .appendingPathComponent(profile)
+        try FileManager.default.createDirectory(at: profileDir, withIntermediateDirectories: true)
+        FileManager.default.createFile(
+            atPath: profileDir.appendingPathComponent("cookies.sqlite").path,
+            contents: Data())
+
+        let detection = self.detection(homeDirectory: temp.path, installedBrowsers: [browser])
+        let orders = ProviderDefaults.metadata.values.compactMap(\.browserCookieOrder)
+            .filter { $0.contains(.firefox) }
+        for order in orders {
+            #expect(order.cookieImportCandidates(using: detection).contains(channel))
+        }
     }
 }
 

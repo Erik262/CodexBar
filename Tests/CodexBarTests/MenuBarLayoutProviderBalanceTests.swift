@@ -8,6 +8,23 @@ struct MenuBarLayoutProviderBalanceTests {
     private let now = Date(timeIntervalSince1970: 1_752_768_000)
 
     @Test
+    func `zai balance uses shared renderer without replacing subscription quotas`() throws {
+        let balance = try ProviderDetailSection(title: "Quota details", rows: [
+            .init(label: "Account balance", value: "¥8.66"),
+        ])
+        let snapshot = UsageSnapshot(primary: nil, secondary: nil, details: [balance], updatedAt: self.now)
+        #expect(self.data(provider: .zai, snapshot: snapshot).balance == "¥8.66")
+        #expect(self.data(provider: .zai, snapshot: snapshot).automaticText == "¥8.66")
+        let quota = UsageSnapshot(
+            primary: .init(usedPercent: 42, windowMinutes: 300, resetsAt: nil, resetDescription: nil),
+            secondary: nil,
+            details: [balance],
+            updatedAt: self.now)
+        #expect(self.data(provider: .zai, snapshot: quota).balance == "¥8.66")
+        #expect(self.data(provider: .zai, snapshot: quota).automaticText == nil)
+    }
+
+    @Test
     func `JetBrains top-up balance renders beside the unchanged monthly percentage`() throws {
         let snapshot = try JetBrainsTopUpIntegrationTests.xml().toUsageSnapshot()
         let data = self.data(provider: .jetbrains, snapshot: snapshot)
@@ -132,7 +149,7 @@ struct MenuBarLayoutProviderBalanceTests {
 
     @Test
     func `TypeSafe plugin balance reaches automatic and explicit layout tokens`() async throws {
-        let snapshot = try await TypeSafePluginTests.fetch(engine: .quickJS)
+        let snapshot = try await TypeSafeTestFixture.fetch(engine: .quickJS)
         let data = self.data(provider: .typesafe, snapshot: snapshot)
         #expect(data.balance == "$4.98")
         #expect(data.automaticText == "$4.98")
@@ -472,7 +489,7 @@ struct MenuBarLayoutProviderBalanceTests {
             supportsAverage: false,
             now: self.now))
         return MenuBarLayoutRenderData(
-            provider: provider,
+            provider: provider.instanceID,
             iconKey: provider.rawValue,
             providerName: provider.rawValue,
             accountLabel: nil,

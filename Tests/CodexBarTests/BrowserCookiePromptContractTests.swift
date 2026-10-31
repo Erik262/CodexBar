@@ -42,7 +42,7 @@ struct BrowserCookiePromptContractTests {
         interaction: ProviderInteraction,
         preflight: KeychainAccessPreflight.Outcome) throws -> Int
     {
-        let browsers: [Browser] = [.chrome, .edge, .brave]
+        let browsers: [Browser] = [.chrome, .edge, .brave, .braveOrigin]
         let home = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         defer { try? FileManager.default.removeItem(at: home) }
         for browser in browsers {
@@ -142,8 +142,8 @@ struct BrowserCookiePromptContractTests {
         }
     }
 
-    @Test
-    func `unrelated cookie rows never request a Safe Storage key`() throws {
+    @Test(arguments: [Browser.brave, .braveOrigin, .claudeDesktop])
+    func `unrelated cookie rows never request a Safe Storage key`(browser: Browser) throws {
         let home = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         try FileManager.default.createDirectory(at: home, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: home) }
@@ -156,12 +156,14 @@ struct BrowserCookiePromptContractTests {
             "CREATE TABLE meta (key TEXT PRIMARY KEY, value TEXT); INSERT INTO meta VALUES ('version', '24'); " +
                 "CREATE TABLE cookies (host_key TEXT, name TEXT, path TEXT, expires_utc INTEGER, " +
                 "is_secure INTEGER, is_httponly INTEGER, value TEXT, encrypted_value BLOB); " +
-                "INSERT INTO cookies VALUES ('unrelated.example', 'session', '/', 0, 1, 1, '', X'763130')",
+                "INSERT INTO cookies VALUES ('unrelated.example', 'session', '/', 0, 1, 1, '', X'763130'), " +
+                "('platform.minimax.cn.evil.example', 'session', '/', 0, 1, 1, '', X'763130'), " +
+                "('notminimax.cn', 'session', '/', 0, 1, 1, '', X'763130')",
             nil,
             nil,
             nil) == SQLITE_OK)
         let store = BrowserCookieStore(
-            browser: .brave,
+            browser: browser,
             profile: .init(id: home.path, name: "Synthetic"),
             kind: .network,
             label: "Synthetic Brave",
@@ -172,11 +174,35 @@ struct BrowserCookiePromptContractTests {
             BrowserCookieKeychainAccessGate.isDisabled = true
             try KeychainAccessPreflight.withCheckGenericPasswordOverrideForTesting { _, _ in .allowed } operation: {
                 try ProviderInteractionContext.$current.withValue(.background) {
-                    let records = try client.codexBarRecords(
-                        matching: BrowserCookieQuery(domains: ["xiaomimimo.com"], domainMatch: .exact), in: store)
-                    #expect(records.isEmpty)
+                    for query in [
+                        BrowserCookieQuery(domains: ["xiaomimimo.com"], domainMatch: .exact),
+                        MiniMaxCookieImporter.cookieQuery,
+                    ] {
+                        let records = try client.codexBarRecords(matching: query, in: store)
+                        #expect(records.isEmpty)
+                    }
                 }
             }
+        }
+    }
+
+    @Test
+    func `MiniMax cookies include current and legacy hosts without admitting lookalikes`() {
+        let query = MiniMaxCookieImporter.cookieQuery
+        for domain in [
+            ".minimax.cn", "platform.minimax.cn", "www.minimax.cn", "account.minimax.cn",
+            ".minimaxi.com", "platform.minimax.io", "account.minimax.io",
+        ] {
+            #expect(BrowserCookieDomainMatcher.matches(
+                domain: domain,
+                patterns: query.domains,
+                match: query.domainMatch))
+        }
+        for domain in ["notminimax.cn", "minimax.cn.example.com", "platform.minimax.io.evil.example"] {
+            #expect(!BrowserCookieDomainMatcher.matches(
+                domain: domain,
+                patterns: query.domains,
+                match: query.domainMatch))
         }
     }
 
@@ -460,8 +486,8 @@ struct BrowserCookiePromptContractTests {
         }
     }
 
-    @Test
-    func `prompt free reads preserve the allowance and nested imports share it`() throws {
+    @Test(arguments: [Browser.brave, .braveOrigin, .claudeDesktop])
+    func `prompt free reads preserve the allowance and nested imports share it`(browser: Browser) throws {
         let keychain = FakeKeychain(promptFreeBrowser: .chrome)
         try self.withFakeKeychain {
             try KeychainAccessPreflight.withCheckGenericPasswordOverrideForTesting { _, _ in .allowed } operation: {
@@ -470,7 +496,7 @@ struct BrowserCookiePromptContractTests {
                         _ = try Self.readKey(for: .chrome, keychain: keychain)
                         #expect(keychain.interactiveQueries == 0)
                         try BrowserCookieAccessGate.withExplicitRetry {
-                            _ = try Self.readKey(for: .brave, keychain: keychain)
+                            _ = try Self.readKey(for: browser, keychain: keychain)
                         }
                         #expect(keychain.interactiveQueries == 1)
                         #expect(throws: BrowserCookieError.self) { try Self.readKey(for: .arc, keychain: keychain) }
@@ -480,6 +506,70 @@ struct BrowserCookiePromptContractTests {
             }
         }
         #expect(keychain.interactiveQueries == 1)
+    }
+
+    @Test
+    func `a Muse denial cannot prolong an expired browser cooldown`() {
+        BrowserCookieAccessGate.withIsolatedStateForTesting {
+            self.withFakeKeychain {
+                let now = Date(timeIntervalSince1970: 1_700_000_000)
+                BrowserCookieAccessGate.recordCredentialDenial(service: MuseCredentials.keychainService, now: now)
+                BrowserCookieAccessGate.recordDenied(for: .chrome, now: now.addingTimeInterval(-7 * 60 * 60))
+                #expect(!BrowserCookieAccessGate.hasActiveDenial(for: .chrome, now: now))
+                ProviderInteractionContext.$current.withValue(.userInitiated) {
+                    BrowserCookieAccessGate.withExplicitRetry {
+                        #expect(BrowserCookieAccessGate.shouldAttempt(.chrome, now: now))
+                        #expect(!BrowserCookieAccessGate.claimCredentialRead(
+                            service: MuseCredentials.keychainService, now: now))
+                    }
+                }
+            }
+        }
+    }
+
+    @Test(arguments: [false, true])
+    func `Muse and browser reads share the manual action allowance`(museFirst: Bool) throws {
+        let keychain = FakeKeychain()
+        let museReads = LockIsolated(0)
+        let read: @Sendable ([String: Any]) -> (OSStatus, Data?) = { query in
+            #expect(query[kSecUseAuthenticationUI as String] == nil)
+            museReads.setValue(museReads.value + 1)
+            return (errSecSuccess, Data(#"{"access_token":"dca:fixture-shared"}"#.utf8))
+        }
+        try BrowserCookieAccessGate.withIsolatedStateForTesting {
+            try self.withFakeKeychain {
+                try KeychainAccessPreflight.withCheckGenericPasswordOverrideForTesting { service, _ in
+                    service == MuseCredentials.keychainService ? .interactionRequired : .allowed
+                } operation: {
+                    try KeychainPromptHandler.withHandlerForTesting { context in
+                        #expect(context.service == MuseCredentials.keychainService)
+                    } operation: {
+                        try MuseCredentials.$keychainReadOverrideForTesting.withValue(read) {
+                            try ProviderInteractionContext.$current.withValue(.userInitiated) {
+                                try BrowserCookieAccessGate.withExplicitRetry {
+                                    let muse = {
+                                        try MuseCredentials.accessToken(
+                                            environment: [:],
+                                            homeDirectory: URL(fileURLWithPath: "/synthetic/muse-budget"))
+                                    }
+                                    if museFirst {
+                                        #expect(try muse() == "dca:fixture-shared")
+                                        #expect(throws: BrowserCookieError.self) {
+                                            try Self.readKey(for: .chrome, keychain: keychain)
+                                        }
+                                    } else {
+                                        _ = try Self.readKey(for: .chrome, keychain: keychain)
+                                        #expect(throws: MuseUsageError.keychainAccessNotGranted) { try muse() }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        #expect(museReads.value == (museFirst ? 1 : 0))
+        #expect(keychain.interactiveQueries == (museFirst ? 0 : 1))
     }
 
     @Test
@@ -506,20 +596,20 @@ struct BrowserCookiePromptContractTests {
         #expect(keychain.interactiveQueries == 1)
     }
 
-    @Test
-    func `an actual interactive denial blocks the next manual action`() {
+    @Test(arguments: [Browser.chrome, .braveOrigin, .claudeDesktop])
+    func `an actual interactive denial blocks the next manual action`(browser: Browser) {
         let keychain = FakeKeychain(deniesInteraction: true)
         self.withFakeKeychain {
             KeychainAccessPreflight.withCheckGenericPasswordOverrideForTesting { _, _ in .allowed } operation: {
                 ProviderInteractionContext.$current.withValue(.userInitiated) {
                     BrowserCookieAccessGate.withExplicitRetry {
-                        _ = try? Self.readKey(for: .chrome, keychain: keychain)
+                        _ = try? Self.readKey(for: browser, keychain: keychain)
                     }
-                    #expect(BrowserCookieAccessGate.hasActiveDenial(for: .chrome))
+                    #expect(BrowserCookieAccessGate.hasActiveDenial(for: browser))
                     BrowserCookieAccessGate.withExplicitRetry {
-                        #expect(!BrowserCookieAccessGate.shouldAttempt(.chrome))
+                        #expect(!BrowserCookieAccessGate.shouldAttempt(browser))
                         #expect(!BrowserCookieAccessGate.shouldAttempt(.brave))
-                        _ = try? Self.readKey(for: .chrome, keychain: keychain)
+                        _ = try? Self.readKey(for: browser, keychain: keychain)
                     }
                 }
             }

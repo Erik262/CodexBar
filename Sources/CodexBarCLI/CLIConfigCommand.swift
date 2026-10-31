@@ -3,8 +3,10 @@ import Commander
 import Foundation
 
 extension CodexBarCLI {
-    static func runConfig(path: [String], values: ParsedValues) {
+    static func runConfig(path: [String], values: ParsedValues) async {
         switch path {
+        case ["config", "login"]:
+            await self.runConfigLogin(values)
         case ["config", "preferences", "export"]:
             self.runConfigPreferences(values, importing: false)
         case ["config", "preferences", "import"]:
@@ -23,6 +25,10 @@ extension CodexBarCLI {
             self.runConfigSetSource(values)
         case ["config", "set-api-key"]:
             self.runConfigSetAPIKey(values)
+        case ["config", "set-cookie"]:
+            self.runConfigSetCookie(values)
+        case ["config", "clear-credential"]:
+            self.runConfigClearCredential(values)
         default:
             self.exit(
                 code: .failure,
@@ -341,14 +347,17 @@ extension CodexBarCLI {
                 displayName: meta?.displayName ?? UserProviderPluginRegistry.plugin(for: providerConfig.id)?
                     .manifest.name ?? providerConfig.id.rawValue,
                 enabled: providerConfig.enabled ?? defaultEnabled,
-                defaultEnabled: defaultEnabled)
+                defaultEnabled: defaultEnabled,
+                authentication: provider.map { ConfigProviderAuthenticationResult(
+                    descriptor: ProviderDescriptorRegistry.descriptor(for: $0)) })
         }
         for entry in config.unavailableProviders {
             results.insert(ConfigProviderStatusResult(
                 provider: entry.id,
                 displayName: "plugin (not loaded)",
                 enabled: entry.enabled,
-                defaultEnabled: false), at: min(entry.index, results.count))
+                defaultEnabled: false,
+                authentication: nil), at: min(entry.index, results.count))
         }
         return results
     }
@@ -430,6 +439,33 @@ struct ConfigProviderStatusResult: Encodable, Equatable {
     let displayName: String
     let enabled: Bool
     let defaultEnabled: Bool
+    let authentication: ConfigProviderAuthenticationResult?
+}
+
+struct ConfigProviderAuthenticationResult: Encodable, Equatable {
+    let sourceModes: [String]
+    let supportsConfigAPIKey: Bool
+    let supportsConfigCookieHeader: Bool
+    let environmentVariables: [String]
+    let loginCommand: String?
+    let tokenAccounts: TokenAccounts?
+
+    struct TokenAccounts: Encodable, Equatable {
+        let title: String
+        let setupHint: String
+    }
+
+    init(descriptor: ProviderDescriptor) {
+        self.sourceModes = descriptor.fetchPlan.sourceModes.map(\.rawValue).sorted()
+        self.supportsConfigAPIKey = descriptor.credentials?.supportsAPIKeyOverride ?? false
+        self.supportsConfigCookieHeader = descriptor.settingsSection.supportsConfigCookieHeader
+        self.environmentVariables = Array(Set(
+            descriptor.credentials?.environmentProjections.map(\.key) ?? [])).sorted()
+        self.loginCommand = descriptor.cli.loginCommand
+        self.tokenAccounts = descriptor.credentials?.tokenAccountSupport.map {
+            TokenAccounts(title: $0.title, setupHint: $0.subtitle)
+        }
+    }
 }
 
 private struct ConfigProviderToggleResult: Encodable {

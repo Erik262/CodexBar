@@ -8,6 +8,15 @@ import Darwin
 #endif
 
 extension CostUsageScanner {
+    /// Source qualification only. The collecting machine decides whether custom rates override it.
+    static func codexAutoReviewIsIncludedInPlan(
+        model: String, timestampUnixMs: Int64?, hasCreatorAccount: Bool) -> Bool
+    {
+        hasCreatorAccount
+            && timestampUnixMs.map { $0 >= 1_791_270_000_000 } == true // 2026-10-06 00:00 PDT.
+            && CostUsagePricing.normalizeCodexModel(model) == "codex-auto-review"
+    }
+
     static func codexReportDayKeys(cache: CostUsageCache, range: CostUsageDayRange) -> [String] {
         cache.days.keys.sorted().filter {
             CostUsageDayRange.isInRange(dayKey: $0, since: range.sinceKey, until: range.untilKey)
@@ -1147,7 +1156,7 @@ extension CostUsageScanner {
     {
         guard isForceRescan else { return }
         for key in cache.files.keys {
-            guard let old = cache.files[key] else { continue }
+            guard let old = cache.files[key], old.codexArchived != true else { continue }
             guard !old.touchesCodexScanWindow(
                 sinceKey: range.scanSinceKey,
                 untilKey: range.scanUntilKey,
@@ -1185,6 +1194,7 @@ extension CostUsageScanner {
         priorityTurns: [String: CodexPriorityTurnMetadata]? = nil,
         pricingResolver: CostUsagePricing.CodexResolver? = nil,
         customPricing: CostUsageCustomPricing? = nil,
+        onPricedRow: ((CodexUsageRow, Double?, Bool) -> Void)? = nil,
         modelsDevCatalogLoader: (URL?) -> ModelsDevCatalog? = {
             CostUsagePricing.modelsDevCatalog(cacheRoot: $0)
         }) -> CostUsageDailyReport
@@ -1205,8 +1215,10 @@ extension CostUsageScanner {
         for (path, usage) in reportCache.files where usage.codexSession?.hasCreatorAccount == true {
             for (index, row) in (usage.codexRows ?? []).enumerated() {
                 guard row.knownCostNanos == nil, row.eventIndex != nil, (row.unpricedTokens ?? 0) == 0,
-                      let timestamp = row.timestampUnixMs, timestamp >= 1_791_270_000_000, // 2026-10-06 00:00 PDT.
-                      CostUsagePricing.normalizeCodexModel(row.model) == "codex-auto-review",
+                      Self.codexAutoReviewIsIncludedInPlan(
+                          model: row.model,
+                          timestampUnixMs: row.timestampUnixMs,
+                          hasCreatorAccount: usage.codexSession?.hasCreatorAccount == true),
                       customPricing.rates(
                           providerID: CostUsagePricing.codexModelsDevProviderID,
                           model: Self.codexPricedModel(for: row, priorityTurns: priorityTurns)) == nil
@@ -1315,7 +1327,8 @@ extension CostUsageScanner {
                     pricing: pricing,
                     allowIncluded: breakdown.costUSD != nil,
                     calendar: range.calendar,
-                    into: &temporalBuckets)
+                    into: &temporalBuckets,
+                    onPricedRow: onPricedRow)
             }
             if let entryCost = entry.costUSD {
                 totalCost += entryCost
@@ -1384,30 +1397,33 @@ extension CostUsageScanner {
 extension Data {
     func containsAscii(_ needle: String) -> Bool {
         guard let n = needle.data(using: .utf8) else { return false }
-        return self.range(of: n) != nil
+        guard !n.isEmpty else { return self.range(of: n) != nil }
+        guard n.count <= self.count else { return false }
+        return self.withUnsafeBytes { haystack in
+            n.withUnsafeBytes { pattern in
+                guard let base = haystack.baseAddress, let needleBase = pattern.baseAddress else { return false }
+                let first = Int32(pattern[0])
+                let limit = haystack.count - pattern.count + 1
+                var offset = 0
+                while offset < limit {
+                    guard let candidate = memchr(base.advanced(by: offset), first, limit - offset) else { return false }
+                    if memcmp(candidate, needleBase, pattern.count) == 0 { return true }
+                    offset = base.distance(to: UnsafeRawPointer(candidate)) + 1
+                }
+                return false
+            }
+        }
     }
 }
 
 extension [Int] {
     subscript(safe index: Int) -> Int? {
-        if index < 0 {
-            return nil
-        }
-        if index >= self.count {
-            return nil
-        }
-        return self[index]
+        self.indices.contains(index) ? self[index] : nil
     }
 }
 
 extension [UInt8] {
     subscript(safe index: Int) -> UInt8? {
-        if index < 0 {
-            return nil
-        }
-        if index >= self.count {
-            return nil
-        }
-        return self[index]
+        self.indices.contains(index) ? self[index] : nil
     }
 }

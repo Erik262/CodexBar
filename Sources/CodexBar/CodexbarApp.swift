@@ -159,6 +159,18 @@ protocol UpdaterProviding: AnyObject {
     func installUpdate()
 }
 
+/// Applies CodexBar's "Check for updates automatically" preference to an updater.
+///
+/// Automatic installs are a separate choice that Sparkle persists itself (`SUAutomaticallyUpdate`), whether it was
+/// made in Settings or in Sparkle's update alert. Launch and the About pane apply only the check preference through
+/// here, so applying it can never overwrite that choice.
+@MainActor
+enum UpdaterPreferenceSync {
+    static func applyAutomaticChecks(_ enabled: Bool, to updater: UpdaterProviding) {
+        updater.automaticallyChecksForUpdates = enabled
+    }
+}
+
 /// No-op updater used for debug builds and non-bundled runs to suppress Sparkle dialogs.
 final class DisabledUpdaterController: UpdaterProviding {
     var automaticallyChecksForUpdates: Bool = false
@@ -188,24 +200,24 @@ final class UpdateStatus {
 import Sparkle
 
 @MainActor
-final class SparkleUpdaterController: NSObject, UpdaterProviding, SPUUpdaterDelegate {
+final class SparkleUpdaterController: NSObject, UpdaterProviding, SPUUpdaterDelegate,
+    SPUStandardUserDriverDelegate
+{
     private static let presentationTimeout: Duration = .seconds(60)
 
     private lazy var controller = SPUStandardUpdaterController(
         startingUpdater: false,
         updaterDelegate: self,
-        userDriverDelegate: nil)
+        userDriverDelegate: self)
     let updateStatus = UpdateStatus()
     let unavailableReason: String? = nil
     let isAvailable = true
     private var dockPresentationAttemptID: DockIconPresentationAttemptID?
 
-    init(savedAutoUpdate: Bool, startingUpdater: Bool = true) {
+    init(savedAutoCheck: Bool, startingUpdater: Bool = true) {
         super.init()
         guard startingUpdater else { return }
-        let updater = self.controller.updater
-        updater.automaticallyChecksForUpdates = savedAutoUpdate
-        updater.automaticallyDownloadsUpdates = savedAutoUpdate
+        UpdaterPreferenceSync.applyAutomaticChecks(savedAutoCheck, to: self)
         self.controller.startUpdater()
     }
 
@@ -295,6 +307,22 @@ final class SparkleUpdaterController: NSObject, UpdaterProviding, SPUUpdaterDele
         }
     }
 
+    /// Scheduled alerts can appear without key, main, or occlusion notifications.
+    nonisolated func standardUserDriverWillHandleShowingUpdate(
+        _ handleShowingUpdate: Bool,
+        forUpdate _: SUAppcastItem,
+        state: SPUUserUpdateState)
+    {
+        guard handleShowingUpdate, !state.userInitiated else { return }
+        Task { @MainActor in
+            if self.dockPresentationAttemptID == nil {
+                self.dockPresentationAttemptID = DockIconController.shared.promote(
+                    presentationTimeout: Self.presentationTimeout)
+            }
+            DockIconController.shared.windowsMayHaveChanged()
+        }
+    }
+
     nonisolated func allowedChannels(for updater: SPUUpdater) -> Set<String> {
         UpdateChannel.current.allowedSparkleChannels
     }
@@ -331,9 +359,9 @@ private func makeUpdaterController() -> UpdaterProviding {
         return DisabledUpdaterController(unavailableReason: "Updates unavailable in this build.")
     }
 
-    // Default to true for first launch; fall back to saved preference thereafter.
+    // Both choices default to on for first launch; Sparkle preserves the saved automatic-install choice.
     return SparkleUpdaterController(
-        savedAutoUpdate: (UserDefaults.standard.object(forKey: "autoUpdateEnabled") as? Bool) ?? true)
+        savedAutoCheck: (UserDefaults.standard.object(forKey: "autoUpdateEnabled") as? Bool) ?? true)
 }
 #else
 private func makeUpdaterController() -> UpdaterProviding {
@@ -445,6 +473,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         MenuBarStatusItemWindowProbe.trace("did-finish-launching")
+        WidgetExtensionRecovery.launch(reload: UsageStore.reloadWidgetTimelines)
         self.dockIconController.start()
         self.memoryPressureMonitor.start()
         #if DEBUG
@@ -456,6 +485,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             missingItemRetriesRemaining: Self.settingsMenuReadinessRetryCount,
             fallbackVerificationRetriesRemaining: Self.settingsMenuFallbackVerificationRetryCount)
         self.cloudSyncCoordinator?.start()
+        Task { await self.settings?.httpServer.startSaved() }
         Task { @MainActor [weak self] in
             await Task.yield()
             guard let settings = self?.settings else { return }
@@ -492,10 +522,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
         guard !self.isWaitingForConfigPersistence else { return .terminateLater }
-        guard let save = self.settings?.persistPendingConfigForTermination() else { return .terminateNow }
+        let serverStop = self.settings?.httpServer.stopForTermination()
+        let save = self.settings?.persistPendingConfigForTermination()
+        guard save != nil || serverStop != nil else { return .terminateNow }
         self.isWaitingForConfigPersistence = true
         Task.detached {
-            await save.value
+            await save?.value
+            await serverStop?.value
             // NSApplication may be inside a modal loop entered from the main dispatch queue.
             // A MainActor task cannot reliably resume there; deliver the reply on that run loop.
             RunLoop.main.perform(inModes: [.default, .modalPanel]) {
@@ -549,8 +582,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc private func handleSessionLimitResetNotification(_ notification: Notification) {
-        guard let event = notification.object as? SessionLimitResetEvent else { return }
-        guard self.settings?.confettiOnSessionLimitResetsEnabled == true else { return }
+        guard let event = notification.object as? SessionLimitResetEvent,
+              self.settings?.confettiOnSessionLimitResetsEnabled == true else { return }
         self.playLimitResetConfetti(
             provider: event.provider,
             accountIdentifier: event.accountIdentifier,
@@ -558,8 +591,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc private func handleWeeklyLimitResetNotification(_ notification: Notification) {
-        guard let event = notification.object as? WeeklyLimitResetEvent else { return }
-        guard self.settings?.confettiOnWeeklyLimitResetsEnabled == true else { return }
+        guard let event = notification.object as? WeeklyLimitResetEvent,
+              self.settings?.confettiOnWeeklyLimitResetsEnabled == true else { return }
         self.playLimitResetConfetti(
             provider: event.provider,
             accountIdentifier: event.accountIdentifier,

@@ -8,6 +8,16 @@ import UniformTypeIdentifiers
 
 struct MenuBarLayoutEditorTests {
     @Test
+    func `separator accessibility speaks names instead of punctuation`() {
+        CodexBarLocalizationOverride.$appLanguage.withValue("en") {
+            #expect(MenuBarLayoutToken.separator(.pipe).editorAccessibilityLabel(provider: nil)
+                == "Separator Vertical bar")
+            #expect(MenuBarLayoutToken.separator(.slash).editorAccessibilityLabel(provider: nil)
+                == "Separator Slash")
+        }
+    }
+
+    @Test
     func `saved history cost item uses the history window label`() throws {
         try CodexBarLocalizationOverride.$appLanguage.withValue("en") {
             let token = try JSONDecoder().decode(MenuBarLayoutToken.self, from: Data(#"{"cost30d":{}}"#.utf8))
@@ -144,6 +154,7 @@ struct MenuBarLayoutEditorTests {
             .percent(window: .session),
             .percent(window: .weekly),
             .percent(window: .scopedWeekly),
+            .percent(window: .spend),
             .lanePercent(lane: .primary),
             .lanePercent(lane: .secondary),
             .extraPercent(id: "cursor-grok-bot"),
@@ -158,12 +169,38 @@ struct MenuBarLayoutEditorTests {
             .pace(window: .session),
             .pace(window: .weekly),
             .pace(window: .automatic),
+            .pace(window: .spend),
         ])
         #expect(MenuBarLayoutPaletteTokens.conditionalBranch.contains(.progressBar(window: .scopedWeekly)))
         #expect(!MenuBarLayoutPaletteTokens.usage(provider: .codex, snapshot: cursor)
             .contains(.extraPercent(id: "cursor-grok-bot")))
         #expect(!MenuBarLayoutPaletteTokens.usage(provider: .cursor, snapshot: nil)
             .contains(.extraPercent(id: "cursor-grok-bot")))
+    }
+
+    @Test
+    func `spend tokens are in the layout and conditional palettes`() {
+        let spendUsage: [MenuBarLayoutToken] = [.percent(window: .spend), .pace(window: .spend)]
+        let spendTime: [MenuBarLayoutToken] = [
+            .windowResetCountdown(window: .spend), .windowResetAbsolute(window: .spend),
+        ]
+        let spendMoney: [MenuBarLayoutToken] = [.spendAmount, .spendBudget]
+        #expect(spendUsage.allSatisfy(MenuBarLayoutPaletteTokens.usage(provider: .codex, snapshot: nil).contains))
+        #expect(spendTime.allSatisfy(MenuBarLayoutPaletteTokens.time.contains))
+        let branch = MenuBarLayoutPaletteTokens.conditionalBranch
+        #expect((spendUsage + spendTime + spendMoney).allSatisfy(branch.contains))
+    }
+
+    @Test
+    func `every separator glyph is a conditional branch choice with a glyph label`() {
+        let branch = MenuBarLayoutPaletteTokens.conditionalBranch
+        #expect(branch.contains(.separatorDot))
+        for separator in MenuBarLayoutSeparator.allCases {
+            let token = MenuBarLayoutToken.separator(separator)
+            #expect(branch.contains(token))
+            #expect(token.editorLabel(provider: nil, snapshot: nil) == separator.glyph)
+            #expect(token.editorAccessibilityLabel(provider: nil).contains(separator.accessibilityName))
+        }
     }
 
     @Test

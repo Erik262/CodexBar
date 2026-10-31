@@ -15,6 +15,8 @@ Cursor.app session and falls back to cookies when the app token is missing, expi
 automatic mode uses cached or stored cookies when available, then falls back to the signed-in Cursor app token, then to
 `cursor-agent`'s, because browser import is unavailable.
 
+Settings omits the Version row because this provider reads web APIs and does not detect a local app or CLI version.
+
 ## Data sources + fallback order
 
 Manual cookie configuration is always the explicit override. The automatic order is Cursor.app → cached cookie → browser
@@ -23,6 +25,14 @@ Linux. Explicit `web` mode never reads local Cursor credentials; macOS uses its 
 
 1) **Cursor.app local auth** (first automatic source on macOS; Linux fallback)
    - Reads Cursor.app's VS Code-style global state DB for `ItemTable` key `cursorAuth/accessToken`.
+   - On macOS, supports both plain JWTs and Cursor 3.27's `cursor-safe-storage:v1:` encrypted tokens. Encrypted
+     tokens use the `Cursor Safe Storage` Keychain item (account `Cursor`). Plain token decoding performs no
+     Keychain reads.
+     Background and settings refreshes never prompt. An explicit manual refresh may request access once, sharing
+     that action's prompt allowance with browser imports. Choose **Always Allow** to permit future refreshes without
+     another prompt; denying access keeps the six-hour cooldown, including subsequent manual refreshes.
+     Unreadable or malformed encrypted tokens fall through to the existing cookie sources without reusing an older
+     persisted Cursor.app identity. JWT user ID and expiry validation still run after decryption.
    - BLOB decoding recognizes BOM-less ASCII UTF-16LE tokens before UTF-8, which would otherwise keep interleaved
      NUL bytes. Other encodings retain the existing UTF-8/UTF-16LE fallback; tokens are not normalized, and malformed
      nonempty values remain distinct from a missing session so they cannot enable stale cached-account fallback.
@@ -33,6 +43,8 @@ Linux. Explicit `web` mode never reads local Cursor credentials; macOS uses its 
    - The database is opened read-only. Active WAL state is read normally; an idle WAL-mode main file with no
      sidecars uses SQLite immutable mode so CodexBar does not recreate files in Cursor's directory.
    - The token is used only while its JWT expiry is more than 60 seconds away. CodexBar never refreshes it.
+     If the app token has expired and no fallback session works, CodexBar reports that the Cursor app session expired:
+     open Cursor to sign in again, or sign in to cursor.com in your browser. An available browser session still wins.
    - On macOS, a validated derived session is also persisted owner-only at
      `~/Library/Application Support/CodexBar/cursor-session.json` through the standard credential-file writer. Linux
      reads the Cursor database directly and does not persist the app token.
@@ -47,12 +59,15 @@ Linux. Explicit `web` mode never reads local Cursor credentials; macOS uses its 
    - Keychain cache: `com.steipete.codexbar.cache` (account `cookie.cursor`).
 
 3) **Browser cookie import** (macOS only)
-   - Cookie order from provider metadata, falling back to SweetCookieKit's default browser catalog, including Aside, Opera, Opera Neon, and Ego Lite.
-   - Domain filters: `cursor.com`, `cursor.sh`.
-   - Cookie names required (any one counts):
+   - Cookie order from provider metadata, falling back to SweetCookieKit's default browser catalog, including Aside, Brave Origin, Opera, Opera Neon, and Ego Lite.
+   - Domain filters: `cursor.com`, `www.cursor.com`, `cursor.sh`, `authenticator.cursor.sh` (leading dots are normalized).
+   - Recognized session cookie names:
      - `WorkosCursorSessionToken`
      - `__Secure-next-auth.session-token`
      - `next-auth.session-token`
+     - `wos-session`, `__Secure-wos-session`
+     - `authjs.session-token`, `__Secure-authjs.session-token`
+   - If no recognized name is present, matching-domain cookies are still tried and validated through the API.
 
 4) **Stored session cookies** (legacy fallback on macOS and Linux)
    - Legacy sessions captured by older CodexBar releases remain readable.
@@ -70,10 +85,17 @@ Manual option:
 ## Add and switch account
 - **Add Account** opens `https://authenticator.cursor.sh/` in a supported browser.
 - Aside, Opera, and Opera Neon are supported with SweetCookieKit 0.5.5. The selected application's bundle identifier pins login to that browser's cookie store.
+- SweetCookieKit 0.5.11 adds Brave Origin cookie imports and Add/Switch Account support. Its `com.brave.Browser.origin` bundle identifier pins login to the separate `BraveSoftware/Brave-Origin` profile store, using the shared browser import order and Keychain prompt safeguards.
 - SweetCookieKit 0.5.6 adds Ego Lite cookie imports. Add/Switch Account does not offer Ego Lite until its application has a verified, unambiguous bundle-identifier mapping; display names and storage paths are insufficient for interactive login.
 - **Switch Account** opens the same authenticator and waits for a different stable account ID when available, falling back to normalized email when IDs are unavailable.
 - When the system's HTTPS handler is a supported browser, CodexBar opens the route there automatically. When the handler is an intermediary app, CodexBar asks the user to choose a concrete supported browser before opening the route.
 - CodexBar pins the original HTTPS route to that concrete browser and polls cookies only from the same application. Interactive login never falls back to another browser, a stored session, or Cursor.app; cancelling browser selection or the absence of a supported browser stops before login opens.
+- Login polls every two seconds with a two-minute deadline, and API requests are capped by the remaining time. The timeout
+  reports the last validation error. A Switch waits for a different account, even if the current account is signed in.
+- Firefox imports persistent cookies from each profile, but does not expose container/partition identity to Cursor.
+  Session-only recovery files support only the default, unpartitioned context. If login is not detected,
+  try a regular Firefox window outside a container and include the exact timeout error when reporting the problem;
+  never share cookie values, tokens, or the browser database.
 - An installed non-Safari browser remains eligible before its first profile or cookie database exists, and CodexBar detects the store created during login. Browsers with access-blocked profile data remain unavailable, while Safari still requires an existing readable cookie source.
 - CodexBar preserves its cached and legacy stored Cursor sessions while login is in progress. An accepted browser session must be durably cached before the legacy session is cleared, so cancellation or failure leaves the previous session intact. Add completes only after the authenticated response includes a Cursor account identity. Switch compares stable account IDs when both sides provide them and otherwise compares normalized email.
 - CodexBar checks all available profiles in the selected browser. Add accepts a sole unambiguous account automatically, while Switch always asks for confirmation before replacing the current account, even when only one eligible alternative is found. Multiple eligible accounts always require an explicit choice, and CodexBar caches only the chosen session.
@@ -88,9 +110,14 @@ Manual option:
   - Stable user ID, email, and name.
 - `GET https://cursor.com/api/usage?user=ID`
   - Legacy request-based plan usage (request counts + limits).
+- `GET https://cursor.com/api/dashboard/v2/usage-status?scope=user`
+  - Optional monthly additional spend for unified personal memberships; failures retain usage-summary data.
 - `POST https://cursor.com/api/dashboard/get-sand-usage-status`
   - Grok Bot weekly included usage (`usagePercent`, `nextResetTimestampUtc`). Same session cookie;
     requires `Origin: https://cursor.com`. Best-effort: a failure leaves Cursor's monthly bars intact.
+  - `isUnified: true` marks The X Subscription's shared weekly pool. When no valid request quota is present,
+    a usable pool with a current reset becomes the primary **Weekly** bar and replaces the stale monthly
+    Total/Cursor/Third Party bars; on-demand spend stays in the cost section.
 
 ## Cookie file paths
 - Safari: `~/Library/Cookies/Cookies.binarycookies`
@@ -161,8 +188,8 @@ An HTTP 403 from the cost endpoint records a failed cost source with an in-memor
 If Auto fetches usage with a cookie that the app still cannot confirm for the current account, the result stays unpublished. An unchanged account scope waits for the next normal or manual refresh instead of repeatedly forcing another request. Real account, history-window, provider, or cost-timezone changes still request a replacement; a successful fetch that confirms its own cookie can publish immediately.
 
 ## Snapshot mapping
-- Primary: plan usage percent (included plan).
-- Secondary: Cursor (Cursor models) usage percent.
+- Primary: a valid legacy request quota takes precedence. Otherwise, use plan usage percent (included plan), or the shared weekly pool for `isUnified: true` accounts with a current weekly reset. Missing or expired timing retains the prior monthly layout.
+- Secondary: Cursor (Cursor models) usage percent on legacy plans; unified weekly accounts omit the stale monthly breakdown.
 - Tertiary: Third Party usage percent.
 - Extra: Grok Bot usage from `get-sand-usage-status` when the account has a paid allowance or an unexpired trial. The current `includedLimitZero` field takes precedence over the older allowance flag. Exhausted active trials remain visible; missing, malformed, or expired trial dates do not grant an allowance. Grok Bot is not the semantic weekly window, so monthly Cursor Auto pace stays on the Cursor bar when this extra 7-day window is present. Paid 7-day Grok Bot extras still show weekly pace on that extra bar; trial extras without a recurring reset do not. Paid Grok Bot allowances with a valid reset use the documented 7-day cadence regardless of `currentPeriodStart`, so pace covers the full week even when that field starts mid-week or is missing. Missing or malformed reset dates leave pace unavailable.
 - Provider cost: Extra usage USD. A capped individual budget wins; team accounts without a user cap use the shared team on-demand budget.
@@ -173,12 +200,13 @@ If Auto fetches usage with a cookie that the app still cannot confirm for the cu
 In Icon and Percent mode, choose **Providers → Cursor → Menu bar metric → Grok Bot** to replace the
 ordinary percentage in Cursor's layout. This saves a Cursor-only override. The layout editor also offers
 **Grok Bot %** in the usage palette when an allowance is available, for layouts with multiple percentages.
+Saved Grok Bot selections continue to read the same allowance after it becomes the unified primary pool.
 Both paths show the allowance's short tag, for example `GB 42%`, and follow the used/remaining
 preference. A saved selection displays `GB –` when the reading is missing or unknown; a real zero
 displays `GB 0%` in used mode. Lane percentages are tagged `T` (Total), `C` (Cursor), and `TP` (Third Party);
-menus and VoiceOver keep the full names. Auto % keeps its existing selection among Cursor's allowances,
-including Grok Bot. Balance tokens remain independent, and the dropdown keeps its existing reset countdown
-and paid-weekly pace display.
+menus and VoiceOver keep the full names. Auto % ranks usable allowances, including Grok Bot, by depletion
+forecast and then used percentage; an exhausted total or exhaustion of every subquota still takes priority.
+Balance tokens remain independent, and the dropdown keeps its existing reset countdown and paid-weekly pace display.
 
 Named-extra selections are stored in V4 layout keys. A V3 projection omits them while preserving explicit
 reset-window selections for 0.60.x; V2/V1 projections remain available for older releases. An unchanged
@@ -190,9 +218,9 @@ downgrade preserves the full layout on return, while edits made in an older rele
 - `Sources/CodexBarCore/Providers/Cursor/CursorStatusProbe+UsageSummary.swift` (summary projection)
 - `Sources/CodexBarCore/Providers/Cursor/CursorTeamSpend.swift` (verified member budget)
 - `Sources/CodexBarCore/Providers/Cursor/CursorSandUsage.swift` (Grok Bot weekly included usage)
-- `Sources/CodexBar/CursorLoginRunner.swift` (login flow)
+- `Sources/CodexBar/Providers/Cursor/CursorLoginRunner.swift` (login flow)
 - `Sources/CodexBar/Providers/Cursor/CursorLoginFlow.swift` (menu integration)
-- `Sources/CodexBar/CursorLoginBrowserRouter.swift` (browser routing and selection)
+- `Sources/CodexBar/Providers/Cursor/CursorLoginBrowserRouter.swift` (browser routing and selection)
 
 ### Enterprise and Business member budgets
 
@@ -215,3 +243,16 @@ team response dates and other members' details are not retained. Caller cancella
 ## Cost reporting period
 
 The shared [cost reporting period](cost-reporting-periods.md) supports month-to-date in the pinned cost time zone. Cursor-metered spend and daily estimates use the same event window. Quota bars continue to follow Cursor’s billing-cycle start/end dates, which can fall mid-month.
+
+## Unified Cursor/Grok additional spend
+
+Unified personal memberships with `limitType: "user"` read monthly additional spend from
+`GET /api/dashboard/v2/usage-status?scope=user`, using the existing Cursor session. The legacy usage summary can
+report zero after account unification. A valid, available monthly response supplies `usedCents`, `limitCents`,
+`periodStart`, and `resetsAt`; amounts convert from cents to USD. Separate `creditsUsedCents` consumption is not
+added to additional spend. See the [affected-account response](https://github.com/steipete/CodexBar/pull/4593#issuecomment-6261700483).
+
+The optional lookup replaces the legacy request-quota lookup for these personal memberships and has a five-second
+request budget. Unavailable, failed, incomplete, malformed, or out-of-period responses retain the summary's spend,
+cap, and reset. Valid zero spend remains zero. Team budgets, legacy plans, weekly Grok allowance, account identity,
+and the normal refresh scheduler retain their existing behavior.

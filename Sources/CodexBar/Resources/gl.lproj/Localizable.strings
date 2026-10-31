@@ -1,4 +1,5 @@
 /* Galician localization for CodexBar */
+"Copilot subscription ended" = "A subscrición a Copilot rematou";
 
 /* iCloud Sync */
 "+ %d more" = "+ %d máis";
@@ -41,6 +42,16 @@
 "7d" = "7d";
 "A managed Codex login is already running. Wait for it to finish before adding " = "Xa hai un inicio de sesión xestionado de Codex en curso. Agarda a que remate antes de engadir ";
 "API key" = "Chave de API";
+
+/* Future AGI provider */
+"Secret key" = "Clave secreta";
+"Required with the API key. Saved in the local config file. Or set FI_SECRET_KEY." = "Requírese xunto coa clave API. Gárdase no ficheiro de configuración local. Tamén podes definir FI_SECRET_KEY.";
+"Paste secret key…" = "Pega a clave secreta…";
+"AI credits" = "Créditos de IA";
+"Gateway requests" = "Solicitudes á pasarela";
+"Future AGI cost history is not available." = "O historial de custos de Future AGI non está dispoñible.";
+"Saved in CodexBar's local config file. Or set FI_API_KEY." = "Gárdase no ficheiro de configuración local de CodexBar. Tamén podes definir FI_API_KEY.";
+
 "API region" = "Rexión da API";
 "API token" = "Token de API";
 "API tokens" = "Tokens de API";
@@ -139,7 +150,7 @@
 "Local token history is unavailable or incomplete." = "O historial local de tokens non está dispoñible ou está incompleto.";
 "Could not add Codex account" = "Non se puido engadir a conta de Codex";
 "Could not open Terminal for Gemini" = "Non se puido abrir o Terminal para Gemini";
-"Could not start claude /login" = "Non se puido iniciar claude /login";
+"Claude OAuth credentials read failed: CodexBar's Claude OAuth cache is temporarily unavailable in macOS Keychain. Check that the login keychain is unlocked in Keychain Access, then retry Refresh." = "Non se puideron ler as credenciais de Claude OAuth: a caché de Claude OAuth de CodexBar non está dispoñible temporalmente no chaveiro de macOS. Comproba que o chaveiro de inicio de sesión estea desbloqueado en Acceso a Chaveiros e volve actualizar.";
 "Could not start codex login" = "Non se puido iniciar codex login";
 "Could not switch system account" = "Non se puido cambiar a conta do sistema";
 "Credits" = "Créditos";
@@ -148,6 +159,7 @@
 "Individual credits" = "Créditos individuais";
 "Workspace" = "Espazo de traballo";
 "Credits history" = "Historial de créditos";
+"Cursor app session expired — open Cursor to sign in again, or sign in to cursor.com in your browser." = "A sesión da aplicación Cursor caducou — abre Cursor para iniciar sesión de novo ou inicia sesión en cursor.com no navegador.";
 "Cursor login failed" = "O inicio de sesión de Cursor fallou";
 "Custom" = "Personalizado";
 "Custom Path" = "Ruta personalizada";
@@ -585,7 +597,6 @@
 
 /* Display Pane */
 "menu_bar_style_title" = "Estilo da barra de menús";
-"menu_bar_style_subtitle" = "Como se debuxa o elemento da barra de menús.";
 "menu_bar_inactive_display_contrast_title" = "Mellorar a visibilidade nas pantallas inactivas";
 "menu_bar_inactive_display_contrast_subtitle" = "Usa unha representación de alto contraste para manter lexibles a icona e a métrica nas outras pantallas.";
 "menu_bar_style_critters" = "Animaliños";
@@ -605,9 +616,15 @@
 "merge_icons_title" = "Combinar iconas";
 "merge_icons_subtitle" = "Usa unha única icona na barra de menús cun selector de provedor.";
 "merged_icon_style_title" = "Estilo de icona combinada";
-"merged_icon_style_subtitle" = "O selector percorre os provedores un a un; Amoreado mostra dous provedores á vez, un por fila.";
+"merged_icon_style_subtitle" = "O selector mostra un provedor de cada vez. Apilado mostra dous provedores como filas de texto. As barras apiladas debuxan dous ou tres provedores como indicadores.";
 "merged_icon_style_switcher" = "Selector";
 "merged_icon_style_stacked" = "Amoreado";
+"merged_icon_style_bars" = "Barras apiladas";
+"stacked_bars_window_title" = "As barras amosan";
+"stacked_bars_window_session" = "Uso da sesión";
+"stacked_bars_window_weekly" = "Uso semanal";
+"stacked_bars_show_icons_title" = "Mostrar as iconas dos provedores";
+"stacked_bars_section_footer" = "As barras seguen a dirección de enchido definida en Menú (restante ou usado).";
 "merge_icon_stacked_top_provider_title" = "Fila superior";
 "merge_icon_stacked_bottom_provider_title" = "Fila inferior";
 "display_mode_title" = "Modo de visualización";
@@ -639,6 +656,8 @@
 "overview_rows_follow_order" = "As filas de Resumo sempre seguen a orde dos provedores.";
 "overview_no_providers_selected" = "Non se seleccionou ningún provedor";
 "agent_sessions_title" = "Sesións de axentes";
+"agent_sessions_remote_title" = "Sesións remotas (Tailscale / SSH)";
+"agent_sessions_remote_subtitle" = "Descubre equipos remotos e conéctate a eles. Desactívao para supervisar só este Mac.";
 "agent_sessions_subtitle" = "Amosa no menú as sesións de Codex e Claude Code locais e descubertas mediante SSH.";
 "agent_sessions_hosts_title" = "Hosts SSH adicionais";
 "agent_sessions_footer" = "Os Mac da túa tailnet descóbrense automaticamente. As sesións locais actualízanse cada 30 segundos; os hosts remotos cada 60 segundos e cando se abre o menú.";
@@ -690,7 +709,15 @@
 "link_website" = "Sitio web";
 "link_twitter" = "Twitter";
 "link_email" = "Correo electrónico";
+"link_acknowledgements" = "Agradecementos";
+"acknowledgements_footer" = "CodexBar está construído con estes proxectos de código aberto.";
+"acknowledgements_others" = "%d máis";
+"acknowledgements_author" = "Autor";
+"acknowledgements_authors" = "Autores";
+"acknowledgements_license" = "Licenza";
 "check_updates_auto" = "Buscar actualizacións automaticamente";
+"install_updates_auto" = "Descargar e instalar actualizacións automaticamente";
+"install_updates_auto_subtitle" = "Se está desactivado, preguntaráseche antes de instalar unha nova versión.";
 "update_channel" = "Canle de actualizacións";
 "check_for_updates" = "Buscar actualizacións…";
 "updates_unavailable" = "Actualizacións non dispoñibles nesta compilación.";
@@ -884,11 +911,8 @@
 "Today cash" = "Gasto de hoxe";
 "DeepSeek 30 day token usage trend" = "Tendencia de uso de tokens de DeepSeek en 30 días";
 "DeepSeek this month token usage trend" = "Tendencia de uso de tokens de DeepSeek este mes";
-"Chrome profile" = "Perfil de Chrome";
 "Choose which signed-in DeepSeek Platform session supplies detailed usage." = "Escolle que sesión iniciada de DeepSeek Platform fornece o uso detallado.";
 "Detailed usage unavailable." = "O uso detallado non está dispoñible.";
-"Sign in to DeepSeek Platform in Chrome for detailed usage." = "Inicia sesión en DeepSeek Platform en Chrome para ver o uso detallado.";
-"Select a DeepSeek Chrome profile in Settings." = "Selecciona un perfil de Chrome de DeepSeek en Axustes.";
 "Select profile…" = "Seleccionar perfil…";
 "cache-hit input" = "entrada atopada na caché";
 "cache-miss input" = "entrada non atopada na caché";
@@ -988,17 +1012,12 @@
 "CodexBar found another managed account that already uses the current system account. Resolve the duplicate account before switching." = "CodexBar atopou outra conta xestionada que xa usa a conta actual do sistema. Resolve a conta duplicada antes de cambiar.";
 "CodexBar will ask macOS Keychain for “%@” so it can decrypt browser cookies and authenticate your account. Click OK to continue." = "CodexBar pediralle ao Chaveiro de macOS “%@” para descifrar as cookies do navegador e autenticar a túa conta. Preme Aceptar para continuar.";
 "CodexBar will ask macOS Keychain for the Claude Code OAuth token so it can fetch your Claude usage. Click OK to continue." = "CodexBar pediralle ao Chaveiro de macOS o token OAuth de Claude Code para obter o teu uso de Claude. Preme Aceptar para continuar.";
-"CodexBar will ask macOS Keychain for your Amp cookie header so it can fetch usage. Click OK to continue." = "CodexBar pediralle ao Chaveiro de macOS a túa cabeceira Cookie de Amp para obter o uso. Preme Aceptar para continuar.";
-"CodexBar will ask macOS Keychain for your Augment cookie header so it can fetch usage. Click OK to continue." = "CodexBar pediralle ao Chaveiro de macOS a túa cabeceira Cookie de Augment para obter o uso. Preme Aceptar para continuar.";
+"CodexBar will ask macOS Keychain for your %@ cookie header so it can fetch usage. Click OK to continue." = "CodexBar pediralle ao Chaveiro de macOS a túa cabeceira Cookie de %@ para obter o uso. Preme Aceptar para continuar.";
 "CodexBar will ask macOS Keychain for your Claude cookie header so it can fetch Claude web usage. Click OK to continue." = "CodexBar pediralle ao Chaveiro de macOS a túa cabeceira Cookie de Claude para obter o uso web de Claude. Preme Aceptar para continuar.";
-"CodexBar will ask macOS Keychain for your Cursor cookie header so it can fetch usage. Click OK to continue." = "CodexBar pediralle ao Chaveiro de macOS a túa cabeceira Cookie de Cursor para obter o uso. Preme Aceptar para continuar.";
-"CodexBar will ask macOS Keychain for your Factory cookie header so it can fetch usage. Click OK to continue." = "CodexBar pediralle ao Chaveiro de macOS a túa cabeceira Cookie de Factory para obter o uso. Preme Aceptar para continuar.";
 "CodexBar will ask macOS Keychain for your GitHub Copilot token so it can fetch usage. Click OK to continue." = "CodexBar pediralle ao Chaveiro de macOS o teu token de GitHub Copilot para obter o uso. Preme Aceptar para continuar.";
 "CodexBar will ask macOS Keychain for your Kimi auth token so it can fetch usage. Click OK to continue." = "CodexBar pediralle ao Chaveiro de macOS o teu token de autenticación de Kimi para obter o uso. Preme Aceptar para continuar.";
 "CodexBar will ask macOS Keychain for your MiniMax API token so it can fetch usage. Click OK to continue." = "CodexBar pediralle ao Chaveiro de macOS o teu token de API de MiniMax para obter o uso. Preme Aceptar para continuar.";
-"CodexBar will ask macOS Keychain for your MiniMax cookie header so it can fetch usage. Click OK to continue." = "CodexBar pediralle ao Chaveiro de macOS a túa cabeceira Cookie de MiniMax para obter o uso. Preme Aceptar para continuar.";
 "CodexBar will ask macOS Keychain for your OpenAI cookie header so it can fetch Codex dashboard extras. Click OK to continue." = "CodexBar pediralle ao Chaveiro de macOS a túa cabeceira Cookie de OpenAI para obter os extras do panel de Codex. Preme Aceptar para continuar.";
-"CodexBar will ask macOS Keychain for your OpenCode cookie header so it can fetch usage. Click OK to continue." = "CodexBar pediralle ao Chaveiro de macOS a túa cabeceira Cookie de OpenCode para obter o uso. Preme Aceptar para continuar.";
 "CodexBar will ask macOS Keychain for your Synthetic API key so it can fetch usage. Click OK to continue." = "CodexBar pediralle ao Chaveiro de macOS a túa chave de API de Synthetic para obter o uso. Preme Aceptar para continuar.";
 "CodexBar will ask macOS Keychain for your z.ai API token so it can fetch usage. Click OK to continue." = "CodexBar pediralle ao Chaveiro de macOS o teu token de API de z.ai para obter o uso. Preme Aceptar para continuar.";
 "Could not open Cursor login in your browser." = "Non se puido abrir o inicio de sesión de Cursor no teu navegador.";
@@ -1048,6 +1067,7 @@
 "Password" = "Contrasinal";
 "%@ authentication is disabled." = "A autenticación %@ está desactivada.";
 "%@ cookies are disabled." = "As cookies de %@ están desactivadas.";
+"%@ is unavailable. Edit the widget to choose a provider." = "%@ non está dispoñible. Edita o widget para escoller un provedor.";
 "%@ web API access is disabled." = "O acceso á API web de %@ está desactivado.";
 "Disable %@ dashboard cookie usage." = "Desactiva o uso das cookies do panel de %@.";
 "Keychain access is disabled in Advanced, so browser cookie import is unavailable." = "O acceso ao chaveiro está desactivado en Avanzado, polo que a importación de cookies do navegador non está dispoñible.";
@@ -1113,7 +1133,6 @@
 "Windsurf session JSON bundle" = "Paquete JSON da sesión de Windsurf";
 "Workspace ID" = "ID do espazo de traballo";
 "Your StepFun platform password. Used to login and obtain a session token." = "O teu contrasinal da plataforma StepFun. Usado para iniciar sesión e obter un token de sesión.";
-"claude /login exited with status %d." = "claude /login saíu co estado %d.";
 "codex login exited with status %d." = "codex login rematou co estado %d.";
 "Cookie: …\n\nor paste a cURL capture from the Abacus AI dashboard" = "Cookie:…\n\nou pega unha captura de cURL desde o panel de control de Abacus AI";
 "Cookie: …\n\nor paste the __Secure-next-auth.session-token value" = "Cookie:…\n\nou pega o valor __Secure-next-auth.session-token";
@@ -1397,6 +1416,7 @@
 /* Menu bar layout editor */
 "menu_bar_layout_title" = "Disposición";
 "menu_bar_layout_footer" = "Arrastra fichas para ordenar a barra de menús. Preme nunha ficha para engadila; selecciona unha ficha colocada e preme Suprimir para retirala.";
+"menu_bar_layout_footer_requires_icon_and_percent" = "A disposición só se aplica ao estilo da barra de menús «%@». Escolle ese estilo arriba para editala.";
 "menu_bar_layout_group_identity" = "Identidade";
 "menu_bar_layout_group_usage" = "Uso";
 "menu_bar_layout_group_time" = "Tempo";
@@ -1427,9 +1447,15 @@
 "menu_bar_layout_size" = "Tamaño";
 "menu_bar_layout_size_small" = "Pequeno";
 "menu_bar_layout_size_regular" = "Normal";
+"menu_bar_layout_size_large" = "Grande";
+"menu_bar_layout_monospaced_digits" = "Díxitos monoespazados";
+"menu_bar_layout_show_window_labels" = "Amosar as etiquetas dos períodos";
 "menu_bar_layout_gap" = "Separación";
 "menu_bar_layout_gap_tight" = "Estreita";
 "menu_bar_layout_gap_regular" = "Normal";
+"menu_bar_layout_bar_style" = "Estilo da barra";
+"menu_bar_layout_bar_style_segmented" = "Segmentada";
+"menu_bar_layout_bar_style_pill" = "Cápsula";
 "menu_bar_layout_vertical_adjustment" = "Axuste vertical";
 "menu_bar_layout_sample_account" = "conta";
 "menu_bar_layout_sample_runs_out" = "esgótase ven.";
@@ -1449,6 +1475,9 @@
 "menu_bar_layout_token_runs_out" = "Esgótase";
 "menu_bar_layout_token_cost_today" = "Custo de hoxe";
 "menu_bar_layout_token_cost_window" = "Custo (Xanela do historial)";
+"menu_bar_layout_token_spend" = "Gasto %";
+"menu_bar_layout_token_spend_pace" = "Ritmo de gasto";
+"menu_bar_layout_token_spend_budget" = "Gasto / orzamento";
 "menu_bar_layout_token_space" = "Espazo";
 "menu_bar_layout_token_line_break" = "Salto de liña";
 "menu_bar_layout_token_separator_accessibility" = "Punto separador";
@@ -1610,6 +1639,7 @@
 "menu_bar_layout_conditional_default_session_spent" = "Sesión case esgotada";
 "menu_bar_layout_conditional_default_either_high" = "Sesión ou semana en nivel alto";
 "menu_bar_layout_conditional_default_scoped_weekly" = "Semana por modelo por riba do 60 %";
+"menu_bar_layout_conditional_default_spend_high" = "Gasto por riba do 90 % usado";
 "Visible usage items" = "Elementos de uso visibles";
 "Restore Defaults" = "Restaurar valores predeterminados";
 "Choose which usage rows appear in this provider's menu, Settings preview, and Overview." = "Escolle as filas de uso que aparecen no menú deste provedor, na vista previa de Configuración e na Vista xeral.";
@@ -1779,6 +1809,7 @@
 "Details for %@" = "Detalles para %@";
 "EST. %@" = "%@ estimado";
 "Enable Antigravity provider" = "Activar o provedor Antigravity";
+"Enable a provider in CodexBar → Settings → Providers." = "Activa un provedor en CodexBar → Axustes → Provedores.";
 "Enable account widgets in CodexBar → Settings → Menu → Widgets. Then edit this widget to choose an account." = "Activa os widgets da conta en CodexBar → Configuración → Menú → Widgets. A continuación, edita este widget para escoller unha conta.";
 "Error: %@" = "Erro: %@";
 "Examples: alt+cmd+2, shift+right. Refresh (cmd+r), Settings (cmd+,) and Quit (cmd+q) are reserved." = "Exemplos: alt+cmd+2, shift+right. Actualizar (cmd+r), Configuración (cmd+,) e Saír (cmd+q) están reservados.";
@@ -1793,6 +1824,9 @@
 "Gateway URL" = "Pasarela URL";
 "Gemini CLI login is no longer supported" = "O inicio de sesión Gemini CLI xa non é compatible";
 "Gemini CLI migration" = "Migración Gemini CLI";
+"Gemini app" = "Aplicación Gemini";
+"Gemini CLI" = "Gemini CLI";
+"Gemini app limits use your browser account and are separate from Gemini CLI quotas." = "Os límites da aplicación Gemini corresponden á túa conta do navegador e son independentes das cotas de Gemini CLI.";
 "Generated locally by CodexBar · Data through %@" = "Xerado localmente por CodexBar · Datos ata %@";
 "GitHub cookies" = "GitHub cookies";
 "GitHub does not publish this value. Enter it to show a usage bar. Applies to the selected GitHub account." = "GitHub non publica este valor. Introdúceo para mostrar unha barra de uso. Aplícase á conta GitHub seleccionada.";
@@ -1896,6 +1930,7 @@
 "Paste the Cookie header from a billing-page request. It must contain sessionid." = "Pega a cabeceira Cookie dunha solicitude de páxina de facturación. Debe conter sessionid.";
 "Paste z.ai / GLM API key…" = "Pega a chave z.ai / GLM API...";
 "Path to the cswap executable (github.com/realiti4/claude-swap)." = "Ruta ao executable cswap (github.com/realiti4/claude-swap).";
+"Path to the tcr executable (github.com/dhkts1/teamclaude-rs)." = "Ruta ao executable tcr (github.com/dhkts1/teamclaude-rs).";
 "Peak %@" = "Pico %@";
 "Percent left" = "Porcentaxe restante";
 "Pick another Codex account before importing OpenAI cookies." = "Escolla outra conta Codex antes de importar OpenAI cookies.";
@@ -1927,7 +1962,7 @@
 "Refresh the profile before refreshing OpenAI web data." = "Actualiza o perfil antes de actualizar os datos web de OpenAI.";
 "Refreshing account status…" = "Actualizando o estado da conta...";
 "Remaining budget compared with an ideal steady burn rate." = "Orzamento restante en comparación cunha taxa de queima constante ideal.";
-"Renews: %@" = "Renovación: %@";
+"Plan renews: %@" = "Renovación do plan: %@";
 "Request quota" = "Solicitar Cota";
 "Requesting login…" = "Solicitando inicio de sesión...";
 "Required. Enter a regular API key or a Management API key here. Management keys also enable account Activity on the official OpenRouter API." = "Obrigatorio. Introduza aquí unha clave API normal ou unha clave de xestión API. As claves de xestión tamén permiten a actividade da conta no OpenRouter API oficial.";
@@ -1950,6 +1985,8 @@
 "Select the provider to display." = "Seleccione o provedor para mostrar.";
 "Session (5-hour)" = "Sesión (5 horas)";
 "Session and weekly usage with credits and costs." = "Sesión e uso semanal con Créditos e custos.";
+"Set the cswap executable path below." = "Define a continuación a ruta do executable cswap.";
+"Set the tcr executable path below." = "Define a continuación a ruta do executable tcr.";
 "Settings unavailable." = "Configuración non dispoñible.";
 "Show account card when only one account is available" = "Mostra a tarxeta de conta cando só hai unha conta dispoñible";
 "Show model-specific weekly usage in widgets" = "Mostra o uso semanal específico do modelo en widgets";
@@ -1957,6 +1994,7 @@
 "Shows model-specific Claude quotas, such as Fable, in desktop widgets." = "Mostra Claude Cota específico do modelo, como Fable, en widgets de escritorio.";
 "Shows the hidden accounts" = "Mostra as contas ocultas";
 "Shows usage and lets you switch accounts through `cswap`. Credentials stay managed by claude-swap; CodexBar never reads them." = "Mostra o uso e permíteche cambiar de conta a través de `cswap`. As credenciais seguen xestionadas por claude-swap; CodexBar nunca os le.";
+"Shows usage from `tcr`; it does not switch accounts, because tcr picks the account for each request. Credentials stay managed by tcr; CodexBar never reads them." = "Mostra o uso desde `tcr`; non cambia de conta, porque tcr escolle a conta para cada solicitude. As credenciais seguen xestionadas por tcr; CodexBar nunca as le.";
 "Stay Awake" = "Mantéñase esperto";
 "Stored in the CodexBar config file. Reads monthly budget and routed usage from /v1/usage." = "Almacenado no ficheiro de configuración CodexBar. Le o orzamento mensual e o uso enrutado desde /v1/usage.";
 "Stored in ~/.codexbar/config.json. OPENAI_ADMIN_KEY is required for organization usage; legacy/user keys only get a best-effort balance fallback." = "Almacenado en ~/.codexbar/config.json. OPENAI_ADMIN_KEY é necesario para o uso da organización; As claves legadas/usuario só obteñen un saldo alternativo do mellor esforzo.";
@@ -1965,6 +2003,7 @@
 "SuperGrok OAuth" = "SuperGrok OAuth";
 "Switch Account…" = "Cambiar conta...";
 "Switch Claude Code account" = "Cambia de conta Claude Code";
+"Claude accounts in tcr" = "Contas de Claude en tcr";
 "Switch Claude Code to %@" = "Cambia Claude Code a %@";
 "Switch Provider" = "Cambia de provedor";
 "Switch the provider shown in the widget." = "Cambia o provedor que se mostra no widget.";
@@ -1985,10 +2024,7 @@
 "Top models:" = "Top modelos:";
 "Two quota burn-down charts in one tile." = "Dous gráficos de queima Cota nun só mosaico.";
 "Usage & spend come from your console.groq.com browser session automatically. An API key is optional and only adds Enterprise Prometheus metrics." = "O uso e o gasto proceden da sesión do teu navegador console.groq.com automaticamente. Unha clave API é opcional e só engade Enterprise Prometheus Métrica.";
-"Usage data appears after a refresh." = "Os datos de uso aparecen despois dunha actualización.";
-"Usage data will appear once the app refreshes." = "Os datos de uso aparecerán unha vez que se actualice a aplicación.";
 "Usage history chart with recent totals." = "Gráfico de historial de uso con totais recentes.";
-"Usage history will appear after a refresh." = "O historial de uso aparecerá despois dunha actualización.";
 "Usage limit" = "Límite de uso";
 "Usage limits and reset countdowns for one saved account." = "Límites de uso e restablecemento das contas atrás para unha conta gardada.";
 "Usage widget with a provider switcher." = "Widget de uso cun selector de provedores.";
@@ -2051,6 +2087,7 @@
 "sk-ant-admin..." = "sk-ant-admin...";
 "sk-or-v1-..." = "sk-or-v1-...";
 "spent" = "Cota esgotado";
+"tcr executable" = "Executable tcr";
 "under pace" = "uso por debaixo do ritmo previsto";
 "us-east-1" = "us-east-1";
 "used" = "usado";
@@ -2061,6 +2098,7 @@
 "~%@ est" = "~%@ estimado";
 "~%@ tracked tokens (partial)" = "~%@ Tokens rexistrados (PARCIAL)";
 "~/.local/bin/cswap" = "~/.local/bin/cswap";
+"/Applications/TcrBar.app/Contents/MacOS/tcr" = "/Applications/TcrBar.app/Contents/MacOS/tcr";
 "~/Library/Application Support/JetBrains/IntelliJIdea2024.3" = "~/Library/Application Support/JetBrains/IntelliJIdea2024.3";
 "00000000-0000-0000-0000-000000000000" = "00000000-0000-0000-0000-000000000000";
 
@@ -2084,6 +2122,8 @@
 "Poe usage history is unavailable." = "O historial de uso de Poe non está dispoñible.";
 "Stored in ~/.codexbar/config.json. Get your key from poe.com/api/keys." = "Almacenado en ~/.codexbar/config.json. Obtén a túa chave de poe.com/api/keys.";
 "Billing" = "Facturación";
+"Invoice billing" = "Pagamento mediante factura";
+"Prepaid" = "Prepago";
 "Rate limit" = "Límite de taxa";
 "Billing and rate-limit data from the v0 Platform API" = "Datos de facturación e límite de tarifa da plataforma v0 API";
 "v0 cost history is not available via the Platform API." = "O historial de custos v0 non está dispoñible a través da plataforma API.";
@@ -2173,6 +2213,10 @@
 "Stored in ~/.codexbar/config.json. Create one at console.x.ai under Settings > Management Keys; inference API keys are not accepted." = "Almacenado en ~/.codexbar/config.json. Crea un en console.x.ai en Configuración > Teclas de xestión; As chaves de inferencia API non se aceptan.";
 "xai-..." = "xai-...";
 "Team ID" = "Equipo ID";
+"Vercel access token" = "Token de acceso de Vercel";
+"Optional. Shows your personal budget instead of team credits. Saved in CodexBar's local config file. Or set VERCEL_ACCESS_TOKEN." = "Opcional. Mostra o teu orzamento persoal en lugar dos créditos do equipo. Gárdase no ficheiro de configuración local de CodexBar. Ou define VERCEL_ACCESS_TOKEN.";
+"Open Vercel tokens" = "Abrir os tokens de Vercel";
+"Required with a Vercel access token. Or set VERCEL_TEAM_ID." = "Obrigatorio cun token de acceso de Vercel. Ou define VERCEL_TEAM_ID.";
 "Required. Shown in the xAI Console URL and team settings." = "Obrigatorio. Móstrase na consola xAI URL e na configuración do equipo.";
 "Sakana AI cost summary is not supported." = "O resumo de custos Sakana AI non é compatible.";
 "Stored in ~/.codexbar/config.json. Copy the Sakana AI console Cookie request header." = "Almacenado en ~/.codexbar/config.json. Copie a cabeceira da solicitude da consola Sakana AI Cookie.";
@@ -2326,6 +2370,7 @@
 "Core Monthly" = "Mensual básico";
 "Bobcoin usage" = "Uso de Bobcoin";
 "Code 7-day" = "Código de 7 días Cota";
+"Other features" = "Outras funcións";
 "Quota services" = "Servizos Cota";
 "Billing history" = "Historial de facturación";
 "Renews" = "Renova";
@@ -2359,7 +2404,7 @@
 "Optional. Select each profile's .gemini folder to combine local token and cost history. The primary home is always included. Does not change sign-in or quotas." = "Opcional. Seleccione o cartafol .gemini de cada perfil para combinar o historial local de tokens e custos. O directorio de inicio principal sempre está incluído. Non modifica o inicio de sesión nin as cotas.";
 
 /* Selected browser profile */
-"Browser profile" = "Perfil do navegador";
+"Browser profile" = "Perfil de navegador";
 "Unavailable profile: %@" = "Perfil non dispoñible: %@";
 "Read only the selected %@ profile. Accounts are never selected automatically." = "Ler só o perfil de %@ seleccionado. As contas nunca se seleccionan automaticamente.";
 "Langdock cost usage is not supported." = "Non se admite o seguimento dos custos de Langdock.";
@@ -2406,6 +2451,7 @@
 
 "X API cost history is not available." = "O historial de custos de X API non está dispoñible.";
 "Paste a console.x.com Cookie header containing auth_token and ct0." = "Pega unha cabeceira Cookie de console.x.com que conteña auth_token e ct0.";
+"Paste a platform.claude.com Cookie header containing sessionKey." = "Pega unha cabeceira Cookie de platform.claude.com que conteña sessionKey.";
 "Open X Developer Console" = "Abrir a consola de desenvolvedores de X";
 "update_available_notification_body" = "Preme para abrir a configuración de actualización e instalar a nova versión.";
 // Structured session performance layout.
@@ -2430,7 +2476,7 @@
 "spend_performance_cache_help" = "Entrada almacenada en caché dividida entre a entrada total das quendas válidas. Ponderada polos tokens de entrada, coa cobertura das mostras indicada.";
 "spend_performance_metric_help" = "Sobre estas observacións";
 "merged_icon_source_title" = "Orixe da icona combinada";
-"merged_icon_source_subtitle" = "Escolle que provedor mostra a icona combinada cando está contraída.";
+"merged_icon_source_subtitle" = "«Maior uso» só compara cotas. Para provedores sen cotas, usa «Selección actual».";
 "merged_icon_source_current_selection" = "Selección actual";
 "merged_icon_source_highest_usage" = "Maior uso";
 "merged_icon_source_frontmost_app" = "Aplicación do provedor en primeiro plano";
@@ -2507,6 +2553,8 @@
 "Pace sign" = "Signo do ritmo";
 "Ahead of pace is +" = "Por riba do ritmo é +";
 "Reserve is +" = "A reserva é +";
+"Back" = "Atrás";
+"Forward" = "Adiante";
 
 "cost_reset_inferred_tooltip" = "Inferido: %@ non informa desta data. Os límites de gasto mensuais restablécense ás 00:00 UTC o día 1.";
 /* fal provider credentials */
@@ -2527,12 +2575,11 @@
 "Clear filters" = "Borrar filtros";
 "Change provider order" = "Cambiar a orde dos provedores";
 "Provider sorting" = "Ordenación dos provedores";
-"Only enabled providers" = "Só provedores activos";
+"Only show enabled providers" = "Amosar só os provedores activos";
 "Restore default order" = "Restaurar a orde predeterminada";
 "Also restores the provider order in the menu bar. Can be undone." = "Tamén restaura a orde dos provedores na barra de menús. Pódese desfacer.";
 "Local Codex details; excluded from combined totals." = "Detalles locais de Codex; excluídos dos totais combinados.";
 
-"Auto uses an API key when configured, otherwise browser cookies." = "Auto uses an API key when configured, otherwise browser cookies.";
 "Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY." = "Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY.";
 /* OpenAI organization rate limits and live usage */
 "%@ tokens · %@ requests" = "%@ tokens · %@ solicitudes";
@@ -2619,3 +2666,138 @@
 "Daily spend · %@" = "Gasto diario · %@";
 "Applies to the selected token account “%@”. Each account keeps its own limits." = "Aplícase á conta de token seleccionada «%@». Cada conta conserva os seus propios límites.";
 "Applies to the OpenAI API key, not to token accounts." = "Aplícase á clave da API de OpenAI, non ás contas de token.";
+"CodexBar will ask macOS Keychain for the Muse Code login token so it can fetch your Muse Code subscription usage. Click OK to continue." = "CodexBar pediralle ao Chaveiro de macOS o token de inicio de sesión de Muse Code para obter o uso da túa subscrición a Muse Code. Preme Aceptar para continuar.";
+/* Claude Platform provider */
+"API credit" = "Crédito da API";
+"Purchased credit" = "Crédito comprado";
+"Claude Platform exposes Console credit balance and monthly spend, not local token cost history." = "Claude Platform mostra o saldo de crédito e o gasto mensual da Console, non o historial local de custos de tokens.";
+
+"Claude config directory" = "Directorio de configuración de Claude";
+/* App-managed HTTP server */
+"http_server_title" = "Servidor HTTP";
+"http_server_enable" = "Activar o servidor HTTP";
+"http_server_bind" = "Enderezo IPv4 de escoita";
+"http_server_port" = "Porto";
+"http_server_token" = "Token do servidor";
+"http_server_show" = "Mostrar";
+"http_server_generate" = "Xerar";
+"http_server_cache" = "Intervalo de caché (segundos)";
+"http_server_timeout" = "Tempo límite da solicitude (segundos; 0 desactiva)";
+"http_server_all_accounts" = "Incluír todas as contas nas instantáneas";
+"http_server_identity" = "Identidade no panel";
+"http_server_redacted" = "Oculta";
+"http_server_warning" = "Expón uso, custos e información de contas e proxectos, nunca credenciais dos provedores. HTTP envía o token do servidor sen cifrar. Úsao só cunha conexión VPN ou Tailscale de confianza.";
+"http_server_plain_http" = "Permitir HTTP sen cifrar fóra deste Mac";
+"http_server_dashboard" = "Panel";
+"http_server_wildcard" = "Noutros dispositivos, substitúe 0.0.0.0 polo enderezo IPv4 da VPN ou Tailscale deste Mac.";
+"http_server_footer" = "Desactivado por defecto. Iníciase con CodexBar e detense ao pechalo. A configuración e o token quedan neste Mac e exclúense da sincronización e das exportacións. Mantén o Mac esperto para o acceso remoto.";
+/* Claude desktop cookie source */
+"Claude desktop app" = "Aplicación de escritorio de Claude";
+"Use Claude desktop app cookies" = "Usar as cookies da aplicación de escritorio de Claude";
+"For Web usage, follow the account signed into Claude.app instead of a browser." = "Para o uso web, usa a conta coa sesión iniciada en Claude.app en lugar da do navegador.";
+
+/* Munito provider credentials */
+"Key with Read account data (Admin API) permission. Or set MUNITO_API_KEY." = "Chave con permiso de ler datos da conta (Admin API). Ou define MUNITO_API_KEY.";
+"Munito reports Admin API spend and limits, not local token cost history." = "Munito informa do gasto e dos límites da Admin API, non do historial de custos de tokens local.";
+
+"Show all accounts in Overview" = "Mostrar todas as contas na vista xeral";
+
+"Expand cached account usage. The six-provider limit still applies." = "Despregue os provedores seleccionados cos datos de uso das contas na caché. Mantense o límite de seis provedores.";
+"Edit" = "Editar";
+"Move up" = "Mover arriba";
+"Move down" = "Mover abaixo";
+"Leave blank to keep the saved credential." = "Déixao en branco para conservar a credencial gardada.";
+
+"No personal budget configured" = "Non hai ningún orzamento persoal configurado";
+
+"monthly_daily_target_format" = "≈ %@ / día para que dure ata o restablecemento";
+
+"Trae CN" = "Trae CN";
+"Show Trae CN usage" = "Amosar o uso de Trae CN";
+"Sign in to Trae CN at trae.cn, then refresh CodexBar." = "Inicia sesión en Trae CN en trae.cn e despois actualiza CodexBar.";
+"Trae CN usage response format changed." = "Cambiou o formato da resposta de uso de Trae CN.";
+"Trae CN request failed. Try refreshing later." = "Fallou a solicitude a Trae CN. Tenta actualizar máis tarde.";
+"Use --provider copilot." = "Usa --provider copilot.";
+"Config changed during login. Please try again." = "A configuración cambiou durante o inicio de sesión. Téntao de novo.";
+
+// Session usage browser
+"Search sessions" = "Buscar sesións";
+"No matching sessions" = "Non hai sesións coincidentes";
+"Select a session" = "Selecciona unha sesión";
+"Cached input is included in input; reasoning is included in output." = "A entrada en caché está incluída na entrada; os tokens de razoamento están incluídos na saída.";
+"Recent activity" = "Actividade recente";
+"Sort by" = "Ordenar por";
+"Ascending" = "Ascendente";
+"Descending" = "Descendente";
+"Each turn includes its recorded model calls within this period. Messages sharing a turn cannot be priced separately." = "Cada quenda inclúe as solicitudes ao modelo rexistradas neste período. As mensaxes da mesma quenda non se poden valorar por separado.";
+"No turn-level usage records are available." = "Non hai rexistros de uso por quenda dispoñibles.";
+"Unattributed usage" = "Uso sen atribuír";
+"Turn %d" = "Quenda %d";
+"Model requests" = "Solicitudes ao modelo";
+"Tool activity has no separate recorded token or monetary cost." = "Non se rexistra un custo independente en tokens ou cartos para as chamadas a ferramentas.";
+"Request %d" = "Solicitude %d";
+
+"Request details exceed the limit." = "Os detalles das solicitudes superan o límite.";
+
+"Request details are unavailable. Refresh usage and try again." = "Os detalles das solicitudes non están dispoñibles. Actualiza o uso e téntao de novo.";
+"Primary" = "Principal";
+"Secondary" = "Secundaria";
+"Tertiary" = "Terciaria";
+
+/* Chatbox AI */
+"Chatbox AI" = "Chatbox AI";
+"Show Chatbox AI usage" = "Mostrar o uso de Chatbox AI";
+"Chatbox AI license key is invalid. Update it in Settings." = "A clave de licenza de Chatbox AI non é válida. Actualízaa na configuración.";
+"Chatbox AI denied access. Check your license." = "Chatbox AI denegou o acceso. Comproba a túa licenza.";
+"Chatbox AI is rate limiting requests. Try again later." = "Chatbox AI está a limitar as solicitudes. Téntao de novo máis tarde.";
+"Chatbox AI request failed. Try refreshing later." = "Fallou a solicitude a Chatbox AI. Tenta actualizar máis tarde.";
+"Chatbox AI returned an unrecognized response. Update CodexBar and try again." = "Chatbox AI devolveu unha resposta descoñecida. Actualiza CodexBar e téntao de novo.";
+
+/* abliteration.ai */
+"abliteration.ai" = "abliteration.ai";
+"Show abliteration.ai usage" = "Mostrar o uso de abliteration.ai";
+"abliteration.ai is rate limiting requests. Try again later." = "abliteration.ai está a limitar as solicitudes. Téntao de novo máis tarde.";
+"abliteration.ai request failed. Try refreshing later." = "Fallou a solicitude a abliteration.ai. Tenta actualizar máis tarde.";
+"abliteration.ai returned an unrecognized response. Update CodexBar and try again." = "abliteration.ai devolveu unha resposta descoñecida. Actualiza CodexBar e téntao de novo.";
+"Check your API key in Settings." = "Comproba a túa clave API en Configuración.";
+"Kimi Code" = "Kimi Code";
+
+"OpenCode local history" = "Historial local de OpenCode";
+
+"Show this Mac's recorded OpenCode usage in Codex history. Off by default; scoped or alternate CODEX_HOME locations always stay excluded." = "Mostra o uso de OpenCode rexistrado neste Mac no historial de Codex. Desactivado de forma predeterminada; as rutas de CODEX_HOME con ámbito restrinxido ou alternativas quedan sempre excluídas.";
+"Auto uses the active saved session, otherwise an API key or browser cookies." = "Auto usa a sesión gardada activa; se non, unha clave API ou as cookies do navegador.";
+"Store multiple Command Code subscription sessions." = "Garda varias sesións de subscrición de Command Code.";
+
+"codex_reset_credit_expiry_notifications_title" = "Caducidade dos créditos de reinicio de Codex";
+
+"codex_reset_credit_expiry_notifications_subtitle" = "Engade recordatorios ao actualizar o uso 1 día e 1 hora antes de caducar.";
+/* OpenDesign */
+"OpenDesign" = "OpenDesign";
+"Show OpenDesign usage" = "Amosar o uso de OpenDesign";
+"Sign in to OpenDesign, then refresh CodexBar." = "Inicia sesión en OpenDesign e actualiza CodexBar.";
+"OpenDesign usage response format changed." = "O formato da resposta de uso de OpenDesign cambiou.";
+"OpenDesign billing access was denied." = "Denegouse o acceso á facturación de OpenDesign.";
+"OpenDesign request failed. Try again later." = "Fallou a solicitude a OpenDesign. Téntao de novo máis tarde.";
+"OpenDesign subscription usage is unavailable for this workspace." = "O uso da subscrición de OpenDesign non está dispoñible para este espazo de traballo.";
+"Sign in to DeepSeek Platform in a Chromium-based browser for detailed usage." = "Inicia sesión en DeepSeek Platform nun navegador baseado en Chromium para ver o uso detallado.";
+"Select a DeepSeek browser profile in Settings." = "Selecciona un perfil de navegador de DeepSeek en Axustes.";
+"upcoming_reset_notifications_title" = "Avisos antes do restablecemento";
+"upcoming_reset_notifications_subtitle" = "Avisa para Codex antes de que o límite semanal se restableza mentres quede cota sen usar.";
+"upcoming_reset_notification_title" = "Límite %2$@ de %1$@ a punto de restablecerse";
+"upcoming_reset_notification_body" = "Queda %1$@ da cota sen usar. Reiníciase en %2$@ e a cota non usada pérdese.";
+"upcoming_reset_notification_body_with_account" = "Conta %1$@. Queda %2$@ da cota sen usar. Reiníciase en %3$@ e a cota non usada pérdese.";
+"menu_bar_layout_token_separator_glyph_accessibility" = "Separador %@";
+"menu_bar_layout_separator_pipe" = "Barra vertical";
+"menu_bar_layout_separator_slash" = "Barra inclinada";
+"menu_bar_layout_separator_hyphen" = "Guión";
+"menu_bar_layout_separator_bullet" = "Viñeta";
+"menu_bar_layout_separator_diamond" = "Rombo sólido";
+"menu_bar_layout_separator_hollowDiamond" = "Rombo baleiro";
+"menu_bar_layout_separator_tilde" = "Til";
+"menu_bar_layout_separator_doubleBar" = "Dobre barra vertical";
+"Rename" = "Cambiar o nome";
+"Rename account" = "Cambiar o nome da conta";
+"Account name" = "Nome da conta";
+"Leave blank to use the default name." = "Deixa este campo baleiro para usar o nome predeterminado.";
+"Rewards" = "Recompensas";
+"Reward expiry" = "Caducidade das recompensas";

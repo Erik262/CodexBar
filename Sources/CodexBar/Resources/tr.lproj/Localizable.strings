@@ -1,4 +1,5 @@
 /* Turkish localization for CodexBar */
+"Copilot subscription ended" = "Copilot aboneliği sona erdi";
 
 /* iCloud Sync */
 "+ %d more" = "+ %d daha";
@@ -41,6 +42,16 @@
 "7d" = "7 gün";
 "A managed Codex login is already running. Wait for it to finish before adding " = "Yönetilen bir Codex girişi zaten çalışıyor. Eklemeden önce bitmesini bekleyin ";
 "API key" = "API anahtarı";
+
+/* Future AGI provider */
+"Secret key" = "Gizli anahtar";
+"Required with the API key. Saved in the local config file. Or set FI_SECRET_KEY." = "API anahtarıyla birlikte gereklidir. Yerel yapılandırma dosyasına kaydedilir. Alternatif olarak FI_SECRET_KEY ayarlayın.";
+"Paste secret key…" = "Gizli anahtarı yapıştırın…";
+"AI credits" = "Yapay zekâ kredileri";
+"Gateway requests" = "Ağ geçidi istekleri";
+"Future AGI cost history is not available." = "Future AGI maliyet geçmişi kullanılamıyor.";
+"Saved in CodexBar's local config file. Or set FI_API_KEY." = "CodexBar’ın yerel yapılandırma dosyasına kaydedilir. Alternatif olarak FI_API_KEY ayarlayın.";
+
 "API region" = "API bölgesi";
 "API token" = "API tokenı";
 "API tokens" = "API tokenları";
@@ -141,7 +152,7 @@
 "Local token history is unavailable or incomplete." = "Yerel token geçmişi mevcut değil veya eksik.";
 "Could not add Codex account" = "Codex hesabı eklenemedi";
 "Could not open Terminal for Gemini" = "Gemini için Terminal açılamadı";
-"Could not start claude /login" = "claude /login başlatılamadı";
+"Claude OAuth credentials read failed: CodexBar's Claude OAuth cache is temporarily unavailable in macOS Keychain. Check that the login keychain is unlocked in Keychain Access, then retry Refresh." = "Claude OAuth kimlik bilgileri okunamadı: CodexBar’ın Claude OAuth önbelleği macOS Anahtar Zinciri’nde geçici olarak kullanılamıyor. Anahtar Zinciri Erişimi’nde oturum açma anahtar zincirinin kilidinin açık olduğunu kontrol edip yeniden yenileyin.";
 "Could not start codex login" = "codex login başlatılamadı";
 "Could not switch system account" = "Sistem hesabı değiştirilemedi";
 "Credits" = "Krediler";
@@ -150,6 +161,7 @@
 "Individual credits" = "Bireysel krediler";
 "Workspace" = "Çalışma alanı";
 "Credits history" = "Kredi geçmişi";
+"Cursor app session expired — open Cursor to sign in again, or sign in to cursor.com in your browser." = "Cursor uygulama oturumunun süresi doldu — yeniden giriş yapmak için Cursor’ı açın veya tarayıcınızda cursor.com’a giriş yapın.";
 "Cursor login failed" = "Cursor girişi başarısız";
 "Custom" = "Özel";
 "Custom Path" = "Özel yol";
@@ -617,7 +629,6 @@
 
 /* Display Pane */
 "menu_bar_style_title" = "Menü çubuğu stili";
-"menu_bar_style_subtitle" = "Menü çubuğu öğesinin nasıl çizileceğini belirler.";
 "menu_bar_inactive_display_contrast_title" = "Etkin olmayan ekranlarda görünürlüğü artır";
 "menu_bar_inactive_display_contrast_subtitle" = "Simge ve ölçümün diğer ekranlarda okunabilir kalması için yüksek kontrastlı işleme kullanır.";
 "menu_bar_style_critters" = "Canavarlar";
@@ -637,9 +648,15 @@
 "merge_icons_title" = "Simgeleri birleştir";
 "merge_icons_subtitle" = "Sağlayıcı seçicili tek bir menü çubuğu simgesi kullan.";
 "merged_icon_style_title" = "Birleşik simge stili";
-"merged_icon_style_subtitle" = "Değiştirici sağlayıcılar arasında tek tek geçiş yapar; Yığılmış ise iki sağlayıcıyı aynı anda, her biri kendi satırında gösterir.";
+"merged_icon_style_subtitle" = "Değiştirici her seferinde bir sağlayıcı gösterir. Yığın, iki sağlayıcıyı metin satırları olarak gösterir. Yığılmış çubuklar iki veya üç sağlayıcıyı gösterge olarak çizer.";
 "merged_icon_style_switcher" = "Değiştirici";
 "merged_icon_style_stacked" = "Yığılmış";
+"merged_icon_style_bars" = "Yığılmış çubuklar";
+"stacked_bars_window_title" = "Çubuklar gösterir";
+"stacked_bars_window_session" = "Oturum kullanımı";
+"stacked_bars_window_weekly" = "Haftalık kullanım";
+"stacked_bars_show_icons_title" = "Sağlayıcı simgelerini göster";
+"stacked_bars_section_footer" = "Çubuklar Menü altında ayarlanan doldurma yönünü izler (kalan veya kullanılan).";
 "merge_icon_stacked_top_provider_title" = "Üst satır";
 "merge_icon_stacked_bottom_provider_title" = "Alt satır";
 "display_mode_title" = "Görünüm modu";
@@ -671,6 +688,8 @@
 "overview_rows_follow_order" = "Genel Bakış satırları her zaman sağlayıcı sırasını takip eder.";
 "overview_no_providers_selected" = "Sağlayıcı seçilmedi";
 "agent_sessions_title" = "Ajan oturumları";
+"agent_sessions_remote_title" = "Uzak oturumlar (Tailscale / SSH)";
+"agent_sessions_remote_subtitle" = "Uzak makineleri keşfedin ve bağlanın. Yalnızca bu Mac’i izlemek için kapatın.";
 "agent_sessions_subtitle" = "Menüde yerel ve SSH ile keşfedilen Codex ve Claude Code oturumlarını göster.";
 "agent_sessions_hosts_title" = "Ek SSH sunucuları";
 "agent_sessions_footer" = "Tailnet'inizdeki Mac'ler otomatik olarak keşfedilir. Yerel oturumlar 30 saniyede bir; uzak sunucular 60 saniyede bir ve menü açıldığında yenilenir.";
@@ -722,7 +741,15 @@
 "link_website" = "Web sitesi";
 "link_twitter" = "Twitter";
 "link_email" = "E-posta";
+"link_acknowledgements" = "Teşekkürler";
+"acknowledgements_footer" = "CodexBar bu açık kaynak projelerle geliştirildi.";
+"acknowledgements_others" = "%d diğer kişi";
+"acknowledgements_author" = "Yazar";
+"acknowledgements_authors" = "Yazarlar";
+"acknowledgements_license" = "Lisans";
 "check_updates_auto" = "Güncellemeleri otomatik denetle";
+"install_updates_auto" = "Güncellemeleri otomatik indir ve yükle";
+"install_updates_auto_subtitle" = "Kapalıyken, yeni bir sürüm yüklenmeden önce size sorulur.";
 "update_channel" = "Güncelleme kanalı";
 "check_for_updates" = "Güncellemeleri denetle…";
 "updates_unavailable" = "Bu derlemede güncellemeler kullanılamıyor.";
@@ -1039,11 +1066,8 @@
 "Today cash" = "Bugünkü nakit";
 "DeepSeek 30 day token usage trend" = "DeepSeek 30 günlük token kullanım trendi";
 "DeepSeek this month token usage trend" = "DeepSeek bu ayki token kullanım trendi";
-"Chrome profile" = "Chrome profili";
 "Choose which signed-in DeepSeek Platform session supplies detailed usage." = "Ayrıntılı kullanımı sağlayacak oturum açılmış DeepSeek Platform hesabını seçin.";
 "Detailed usage unavailable." = "Ayrıntılı kullanım kullanılamıyor.";
-"Sign in to DeepSeek Platform in Chrome for detailed usage." = "Ayrıntılı kullanım için Chrome'da DeepSeek Platform'a giriş yapın.";
-"Select a DeepSeek Chrome profile in Settings." = "Ayarlarda bir DeepSeek Chrome profili seçin.";
 "Select profile…" = "Profil seç…";
 "cache-hit input" = "önbellekten alınan girdi";
 "cache-miss input" = "önbellekte bulunmayan girdi";
@@ -1161,17 +1185,12 @@
 "CodexBar found another managed account that already uses the current system account. Resolve the duplicate account before switching." = "CodexBar, geçerli sistem hesabını zaten kullanan başka bir yönetilen hesap buldu. Geçiş yapmadan önce yinelenen hesabı çözün.";
 "CodexBar will ask macOS Keychain for “%@” so it can decrypt browser cookies and authenticate your account. Click OK to continue." = "CodexBar, tarayıcı çerezlerinin şifresini çözmek ve hesabınızı doğrulamak için macOS Anahtar Zinciri'nden “%@” isteyecek. Devam etmek için Tamam'a tıklayın.";
 "CodexBar will ask macOS Keychain for the Claude Code OAuth token so it can fetch your Claude usage. Click OK to continue." = "CodexBar, Claude kullanımınızı almak için macOS Anahtar Zinciri'nden Claude Code OAuth tokenını isteyecek. Devam etmek için Tamam'a tıklayın.";
-"CodexBar will ask macOS Keychain for your Amp cookie header so it can fetch usage. Click OK to continue." = "CodexBar, kullanımı almak için macOS Anahtar Zinciri'nden Amp çerez başlığınızı isteyecek. Devam etmek için Tamam'a tıklayın.";
-"CodexBar will ask macOS Keychain for your Augment cookie header so it can fetch usage. Click OK to continue." = "CodexBar, kullanımı almak için macOS Anahtar Zinciri'nden Augment çerez başlığınızı isteyecek. Devam etmek için Tamam'a tıklayın.";
+"CodexBar will ask macOS Keychain for your %@ cookie header so it can fetch usage. Click OK to continue." = "CodexBar, kullanımı almak için macOS Anahtar Zinciri'nden %@ çerez başlığınızı isteyecek. Devam etmek için Tamam'a tıklayın.";
 "CodexBar will ask macOS Keychain for your Claude cookie header so it can fetch Claude web usage. Click OK to continue." = "CodexBar, Claude web kullanımını almak için macOS Anahtar Zinciri'nden Claude çerez başlığınızı isteyecek. Devam etmek için Tamam'a tıklayın.";
-"CodexBar will ask macOS Keychain for your Cursor cookie header so it can fetch usage. Click OK to continue." = "CodexBar, kullanımı almak için macOS Anahtar Zinciri'nden Cursor çerez başlığınızı isteyecek. Devam etmek için Tamam'a tıklayın.";
-"CodexBar will ask macOS Keychain for your Factory cookie header so it can fetch usage. Click OK to continue." = "CodexBar, kullanımı almak için macOS Anahtar Zinciri'nden Factory çerez başlığınızı isteyecek. Devam etmek için Tamam'a tıklayın.";
 "CodexBar will ask macOS Keychain for your GitHub Copilot token so it can fetch usage. Click OK to continue." = "CodexBar, kullanımı almak için macOS Anahtar Zinciri'nden GitHub Copilot tokenınızı isteyecek. Devam etmek için Tamam'a tıklayın.";
 "CodexBar will ask macOS Keychain for your Kimi auth token so it can fetch usage. Click OK to continue." = "CodexBar, kullanımı almak için macOS Anahtar Zinciri'nden Kimi kimlik doğrulama tokenınızı isteyecek. Devam etmek için Tamam'a tıklayın.";
 "CodexBar will ask macOS Keychain for your MiniMax API token so it can fetch usage. Click OK to continue." = "CodexBar, kullanımı almak için macOS Anahtar Zinciri'nden MiniMax API tokenınızı isteyecek. Devam etmek için Tamam'a tıklayın.";
-"CodexBar will ask macOS Keychain for your MiniMax cookie header so it can fetch usage. Click OK to continue." = "CodexBar, kullanımı almak için macOS Anahtar Zinciri'nden MiniMax çerez başlığınızı isteyecek. Devam etmek için Tamam'a tıklayın.";
 "CodexBar will ask macOS Keychain for your OpenAI cookie header so it can fetch Codex dashboard extras. Click OK to continue." = "CodexBar, Codex panel eklerini almak için macOS Anahtar Zinciri'nden OpenAI çerez başlığınızı isteyecek. Devam etmek için Tamam'a tıklayın.";
-"CodexBar will ask macOS Keychain for your OpenCode cookie header so it can fetch usage. Click OK to continue." = "CodexBar, kullanımı almak için macOS Anahtar Zinciri'nden OpenCode çerez başlığınızı isteyecek. Devam etmek için Tamam'a tıklayın.";
 "CodexBar will ask macOS Keychain for your Synthetic API key so it can fetch usage. Click OK to continue." = "CodexBar, kullanımı almak için macOS Anahtar Zinciri'nden Synthetic API anahtarınızı isteyecek. Devam etmek için Tamam'a tıklayın.";
 "CodexBar will ask macOS Keychain for your z.ai API token so it can fetch usage. Click OK to continue." = "CodexBar, kullanımı almak için macOS Anahtar Zinciri'nden z.ai API tokenınızı isteyecek. Devam etmek için Tamam'a tıklayın.";
 "Could not open Cursor login in your browser." = "Tarayıcınızda Cursor girişi açılamadı.";
@@ -1221,6 +1240,7 @@
 "Password" = "Parola";
 "%@ authentication is disabled." = "%@ kimlik doğrulaması devre dışı.";
 "%@ cookies are disabled." = "%@ çerezleri devre dışı.";
+"%@ is unavailable. Edit the widget to choose a provider." = "%@ kullanılamıyor. Bir sağlayıcı seçmek için widget’ı düzenleyin.";
 "%@ web API access is disabled." = "%@ web API erişimi devre dışı.";
 "Disable %@ dashboard cookie usage." = "%@ panel çerez kullanımını devre dışı bırak.";
 "Keychain access is disabled in Advanced, so browser cookie import is unavailable." = "Anahtar Zinciri erişimi Gelişmiş bölümünde devre dışı bırakıldı, bu nedenle tarayıcı çerezleri içe aktarılamıyor.";
@@ -1285,7 +1305,6 @@
 "Windsurf session JSON bundle" = "Windsurf oturum JSON paketi";
 "Workspace ID" = "Çalışma alanı kimliği";
 "Your StepFun platform password. Used to login and obtain a session token." = "StepFun platform parolanız. Oturum açmak ve oturum tokenı almak için kullanılır.";
-"claude /login exited with status %d." = "claude /login %d durum koduyla sonlandı.";
 "codex login exited with status %d." = "codex login %d durum koduyla sonlandı.";
 "Cookie: …\n\nor paste a cURL capture from the Abacus AI dashboard" = "Çerez: …\n\nveya Abacus AI panelinden bir cURL yakalaması yapıştırın";
 "Cookie: …\n\nor paste the __Secure-next-auth.session-token value" = "Çerez: …\n\nveya __Secure-next-auth.session-token değerini yapıştırın";
@@ -1399,6 +1418,7 @@
 /* Menu bar layout editor */
 "menu_bar_layout_title" = "Düzen";
 "menu_bar_layout_footer" = "Menü çubuğunu düzenlemek için öğeleri sürükleyin. Eklemek için bir öğeye tıklayın; yerleştirilmiş bir öğeyi seçip silmek için Delete tuşuna basın.";
+"menu_bar_layout_footer_requires_icon_and_percent" = "Düzen yalnızca “%@” menü çubuğu stili için geçerlidir. Düzenlemek için yukarıdan bu stili seçin.";
 "menu_bar_layout_group_identity" = "Kimlik";
 "menu_bar_layout_group_usage" = "Kullanım";
 "menu_bar_layout_group_time" = "Zaman";
@@ -1429,9 +1449,15 @@
 "menu_bar_layout_size" = "Boyut";
 "menu_bar_layout_size_small" = "Küçük";
 "menu_bar_layout_size_regular" = "Normal";
+"menu_bar_layout_size_large" = "Büyük";
+"menu_bar_layout_monospaced_digits" = "Eş aralıklı rakamlar";
+"menu_bar_layout_show_window_labels" = "Dönem etiketlerini göster";
 "menu_bar_layout_gap" = "Boşluk";
 "menu_bar_layout_gap_tight" = "Dar";
 "menu_bar_layout_gap_regular" = "Normal";
+"menu_bar_layout_bar_style" = "Çubuk stili";
+"menu_bar_layout_bar_style_segmented" = "Bölümlü";
+"menu_bar_layout_bar_style_pill" = "Kapsül";
 "menu_bar_layout_vertical_adjustment" = "Dikey ayar";
 "menu_bar_layout_sample_account" = "hesap";
 "menu_bar_layout_sample_runs_out" = "Cuma biter";
@@ -1451,6 +1477,9 @@
 "menu_bar_layout_token_runs_out" = "Biter";
 "menu_bar_layout_token_cost_today" = "Bugünkü maliyet";
 "menu_bar_layout_token_cost_window" = "Maliyet (Geçmiş penceresi)";
+"menu_bar_layout_token_spend" = "Harcama %";
+"menu_bar_layout_token_spend_pace" = "Harcama temposu";
+"menu_bar_layout_token_spend_budget" = "Harcama / bütçe";
 "menu_bar_layout_token_space" = "Boşluk";
 "menu_bar_layout_token_line_break" = "Satır sonu";
 "menu_bar_layout_token_separator_accessibility" = "Ayırıcı nokta";
@@ -1614,6 +1643,7 @@
 "menu_bar_layout_conditional_default_session_spent" = "Oturum neredeyse tükendi";
 "menu_bar_layout_conditional_default_either_high" = "Oturum veya haftalık kullanım yükseldi";
 "menu_bar_layout_conditional_default_scoped_weekly" = "Model haftasının %60'ından fazlası kullanıldı";
+"menu_bar_layout_conditional_default_spend_high" = "Harcamanın %90'ından fazlası kullanıldı";
 "Visible usage items" = "Görünür kullanım öğeleri";
 "Restore Defaults" = "Varsayılanları Geri Yükle";
 "Choose which usage rows appear in this provider's menu, Settings preview, and Overview." = "Bu sağlayıcının menüsünde, Ayarlar önizlemesinde ve Genel Bakış'ta hangi kullanım satırlarının görüneceğini seçin.";
@@ -1783,6 +1813,7 @@
 "Details for %@" = "%@ için ayrıntılar";
 "EST. %@" = "Tahmini %@";
 "Enable Antigravity provider" = "Antigravity sağlayıcısını etkinleştirin";
+"Enable a provider in CodexBar → Settings → Providers." = "CodexBar → Ayarlar → Sağlayıcılar’da bir sağlayıcıyı etkinleştirin.";
 "Enable account widgets in CodexBar → Settings → Menu → Widgets. Then edit this widget to choose an account." = "CodexBar → Ayarlar → Menü → Widget'lar bölümünde hesap widget'larını etkinleştirin. Daha sonra bir hesap seçmek için bu widget'ı düzenleyin.";
 "Error: %@" = "Hata: %@";
 "Examples: alt+cmd+2, shift+right. Refresh (cmd+r), Settings (cmd+,) and Quit (cmd+q) are reserved." = "Örnekler: alt+cmd+2, shift+right. Yenile (cmd+r), Ayarlar (cmd+,) ve Çık (cmd+q) ayrılmıştır.";
@@ -1797,6 +1828,9 @@
 "Gateway URL" = "Ağ Geçidi URL";
 "Gemini CLI login is no longer supported" = "Gemini CLI oturum açma işlemi artık desteklenmiyor";
 "Gemini CLI migration" = "Gemini CLI geçişi";
+"Gemini app" = "Gemini uygulaması";
+"Gemini CLI" = "Gemini CLI";
+"Gemini app limits use your browser account and are separate from Gemini CLI quotas." = "Gemini uygulamasının sınırları tarayıcı hesabınız için geçerlidir ve Gemini CLI kotalarından ayrıdır.";
 "Generated locally by CodexBar · Data through %@" = "CodexBar tarafından yerel olarak oluşturulmuştur · %@ tarihine kadar veriler";
 "GitHub cookies" = "GitHub cookies";
 "GitHub does not publish this value. Enter it to show a usage bar. Applies to the selected GitHub account." = "GitHub bu değeri yayınlamaz. Kullanım çubuğunu göstermek için girin. Seçilen GitHub hesabı için geçerlidir.";
@@ -1900,6 +1934,7 @@
 "Paste the Cookie header from a billing-page request. It must contain sessionid." = "Bir fatura sayfası isteğinden Cookie başlığını yapıştırın. sessionid içermelidir.";
 "Paste z.ai / GLM API key…" = "z.ai / GLM API anahtarını yapıştırın…";
 "Path to the cswap executable (github.com/realiti4/claude-swap)." = "cswap yürütülebilir dosyasının yolu (github.com/realiti4/claude-swap).";
+"Path to the tcr executable (github.com/dhkts1/teamclaude-rs)." = "tcr yürütülebilir dosyasının yolu (github.com/dhkts1/teamclaude-rs).";
 "Peak %@" = "Zirve %@";
 "Percent left" = "Kalan yüzde";
 "Pick another Codex account before importing OpenAI cookies." = "OpenAI cookies'yi içe aktarmadan önce başka bir Codex hesabı seçin.";
@@ -1931,7 +1966,7 @@
 "Refresh the profile before refreshing OpenAI web data." = "OpenAI web verilerini yenilemeden önce profili yenileyin.";
 "Refreshing account status…" = "Hesap durumu yenileniyor…";
 "Remaining budget compared with an ideal steady burn rate." = "İdeal sabit yazma hızıyla karşılaştırıldığında kalan bütçe.";
-"Renews: %@" = "Yeniler: %@";
+"Plan renews: %@" = "Plan yenilenir: %@";
 "Request quota" = "Kota talebinde bulunun";
 "Requesting login…" = "Giriş isteniyor…";
 "Required. Enter a regular API key or a Management API key here. Management keys also enable account Activity on the official OpenRouter API." = "Gerekli. Buraya normal bir API anahtarı veya Yönetim API anahtarı girin. Yönetim anahtarları ayrıca resmi OpenRouter API'deki hesap Etkinliğini de etkinleştirir.";
@@ -1954,6 +1989,8 @@
 "Select the provider to display." = "Görüntülenecek sağlayıcıyı seçin.";
 "Session (5-hour)" = "Oturum (5 saat)";
 "Session and weekly usage with credits and costs." = "Krediler ile oturum ve haftalık kullanım ve maliyetler.";
+"Set the cswap executable path below." = "cswap yürütülebilir dosyasının yolunu aşağıda ayarlayın.";
+"Set the tcr executable path below." = "tcr yürütülebilir dosyasının yolunu aşağıda ayarlayın.";
 "Settings unavailable." = "Ayarlar kullanılamıyor.";
 "Show account card when only one account is available" = "Yalnızca bir hesap mevcut olduğunda hesap kartını göster";
 "Show model-specific weekly usage in widgets" = "Widget'larda modele özgü haftalık kullanımı göster";
@@ -1961,6 +1998,7 @@
 "Shows model-specific Claude quotas, such as Fable, in desktop widgets." = "Masaüstü widget'larında Fable gibi modele özgü Claude Kota'yi gösterir.";
 "Shows the hidden accounts" = "Gizli hesapları gösterir";
 "Shows usage and lets you switch accounts through `cswap`. Credentials stay managed by claude-swap; CodexBar never reads them." = "Kullanımı gösterir ve `cswap` aracılığıyla hesaplar arasında geçiş yapmanızı sağlar. Kimlik bilgileri claude-swap tarafından yönetilmeye devam eder; CodexBar bunları asla okumaz.";
+"Shows usage from `tcr`; it does not switch accounts, because tcr picks the account for each request. Credentials stay managed by tcr; CodexBar never reads them." = "Kullanımı `tcr` üzerinden gösterir; hesaplar arasında geçiş yapmaz, çünkü tcr her istek için hesabı kendisi seçer. Kimlik bilgileri tcr tarafından yönetilmeye devam eder; CodexBar bunları asla okumaz.";
 "Stay Awake" = "Uyanık Kal";
 "Stored in the CodexBar config file. Reads monthly budget and routed usage from /v1/usage." = "CodexBar yapılandırma dosyasında saklanır. /v1/usage'den aylık bütçeyi ve yönlendirilmiş kullanımı okur.";
 "Stored in ~/.codexbar/config.json. OPENAI_ADMIN_KEY is required for organization usage; legacy/user keys only get a best-effort balance fallback." = "~/.codexbar/config.json konumunda saklanır. OPENAI_ADMIN_KEY kurumsal kullanım için gereklidir; eski/kullanıcı anahtarları yalnızca en iyi çaba dengesine geri döner.";
@@ -1969,6 +2007,7 @@
 "SuperGrok OAuth" = "SuperGrok OAuth";
 "Switch Account…" = "Hesap Değiştir…";
 "Switch Claude Code account" = "Claude Code hesabını değiştir";
+"Claude accounts in tcr" = "tcr içindeki Claude hesapları";
 "Switch Claude Code to %@" = "Claude Code'yi %@ olarak değiştirin";
 "Switch Provider" = "Sağlayıcıyı Değiştir";
 "Switch the provider shown in the widget." = "Widget'ta gösterilen sağlayıcıyı değiştirin.";
@@ -1989,10 +2028,7 @@
 "Top models:" = "En iyi modeller:";
 "Two quota burn-down charts in one tile." = "Tek bir kutucukta iki Kota yanma grafiği.";
 "Usage & spend come from your console.groq.com browser session automatically. An API key is optional and only adds Enterprise Prometheus metrics." = "Kullanım ve harcama, console.groq.com tarayıcı oturumunuzdan otomatik olarak gelir. API anahtarı isteğe bağlıdır ve yalnızca Enterprise Prometheus Metrik'yi ekler.";
-"Usage data appears after a refresh." = "Kullanım verileri yenileme sonrasında görünür.";
-"Usage data will appear once the app refreshes." = "Uygulama yenilendiğinde kullanım verileri görünecektir.";
 "Usage history chart with recent totals." = "Son toplamları içeren kullanım geçmişi grafiği.";
-"Usage history will appear after a refresh." = "Kullanım geçmişi yenileme sonrasında görünecektir.";
 "Usage limit" = "Kullanım sınırı";
 "Usage limits and reset countdowns for one saved account." = "Kayıtlı bir hesap için kullanım sınırları ve geri sayımları sıfırlama.";
 "Usage widget with a provider switcher." = "Sağlayıcı değiştiricili kullanım widget'ı.";
@@ -2055,6 +2091,7 @@
 "sk-ant-admin..." = "sk-ant-admin...";
 "sk-or-v1-..." = "sk-or-v1-...";
 "spent" = "Kota tükendi";
+"tcr executable" = "tcr çalıştırılabilir";
 "under pace" = "planlanan hızın altında kullanım";
 "us-east-1" = "us-east-1";
 "used" = "kullanıldı";
@@ -2065,6 +2102,7 @@
 "~%@ est" = "~%@ tahmini";
 "~%@ tracked tokens (partial)" = "~%@ Kaydedilen tokenlar (KISMİ)";
 "~/.local/bin/cswap" = "~/.local/bin/cswap";
+"/Applications/TcrBar.app/Contents/MacOS/tcr" = "/Applications/TcrBar.app/Contents/MacOS/tcr";
 "~/Library/Application Support/JetBrains/IntelliJIdea2024.3" = "~/Library/Application Support/JetBrains/IntelliJIdea2024.3";
 "00000000-0000-0000-0000-000000000000" = "00000000-0000-0000-0000-000000000000";
 
@@ -2088,6 +2126,8 @@
 "Poe usage history is unavailable." = "Poe kullanım geçmişi mevcut değil.";
 "Stored in ~/.codexbar/config.json. Get your key from poe.com/api/keys." = "~/.codexbar/config.json konumunda saklanır. Anahtarınızı poe.com/api/keys adresinden alın.";
 "Billing" = "Faturalandırma";
+"Invoice billing" = "Faturalı ödeme";
+"Prepaid" = "Ön ödemeli";
 "Rate limit" = "Oran sınırı";
 "Billing and rate-limit data from the v0 Platform API" = "v0 Platformu API'den faturalandırma ve ücret sınırı verileri";
 "v0 cost history is not available via the Platform API." = "v0 maliyet geçmişi, API Platformu aracılığıyla mevcut değildir.";
@@ -2177,6 +2217,10 @@
 "Stored in ~/.codexbar/config.json. Create one at console.x.ai under Settings > Management Keys; inference API keys are not accepted." = "~/.codexbar/config.json konumunda saklanır. Ayarlar > Yönetim Anahtarları altında console.x.ai'de bir tane oluşturun; çıkarım API anahtarları kabul edilmez.";
 "xai-..." = "xai-...";
 "Team ID" = "Takım ID";
+"Vercel access token" = "Vercel erişim belirteci";
+"Optional. Shows your personal budget instead of team credits. Saved in CodexBar's local config file. Or set VERCEL_ACCESS_TOKEN." = "İsteğe bağlı. Ekip kredileri yerine kişisel bütçenizi gösterir. CodexBar'ın yerel yapılandırma dosyasına kaydedilir. Veya VERCEL_ACCESS_TOKEN ayarlayın.";
+"Open Vercel tokens" = "Vercel belirteçlerini aç";
+"Required with a Vercel access token. Or set VERCEL_TEAM_ID." = "Vercel erişim belirteciyle birlikte gereklidir. Veya VERCEL_TEAM_ID ayarlayın.";
 "Required. Shown in the xAI Console URL and team settings." = "Gerekli. xAI Konsolu URL ve ekip ayarlarında gösterilir.";
 "Sakana AI cost summary is not supported." = "Sakana AI maliyet özeti desteklenmiyor.";
 "Stored in ~/.codexbar/config.json. Copy the Sakana AI console Cookie request header." = "~/.codexbar/config.json konumunda saklanır. Sakana AI konsolu Cookie istek başlığını kopyalayın.";
@@ -2330,6 +2374,7 @@
 "Core Monthly" = "Çekirdek Aylık";
 "Bobcoin usage" = "Bobcoin kullanımı";
 "Code 7-day" = "Kod 7 günlük Kota";
+"Other features" = "Diğer özellikler";
 "Quota services" = "Kota hizmetleri";
 "Billing history" = "Faturalandırma geçmişi";
 "Renews" = "Yeniler";
@@ -2410,6 +2455,7 @@
 
 "X API cost history is not available." = "X API maliyet geçmişi kullanılamıyor.";
 "Paste a console.x.com Cookie header containing auth_token and ct0." = "auth_token ve ct0 içeren bir console.x.com Cookie başlığı yapıştırın.";
+"Paste a platform.claude.com Cookie header containing sessionKey." = "sessionKey içeren bir platform.claude.com Cookie başlığı yapıştırın.";
 "Open X Developer Console" = "X Geliştirici Konsolunu Aç";
 "update_available_notification_body" = "Güncelleme ayarlarını açmak ve yeni sürümü yüklemek için tıklayın.";
 // Structured session performance layout.
@@ -2434,7 +2480,7 @@
 "spend_performance_cache_help" = "Uygun konuşma turlarındaki önbelleğe alınmış girdinin toplam girdiye oranı. Girdi tokenlarına göre ağırlıklandırılır ve ölçümlerin kapsamı gösterilir.";
 "spend_performance_metric_help" = "Bu gözlemler hakkında";
 "merged_icon_source_title" = "Birleşik simge kaynağı";
-"merged_icon_source_subtitle" = "Daraltılmış birleşik simgede gösterilecek sağlayıcıyı seçin.";
+"merged_icon_source_subtitle" = "“En yüksek kullanım” yalnızca kotaları karşılaştırır. Kotası olmayan sağlayıcılar için “Geçerli seçim” seçeneğini kullanın.";
 "merged_icon_source_current_selection" = "Geçerli seçim";
 "merged_icon_source_highest_usage" = "En yüksek kullanım";
 "merged_icon_source_frontmost_app" = "Öndeki sağlayıcı uygulaması";
@@ -2511,6 +2557,8 @@
 "Pace sign" = "Kullanım hızı işareti";
 "Ahead of pace is +" = "Hızın üzerinde kullanım +";
 "Reserve is +" = "Rezerv +";
+"Back" = "Geri";
+"Forward" = "İleri";
 
 "cost_reset_inferred_tooltip" = "Çıkarım: %@ bu tarihi bildirmez. Aylık harcama limitleri her ayın 1'inde 00:00 UTC'de sıfırlanır.";
 /* fal provider credentials */
@@ -2531,12 +2579,11 @@
 "Clear filters" = "Filtreleri temizle";
 "Change provider order" = "Sağlayıcı sırasını değiştir";
 "Provider sorting" = "Sağlayıcı sıralaması";
-"Only enabled providers" = "Yalnızca etkin sağlayıcılar";
+"Only show enabled providers" = "Yalnızca etkin sağlayıcıları göster";
 "Restore default order" = "Varsayılan sırayı geri yükle";
 "Also restores the provider order in the menu bar. Can be undone." = "Menü çubuğundaki sağlayıcı sırasını da geri yükler. Geri alınabilir.";
 "Local Codex details; excluded from combined totals." = "Yerel Codex ayrıntıları; birleşik toplamlara dahil edilmez.";
 
-"Auto uses an API key when configured, otherwise browser cookies." = "Auto uses an API key when configured, otherwise browser cookies.";
 "Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY." = "Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY.";
 /* OpenAI organization rate limits and live usage */
 "%@ tokens · %@ requests" = "%@ token · %@ istek";
@@ -2623,3 +2670,138 @@
 "Daily spend · %@" = "Günlük harcama · %@";
 "Applies to the selected token account “%@”. Each account keeps its own limits." = "Seçili “%@” token hesabı için geçerlidir. Her hesap kendi sınırlarını korur.";
 "Applies to the OpenAI API key, not to token accounts." = "Token hesapları için değil, OpenAI API anahtarı için geçerlidir.";
+"CodexBar will ask macOS Keychain for the Muse Code login token so it can fetch your Muse Code subscription usage. Click OK to continue." = "CodexBar, Muse Code abonelik kullanımınızı almak için macOS Anahtar Zinciri'nden Muse Code giriş tokenını isteyecek. Devam etmek için Tamam'a tıklayın.";
+/* Claude Platform provider */
+"API credit" = "API kredisi";
+"Purchased credit" = "Satın alınan kredi";
+"Claude Platform exposes Console credit balance and monthly spend, not local token cost history." = "Claude Platform, yerel token maliyet geçmişini değil, Console kredi bakiyesini ve aylık harcamayı gösterir.";
+
+"Claude config directory" = "Claude yapılandırma dizini";
+/* App-managed HTTP server */
+"http_server_title" = "HTTP sunucusu";
+"http_server_enable" = "HTTP sunucusunu etkinleştir";
+"http_server_bind" = "Bağlanılacak IPv4 adresi";
+"http_server_port" = "Bağlantı noktası";
+"http_server_token" = "Sunucu belirteci";
+"http_server_show" = "Göster";
+"http_server_generate" = "Oluştur";
+"http_server_cache" = "Önbellek aralığı (saniye)";
+"http_server_timeout" = "İstek zaman aşımı (saniye; 0 devre dışı bırakır)";
+"http_server_all_accounts" = "Anlık görüntülere tüm hesapları dahil et";
+"http_server_identity" = "Panodaki kimlik";
+"http_server_redacted" = "Gizlenmiş";
+"http_server_warning" = "Kullanım, maliyet, hesap ve proje bilgilerini paylaşır; sağlayıcı kimlik bilgilerini asla paylaşmaz. HTTP sunucu belirtecini şifrelemeden gönderir. Yalnızca güvenilir bir VPN veya Tailscale bağlantısı kullanın.";
+"http_server_plain_http" = "Bu Mac dışında şifrelenmemiş HTTP’ye izin ver";
+"http_server_dashboard" = "Pano";
+"http_server_wildcard" = "Diğer cihazlarda 0.0.0.0 yerine bu Mac’in VPN veya Tailscale IPv4 adresini kullanın.";
+"http_server_footer" = "Varsayılan olarak kapalıdır. CodexBar ile başlar ve kapatıldığında durur. Ayarlar ve belirteç bu Mac’te kalır; eşitleme ve dışa aktarmaya dahil edilmez. Uzaktan erişim için Mac’i uyanık tutun.";
+/* Claude desktop cookie source */
+"Claude desktop app" = "Claude masaüstü uygulaması";
+"Use Claude desktop app cookies" = "Claude masaüstü uygulamasının çerezlerini kullan";
+"For Web usage, follow the account signed into Claude.app instead of a browser." = "Web kullanımı için tarayıcı hesabı yerine Claude.app içinde oturum açılan hesabı kullan.";
+
+/* Munito provider credentials */
+"Key with Read account data (Admin API) permission. Or set MUNITO_API_KEY." = "Hesap verilerini okuma (Admin API) iznine sahip anahtar. Ya da MUNITO_API_KEY ayarlayın.";
+"Munito reports Admin API spend and limits, not local token cost history." = "Munito, Admin API harcamalarını ve limitlerini raporlar; yerel token maliyet geçmişini raporlamaz.";
+
+"Show all accounts in Overview" = "Genel bakışta tüm hesapları göster";
+
+"Expand cached account usage. The six-provider limit still applies." = "Önbellekteki hesap kullanımını kullanarak seçili sağlayıcıları genişletir. Altı sağlayıcı sınırı geçerli kalır.";
+"Edit" = "Düzenle";
+"Move up" = "Yukarı taşı";
+"Move down" = "Aşağı taşı";
+"Leave blank to keep the saved credential." = "Kayıtlı kimlik bilgisini korumak için boş bırakın.";
+
+"No personal budget configured" = "Kişisel bütçe yapılandırılmadı";
+
+"monthly_daily_target_format" = "Sıfırlamaya kadar yetmesi için günde ≈ %@";
+
+"Trae CN" = "Trae CN";
+"Show Trae CN usage" = "Trae CN kullanımını göster";
+"Sign in to Trae CN at trae.cn, then refresh CodexBar." = "trae.cn üzerinden Trae CN’ye giriş yapıp CodexBar’ı yenileyin.";
+"Trae CN usage response format changed." = "Trae CN kullanım yanıtının biçimi değişti.";
+"Trae CN request failed. Try refreshing later." = "Trae CN isteği başarısız oldu. Daha sonra yeniden yenileyin.";
+"Use --provider copilot." = "--provider copilot kullanın.";
+"Config changed during login. Please try again." = "Giriş sırasında yapılandırma değişti. Lütfen tekrar deneyin.";
+
+// Session usage browser
+"Search sessions" = "Oturum ara";
+"No matching sessions" = "Eşleşen oturum yok";
+"Select a session" = "Bir oturum seçin";
+"Cached input is included in input; reasoning is included in output." = "Önbelleğe alınan girdi, girdiye dahildir; akıl yürütme tokenleri çıktıya dahildir.";
+"Recent activity" = "Son etkinlik";
+"Sort by" = "Sıralama ölçütü";
+"Ascending" = "Artan";
+"Descending" = "Azalan";
+"Each turn includes its recorded model calls within this period. Messages sharing a turn cannot be priced separately." = "Her tur, bu dönemde kaydedilen model isteklerini içerir. Aynı turdaki mesajlar ayrı ayrı fiyatlandırılamaz.";
+"No turn-level usage records are available." = "Tur düzeyinde kullanım kaydı yok.";
+"Unattributed usage" = "İlişkilendirilmemiş kullanım";
+"Turn %d" = "Tur %d";
+"Model requests" = "Model istekleri";
+"Tool activity has no separate recorded token or monetary cost." = "Araç çağrıları için ayrı token veya parasal maliyet kaydedilmez.";
+"Request %d" = "İstek %d";
+
+"Request details exceed the limit." = "İstek ayrıntıları sınırı aşıyor.";
+
+"Request details are unavailable. Refresh usage and try again." = "İstek ayrıntıları kullanılamıyor. Kullanımı yenileyip tekrar deneyin.";
+"Primary" = "Birincil";
+"Secondary" = "İkincil";
+"Tertiary" = "Üçüncül";
+
+/* Chatbox AI */
+"Chatbox AI" = "Chatbox AI";
+"Show Chatbox AI usage" = "Chatbox AI kullanımını göster";
+"Chatbox AI license key is invalid. Update it in Settings." = "Chatbox AI lisans anahtarı geçersiz. Ayarlar’dan güncelleyin.";
+"Chatbox AI denied access. Check your license." = "Chatbox AI erişimi reddetti. Lisansınızı kontrol edin.";
+"Chatbox AI is rate limiting requests. Try again later." = "Chatbox AI istek sıklığını sınırlıyor. Daha sonra tekrar deneyin.";
+"Chatbox AI request failed. Try refreshing later." = "Chatbox AI isteği başarısız oldu. Daha sonra yeniden yenileyin.";
+"Chatbox AI returned an unrecognized response. Update CodexBar and try again." = "Chatbox AI tanınmayan bir yanıt döndürdü. CodexBar’ı güncelleyip tekrar deneyin.";
+
+/* abliteration.ai */
+"abliteration.ai" = "abliteration.ai";
+"Show abliteration.ai usage" = "abliteration.ai kullanımını göster";
+"abliteration.ai is rate limiting requests. Try again later." = "abliteration.ai istek sıklığını sınırlıyor. Daha sonra tekrar deneyin.";
+"abliteration.ai request failed. Try refreshing later." = "abliteration.ai isteği başarısız oldu. Daha sonra yeniden yenileyin.";
+"abliteration.ai returned an unrecognized response. Update CodexBar and try again." = "abliteration.ai tanınmayan bir yanıt döndürdü. CodexBar’ı güncelleyip tekrar deneyin.";
+"Check your API key in Settings." = "Ayarlar’dan API anahtarınızı kontrol edin.";
+"Kimi Code" = "Kimi Code";
+
+"OpenCode local history" = "Yerel OpenCode geçmişi";
+
+"Show this Mac's recorded OpenCode usage in Codex history. Off by default; scoped or alternate CODEX_HOME locations always stay excluded." = "Bu Mac’te kaydedilen OpenCode kullanımını Codex geçmişinde gösterir. Varsayılan olarak kapalıdır; kapsamı sınırlandırılmış veya alternatif CODEX_HOME konumları her zaman hariç tutulur.";
+"Auto uses the active saved session, otherwise an API key or browser cookies." = "Otomatik, etkin kayıtlı oturumu kullanır; yoksa bir API anahtarı veya tarayıcı çerezlerini kullanır.";
+"Store multiple Command Code subscription sessions." = "Birden fazla Command Code abonelik oturumunu depolayın.";
+
+"codex_reset_credit_expiry_notifications_title" = "Codex sıfırlama kredisi süresi";
+
+"codex_reset_credit_expiry_notifications_subtitle" = "Kullanım yenilendiğinde, süre dolmadan 1 gün ve 1 saat önce hatırlatır.";
+/* OpenDesign */
+"OpenDesign" = "OpenDesign";
+"Show OpenDesign usage" = "OpenDesign kullanımını göster";
+"Sign in to OpenDesign, then refresh CodexBar." = "OpenDesign hesabınıza giriş yapın, ardından CodexBar’ı yenileyin.";
+"OpenDesign usage response format changed." = "OpenDesign kullanım yanıtının biçimi değişti.";
+"OpenDesign billing access was denied." = "OpenDesign fatura bilgilerine erişim reddedildi.";
+"OpenDesign request failed. Try again later." = "OpenDesign isteği başarısız oldu. Daha sonra tekrar deneyin.";
+"OpenDesign subscription usage is unavailable for this workspace." = "Bu çalışma alanı için OpenDesign abonelik kullanımı mevcut değil.";
+"upcoming_reset_notifications_title" = "Yaklaşan sıfırlama uyarıları";
+"upcoming_reset_notifications_subtitle" = "Codex için haftalık limit sıfırlanmadan önce, kota kullanılmamışken uyarır.";
+"upcoming_reset_notification_title" = "%1$@ %2$@ limiti yakında sıfırlanacak";
+"upcoming_reset_notification_body" = "Henüz %1$@ kota kullanılmadı. %2$@ içinde sıfırlanacak ve kullanılmayan kota kaybolacak.";
+"upcoming_reset_notification_body_with_account" = "Hesap %1$@. Henüz %2$@ kota kullanılmadı. %3$@ içinde sıfırlanacak ve kullanılmayan kota kaybolacak.";
+"Sign in to DeepSeek Platform in a Chromium-based browser for detailed usage." = "Ayrıntılı kullanım için Chromium tabanlı bir tarayıcıda DeepSeek Platform'a giriş yapın.";
+"Select a DeepSeek browser profile in Settings." = "Ayarlarda bir DeepSeek tarayıcı profili seçin.";
+"menu_bar_layout_token_separator_glyph_accessibility" = "Ayırıcı %@";
+"menu_bar_layout_separator_pipe" = "Dikey çizgi";
+"menu_bar_layout_separator_slash" = "Eğik çizgi";
+"menu_bar_layout_separator_hyphen" = "Kısa çizgi";
+"menu_bar_layout_separator_bullet" = "Madde imi";
+"menu_bar_layout_separator_diamond" = "Dolu baklava";
+"menu_bar_layout_separator_hollowDiamond" = "Boş baklava";
+"menu_bar_layout_separator_tilde" = "Yaklaşık işareti";
+"menu_bar_layout_separator_doubleBar" = "Çift dikey çizgi";
+"Rename" = "Yeniden adlandır";
+"Rename account" = "Hesabı yeniden adlandır";
+"Account name" = "Hesap adı";
+"Leave blank to use the default name." = "Varsayılan adı kullanmak için boş bırakın.";
+"Rewards" = "Ödüller";
+"Reward expiry" = "Ödüllerin son kullanma tarihi";

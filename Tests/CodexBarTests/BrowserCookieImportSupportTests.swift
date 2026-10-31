@@ -94,19 +94,23 @@ struct BrowserCookieImportSupportTests {
 
     @Test
     func `browser labels and keychain requirements follow catalog metadata without discovery`() {
-        #expect(BrowserCookieImportSupport.browserNames(for: nil) == "Chrome")
+        let userPluginOrder = Browser.defaultImportOrder.filter { $0 != .claudeDesktop }
+        #expect(BrowserCookieImportSupport.importOrder(for: nil) == userPluginOrder)
+        #expect(BrowserCookieImportSupport.browserNames(for: nil) == userPluginOrder.map(\.displayName)
+            .joined(separator: ", "))
         #expect(BrowserCookieImportSupport.importOrder(for: .museai) == Browser.defaultImportOrder)
         for browser in Browser.allCases {
             #expect(browser.usesKeychainForCookieDecryption == browser.usesChromiumProfileStore)
         }
     }
 
-    @Test(arguments: ["Aside", "Opera", "Opera Neon"])
+    @Test(arguments: ["Aside", "Brave Origin", "Opera", "Opera Neon"])
     func `catalog browsers participate in Muse automatic import`(name: String) throws {
         let browser = try #require(Browser.allCases.first { $0.displayName == name })
         #expect(browser.usesChromiumProfileStore)
         #expect(browser.usesKeychainForCookieDecryption)
         #expect(Browser.defaultImportOrder.contains(browser))
+        #expect(BrowserCookieImportSupport.importOrder(for: nil).contains(browser))
         var visited: [Browser] = []
         let sessions = try BrowserCookieImportSupport.collectSessions(
             from: BrowserCookieImportSupport.importOrder(for: .museai),
@@ -118,6 +122,12 @@ struct BrowserCookieImportSupportTests {
             })
         #expect(Array(sessions) == ["fixture-session"])
         #expect(visited == Browser.defaultImportOrder)
+    }
+
+    @Test
+    func `automatic plugin import excludes opt in desktop cookies`() {
+        #expect(!BrowserCookieImportSupport.importOrder(for: .claude).contains(.claudeDesktop))
+        #expect(!BrowserCookieImportSupport.browserNames(for: .claude).contains("Claude desktop app"))
     }
 
     @Test
@@ -141,7 +151,9 @@ struct BrowserCookieImportSupportTests {
                   descriptor.settingsSection.selectedProfileBrowsers == nil,
                   let order = descriptor.metadata.browserCookieOrder
             else { continue }
-            #expect(Set(order) == Set(Browser.defaultImportOrder), "\(descriptor.id) restricts automatic cookie import")
+            #expect(
+                Set(order.filter { $0 != .claudeDesktop }) == Set(Browser.defaultImportOrder),
+                "\(descriptor.id) restricts automatic cookie import")
         }
     }
 
