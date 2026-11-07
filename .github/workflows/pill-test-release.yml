@@ -1,0 +1,53 @@
+name: Pill test release
+
+# Fork-only helper: builds upstream CodexBar v0.84.0 plus the Pill bar style as an ad-hoc signed app and
+# publishes it as a GitHub PRE-release. Ad-hoc builds ship without an update feed, so this build never
+# auto-updates, and a prerelease never becomes "latest", so the fork's Sparkle feed is untouched.
+
+on:
+  push:
+    branches: [claude/pill-bar-only-0.84-build]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pill-test-release
+  cancel-in-progress: false
+
+env:
+  TAG: v0.84.0-pill.1
+
+jobs:
+  macos-app:
+    runs-on: xcode-27
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Select Xcode 27
+        run: |
+          set -euo pipefail
+          sudo xcode-select -s /Applications/Xcode_27.0.app/Contents/Developer
+          echo "DEVELOPER_DIR=/Applications/Xcode_27.0.app/Contents/Developer" >> "$GITHUB_ENV"
+          /usr/bin/xcodebuild -version
+
+      - name: Package app
+        run: |
+          set -euo pipefail
+          CODEXBAR_SIGNING=adhoc ARCHES="arm64" ./Scripts/package_app.sh release
+          mkdir -p dist
+          ditto -c -k --sequesterRsrc --keepParent CodexBar.app "dist/CodexBar-${TAG}.zip"
+
+      - name: Publish prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if ! gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+              --prerelease --latest=false --title "$TAG (test: upstream 0.84.0 + Pill bar style)" \
+              --notes "Test build: upstream CodexBar v0.84.0 plus only the Pill bar style option (Settings > Menu bar > layout editor > Bar style). Ad-hoc signed, arm64, no auto-updates. Not a fork update."
+          fi
+          gh release upload "$TAG" "dist/CodexBar-${TAG}.zip" --clobber --repo "$GITHUB_REPOSITORY"
