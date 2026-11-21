@@ -21,6 +21,8 @@ extension UsageMenuCardView.Model {
         let lastKnownUsageCapturedAt: Date?
         let isRefreshing: Bool
         let lastError: String?
+        let quotaRefreshFailed: Bool
+        let dashboardRefreshFailed: Bool
         let limitsAvailability: UsageLimitsAvailability?
         let usageBarsShowUsed: Bool
         let resetTimeDisplayStyle: ResetTimeDisplayStyle
@@ -75,6 +77,8 @@ extension UsageMenuCardView.Model {
             lastKnownUsageCapturedAt: Date? = nil,
             isRefreshing: Bool,
             lastError: String?,
+            quotaRefreshFailed: Bool = false,
+            dashboardRefreshFailed: Bool = false,
             limitsAvailability: UsageLimitsAvailability? = nil,
             usageBarsShowUsed: Bool,
             resetTimeDisplayStyle: ResetTimeDisplayStyle,
@@ -125,6 +129,8 @@ extension UsageMenuCardView.Model {
             self.lastKnownUsageCapturedAt = lastKnownUsageCapturedAt
             self.isRefreshing = isRefreshing
             self.lastError = lastError
+            self.quotaRefreshFailed = quotaRefreshFailed
+            self.dashboardRefreshFailed = dashboardRefreshFailed
             self.limitsAvailability = limitsAvailability
             self.usageBarsShowUsed = usageBarsShowUsed
             self.resetTimeDisplayStyle = resetTimeDisplayStyle
