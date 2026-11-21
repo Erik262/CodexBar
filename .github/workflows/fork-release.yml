@@ -25,8 +25,10 @@ concurrency:
 jobs:
   macos-app:
     if: ${{ github.repository != 'steipete/CodexBar' }}
-    runs-on: macos-26
-    timeout-minutes: 90
+    # Same runner and Xcode as upstream's release.yml; the 0.84 packaged-app WebKit smoke check
+    # segfaults on macos-26 with Xcode 26.6.
+    runs-on: xcode-27
+    timeout-minutes: 120
     env:
       TAG: ${{ github.event.release.tag_name || inputs.tag }}
     steps:
@@ -35,12 +37,16 @@ jobs:
           # A published release builds its tag; a manual run builds the commit it was dispatched from.
           ref: ${{ github.event.release.tag_name || github.sha }}
 
-      - name: Select Xcode 26.6
+      - name: Select Xcode 27
         run: |
           set -euo pipefail
-          sudo xcode-select -s /Applications/Xcode_26.6.app/Contents/Developer
-          echo "DEVELOPER_DIR=/Applications/Xcode_26.6.app/Contents/Developer" >> "$GITHUB_ENV"
+          sudo xcode-select -s /Applications/Xcode_27.0.app/Contents/Developer
+          echo "DEVELOPER_DIR=/Applications/Xcode_27.0.app/Contents/Developer" >> "$GITHUB_ENV"
+          [[ "$(/usr/bin/xcodebuild -version)" == Xcode\ 27* ]]
           /usr/bin/xcodebuild -version
+
+      - name: Install widget project generator
+        run: brew list xcodegen >/dev/null 2>&1 || brew install xcodegen
 
       - name: Load Sparkle signing key
         env:
