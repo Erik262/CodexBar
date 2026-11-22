@@ -543,7 +543,8 @@ final class MenuBarLayoutRenderer {
                         foregroundColor: foregroundColor,
                         iconHeight: Self.iconHeight(size: options.size, isStacked: isStacked),
                         attributes: attributes),
-                    options: options)
+                    options: options,
+                    providerTintColor: providerTintColor)
                 switch token {
                 case .percent(window: .automatic), .pace(window: .automatic), .resetCountdown, .resetAbsolute,
                      .windowResetCountdown(window: .automatic), .windowResetAbsolute(window: .automatic):
@@ -765,7 +766,8 @@ final class MenuBarLayoutRenderer {
         data: MenuBarLayoutRenderData,
         icon: NSImage?,
         style: TokenStyle,
-        options: MenuBarLayoutRenderOptions)
+        options: MenuBarLayoutRenderOptions,
+        providerTintColor: NSColor? = nil)
         -> (value: NSAttributedString, accessibilityText: String?)
     {
         if let rendered = self.renderProviderTextItem(
