@@ -364,9 +364,7 @@ private struct UsageMenuCardHeaderView: View {
                         .alignmentGuide(.firstTextBaseline) { $0[.bottom] - 2 }
                         .accessibilityHidden(true)
                 }
-                Text(self.model.providerName).font(.headline)
-                    .fontWeight(.semibold)
-                    .lineLimit(1).truncationMode(.tail).layoutPriority(1)
+                UsageMenuCardTitleView(title: self.model.providerName)
                 Spacer()
                 Text(self.model.email).font(.subheadline)
                     .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))

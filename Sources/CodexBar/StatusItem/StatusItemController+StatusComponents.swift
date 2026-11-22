@@ -87,9 +87,8 @@ extension StatusItemController {
     }
 
     func makeStatusComponentsSubmenu(provider: UsageProvider, width: CGFloat? = nil) -> NSMenu? {
-        guard self.store.statusChecksEnabled else { return nil }
-        guard Self.statusComponentsSubmenuProviders.contains(provider) else { return nil }
-        guard ProviderDescriptorRegistry.descriptor(for: provider).metadata.statusPageURL != nil else { return nil }
+        guard self.store.statusChecksEnabled, Self.statusComponentsSubmenuProviders.contains(provider),
+              ProviderDescriptorRegistry.descriptor(for: provider).metadata.statusPageURL != nil else { return nil }
         if let width {
             return self.makeHostedSubviewPlaceholderMenu(
                 chartID: Self.statusComponentsID,
